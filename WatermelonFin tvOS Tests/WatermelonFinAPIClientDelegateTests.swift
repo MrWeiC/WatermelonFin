@@ -87,6 +87,48 @@ final class WatermelonFinAPIClientDelegateTests: XCTestCase {
         )
     }
 
+    func testRecoveredRequestRetainsAccessToken() async throws {
+        let oldURL = try XCTUnwrap(URL(string: "http://192.0.2.10:8096"))
+        let newURL = try XCTUnwrap(URL(string: "http://192.0.2.11:8096"))
+        let requestURL = oldURL.appendingPathComponent("Users/Me")
+        let configuration = try JellyfinClient.Configuration(
+            url: oldURL,
+            accessToken: "saved-user-token",
+            client: "WatermelonFin Apple TV",
+            deviceName: "Living Room",
+            deviceID: "tvOS_ABC123",
+            version: "1.0"
+        )
+        let delegate = WatermelonFinAPIClientDelegate(
+            serverID: "stable-server-id",
+            serverURL: oldURL
+        ) { _, _ in
+            newURL
+        }
+        let jellyfinClient = JellyfinClient(configuration: configuration)
+        delegate.jellyfinClient = jellyfinClient
+        let client = APIClient(baseURL: oldURL)
+        let task = URLSession.shared.dataTask(with: requestURL)
+        defer { task.cancel() }
+
+        let shouldRetry = try await delegate.client(
+            client,
+            shouldRetry: task,
+            error: URLError(.cannotConnectToHost),
+            attempts: 1
+        )
+        XCTAssertTrue(shouldRetry)
+
+        var retryRequest = URLRequest(url: requestURL)
+        try await delegate.client(client, willSendRequest: &retryRequest)
+
+        XCTAssertEqual(retryRequest.url, newURL.appendingPathComponent("Users/Me"))
+        XCTAssertEqual(
+            retryRequest.value(forHTTPHeaderField: "Authorization"),
+            #"MediaBrowser Client="WatermelonFin Apple TV", Device="Living Room", DeviceId="tvOS_ABC123", Version="1.0", Token="saved-user-token""#
+        )
+    }
+
     func testNonConnectionFailureDoesNotAttemptAddressRecovery() async throws {
         let serverURL = try XCTUnwrap(URL(string: "http://192.0.2.10:8096"))
         var didAttemptRecovery = false

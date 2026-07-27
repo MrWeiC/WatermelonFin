@@ -21,11 +21,12 @@ final class ServerConnectionViewModel: ViewModel {
     }
 
     // TODO: this could probably be cleaner
-    func delete() {
+    @discardableResult
+    func delete() -> Bool {
 
         guard let storedServer = try? dataStack.fetchOne(From<ServerModel>().where(\.$id == server.id)) else {
             logger.critical("Unable to find server to delete")
-            return
+            return false
         }
 
         let userStates = storedServer.users.compactMap(\.state)
@@ -49,11 +50,15 @@ final class ServerConnectionViewModel: ViewModel {
 
             for user in userStates {
                 UserDefaults.userSuite(id: user.id).removeAll()
+                user.removeAccessToken()
+                keychain.delete("\(user.id)-pin")
             }
 
             Notifications[.didDeleteServer].post(server)
+            return true
         } catch {
             logger.critical("Unable to delete server: \(server.name)")
+            return false
         }
     }
 

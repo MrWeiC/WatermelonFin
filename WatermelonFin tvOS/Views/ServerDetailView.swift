@@ -194,8 +194,9 @@ struct EditServerView: View {
         .navigationTitle(L10n.server)
         .alert(L10n.deleteServer, isPresented: $isPresentingConfirmDeletion) {
             Button(L10n.delete, role: .destructive) {
-                viewModel.delete()
-//                    router.popLast()
+                if viewModel.delete() {
+                    router.dismiss()
+                }
             }
         } message: {
             Text(L10n.confirmDeleteServerAndUsers(viewModel.server.name))

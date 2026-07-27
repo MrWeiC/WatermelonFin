@@ -436,7 +436,13 @@ struct SelectUserView: View {
         .onNotification(.didConnectToServer) { server in
             viewModel.getServers()
             serverSelection = .server(id: server.id)
-            router.route(to: .userSignIn(server: server))
+
+            // A rediscovered address for a saved server retains its users and
+            // access tokens. Let the user select that saved account instead of
+            // forcing a password sign-in.
+            if server.userIDs.isEmpty {
+                router.route(to: .userSignIn(server: server))
+            }
         }
         .onNotification(.didChangeCurrentServerURL) { _ in
             viewModel.getServers()

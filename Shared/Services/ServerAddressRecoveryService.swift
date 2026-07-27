@@ -26,14 +26,15 @@ final class ServerAddressRecoveryService {
     private let logger = Logger.watermelonfin()
     private var recoveryTasks: [String: Task<URL?, Never>] = [:]
 
-    /// Checks the saved address without blocking app navigation. If it no
-    /// longer identifies the expected server, local discovery is attempted.
-    func refreshAddressIfNeeded(serverID: String, currentURL: URL) async {
+    /// Checks the saved address. If it no longer identifies the expected
+    /// server, local discovery is attempted.
+    @discardableResult
+    func refreshAddressIfNeeded(serverID: String, currentURL: URL) async -> Bool {
         if await verify(url: currentURL, expectedServerID: serverID) != nil {
-            return
+            return true
         }
 
-        _ = await recover(serverID: serverID, failedURL: currentURL)
+        return await recover(serverID: serverID, failedURL: currentURL) != nil
     }
 
     /// Finds another address for a saved server and coalesces simultaneous
