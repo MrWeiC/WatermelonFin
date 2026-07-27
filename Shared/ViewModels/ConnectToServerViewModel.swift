@@ -73,6 +73,9 @@ final class ConnectToServerViewModel: ViewModel {
 
             for await response in self.discovery.discoveredServers.values {
                 if let serverState = response.asServerState {
+                    if let previousAddress = self.localServers.first(where: { $0.id == serverState.id }) {
+                        self.localServers.remove(previousAddress)
+                    }
                     self.localServers.append(serverState)
                 }
             }
