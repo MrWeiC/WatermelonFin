@@ -6,16 +6,22 @@
 	objectVersion = 71;
 	objects = {
 
-	/* Begin PBXBuildFile section */
-        C011EC710026100000000002 /* CollectionPagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011EC710026100000000001 /* CollectionPagingTests.swift */; };
-			08BEEA4E5F77A74D7B6FE59F /* VideoPlayerContainerStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEE9EF7528B67B93A71FB1 /* VideoPlayerContainerStateTests.swift */; };
-			1A7F0B902E1BE2B000ABC001 /* AppBuildInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */; };
-			2F0A116D2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */; };
-			CA7E00022F30000000CACE02 /* AsyncExpiringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E00012F30000000CACE01 /* AsyncExpiringCacheTests.swift */; };
-			C0DE100D2F0000000000000D /* TopShelfProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE10092F00000000000009 /* TopShelfProvider.swift */; };
-			C0DE100E2F0000000000000E /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53ABFDDB267972BF00886593 /* TVServices.framework */; };
-			C0DE100F2F0000000000000F /* WatermelonFinTopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C0DE10082F00000000000008 /* WatermelonFinTopShelf.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-			53ABFDDC267972BF00886593 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53ABFDDB267972BF00886593 /* TVServices.framework */; };
+/* Begin PBXBuildFile section */
+		08BEEA4E5F77A74D7B6FE59F /* VideoPlayerContainerStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEE9EF7528B67B93A71FB1 /* VideoPlayerContainerStateTests.swift */; };
+		0B211A77F4CE444D8A28A137 /* Get in Frameworks */ = {isa = PBXBuildFile; productRef = 286E1AF58EBD4742A6582D93 /* Get */; };
+		0E6C6ABACF224A17B33E872B /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = E1002B6A2793E36600E47059 /* Algorithms */; };
+		1A7F0B902E1BE2B000ABC001 /* AppBuildInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */; };
+		24B45F6D6C074E1A829DFB4A /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = E192608728D2E5F0002314B4 /* Factory */; };
+		2F0A116D2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */; };
+		30C5A83FA8B34A579E3A840D /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = E13AF3B528A0C598009093AB /* Nuke */; };
+		41CEA51EFBEB4CB5B07F4E95 /* SwizzleSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E1388A45293F0ABA009721B1 /* SwizzleSwift */; };
+		49AAF6FD176B44CD821BA2FE /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = E13AF3B728A0C598009093AB /* NukeExtensions */; };
+		4CF00E71C5284DF79D17DF11 /* StatefulMacros in Frameworks */ = {isa = PBXBuildFile; productRef = E14000BC2EF622AC00354A3C /* StatefulMacros */; };
+		51052C7FE6B44D9AA274180D /* JellyfinAPI in Frameworks */ = {isa = PBXBuildFile; productRef = E150C0C22BFD6DA200944FFA /* JellyfinAPI */; };
+		5253EF85560645EB8FC1EA73 /* CollectionHStack in Frameworks */ = {isa = PBXBuildFile; productRef = E1A09F782D05935A00835265 /* CollectionHStack */; };
+		53ABFDDC267972BF00886593 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53ABFDDB267972BF00886593 /* TVServices.framework */; };
+		5848B42D104840DB9B92B1DD /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E1B5F7AC29577BDD004B26CF /* OrderedCollections */; };
+		5DC1556BD6544BD2A63CA336 /* MPVKit-GPL in Frameworks */ = {isa = PBXBuildFile; productRef = 7BF2735257A24BF8B7B9A5E3 /* MPVKit-GPL */; };
 		62666E1327E501C300EC0ECD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62666E1227E501C300EC0ECD /* AudioToolbox.framework */; };
 		62666E1527E501C800EC0ECD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62666E1427E501C800EC0ECD /* AVFoundation.framework */; };
 		62666E1727E501CC00EC0ECD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62666E1627E501CC00EC0ECD /* CFNetwork.framework */; };
@@ -30,19 +36,36 @@
 		62666E2E27E5021400EC0ECD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62666E2D27E5021400EC0ECD /* Security.framework */; };
 		62666E3027E5021800EC0ECD /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62666E2F27E5021800EC0ECD /* VideoToolbox.framework */; };
 		62666E3227E5021E00EC0ECD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62666E3127E5021E00EC0ECD /* UIKit.framework */; };
-			6C6178530A261AC4FD50E4DC /* MediaErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7283F82B960F951ABA41CDC /* MediaErrorTests.swift */; };
-			B6FD5626C1D953D86DA73199 /* NetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */; };
-			C0D3A3002E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A2FF2E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift */; };
-			C0D3A3022E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A3012E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift */; };
-			C1B4A0022F20000000BEEF02 /* CinematicBackgroundImageSizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B4A0012F20000000BEEF01 /* CinematicBackgroundImageSizingTests.swift */; };
-			C0D3A3042E22000000F1A001 /* MainTabViewTabsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A3032E22000000F1A001 /* MainTabViewTabsTests.swift */; };
-			EE9A94A7172E4DA099EED926 /* MediaPlayerItemAudioSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */; };
-			F0C050022F50000000F0C002 /* HomeViewModelStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */; };
-			F0C050042F50000000F0C004 /* MediaProgressObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */; };
-			BD88CB422D77E6A0006BB5E3 /* TVOSPicker in Frameworks */ = {isa = PBXBuildFile; productRef = BD88CB412D77E6A0006BB5E3 /* TVOSPicker */; };
-			D04348C2BD461D556AC693DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1438DC36A93916AACE477B /* Foundation.framework */; };
+		69295ABCE90642759DEEBF73 /* MPVKit-GPL in Frameworks */ = {isa = PBXBuildFile; productRef = 7BF2735257A24BF8B7B9A5E3 /* MPVKit-GPL */; };
+		6C6178530A261AC4FD50E4DC /* MediaErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7283F82B960F951ABA41CDC /* MediaErrorTests.swift */; };
+		7036A4689376473DBE4EDCF3 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = E12186DD2718F1C50010884C /* Defaults */; };
+		70ECE45EE751433DBDA67C2E /* Transmission in Frameworks */ = {isa = PBXBuildFile; productRef = E1E2D7BE2E3FD936004E2E5F /* Transmission */; };
+		7934B13BB9CF44D2B29AD0BF /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = E1575E57293E7685001665B1 /* Files */; };
+		8796B615DF7246C99241DDA0 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = E1B5F7A829577BCE004B26CF /* PulseLogHandler */; };
+		88327374822B4E93ADD75C72 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = E1B5F7AA29577BCE004B26CF /* PulseUI */; };
+		9F874270583643C2ADB8F9CC /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E19D41B12BF2BFA50082B8B2 /* KeychainSwift */; };
+		A83D19D42E1746C180449F9F /* CollectionVGrid in Frameworks */ = {isa = PBXBuildFile; productRef = E1A09F762D05935A00835265 /* CollectionVGrid */; };
+		A99C8133FCA944EE9744A592 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = E1B5F7A629577BCE004B26CF /* Pulse */; };
+		AD8BD71659EE4088B8C30920 /* UDPBroadcast in Frameworks */ = {isa = PBXBuildFile; productRef = E18443CA2A037773002DDDC8 /* UDPBroadcast */; };
+		B6FD5626C1D953D86DA73199 /* NetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */; };
+		BD88CB422D77E6A0006BB5E3 /* TVOSPicker in Frameworks */ = {isa = PBXBuildFile; productRef = BD88CB412D77E6A0006BB5E3 /* TVOSPicker */; };
+		C011EC710026100000000002 /* CollectionPagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011EC710026100000000001 /* CollectionPagingTests.swift */; };
+		C0D3A3002E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A2FF2E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift */; };
+		C0D3A3022E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A3012E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift */; };
+		C0D3A3042E22000000F1A001 /* MainTabViewTabsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A3032E22000000F1A001 /* MainTabViewTabsTests.swift */; };
+		C0DE100D2F0000000000000D /* TopShelfProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE10092F00000000000009 /* TopShelfProvider.swift */; };
+		C0DE100E2F0000000000000E /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53ABFDDB267972BF00886593 /* TVServices.framework */; };
+		C0DE100F2F0000000000000F /* WatermelonFinTopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C0DE10082F00000000000008 /* WatermelonFinTopShelf.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C1B4A0022F20000000BEEF02 /* CinematicBackgroundImageSizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B4A0012F20000000BEEF01 /* CinematicBackgroundImageSizingTests.swift */; };
+		C90C584B5D6B4FB3978AC463 /* Get in Frameworks */ = {isa = PBXBuildFile; productRef = 286E1AF58EBD4742A6582D93 /* Get */; };
+		C9A8683A4D824B61A2015566 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = E13AF3B928A0C598009093AB /* NukeUI */; };
+		CA7E00022F30000000CACE02 /* AsyncExpiringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E00012F30000000CACE01 /* AsyncExpiringCacheTests.swift */; };
+		D04348C2BD461D556AC693DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1438DC36A93916AACE477B /* Foundation.framework */; };
+		D1409A0961A947A9A17F1A3A /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E1155ACA2D0584A90021557A /* IdentifiedCollections */; };
+		D425C528CC4D4F1693DA7CC8 /* BlurHashKit in Frameworks */ = {isa = PBXBuildFile; productRef = E13AF3BB28A0C59E009093AB /* BlurHashKit */; };
+		D807217BD53B43EEB3E07FE1 /* CoreStore in Frameworks */ = {isa = PBXBuildFile; productRef = E13DD3CC27164CA7009D4DAF /* CoreStore */; };
+		DC1A23CDC85F4C1CB36C584D /* PreferencesView in Frameworks */ = {isa = PBXBuildFile; productRef = E1A7B1642B9A9F7800152546 /* PreferencesView */; };
 		E1002B6B2793E36600E47059 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = E1002B6A2793E36600E47059 /* Algorithms */; };
-		5DC1556BD6544BD2A63CA336 /* MPVKit-GPL in Frameworks */ = {isa = PBXBuildFile; productRef = 7BF2735257A24BF8B7B9A5E3 /* MPVKit-GPL */; };
 		E1153DD22BBB649C00424D36 /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = E1153DD12BBB649C00424D36 /* SVGKit */; };
 		E1155ACB2D0584A90021557A /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E1155ACA2D0584A90021557A /* IdentifiedCollections */; };
 		E12186DE2718F1C50010884C /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = E12186DD2718F1C50010884C /* Defaults */; };
@@ -67,16 +90,15 @@
 		E1B5F7AB29577BCE004B26CF /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = E1B5F7AA29577BCE004B26CF /* PulseUI */; };
 		E1B5F7AD29577BDD004B26CF /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E1B5F7AC29577BDD004B26CF /* OrderedCollections */; };
 		E1E2D7BF2E3FD936004E2E5F /* Transmission in Frameworks */ = {isa = PBXBuildFile; productRef = E1E2D7BE2E3FD936004E2E5F /* Transmission */; };
+		E21825439C704DC39959A197 /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = E1153DD12BBB649C00424D36 /* SVGKit */; };
+		EC71D4B177394CA8A2335C68 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E1392FEC2BA218A80034110D /* SwiftUIIntrospect */; };
+		EE1149E31B2348D38B93B4FF /* JellyfinAPI in Frameworks */ = {isa = PBXBuildFile; productRef = E150C0C22BFD6DA200944FFA /* JellyfinAPI */; };
+		EE9A94A7172E4DA099EED926 /* MediaPlayerItemAudioSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */; };
+		F0C050022F50000000F0C002 /* HomeViewModelStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */; };
+		F0C050042F50000000F0C004 /* MediaProgressObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C0DE10112F00000000000011 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5377CBE9263B596A003A4E83 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C0DE10012F00000000000001;
-			remoteInfo = WatermelonFinTopShelf;
-		};
 		3209D57EA13F2370922067BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5377CBE9263B596A003A4E83 /* Project object */;
@@ -84,9 +106,30 @@
 			remoteGlobalIDString = 5358705F2669D21600D05A09;
 			remoteInfo = "WatermelonFin tvOS";
 		};
+		AE74210E57EA48BD8348261B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5377CBE9263B596A003A4E83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0CE6520BBB54C35B4AAD04F;
+			remoteInfo = "WatermelonFin iOS";
+		};
+		C0DE10112F00000000000011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5377CBE9263B596A003A4E83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0DE10012F00000000000001;
+			remoteInfo = WatermelonFinTopShelf;
+		};
+		F1C25C366CAF4D0EA867586F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5377CBE9263B596A003A4E83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0CE6520BBB54C35B4AAD04F;
+			remoteInfo = "WatermelonFin iOS";
+		};
 /* End PBXContainerItemProxy section */
 
-	/* Begin PBXCopyFilesBuildPhase section */
+/* Begin PBXCopyFilesBuildPhase section */
 		C0DE10102F00000000000010 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -98,25 +141,16 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-	/* End PBXCopyFilesBuildPhase section */
+/* End PBXCopyFilesBuildPhase section */
 
-	/* Begin PBXFileReference section */
-        C011EC710026100000000001 /* CollectionPagingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPagingTests.swift; sourceTree = "<group>"; };
-			1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkErrorTests.swift; sourceTree = "<group>"; };
-			1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppBuildInfoTests.swift; sourceTree = "<group>"; };
-			2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseItemDtoUserDataTests.swift; sourceTree = "<group>"; };
-			CA7E00012F30000000CACE01 /* AsyncExpiringCacheTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AsyncExpiringCacheTests.swift; sourceTree = "<group>"; };
-			C0D3A3032E22000000F1A001 /* MainTabViewTabsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainTabViewTabsTests.swift; sourceTree = "<group>"; };
-			E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MediaPlayerItemAudioSelectionTests.swift; sourceTree = "<group>"; };
-			F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeViewModelStateTests.swift; sourceTree = "<group>"; };
-			F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MediaProgressObserverTests.swift; sourceTree = "<group>"; };
-			535870602669D21600D05A09 /* WatermelonFin tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatermelonFin tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-			C0DE10082F00000000000008 /* WatermelonFinTopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WatermelonFinTopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-			C0DE10092F00000000000009 /* TopShelfProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopShelfProvider.swift; sourceTree = "<group>"; };
-			C0DE100A2F0000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-			C0DE100B2F0000000000000B /* WatermelonFinTopShelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatermelonFinTopShelf.entitlements; sourceTree = "<group>"; };
-			5362E4A7267D4067000E2F71 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = "../../Downloads/GoogleCastSDK-ios-4.6.0_dynamic/GoogleCast.framework"; sourceTree = "<group>"; };
-			5362E4AA267D40AD000E2F71 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* Begin PBXFileReference section */
+		08C2A57D68D74086A5AD16E3 /* WatermelonFin iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "WatermelonFin iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkErrorTests.swift; sourceTree = "<group>"; };
+		1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppBuildInfoTests.swift; sourceTree = "<group>"; };
+		2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseItemDtoUserDataTests.swift; sourceTree = "<group>"; };
+		535870602669D21600D05A09 /* WatermelonFin tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatermelonFin tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5362E4A7267D4067000E2F71 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = "../../Downloads/GoogleCastSDK-ios-4.6.0_dynamic/GoogleCast.framework"; sourceTree = "<group>"; };
+		5362E4AA267D40AD000E2F71 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5362E4AC267D40B1000E2F71 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		5362E4AE267D40B5000E2F71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5362E4B0267D40B9000E2F71 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -134,6 +168,7 @@
 		5362E4C8267D40F7000E2F71 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		53ABFDDB267972BF00886593 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		5DAEE9EF7528B67B93A71FB1 /* VideoPlayerContainerStateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoPlayerContainerStateTests.swift; sourceTree = "<group>"; };
+		5E1D35E1F8924E03B385C619 /* WatermelonFin iOS UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "WatermelonFin iOS UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62666E0027E5016900EC0ECD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		62666E0527E5017A00EC0ECD /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		62666E0727E5018D00EC0ECD /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
@@ -165,15 +200,63 @@
 		628B95232670CABD0091AF3B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		637FCAF3287B5B2600C0A353 /* UDPBroadcast.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = UDPBroadcast.xcframework; path = Carthage/Build/UDPBroadcast.xcframework; sourceTree = "<group>"; };
 		6C1438DC36A93916AACE477B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		73F2B586BEE64D1BBC72CD40 /* WatermelonFin iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = "WatermelonFin iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		796E798440A8807BC2883549 /* WatermelonFin tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatermelonFin tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7283F82B960F951ABA41CDC /* MediaErrorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MediaErrorTests.swift; sourceTree = "<group>"; };
+		C011EC710026100000000001 /* CollectionPagingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPagingTests.swift; sourceTree = "<group>"; };
 		C0D3A2FF2E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatermelonFinAPIClientDelegateTests.swift; sourceTree = "<group>"; };
 		C0D3A3012E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirstTimeAccountFlowAutomationTests.swift; sourceTree = "<group>"; };
+		C0D3A3032E22000000F1A001 /* MainTabViewTabsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainTabViewTabsTests.swift; sourceTree = "<group>"; };
+		C0DE10082F00000000000008 /* WatermelonFinTopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WatermelonFinTopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0DE10092F00000000000009 /* TopShelfProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopShelfProvider.swift; sourceTree = "<group>"; };
+		C0DE100A2F0000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0DE100B2F0000000000000B /* WatermelonFinTopShelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatermelonFinTopShelf.entitlements; sourceTree = "<group>"; };
 		C1B4A0012F20000000BEEF01 /* CinematicBackgroundImageSizingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CinematicBackgroundImageSizingTests.swift; sourceTree = "<group>"; };
+		CA7E00012F30000000CACE01 /* AsyncExpiringCacheTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AsyncExpiringCacheTests.swift; sourceTree = "<group>"; };
 		E1B2AB9628808CDF0072B3B9 /* GoogleCast.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleCast.xcframework; path = Carthage/Build/GoogleCast.xcframework; sourceTree = "<group>"; };
+		E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MediaPlayerItemAudioSelectionTests.swift; sourceTree = "<group>"; };
+		F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeViewModelStateTests.swift; sourceTree = "<group>"; };
+		F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MediaProgressObserverTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2F2738DDEB344A53AF160476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */;
+		};
+		802DE4E55C7848478B1921FD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Extensions/JellyfinAPI/TaskTriggerInfoType.swift,
+				Objects/ItemArrayElements.swift,
+				ViewModels/AdminDashboard/ActiveSessionsViewModel.swift,
+				ViewModels/AdminDashboard/AddServerUserViewModel.swift,
+				ViewModels/AdminDashboard/APIKeysViewModel.swift,
+				ViewModels/AdminDashboard/DevicesViewModel.swift,
+				ViewModels/AdminDashboard/ServerActivityDetailViewModel.swift,
+				ViewModels/AdminDashboard/ServerActivityViewModel.swift,
+				ViewModels/AdminDashboard/ServerTaskObserver.swift,
+				ViewModels/AdminDashboard/ServerTasksViewModel.swift,
+				ViewModels/AdminDashboard/ServerUserAdminViewModel.swift,
+				ViewModels/AdminDashboard/ServerUsersViewModel.swift,
+				ViewModels/DownloadListViewModel.swift,
+				ViewModels/ItemAdministration/IdentifyItemViewModel.swift,
+				ViewModels/ItemAdministration/ItemEditorViewModel/GenreEditorViewModel.swift,
+				ViewModels/ItemAdministration/ItemEditorViewModel/ItemEditorViewModel.swift,
+				ViewModels/ItemAdministration/ItemEditorViewModel/PeopleEditorViewModel.swift,
+				ViewModels/ItemAdministration/ItemEditorViewModel/StudioEditorViewModel.swift,
+				ViewModels/ItemAdministration/ItemEditorViewModel/TagEditorViewModel.swift,
+				ViewModels/ItemAdministration/ItemImagesViewModel.swift,
+				ViewModels/ItemAdministration/RemoteImageInfoViewModel.swift,
+				ViewModels/QuickConnectAuthorizeViewModel.swift,
+				ViewModels/ServerCheckViewModel.swift,
+				Views/SettingsView/SettingsView.swift,
+			);
+			target = B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */;
+		};
 		E14565D92DFCAE6E008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -207,7 +290,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Info.plist,
-				"Resources/WatermelonFin tvOS.entitlements",
 			);
 			target = 5358705F2669D21600D05A09 /* WatermelonFin tvOS */;
 		};
@@ -219,14 +301,70 @@
 			);
 			target = 5358705F2669D21600D05A09 /* WatermelonFin tvOS */;
 		};
+		EF44A96020C14CA6920A1B53 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/WatermelonFinApp.swift,
+				Components/PosterButton.swift,
+				Components/PosterHStack.swift,
+				Resources/Assets.xcassets,
+				Resources/Info.plist,
+				Views/AppSettingsView/Components/HourMinutePicker.swift,
+				Views/HomeView/Components/CinematicRecentlyAddedView.swift,
+				Views/HomeView/Components/CinematicResumeItemView.swift,
+				Views/HomeView/Components/LatestInLibraryView.swift,
+				Views/HomeView/Components/NextUpView.swift,
+				Views/HomeView/Components/RecentlyAddedView.swift,
+				Views/HomeView/HomeView.swift,
+				Views/ItemView/ItemView.swift,
+				Views/ItemView/ScrollViews/CinematicScrollView.swift,
+				Views/ProgramsView/PagingLibraryView/Components/LibraryRow.swift,
+				Views/ProgramsView/PagingLibraryView/PagingLibraryView.swift,
+				Views/SearchView.swift,
+				Views/SelectUserView/Components/AddUserBottomButton.swift,
+				Views/SelectUserView/Components/AddUserGridButton.swift,
+				Views/SelectUserView/Components/SelectUserBottomBar.swift,
+				Views/SelectUserView/Components/ServerSelectionMenu.swift,
+				Views/SelectUserView/Components/UserGridButton.swift,
+				Views/SelectUserView/SelectUserView.swift,
+				Views/VideoPlayerContainerState/Components/LoadingView.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/ActionButtons.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AspectFillActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AudioActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AutoPlayActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/EpisodesActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/InfoActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlaybackQualityActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlaybackSpeedActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlayNextItemActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlayPreviousItemActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/SkipIntroActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/SubtitleActionButton.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/ChapterTrackMask.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/NavigationBar.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/PlaybackButtons.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/PlaybackProgress.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/SideActionButtons.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/SplitTimestamp.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/Components/TransportBarButtonStyle.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/ConfirmCloseOverlay.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/PlaybackControls.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/SupplementContainerView.swift,
+				Views/VideoPlayerContainerState/PlaybackControls/VideoPlayerContainerView.swift,
+			);
+			target = B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E14563272DFCAE6E008FF700 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E14565D92DFCAE6E008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 802DE4E55C7848478B1921FD, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
+		1BEE133050454636B53F5957 /* WatermelonFin iOS Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin iOS Tests"; sourceTree = "<group>"; };
+		E14563272DFCAE6E008FF700 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (802DE4E55C7848478B1921FD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E14565D92DFCAE6E008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		E14565DD2DFCAE78008FF700 /* Scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Scripts; sourceTree = "<group>"; };
-		E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E14567272DFCAEFD008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, EF44A96020C14CA6920A1B53, ); explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin tvOS"; sourceTree = "<group>"; };
+		E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (EF44A96020C14CA6920A1B53 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E14567272DFCAEFD008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin tvOS"; sourceTree = "<group>"; };
 		E1456FC82DFCB323008FF700 /* Translations */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Translations; sourceTree = "<group>"; };
 		E150B7D12DFF2E7C00DC7CF4 /* XcodeConfig */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E1C08F7D2F1316BD00DCEA25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = XcodeConfig; sourceTree = "<group>"; };
+		E583E45451A9464CB438D2EA /* WatermelonFin iOS UI Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin iOS UI Tests"; sourceTree = "<group>"; };
+		FBB5CA8E7500457DAE566B8E /* WatermelonFin iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2F2738DDEB344A53AF160476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin iOS"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,19 +376,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C0DE10032F00000000000003 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C0DE100E2F0000000000000E /* TVServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5358705D2669D21600D05A09 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-                C90C584B5D6B4FB3978AC463,
+				C90C584B5D6B4FB3978AC463 /* Get in Frameworks */,
 				5DC1556BD6544BD2A63CA336 /* MPVKit-GPL in Frameworks */,
 				62666E1727E501CC00EC0ECD /* CFNetwork.framework in Frameworks */,
 				62666E3227E5021E00EC0ECD /* UIKit.framework in Frameworks */,
@@ -296,6 +426,63 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5E6EC9EBA72946F88887A7B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE1149E31B2348D38B93B4FF /* JellyfinAPI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		792E314A8734495292E8C666 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B211A77F4CE444D8A28A137 /* Get in Frameworks */,
+				69295ABCE90642759DEEBF73 /* MPVKit-GPL in Frameworks */,
+				0E6C6ABACF224A17B33E872B /* Algorithms in Frameworks */,
+				EC71D4B177394CA8A2335C68 /* SwiftUIIntrospect in Frameworks */,
+				49AAF6FD176B44CD821BA2FE /* NukeExtensions in Frameworks */,
+				7934B13BB9CF44D2B29AD0BF /* Files in Frameworks */,
+				A99C8133FCA944EE9744A592 /* Pulse in Frameworks */,
+				5253EF85560645EB8FC1EA73 /* CollectionHStack in Frameworks */,
+				C9A8683A4D824B61A2015566 /* NukeUI in Frameworks */,
+				88327374822B4E93ADD75C72 /* PulseUI in Frameworks */,
+				8796B615DF7246C99241DDA0 /* PulseLogHandler in Frameworks */,
+				41CEA51EFBEB4CB5B07F4E95 /* SwizzleSwift in Frameworks */,
+				4CF00E71C5284DF79D17DF11 /* StatefulMacros in Frameworks */,
+				9F874270583643C2ADB8F9CC /* KeychainSwift in Frameworks */,
+				AD8BD71659EE4088B8C30920 /* UDPBroadcast in Frameworks */,
+				D1409A0961A947A9A17F1A3A /* IdentifiedCollections in Frameworks */,
+				5848B42D104840DB9B92B1DD /* OrderedCollections in Frameworks */,
+				D807217BD53B43EEB3E07FE1 /* CoreStore in Frameworks */,
+				DC1A23CDC85F4C1CB36C584D /* PreferencesView in Frameworks */,
+				A83D19D42E1746C180449F9F /* CollectionVGrid in Frameworks */,
+				E21825439C704DC39959A197 /* SVGKit in Frameworks */,
+				D425C528CC4D4F1693DA7CC8 /* BlurHashKit in Frameworks */,
+				51052C7FE6B44D9AA274180D /* JellyfinAPI in Frameworks */,
+				70ECE45EE751433DBDA67C2E /* Transmission in Frameworks */,
+				30C5A83FA8B34A579E3A840D /* Nuke in Frameworks */,
+				7036A4689376473DBE4EDCF3 /* Defaults in Frameworks */,
+				24B45F6D6C074E1A829DFB4A /* Factory in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D3BA6D4B56F48D78DE6235D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0DE10032F00000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0DE100E2F0000000000000E /* TVServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -310,9 +497,9 @@
 		5377CBE8263B596A003A4E83 = {
 			isa = PBXGroup;
 			children = (
-                E583E45451A9464CB438D2EA,
-                1BEE133050454636B53F5957,
-                FBB5CA8E7500457DAE566B8E,
+				E583E45451A9464CB438D2EA /* WatermelonFin iOS UI Tests */,
+				1BEE133050454636B53F5957 /* WatermelonFin iOS Tests */,
+				FBB5CA8E7500457DAE566B8E /* WatermelonFin iOS */,
 				E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */,
 				C0DE100C2F0000000000000C /* WatermelonFinTopShelf */,
 				E14563272DFCAE6E008FF700 /* Shared */,
@@ -328,9 +515,9 @@
 		5377CBF2263B596A003A4E83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-                5E1D35E1F8924E03B385C619,
-                08C2A57D68D74086A5AD16E3,
-                73F2B586BEE64D1BBC72CD40,
+				5E1D35E1F8924E03B385C619 /* WatermelonFin iOS UI Tests.xctest */,
+				08C2A57D68D74086A5AD16E3 /* WatermelonFin iOS Tests.xctest */,
+				73F2B586BEE64D1BBC72CD40 /* WatermelonFin iOS.app */,
 				535870602669D21600D05A09 /* WatermelonFin tvOS.app */,
 				C0DE10082F00000000000008 /* WatermelonFinTopShelf.appex */,
 				796E798440A8807BC2883549 /* WatermelonFin tvOS Tests.xctest */,
@@ -395,6 +582,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AAD4A20CAC7D1BEC55450E5C /* WatermelonFin tvOS Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */,
+				2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */,
+				CA7E00012F30000000CACE01 /* AsyncExpiringCacheTests.swift */,
+				5DAEE9EF7528B67B93A71FB1 /* VideoPlayerContainerStateTests.swift */,
+				1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */,
+				B7283F82B960F951ABA41CDC /* MediaErrorTests.swift */,
+				E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */,
+				F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */,
+				F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */,
+				C011EC710026100000000001 /* CollectionPagingTests.swift */,
+				C0D3A2FF2E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift */,
+				C0D3A3012E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift */,
+				C1B4A0012F20000000BEEF01 /* CinematicBackgroundImageSizingTests.swift */,
+				C0D3A3032E22000000F1A001 /* MainTabViewTabsTests.swift */,
+			);
+			path = "WatermelonFin tvOS Tests";
+			sourceTree = "<group>";
+		};
 		C0DE100C2F0000000000000C /* WatermelonFinTopShelf */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,30 +613,30 @@
 			path = WatermelonFinTopShelf;
 			sourceTree = "<group>";
 		};
-			AAD4A20CAC7D1BEC55450E5C /* WatermelonFin tvOS Tests */ = {
-				isa = PBXGroup;
-				children = (
-					1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */,
-					2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */,
-					CA7E00012F30000000CACE01 /* AsyncExpiringCacheTests.swift */,
-					5DAEE9EF7528B67B93A71FB1 /* VideoPlayerContainerStateTests.swift */,
-					1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */,
-					B7283F82B960F951ABA41CDC /* MediaErrorTests.swift */,
-					E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */,
-					F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */,
-					F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */,
-                    C011EC710026100000000001 /* CollectionPagingTests.swift */,
-					C0D3A2FF2E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift */,
-					C0D3A3012E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift */,
-					C1B4A0012F20000000BEEF01 /* CinematicBackgroundImageSizingTests.swift */,
-					C0D3A3032E22000000F1A001 /* MainTabViewTabsTests.swift */,
-				);
-				path = "WatermelonFin tvOS Tests";
-				sourceTree = "<group>";
-			};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		082BA00F2A764D53BB4297BE /* WatermelonFin iOS UI Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 671D5979FFE64F949E1ED9BE /* Build configuration list for PBXNativeTarget "WatermelonFin iOS UI Tests" */;
+			buildPhases = (
+				AC64CE05FA3845B89C73E91F /* Sources */,
+				8D3BA6D4B56F48D78DE6235D /* Frameworks */,
+				721C0A8165ED4CFAB4FE071B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D379AF708B74B91B8D81A9E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E583E45451A9464CB438D2EA /* WatermelonFin iOS UI Tests */,
+			);
+			name = "WatermelonFin iOS UI Tests";
+			productName = "WatermelonFin iOS UI Tests";
+			productReference = 5E1D35E1F8924E03B385C619 /* WatermelonFin iOS UI Tests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		5358705F2669D21600D05A09 /* WatermelonFin tvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 535870712669D21700D05A09 /* Build configuration list for PBXNativeTarget "WatermelonFin tvOS" */;
@@ -441,6 +649,7 @@
 				5358705E2669D21600D05A09 /* Resources */,
 				C0DE10102F00000000000010 /* Embed App Extensions */,
 				1A7F0B912E1BE2B000ABC001 /* Generate Git Commit Info */,
+				C0DE20012F00000000000001 /* Normalize MPVKit Minimum OS */,
 			);
 			buildRules = (
 			);
@@ -455,7 +664,7 @@
 			);
 			name = "WatermelonFin tvOS";
 			packageProductDependencies = (
-                286E1AF58EBD4742A6582D93,
+				286E1AF58EBD4742A6582D93 /* Get */,
 				E13DD3CC27164CA7009D4DAF /* CoreStore */,
 				E12186DD2718F1C50010884C /* Defaults */,
 				E1002B6A2793E36600E47059 /* Algorithms */,
@@ -486,6 +695,83 @@
 			);
 			productName = "JellyfinPlayer tvOS";
 			productReference = 535870602669D21600D05A09 /* WatermelonFin tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		88CC21CF9E20403E8CFACE73 /* WatermelonFin iOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A5A3530DF0B4EFCB85E029C /* Build configuration list for PBXNativeTarget "WatermelonFin iOS Tests" */;
+			buildPhases = (
+				629006D301174384A585848A /* Sources */,
+				5E6EC9EBA72946F88887A7B8 /* Frameworks */,
+				3E9DD81502834D64A67C1B3F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2BD710FC6C9456480F37F13 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1BEE133050454636B53F5957 /* WatermelonFin iOS Tests */,
+			);
+			name = "WatermelonFin iOS Tests";
+			packageProductDependencies = (
+				E150C0C22BFD6DA200944FFA /* JellyfinAPI */,
+			);
+			productName = "WatermelonFin iOS Tests";
+			productReference = 08C2A57D68D74086A5AD16E3 /* WatermelonFin iOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 865AFC9CD9574D4DAC26DEF9 /* Build configuration list for PBXNativeTarget "WatermelonFin iOS" */;
+			buildPhases = (
+				F7D2A87DBE1E470497602EA1 /* Sources */,
+				792E314A8734495292E8C666 /* Frameworks */,
+				53127D841E5F4162867FD2B5 /* Resources */,
+				C0DE20022F00000000000002 /* Normalize MPVKit Minimum OS */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E14563272DFCAE6E008FF700 /* Shared */,
+				E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */,
+				E1456FC82DFCB323008FF700 /* Translations */,
+				FBB5CA8E7500457DAE566B8E /* WatermelonFin iOS */,
+			);
+			name = "WatermelonFin iOS";
+			packageProductDependencies = (
+				286E1AF58EBD4742A6582D93 /* Get */,
+				E13DD3CC27164CA7009D4DAF /* CoreStore */,
+				E12186DD2718F1C50010884C /* Defaults */,
+				E1002B6A2793E36600E47059 /* Algorithms */,
+				E13AF3B528A0C598009093AB /* Nuke */,
+				E13AF3B728A0C598009093AB /* NukeExtensions */,
+				E13AF3B928A0C598009093AB /* NukeUI */,
+				E13AF3BB28A0C59E009093AB /* BlurHashKit */,
+				E192608728D2E5F0002314B4 /* Factory */,
+				E1575E57293E7685001665B1 /* Files */,
+				E1388A45293F0ABA009721B1 /* SwizzleSwift */,
+				E1B5F7A629577BCE004B26CF /* Pulse */,
+				E1B5F7A829577BCE004B26CF /* PulseLogHandler */,
+				E1B5F7AA29577BCE004B26CF /* PulseUI */,
+				E1B5F7AC29577BDD004B26CF /* OrderedCollections */,
+				E18443CA2A037773002DDDC8 /* UDPBroadcast */,
+				E1A7B1642B9A9F7800152546 /* PreferencesView */,
+				E1392FEC2BA218A80034110D /* SwiftUIIntrospect */,
+				E1153DD12BBB649C00424D36 /* SVGKit */,
+				E19D41B12BF2BFA50082B8B2 /* KeychainSwift */,
+				E150C0C22BFD6DA200944FFA /* JellyfinAPI */,
+				E1155ACA2D0584A90021557A /* IdentifiedCollections */,
+				E1A09F762D05935A00835265 /* CollectionVGrid */,
+				E1A09F782D05935A00835265 /* CollectionHStack */,
+				7BF2735257A24BF8B7B9A5E3 /* MPVKit-GPL */,
+				E1E2D7BE2E3FD936004E2E5F /* Transmission */,
+				E14000BC2EF622AC00354A3C /* StatefulMacros */,
+			);
+			productName = "WatermelonFin iOS";
+			productReference = 73F2B586BEE64D1BBC72CD40 /* WatermelonFin iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C0DE10012F00000000000001 /* WatermelonFinTopShelf */ = {
@@ -523,73 +809,6 @@
 			productReference = 796E798440A8807BC2883549 /* WatermelonFin tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		73F2B586BEE64D1BBC72CD40 = { "isa" = "PBXFileReference"; "explicitFileType" = "wrapper.application"; "path" = "WatermelonFin iOS.app"; "sourceTree" = "BUILT_PRODUCTS_DIR"; };
-		FBB5CA8E7500457DAE566B8E = { "isa" = "PBXFileSystemSynchronizedRootGroup"; "path" = "WatermelonFin iOS"; "sourceTree" = "<group>"; "exceptions" = ("2F2738DDEB344A53AF160476"); "explicitFileTypes" = {  }; "explicitFolders" = (); };
-        2F2738DDEB344A53AF160476 = { "isa" = "PBXFileSystemSynchronizedBuildFileExceptionSet"; "membershipExceptions" = ("Resources/Info.plist"); "target" = "B0CE6520BBB54C35B4AAD04F"; };
-        802DE4E55C7848478B1921FD = { "isa" = "PBXFileSystemSynchronizedBuildFileExceptionSet"; "membershipExceptions" = ("Extensions/JellyfinAPI/TaskTriggerInfoType.swift", "Objects/ItemArrayElements.swift", "ViewModels/AdminDashboard/ActiveSessionsViewModel.swift", "ViewModels/AdminDashboard/AddServerUserViewModel.swift", "ViewModels/AdminDashboard/APIKeysViewModel.swift", "ViewModels/AdminDashboard/DevicesViewModel.swift", "ViewModels/AdminDashboard/ServerActivityDetailViewModel.swift", "ViewModels/AdminDashboard/ServerActivityViewModel.swift", "ViewModels/AdminDashboard/ServerTaskObserver.swift", "ViewModels/AdminDashboard/ServerTasksViewModel.swift", "ViewModels/AdminDashboard/ServerUserAdminViewModel.swift", "ViewModels/AdminDashboard/ServerUsersViewModel.swift", "ViewModels/DownloadListViewModel.swift", "ViewModels/ItemAdministration/IdentifyItemViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/GenreEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/ItemEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/PeopleEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/StudioEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/TagEditorViewModel.swift", "ViewModels/ItemAdministration/ItemImagesViewModel.swift", "ViewModels/ItemAdministration/RemoteImageInfoViewModel.swift", "ViewModels/QuickConnectAuthorizeViewModel.swift", "ViewModels/ServerCheckViewModel.swift", "Views/SettingsView/SettingsView.swift"); "target" = "B0CE6520BBB54C35B4AAD04F"; };
-        EF44A96020C14CA6920A1B53 = { "isa" = "PBXFileSystemSynchronizedBuildFileExceptionSet"; "membershipExceptions" = ("App/WatermelonFinApp.swift", "Components/PosterButton.swift", "Components/PosterHStack.swift", "Views/SearchView.swift", "Views/VideoPlayerContainerState/Components/LoadingView.swift", "Views/VideoPlayerContainerState/PlaybackControls/SupplementContainerView.swift", "Views/VideoPlayerContainerState/PlaybackControls/ConfirmCloseOverlay.swift", "Views/VideoPlayerContainerState/PlaybackControls/VideoPlayerContainerView.swift", "Views/VideoPlayerContainerState/PlaybackControls/PlaybackControls.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/SideActionButtons.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/NavigationBar.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/SplitTimestamp.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/PlaybackProgress.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ChapterTrackMask.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/TransportBarButtonStyle.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/PlaybackButtons.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/InfoActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AspectFillActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AutoPlayActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlaybackSpeedActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlayPreviousItemActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/SubtitleActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/SkipIntroActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AudioActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlaybackQualityActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/EpisodesActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/ActionButtons.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlayNextItemActionButton.swift", "Views/SelectUserView/SelectUserView.swift", "Views/SelectUserView/Components/ServerSelectionMenu.swift", "Views/SelectUserView/Components/UserGridButton.swift", "Views/SelectUserView/Components/AddUserGridButton.swift", "Views/SelectUserView/Components/SelectUserBottomBar.swift", "Views/SelectUserView/Components/AddUserBottomButton.swift", "Views/ItemView/ItemView.swift", "Views/ItemView/ScrollViews/CinematicScrollView.swift", "Views/HomeView/HomeView.swift", "Views/HomeView/Components/NextUpView.swift", "Views/HomeView/Components/LatestInLibraryView.swift", "Views/HomeView/Components/RecentlyAddedView.swift", "Views/HomeView/Components/CinematicResumeItemView.swift", "Views/HomeView/Components/CinematicRecentlyAddedView.swift", "Views/ProgramsView/PagingLibraryView/PagingLibraryView.swift", "Views/ProgramsView/PagingLibraryView/Components/LibraryRow.swift", "Resources/Info.plist", "Resources/WatermelonFin tvOS.entitlements", "Resources/Assets.xcassets", "Views/AppSettingsView/Components/HourMinutePicker.swift"); "target" = "B0CE6520BBB54C35B4AAD04F"; };
-		69295ABCE90642759DEEBF73 = { "isa" = "PBXBuildFile"; "productRef" = "7BF2735257A24BF8B7B9A5E3"; };
-		0E6C6ABACF224A17B33E872B = { "isa" = "PBXBuildFile"; "productRef" = "E1002B6A2793E36600E47059"; };
-		EC71D4B177394CA8A2335C68 = { "isa" = "PBXBuildFile"; "productRef" = "E1392FEC2BA218A80034110D"; };
-		49AAF6FD176B44CD821BA2FE = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3B728A0C598009093AB"; };
-		7934B13BB9CF44D2B29AD0BF = { "isa" = "PBXBuildFile"; "productRef" = "E1575E57293E7685001665B1"; };
-		A99C8133FCA944EE9744A592 = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7A629577BCE004B26CF"; };
-		5253EF85560645EB8FC1EA73 = { "isa" = "PBXBuildFile"; "productRef" = "E1A09F782D05935A00835265"; };
-		C9A8683A4D824B61A2015566 = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3B928A0C598009093AB"; };
-		88327374822B4E93ADD75C72 = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7AA29577BCE004B26CF"; };
-		8796B615DF7246C99241DDA0 = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7A829577BCE004B26CF"; };
-		41CEA51EFBEB4CB5B07F4E95 = { "isa" = "PBXBuildFile"; "productRef" = "E1388A45293F0ABA009721B1"; };
-		4CF00E71C5284DF79D17DF11 = { "isa" = "PBXBuildFile"; "productRef" = "E14000BC2EF622AC00354A3C"; };
-		9F874270583643C2ADB8F9CC = { "isa" = "PBXBuildFile"; "productRef" = "E19D41B12BF2BFA50082B8B2"; };
-		AD8BD71659EE4088B8C30920 = { "isa" = "PBXBuildFile"; "productRef" = "E18443CA2A037773002DDDC8"; };
-		D1409A0961A947A9A17F1A3A = { "isa" = "PBXBuildFile"; "productRef" = "E1155ACA2D0584A90021557A"; };
-		5848B42D104840DB9B92B1DD = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7AC29577BDD004B26CF"; };
-		D807217BD53B43EEB3E07FE1 = { "isa" = "PBXBuildFile"; "productRef" = "E13DD3CC27164CA7009D4DAF"; };
-		DC1A23CDC85F4C1CB36C584D = { "isa" = "PBXBuildFile"; "productRef" = "E1A7B1642B9A9F7800152546"; };
-		A83D19D42E1746C180449F9F = { "isa" = "PBXBuildFile"; "productRef" = "E1A09F762D05935A00835265"; };
-		E21825439C704DC39959A197 = { "isa" = "PBXBuildFile"; "productRef" = "E1153DD12BBB649C00424D36"; };
-		D425C528CC4D4F1693DA7CC8 = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3BB28A0C59E009093AB"; };
-		51052C7FE6B44D9AA274180D = { "isa" = "PBXBuildFile"; "productRef" = "E150C0C22BFD6DA200944FFA"; };
-		70ECE45EE751433DBDA67C2E = { "isa" = "PBXBuildFile"; "productRef" = "E1E2D7BE2E3FD936004E2E5F"; };
-		30C5A83FA8B34A579E3A840D = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3B528A0C598009093AB"; };
-		7036A4689376473DBE4EDCF3 = { "isa" = "PBXBuildFile"; "productRef" = "E12186DD2718F1C50010884C"; };
-		24B45F6D6C074E1A829DFB4A = { "isa" = "PBXBuildFile"; "productRef" = "E192608728D2E5F0002314B4"; };
-		F7D2A87DBE1E470497602EA1 = { "isa" = "PBXSourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		792E314A8734495292E8C666 = { "isa" = "PBXFrameworksBuildPhase"; "buildActionMask" = "2147483647"; "files" = (
-                0B211A77F4CE444D8A28A137,"69295ABCE90642759DEEBF73", "0E6C6ABACF224A17B33E872B", "EC71D4B177394CA8A2335C68", "49AAF6FD176B44CD821BA2FE", "7934B13BB9CF44D2B29AD0BF", "A99C8133FCA944EE9744A592", "5253EF85560645EB8FC1EA73", "C9A8683A4D824B61A2015566", "88327374822B4E93ADD75C72", "8796B615DF7246C99241DDA0", "41CEA51EFBEB4CB5B07F4E95", "4CF00E71C5284DF79D17DF11", "9F874270583643C2ADB8F9CC", "AD8BD71659EE4088B8C30920", "D1409A0961A947A9A17F1A3A", "5848B42D104840DB9B92B1DD", "D807217BD53B43EEB3E07FE1", "DC1A23CDC85F4C1CB36C584D", "A83D19D42E1746C180449F9F", "E21825439C704DC39959A197", "D425C528CC4D4F1693DA7CC8", "51052C7FE6B44D9AA274180D", "70ECE45EE751433DBDA67C2E", "30C5A83FA8B34A579E3A840D", "7036A4689376473DBE4EDCF3", "24B45F6D6C074E1A829DFB4A"); "runOnlyForDeploymentPostprocessing" = "0"; };
-		53127D841E5F4162867FD2B5 = { "isa" = "PBXResourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		FD860C9E80F44F919258DF4E = { "isa" = "XCBuildConfiguration"; "buildSettings" = { "ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon"; "CODE_SIGN_STYLE" = "Automatic"; "CURRENT_PROJECT_VERSION" = "2"; "MARKETING_VERSION" = "1.0.0"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "INFOPLIST_FILE" = "WatermelonFin iOS/Resources/Info.plist"; "SWIFT_VERSION" = "5.0"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG WATERMELONFIN_PHONE"; "LD_RUNPATH_SEARCH_PATHS" = ("$(inherited)", "@executable_path/Frameworks"); "ENABLE_USER_SCRIPT_SANDBOXING" = "NO"; "SUPPORTS_MACCATALYST" = "NO"; "GENERATE_INFOPLIST_FILE" = "NO"; }; "name" = "Debug"; };
-		67842B1DE1704C47B64D4B10 = { "isa" = "XCBuildConfiguration"; "buildSettings" = { "ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon"; "CODE_SIGN_STYLE" = "Automatic"; "CURRENT_PROJECT_VERSION" = "2"; "MARKETING_VERSION" = "1.0.0"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "INFOPLIST_FILE" = "WatermelonFin iOS/Resources/Info.plist"; "SWIFT_VERSION" = "5.0"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "WATERMELONFIN_PHONE"; "LD_RUNPATH_SEARCH_PATHS" = ("$(inherited)", "@executable_path/Frameworks"); "ENABLE_USER_SCRIPT_SANDBOXING" = "NO"; "SUPPORTS_MACCATALYST" = "NO"; "GENERATE_INFOPLIST_FILE" = "NO"; }; "name" = "Release"; };
-		865AFC9CD9574D4DAC26DEF9 = { "isa" = "XCConfigurationList"; "buildConfigurations" = ("FD860C9E80F44F919258DF4E", "67842B1DE1704C47B64D4B10"); "defaultConfigurationIsVisible" = "0"; "defaultConfigurationName" = "Release"; };
-		B0CE6520BBB54C35B4AAD04F = { "isa" = "PBXNativeTarget"; "name" = "WatermelonFin iOS"; "productName" = "WatermelonFin iOS"; "productReference" = "73F2B586BEE64D1BBC72CD40"; "productType" = "com.apple.product-type.application"; "buildConfigurationList" = "865AFC9CD9574D4DAC26DEF9"; "buildPhases" = ("F7D2A87DBE1E470497602EA1", "792E314A8734495292E8C666", "53127D841E5F4162867FD2B5"); "buildRules" = (); "dependencies" = (); "fileSystemSynchronizedGroups" = ("E14563272DFCAE6E008FF700", "E145669F2DFCAEFD008FF700", "E1456FC82DFCB323008FF700", "FBB5CA8E7500457DAE566B8E"); "packageProductDependencies" = (
-                286E1AF58EBD4742A6582D93,"E13DD3CC27164CA7009D4DAF", "E12186DD2718F1C50010884C", "E1002B6A2793E36600E47059", "E13AF3B528A0C598009093AB", "E13AF3B728A0C598009093AB", "E13AF3B928A0C598009093AB", "E13AF3BB28A0C59E009093AB", "E192608728D2E5F0002314B4", "E1575E57293E7685001665B1", "E1388A45293F0ABA009721B1", "E1B5F7A629577BCE004B26CF", "E1B5F7A829577BCE004B26CF", "E1B5F7AA29577BCE004B26CF", "E1B5F7AC29577BDD004B26CF", "E18443CA2A037773002DDDC8", "E1A7B1642B9A9F7800152546", "E1392FEC2BA218A80034110D", "E1153DD12BBB649C00424D36", "E19D41B12BF2BFA50082B8B2", "E150C0C22BFD6DA200944FFA", "E1155ACA2D0584A90021557A", "E1A09F762D05935A00835265", "E1A09F782D05935A00835265", "7BF2735257A24BF8B7B9A5E3", "E1E2D7BE2E3FD936004E2E5F", "E14000BC2EF622AC00354A3C"); };
-		08C2A57D68D74086A5AD16E3 = { "isa" = "PBXFileReference"; "explicitFileType" = "wrapper.cfbundle"; "path" = "WatermelonFin iOS Tests.xctest"; "sourceTree" = "BUILT_PRODUCTS_DIR"; };
-		1BEE133050454636B53F5957 = { "isa" = "PBXFileSystemSynchronizedRootGroup"; "path" = "WatermelonFin iOS Tests"; "sourceTree" = "<group>"; "explicitFileTypes" = {  }; "explicitFolders" = (); };
-		629006D301174384A585848A = { "isa" = "PBXSourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		5E6EC9EBA72946F88887A7B8 = { "isa" = "PBXFrameworksBuildPhase"; "buildActionMask" = "2147483647"; "files" = ("EE1149E31B2348D38B93B4FF"); "runOnlyForDeploymentPostprocessing" = "0"; };
-		3E9DD81502834D64A67C1B3F = { "isa" = "PBXResourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		956D1E7963BA43799252E620 = { "isa" = "XCBuildConfiguration"; "name" = "Debug"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.tests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG"; "TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/WatermelonFin iOS.app/WatermelonFin iOS"; "BUNDLE_LOADER" = "$(TEST_HOST)"; }; };
-		DCE6F99F3D0746C4B0B9AE84 = { "isa" = "XCBuildConfiguration"; "name" = "Release"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.tests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = ""; "TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/WatermelonFin iOS.app/WatermelonFin iOS"; "BUNDLE_LOADER" = "$(TEST_HOST)"; }; };
-		0A5A3530DF0B4EFCB85E029C = { "isa" = "XCConfigurationList"; "buildConfigurations" = ("956D1E7963BA43799252E620", "DCE6F99F3D0746C4B0B9AE84"); "defaultConfigurationIsVisible" = "0"; "defaultConfigurationName" = "Release"; };
-		F1C25C366CAF4D0EA867586F = { "isa" = "PBXContainerItemProxy"; "containerPortal" = "5377CBE9263B596A003A4E83"; "proxyType" = "1"; "remoteGlobalIDString" = "B0CE6520BBB54C35B4AAD04F"; "remoteInfo" = "WatermelonFin iOS"; };
-		A2BD710FC6C9456480F37F13 = { "isa" = "PBXTargetDependency"; "target" = "B0CE6520BBB54C35B4AAD04F"; "targetProxy" = "F1C25C366CAF4D0EA867586F"; };
-		88CC21CF9E20403E8CFACE73 = { "isa" = "PBXNativeTarget"; "name" = "WatermelonFin iOS Tests"; "productName" = "WatermelonFin iOS Tests"; "productReference" = "08C2A57D68D74086A5AD16E3"; "productType" = "com.apple.product-type.bundle.unit-test"; "buildConfigurationList" = "0A5A3530DF0B4EFCB85E029C"; "buildPhases" = ("629006D301174384A585848A", "5E6EC9EBA72946F88887A7B8", "3E9DD81502834D64A67C1B3F"); "buildRules" = (); "dependencies" = ("A2BD710FC6C9456480F37F13"); "fileSystemSynchronizedGroups" = ("1BEE133050454636B53F5957"); "packageProductDependencies" = ("E150C0C22BFD6DA200944FFA"); };
-		EE1149E31B2348D38B93B4FF = { "isa" = "PBXBuildFile"; "productRef" = "E150C0C22BFD6DA200944FFA"; };
-		5E1D35E1F8924E03B385C619 = { "isa" = "PBXFileReference"; "explicitFileType" = "wrapper.cfbundle"; "path" = "WatermelonFin iOS UI Tests.xctest"; "sourceTree" = "BUILT_PRODUCTS_DIR"; };
-		E583E45451A9464CB438D2EA = { "isa" = "PBXFileSystemSynchronizedRootGroup"; "path" = "WatermelonFin iOS UI Tests"; "sourceTree" = "<group>"; "explicitFileTypes" = {  }; "explicitFolders" = (); };
-		AC64CE05FA3845B89C73E91F = { "isa" = "PBXSourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		8D3BA6D4B56F48D78DE6235D = { "isa" = "PBXFrameworksBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		721C0A8165ED4CFAB4FE071B = { "isa" = "PBXResourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
-		27D912081971402FB5F21B5F = { "isa" = "XCBuildConfiguration"; "name" = "Debug"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.uitests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG"; "TEST_TARGET_NAME" = "WatermelonFin iOS"; }; };
-		9AC64F9AEC2F4D93BD382E44 = { "isa" = "XCBuildConfiguration"; "name" = "Release"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.uitests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = ""; "TEST_TARGET_NAME" = "WatermelonFin iOS"; }; };
-		671D5979FFE64F949E1ED9BE = { "isa" = "XCConfigurationList"; "buildConfigurations" = ("27D912081971402FB5F21B5F", "9AC64F9AEC2F4D93BD382E44"); "defaultConfigurationIsVisible" = "0"; "defaultConfigurationName" = "Release"; };
-		AE74210E57EA48BD8348261B = { "isa" = "PBXContainerItemProxy"; "containerPortal" = "5377CBE9263B596A003A4E83"; "proxyType" = "1"; "remoteGlobalIDString" = "B0CE6520BBB54C35B4AAD04F"; "remoteInfo" = "WatermelonFin iOS"; };
-		1D379AF708B74B91B8D81A9E = { "isa" = "PBXTargetDependency"; "target" = "B0CE6520BBB54C35B4AAD04F"; "targetProxy" = "AE74210E57EA48BD8348261B"; };
-		082BA00F2A764D53BB4297BE = { "isa" = "PBXNativeTarget"; "name" = "WatermelonFin iOS UI Tests"; "productName" = "WatermelonFin iOS UI Tests"; "productReference" = "5E1D35E1F8924E03B385C619"; "productType" = "com.apple.product-type.bundle.ui-testing"; "buildConfigurationList" = "671D5979FFE64F949E1ED9BE"; "buildPhases" = ("AC64CE05FA3845B89C73E91F", "8D3BA6D4B56F48D78DE6235D", "721C0A8165ED4CFAB4FE071B"); "buildRules" = (); "dependencies" = ("1D379AF708B74B91B8D81A9E"); "fileSystemSynchronizedGroups" = ("E583E45451A9464CB438D2EA"); };
-		04BBBB1C373F4A7BA3E57C73 = { "isa" = "XCRemoteSwiftPackageReference"; "repositoryURL" = "https://github.com/kean/Get"; "requirement" = { "kind" = "upToNextMajorVersion"; "minimumVersion" = "2.2.1"; }; };
-		286E1AF58EBD4742A6582D93 = { "isa" = "XCSwiftPackageProductDependency"; "package" = "04BBBB1C373F4A7BA3E57C73"; "productName" = "Get"; };
-		C90C584B5D6B4FB3978AC463 = { "isa" = "PBXBuildFile"; "productRef" = "286E1AF58EBD4742A6582D93"; };
-		0B211A77F4CE444D8A28A137 = { "isa" = "PBXBuildFile"; "productRef" = "286E1AF58EBD4742A6582D93"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -668,7 +887,7 @@
 			);
 			mainGroup = 5377CBE8263B596A003A4E83;
 			packageReferences = (
-                04BBBB1C373F4A7BA3E57C73,
+				04BBBB1C373F4A7BA3E57C73 /* XCRemoteSwiftPackageReference "Get" */,
 				5335256F265EA0A0006CCA86 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				E13DD3C42716499E009D4DAF /* XCRemoteSwiftPackageReference "CoreStore" */,
 				E13DD3D127168E65009D4DAF /* XCRemoteSwiftPackageReference "Defaults" */,
@@ -700,9 +919,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-                082BA00F2A764D53BB4297BE,
-                88CC21CF9E20403E8CFACE73,
-                B0CE6520BBB54C35B4AAD04F,
+				082BA00F2A764D53BB4297BE /* WatermelonFin iOS UI Tests */,
+				88CC21CF9E20403E8CFACE73 /* WatermelonFin iOS Tests */,
+				B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */,
 				5358705F2669D21600D05A09 /* WatermelonFin tvOS */,
 				C0DE10012F00000000000001 /* WatermelonFinTopShelf */,
 				D69A236F08D624F2AAB685F5 /* WatermelonFin tvOS Tests */,
@@ -711,7 +930,28 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3E9DD81502834D64A67C1B3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53127D841E5F4162867FD2B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5358705E2669D21600D05A09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		721C0A8165ED4CFAB4FE071B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -735,6 +975,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1A7F0B912E1BE2B000ABC001 /* Generate Git Commit Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Git Commit Info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/GitCommitInfoPrefix.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n\ncommit=\"unknown\"\nif command -v git >/dev/null 2>&1; then\n    commit=$(git -C \"${SRCROOT}\" rev-parse --short HEAD 2>/dev/null || printf unknown)\nfi\n\nprintf '#define GIT_COMMIT_HASH %s\\n' \"$commit\" > \"${DERIVED_FILE_DIR}/GitCommitInfoPrefix.h\"\n";
+		};
 		4EC71FBD2D1620AF00D0B3A8 /* Alphabetize Strings */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -793,30 +1053,48 @@
 			shellPath = /bin/sh;
 			shellScript = "# Add Homebrew to the path to support Apple Silicon Homebrew SwiftFormat installations\nexport PATH=/opt/homebrew/bin:$PATH\n\n# Skip phase if the action is not build (ie. analyze, archive, etc).\nif [ \"$ACTION\" != \"build\" ]; then\n    exit 0\nfi\n\nif which swiftformat >/dev/null; then\n    swiftformat . --exclude build/SourcePackages\nelse\n    echo \"error: SwiftFormat not installed, check contributing.md for installation instructions.\"\nfi\n";
 		};
-		1A7F0B912E1BE2B000ABC001 /* Generate Git Commit Info */ = {
+		C0DE20012F00000000000001 /* Normalize MPVKit Minimum OS */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Git Commit Info";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/GitCommitInfoPrefix.h",
-			);
+			files = ();
+			inputPaths = ("$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/Info.plist", "$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/MPVKit", );
+			name = "Normalize MPVKit Minimum OS";
+			outputPaths = ();
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -eu\n\ncommit=\"unknown\"\nif command -v git >/dev/null 2>&1; then\n    commit=$(git -C \"${SRCROOT}\" rev-parse --short HEAD 2>/dev/null || printf unknown)\nfi\n\nprintf '#define GIT_COMMIT_HASH %s\\n' \"$commit\" > \"${DERIVED_FILE_DIR}/GitCommitInfoPrefix.h\"\n";
+			shellPath = /bin/bash;
+			shellScript = "bash \"${SRCROOT}/Scripts/Distribution/NormalizeMPVKitMinimumOS.sh\"\n";
+		};
+		C0DE20022F00000000000002 /* Normalize MPVKit Minimum OS */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = ();
+			inputPaths = ("$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/Info.plist", "$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/MPVKit", );
+			name = "Normalize MPVKit Minimum OS";
+			outputPaths = ();
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "bash \"${SRCROOT}/Scripts/Distribution/NormalizeMPVKitMinimumOS.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5358705C2669D21600D05A09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		629006D301174384A585848A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC64CE05FA3845B89C73E91F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -831,30 +1109,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-			FCAD6A1BEF4590C86AB68979 /* Sources */ = {
-				isa = PBXSourcesBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-					08BEEA4E5F77A74D7B6FE59F /* VideoPlayerContainerStateTests.swift in Sources */,
-					1A7F0B902E1BE2B000ABC001 /* AppBuildInfoTests.swift in Sources */,
-					2F0A116D2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift in Sources */,
-					CA7E00022F30000000CACE02 /* AsyncExpiringCacheTests.swift in Sources */,
-					B6FD5626C1D953D86DA73199 /* NetworkErrorTests.swift in Sources */,
-					6C6178530A261AC4FD50E4DC /* MediaErrorTests.swift in Sources */,
-					EE9A94A7172E4DA099EED926 /* MediaPlayerItemAudioSelectionTests.swift in Sources */,
-					F0C050022F50000000F0C002 /* HomeViewModelStateTests.swift in Sources */,
-					F0C050042F50000000F0C004 /* MediaProgressObserverTests.swift in Sources */,
-                    C011EC710026100000000002 /* CollectionPagingTests.swift in Sources */,
-					C0D3A3002E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift in Sources */,
-					C0D3A3022E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift in Sources */,
-					C1B4A0022F20000000BEEF02 /* CinematicBackgroundImageSizingTests.swift in Sources */,
-					C0D3A3042E22000000F1A001 /* MainTabViewTabsTests.swift in Sources */,
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
+		F7D2A87DBE1E470497602EA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCAD6A1BEF4590C86AB68979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BEEA4E5F77A74D7B6FE59F /* VideoPlayerContainerStateTests.swift in Sources */,
+				1A7F0B902E1BE2B000ABC001 /* AppBuildInfoTests.swift in Sources */,
+				2F0A116D2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift in Sources */,
+				CA7E00022F30000000CACE02 /* AsyncExpiringCacheTests.swift in Sources */,
+				B6FD5626C1D953D86DA73199 /* NetworkErrorTests.swift in Sources */,
+				6C6178530A261AC4FD50E4DC /* MediaErrorTests.swift in Sources */,
+				EE9A94A7172E4DA099EED926 /* MediaPlayerItemAudioSelectionTests.swift in Sources */,
+				F0C050022F50000000F0C002 /* HomeViewModelStateTests.swift in Sources */,
+				F0C050042F50000000F0C004 /* MediaProgressObserverTests.swift in Sources */,
+				C011EC710026100000000002 /* CollectionPagingTests.swift in Sources */,
+				C0D3A3002E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift in Sources */,
+				C0D3A3022E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift in Sources */,
+				C1B4A0022F20000000BEEF02 /* CinematicBackgroundImageSizingTests.swift in Sources */,
+				C0D3A3042E22000000F1A001 /* MainTabViewTabsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1D379AF708B74B91B8D81A9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */;
+			targetProxy = AE74210E57EA48BD8348261B /* PBXContainerItemProxy */;
+		};
+		A2BD710FC6C9456480F37F13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0CE6520BBB54C35B4AAD04F /* WatermelonFin iOS */;
+			targetProxy = F1C25C366CAF4D0EA867586F /* PBXContainerItemProxy */;
+		};
 		C0DE10122F00000000000012 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C0DE10012F00000000000001 /* WatermelonFinTopShelf */;
@@ -893,6 +1188,23 @@
 			};
 			name = Release;
 		};
+		27D912081971402FB5F21B5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.ios.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "WatermelonFin iOS";
+			};
+			name = Debug;
+		};
 		535870722669D21700D05A09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -901,9 +1213,9 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "WatermelonFin tvOS/Resources/WatermelonFin tvOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "$(inherited)";
+				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -914,7 +1226,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-					MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -933,10 +1245,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "WatermelonFin tvOS/Resources/WatermelonFin tvOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "WatermelonFin tvOS App Store Local 2026";
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "$(inherited)";
+				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -947,65 +1261,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-					MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.5;
-			};
-			name = Release;
-		};
-		C0DE10052F00000000000005 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_ENTITLEMENTS = WatermelonFinTopShelf/WatermelonFinTopShelf.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "$(inherited)";
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = WatermelonFinTopShelf/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.topshelf;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.5;
-			};
-			name = Debug;
-		};
-		C0DE10062F00000000000006 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_ENTITLEMENTS = WatermelonFinTopShelf/WatermelonFinTopShelf.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "$(inherited)";
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = WatermelonFinTopShelf/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.topshelf;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1144,6 +1403,68 @@
 			};
 			name = Release;
 		};
+		67842B1DE1704C47B64D4B10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = GP22YF7BL7;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "WatermelonFin iOS/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WATERMELONFIN_PHONE;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		956D1E7963BA43799252E620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.ios.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatermelonFin iOS.app/WatermelonFin iOS";
+			};
+			name = Debug;
+		};
+		9AC64F9AEC2F4D93BD382E44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.ios.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "WatermelonFin iOS";
+			};
+			name = Release;
+		};
 		A88FDBD2206EEBF987A737F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1168,23 +1489,125 @@
 			};
 			name = Debug;
 		};
+		C0DE10052F00000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = WatermelonFinTopShelf/WatermelonFinTopShelf.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = GP22YF7BL7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WatermelonFinTopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.topshelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.5;
+			};
+			name = Debug;
+		};
+		C0DE10062F00000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = WatermelonFinTopShelf/WatermelonFinTopShelf.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "WatermelonFin TopShelf App Store Local 2026";
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = GP22YF7BL7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WatermelonFinTopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.topshelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.5;
+			};
+			name = Release;
+		};
+		DCE6F99F3D0746C4B0B9AE84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin.ios.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatermelonFin iOS.app/WatermelonFin iOS";
+			};
+			name = Release;
+		};
+		FD860C9E80F44F919258DF4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = GP22YF7BL7;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "WatermelonFin iOS/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.chenacademy.watermelonfin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG WATERMELONFIN_PHONE";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A5A3530DF0B4EFCB85E029C /* Build configuration list for PBXNativeTarget "WatermelonFin iOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				956D1E7963BA43799252E620 /* Debug */,
+				DCE6F99F3D0746C4B0B9AE84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		535870712669D21700D05A09 /* Build configuration list for PBXNativeTarget "WatermelonFin tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				535870722669D21700D05A09 /* Debug */,
 				535870732669D21700D05A09 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C0DE10072F00000000000007 /* Build configuration list for PBXNativeTarget "WatermelonFinTopShelf" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C0DE10052F00000000000005 /* Debug */,
-				C0DE10062F00000000000006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1207,6 +1630,33 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		671D5979FFE64F949E1ED9BE /* Build configuration list for PBXNativeTarget "WatermelonFin iOS UI Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27D912081971402FB5F21B5F /* Debug */,
+				9AC64F9AEC2F4D93BD382E44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		865AFC9CD9574D4DAC26DEF9 /* Build configuration list for PBXNativeTarget "WatermelonFin iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD860C9E80F44F919258DF4E /* Debug */,
+				67842B1DE1704C47B64D4B10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0DE10072F00000000000007 /* Build configuration list for PBXNativeTarget "WatermelonFinTopShelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0DE10052F00000000000005 /* Debug */,
+				C0DE10062F00000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
@@ -1217,6 +1667,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		04BBBB1C373F4A7BA3E57C73 /* XCRemoteSwiftPackageReference "Get" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Get";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
 		5335256F265EA0A0006CCA86 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
@@ -1241,20 +1699,20 @@
 				minimumVersion = 0.3.0;
 			};
 		};
-		E1002B662793CFBA00E47059 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		CA0B8AF275C549A1AB319330 /* XCRemoteSwiftPackageReference "MPVKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/streamyfin/MPVKit.git";
 			requirement = {
 				kind = exactVersion;
 				version = "0.40.0-av";
+			};
+		};
+		E1002B662793CFBA00E47059 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		E1153DCE2BBB634F00424D36 /* XCRemoteSwiftPackageReference "SVGKit" */ = {
@@ -1420,6 +1878,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		286E1AF58EBD4742A6582D93 /* Get */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BBBB1C373F4A7BA3E57C73 /* XCRemoteSwiftPackageReference "Get" */;
+			productName = Get;
+		};
+		7BF2735257A24BF8B7B9A5E3 /* MPVKit-GPL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA0B8AF275C549A1AB319330 /* XCRemoteSwiftPackageReference "MPVKit" */;
+			productName = "MPVKit-GPL";
+		};
 		BD88CB412D77E6A0006BB5E3 /* TVOSPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BD88CB402D77E6A0006BB5E3 /* XCRemoteSwiftPackageReference "TVOSPicker" */;
@@ -1429,11 +1897,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E1002B662793CFBA00E47059 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
-		};
-		7BF2735257A24BF8B7B9A5E3 /* MPVKit-GPL */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA0B8AF275C549A1AB319330 /* XCRemoteSwiftPackageReference "MPVKit" */;
-			productName = "MPVKit-GPL";
 		};
 		E1153DD12BBB649C00424D36 /* SVGKit */ = {
 			isa = XCSwiftPackageProductDependency;
