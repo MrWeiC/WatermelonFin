@@ -19,6 +19,8 @@ import SwiftUI
 struct WatermelonFinApp: App {
 
     init() {
+        // Remove legacy payloads containing authenticated artwork URLs.
+        TopShelfCache.clear()
 
         // Logging
         LoggingSystem.bootstrap { label in

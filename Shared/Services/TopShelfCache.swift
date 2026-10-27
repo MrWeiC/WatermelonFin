@@ -7,18 +7,22 @@
 //
 
 #if os(tvOS)
+import Factory
 import Foundation
 import JellyfinAPI
 import TVServices
 
+@MainActor
 enum TopShelfCache {
 
     static let payloadKey = "WatermelonFinTopShelfPayload"
-    static let maxItemsPerSection = 12
+    nonisolated static let maxItemsPerSection = 12
 
     private static let appGroupInfoPlistKey = "WatermelonFinAppGroupIdentifier"
     private static let defaultAppGroupIdentifier = "group.org.chenacademy.watermelonfin"
-    private static let payloadVersion = 1
+    private static let payloadVersion = 2
+    private static var artworkTask: Task<Void, Never>?
+    private static var updateID = UUID()
 
     static var appGroupIdentifier: String {
         Bundle.main.object(forInfoDictionaryKey: appGroupInfoPlistKey) as? String ?? defaultAppGroupIdentifier
@@ -29,31 +33,75 @@ enum TopShelfCache {
         nextUpItems: [BaseItemDto],
         session: UserSession
     ) {
-        let payload = makePayload(
-            resumeItems: resumeItems,
-            nextUpItems: nextUpItems,
-            session: session
+        // A delayed home refresh from a signed-out account must not republish its library.
+        guard Container.shared.currentUserSession() === session else { return }
+        clear()
+        var payload = makePayload(resumeItems: resumeItems, nextUpItems: nextUpItems, session: session)
+        guard payload.sections.isNotEmpty else { return }
+        // Publish token-free metadata immediately, even if artwork cannot be fetched.
+        persist(payload)
+
+        guard let directory = artworkDirectory else { return }
+        let generation = updateID
+        let downloadDirectory = directory.appendingPathComponent(generation.uuidString, isDirectory: true)
+        let artworkURLs = Dictionary(
+            (resumeItems + nextUpItems).compactMap { item -> (String, URL)? in
+                guard let id = item.id, let url = imageURL(for: item, session: session) else { return nil }
+                return (id, url)
+            },
+            uniquingKeysWith: { first, _ in first }
         )
-
-        guard payload.sections.isNotEmpty else {
-            clear()
-            return
+        let accessToken = session.user.accessToken
+        artworkTask = Task {
+            let downloader = URLSession(configuration: .ephemeral)
+            defer { downloader.invalidateAndCancel() }
+            for sectionIndex in payload.sections.indices {
+                for itemIndex in payload.sections[sectionIndex].items.indices {
+                    guard !Task.isCancelled, generation == updateID else { return }
+                    let id = payload.sections[sectionIndex].items[itemIndex].id
+                    guard let remoteURL = artworkURLs[id] else { continue }
+                    do {
+                        var request = URLRequest(url: remoteURL)
+                        request.setValue(accessToken, forHTTPHeaderField: "X-Emby-Token")
+                        request.timeoutInterval = 15
+                        let (data, response) = try await downloader.data(for: request)
+                        guard !Task.isCancelled, generation == updateID else { return }
+                        guard let response = response as? HTTPURLResponse,
+                              (200 ..< 300).contains(response.statusCode),
+                              response.mimeType?.hasPrefix("image/") == true
+                        else { continue }
+                        let localURL = try TopShelfArtworkStore.write(data, to: downloadDirectory)
+                        payload.sections[sectionIndex].items[itemIndex].imageURL = localURL.absoluteString
+                    } catch {
+                        // Artwork is optional; never fall back to a persisted authenticated URL.
+                        continue
+                    }
+                }
+            }
+            guard !Task.isCancelled, generation == updateID else { return }
+            persist(payload)
         }
-
-        guard let defaults = sharedDefaults,
-              let data = try? JSONEncoder().encode(payload)
-        else { return }
-
-        defaults.set(data, forKey: payloadKey)
-        defaults.synchronize()
-        TVTopShelfContentProvider.topShelfContentDidChange()
     }
 
     static func clear() {
-        guard let defaults = sharedDefaults else { return }
+        updateID = UUID()
+        artworkTask?.cancel()
+        artworkTask = nil
+        sharedDefaults?.removeObject(forKey: payloadKey)
+        if let artworkDirectory {
+            try? FileManager.default.removeItem(at: artworkDirectory)
+        }
+        TVTopShelfContentProvider.topShelfContentDidChange()
+    }
 
-        defaults.removeObject(forKey: payloadKey)
-        defaults.synchronize()
+    private static var artworkDirectory: URL? {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?
+            .appendingPathComponent("Library/Caches/TopShelfArtwork", isDirectory: true)
+    }
+
+    private static func persist(_ payload: TopShelfPayload) {
+        guard let data = try? JSONEncoder().encode(payload) else { return }
+        sharedDefaults?.set(data, forKey: payloadKey)
         TVTopShelfContentProvider.topShelfContentDidChange()
     }
 
@@ -126,7 +174,7 @@ enum TopShelfCache {
         return TopShelfItem(
             id: id,
             title: title(for: item),
-            imageURL: imageURL(for: item, session: session)?.absoluteString,
+            imageURL: nil,
             displayURL: displayURL.absoluteString,
             playURL: playURL?.absoluteString
         )
@@ -166,26 +214,25 @@ enum TopShelfCache {
 
         return candidates
             .compactMap { $0 }
-            .first?
-            .addingAPIKey(session.user.accessToken)
+            .first
     }
 }
 
 struct TopShelfPayload: Codable, Equatable {
     let version: Int
     let updatedAt: TimeInterval
-    let sections: [TopShelfSection]
+    var sections: [TopShelfSection]
 }
 
 struct TopShelfSection: Codable, Equatable {
     let title: String
-    let items: [TopShelfItem]
+    var items: [TopShelfItem]
 }
 
 struct TopShelfItem: Codable, Equatable {
     let id: String
     let title: String
-    let imageURL: String?
+    var imageURL: String?
     let displayURL: String
     let playURL: String?
 }
@@ -253,19 +300,4 @@ enum TopShelfDeepLinkStore {
     }
 }
 
-private extension URL {
-
-    func addingAPIKey(_ apiKey: String) -> URL {
-        guard var components = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
-            return self
-        }
-
-        var queryItems = components.queryItems ?? []
-        queryItems.removeAll { $0.name == "api_key" }
-        queryItems.append(.init(name: "api_key", value: apiKey))
-        components.queryItems = queryItems
-
-        return components.url ?? self
-    }
-}
 #endif
