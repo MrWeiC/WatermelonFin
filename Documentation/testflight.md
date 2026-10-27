@@ -8,12 +8,12 @@ Prepare a TestFlight beta first. The intended US App Store launch price is **US$
 
 - Scheme: `WatermelonFin iOS`
 - Bundle identifier: `org.chenacademy.watermelonfin`
-- Version/build: `1.0.0 (7)`; verify the next unused build number in App Store Connect before uploading.
+- Version/build: `1.0.0 (8)`; verify the next unused build number in App Store Connect before uploading.
 - Minimum iOS/iPadOS: 17.5; supports both iPhone and iPad
 - Automated simulator validation: seven tests passed on each of CS iPhone Duo and iPad Pro 13-inch (M5). See `iphone-verification.md` for actual runtime coverage and remaining tests.
 - Developer team: Wei Chen (`GP22YF7BL7`), using automatic signing for iOS, tvOS, and Top Shelf.
 - Release archive check: optimized unsigned archive succeeded on Xcode 27.1 after updating Transmission to 2.12.3 and Engine to 2.12.2. Distribution signing and TestFlight upload remain outstanding.
-- Existing App Store Connect app: WatermelonFin, Apple ID `6789271807`, bundle ID `org.chenacademy.watermelonfin`. iOS was added alongside tvOS for one app record. The previous tvOS build is 1.0.0 (6); new uploads use build 7.
+- Existing App Store Connect app: WatermelonFin, Apple ID `6789271807`, bundle ID `org.chenacademy.watermelonfin`. iOS was added alongside tvOS for one app record. The previous tvOS build is 1.0.0 (6); new uploads use build 8.
 
 ## Upload prerequisites
 
@@ -49,3 +49,9 @@ A Jellyfin server and account are required. This app does not provide media cont
 ## Price setup after beta validation
 
 In App Store Connect, select the United States base storefront and the available USD 0.99 price point. Review Apple's generated prices for other storefronts separately. The account holder must complete any required paid-app agreement, tax, or banking steps personally. Keep the app unreleased until testing and submission preparation are complete.
+
+## Upload validation
+
+iOS build 7 uploaded successfully from Xcode but Apple processing rejected it with 90208: the generated MPVKit framework plist advertised iOS 12.0 while its linked binary required 17.5. Both app targets now run `Scripts/Distribution/NormalizeMPVKitMinimumOS.sh`, which derives MinimumOSVersion from the embedded Mach-O binary and re-signs the framework when signing is enabled. Build 8 archives for iOS and tvOS were verified to declare and require 17.5.
+
+The iOS build 8 signed archive succeeded. The tvOS build 8 unsigned archive succeeded; distribution signing happens during export because the team has no registered Apple TV development device. Xcode may warn that MPVKit has no matching dSYM; this affects symbolication of that framework and is separate from Apple processing acceptance. New TestFlight availability must be checked after processing.

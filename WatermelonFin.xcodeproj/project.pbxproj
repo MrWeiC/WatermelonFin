@@ -649,6 +649,7 @@
 				5358705E2669D21600D05A09 /* Resources */,
 				C0DE10102F00000000000010 /* Embed App Extensions */,
 				1A7F0B912E1BE2B000ABC001 /* Generate Git Commit Info */,
+				C0DE20012F00000000000001 /* Normalize MPVKit Minimum OS */,
 			);
 			buildRules = (
 			);
@@ -727,6 +728,7 @@
 				F7D2A87DBE1E470497602EA1 /* Sources */,
 				792E314A8734495292E8C666 /* Frameworks */,
 				53127D841E5F4162867FD2B5 /* Resources */,
+				C0DE20022F00000000000002 /* Normalize MPVKit Minimum OS */,
 			);
 			buildRules = (
 			);
@@ -1051,6 +1053,30 @@
 			shellPath = /bin/sh;
 			shellScript = "# Add Homebrew to the path to support Apple Silicon Homebrew SwiftFormat installations\nexport PATH=/opt/homebrew/bin:$PATH\n\n# Skip phase if the action is not build (ie. analyze, archive, etc).\nif [ \"$ACTION\" != \"build\" ]; then\n    exit 0\nfi\n\nif which swiftformat >/dev/null; then\n    swiftformat . --exclude build/SourcePackages\nelse\n    echo \"error: SwiftFormat not installed, check contributing.md for installation instructions.\"\nfi\n";
 		};
+		C0DE20012F00000000000001 /* Normalize MPVKit Minimum OS */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = ();
+			inputPaths = ("$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/Info.plist", "$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/MPVKit", );
+			name = "Normalize MPVKit Minimum OS";
+			outputPaths = ();
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "bash \"${SRCROOT}/Scripts/Distribution/NormalizeMPVKitMinimumOS.sh\"\n";
+		};
+		C0DE20022F00000000000002 /* Normalize MPVKit Minimum OS */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = ();
+			inputPaths = ("$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/Info.plist", "$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MPVKit.framework/MPVKit", );
+			name = "Normalize MPVKit Minimum OS";
+			outputPaths = ();
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "bash \"${SRCROOT}/Scripts/Distribution/NormalizeMPVKitMinimumOS.sh\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1187,7 +1213,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "WatermelonFin tvOS/Resources/WatermelonFin tvOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_PREVIEWS = YES;
@@ -1220,7 +1246,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "WatermelonFin tvOS/Resources/WatermelonFin tvOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_PREVIEWS = YES;
@@ -1380,7 +1406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1467,7 +1493,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = WatermelonFinTopShelf/WatermelonFinTopShelf.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WatermelonFinTopShelf/Info.plist;
@@ -1495,7 +1521,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = WatermelonFinTopShelf/WatermelonFinTopShelf.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = WatermelonFinTopShelf/Info.plist;
@@ -1539,7 +1565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = GP22YF7BL7;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
