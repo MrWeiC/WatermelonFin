@@ -39,6 +39,10 @@ extension ItemView {
                         .padding(.leading, 50)
 
                     Spacer()
+                    Button(L10n.seeAll) {
+                        router.route(to: .library(viewModel: element.value))
+                    }
+                    .padding(.trailing, 50)
                 }
 
                 CollectionHStack(
@@ -53,7 +57,7 @@ extension ItemView {
                 .insets(horizontal: EdgeInsets.edgePadding)
                 .itemSpacing(EdgeInsets.edgePadding / 2)
             }
-            .focusSection()
+            .platformFocusSection()
         }
 
         // MARK: - Default Poster HStack
@@ -66,18 +70,20 @@ extension ItemView {
             ) { item in
                 router.route(to: .item(item: item))
             }
-            .focusSection()
-
-            // TODO: Is this possible?
-            /* .trailing {
-                 SeeMoreButton() {
-                     router.route(to: .library(viewModel: element.value))
-                 }
-             } */
+            .trailing {
+                Button(L10n.seeAll) {
+                    router.route(to: .library(viewModel: element.value))
+                }
+            }
+            .platformFocusSection()
         }
 
         var body: some View {
             VStack(spacing: 0) {
+                if let entries = viewModel.playlistEntries {
+                    PlaylistEntriesView(viewModel: entries, collection: viewModel)
+                }
+
                 ForEach(
                     viewModel.sections.elements,
                     id: \.key

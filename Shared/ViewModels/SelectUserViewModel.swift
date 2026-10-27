@@ -81,8 +81,8 @@ final class SelectUserViewModel: ViewModel {
             return
         }
 
-        if user.accessPolicy == .requirePin, let storedPin = keychain.get("\(user.id)-pin") {
-            guard pin == storedPin else {
+        if user.accessPolicy == .requirePin {
+            guard LocalPINPolicy.isValid(pin), let storedPin = keychain.get("\(user.id)-pin"), pin == storedPin else {
                 throw ErrorMessage(L10n.incorrectPinForUser(user.username))
             }
         }

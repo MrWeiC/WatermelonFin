@@ -27,7 +27,7 @@ extension NavigationRoute {
         }
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static let adminDashboard = NavigationRoute(
         id: "adminDashboard"
     ) {
@@ -61,7 +61,7 @@ extension NavigationRoute {
         DiagnosticsView()
     }
 
-    #if DEBUG && !os(tvOS)
+    #if DEBUG && !os(tvOS) && !WATERMELONFIN_PHONE
     static let debugSettings = NavigationRoute(
         id: "debugSettings"
     ) {
@@ -125,7 +125,7 @@ extension NavigationRoute {
         CustomizeViewsSettings.HiddenLibrariesSettingsView()
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static let gestureSettings = NavigationRoute(
         id: "gestureSettings"
     ) {
@@ -190,7 +190,7 @@ extension NavigationRoute {
     static let nativePlayerSettings = NavigationRoute(
         id: "nativePlayerSettings"
     ) {
-        NativeVideoPlayerSettingsView()
+        VideoPlayerSettingsView()
     }
     #endif
 
@@ -200,7 +200,7 @@ extension NavigationRoute {
         PlaybackQualitySettingsView()
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static func resetUserPassword(userID: String) -> NavigationRoute {
         NavigationRoute(
             id: "resetUserPassword",

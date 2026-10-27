@@ -80,7 +80,7 @@ extension SeriesEpisodeSelector {
                     }
                     .posterStyle(.landscape)
                 }
-                .buttonStyle(.card)
+                .buttonStyle(.platformCard)
                 .posterShadow()
                 .focused($isFocused)
 

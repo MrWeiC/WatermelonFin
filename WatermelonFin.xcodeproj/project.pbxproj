@@ -7,6 +7,7 @@
 	objects = {
 
 	/* Begin PBXBuildFile section */
+        C011EC710026100000000002 /* CollectionPagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011EC710026100000000001 /* CollectionPagingTests.swift */; };
 			08BEEA4E5F77A74D7B6FE59F /* VideoPlayerContainerStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEE9EF7528B67B93A71FB1 /* VideoPlayerContainerStateTests.swift */; };
 			1A7F0B902E1BE2B000ABC001 /* AppBuildInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */; };
 			2F0A116D2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */; };
@@ -100,6 +101,7 @@
 	/* End PBXCopyFilesBuildPhase section */
 
 	/* Begin PBXFileReference section */
+        C011EC710026100000000001 /* CollectionPagingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPagingTests.swift; sourceTree = "<group>"; };
 			1279A92061D12F3D7D8B6C9E /* NetworkErrorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkErrorTests.swift; sourceTree = "<group>"; };
 			1A7F0B8F2E1BE2B000ABC001 /* AppBuildInfoTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppBuildInfoTests.swift; sourceTree = "<group>"; };
 			2F0A116C2E1A100000A1B2C3 /* BaseItemDtoUserDataTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseItemDtoUserDataTests.swift; sourceTree = "<group>"; };
@@ -220,9 +222,9 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E14563272DFCAE6E008FF700 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E14565D92DFCAE6E008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
+		E14563272DFCAE6E008FF700 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E14565D92DFCAE6E008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 802DE4E55C7848478B1921FD, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		E14565DD2DFCAE78008FF700 /* Scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Scripts; sourceTree = "<group>"; };
-		E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E14567272DFCAEFD008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin tvOS"; sourceTree = "<group>"; };
+		E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E14567272DFCAEFD008FF700 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, EF44A96020C14CA6920A1B53, ); explicitFileTypes = {}; explicitFolders = (); path = "WatermelonFin tvOS"; sourceTree = "<group>"; };
 		E1456FC82DFCB323008FF700 /* Translations */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Translations; sourceTree = "<group>"; };
 		E150B7D12DFF2E7C00DC7CF4 /* XcodeConfig */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E1C08F7D2F1316BD00DCEA25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = XcodeConfig; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -248,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+                C90C584B5D6B4FB3978AC463,
 				5DC1556BD6544BD2A63CA336 /* MPVKit-GPL in Frameworks */,
 				62666E1727E501CC00EC0ECD /* CFNetwork.framework in Frameworks */,
 				62666E3227E5021E00EC0ECD /* UIKit.framework in Frameworks */,
@@ -307,6 +310,9 @@
 		5377CBE8263B596A003A4E83 = {
 			isa = PBXGroup;
 			children = (
+                E583E45451A9464CB438D2EA,
+                1BEE133050454636B53F5957,
+                FBB5CA8E7500457DAE566B8E,
 				E145669F2DFCAEFD008FF700 /* WatermelonFin tvOS */,
 				C0DE100C2F0000000000000C /* WatermelonFinTopShelf */,
 				E14563272DFCAE6E008FF700 /* Shared */,
@@ -322,6 +328,9 @@
 		5377CBF2263B596A003A4E83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+                5E1D35E1F8924E03B385C619,
+                08C2A57D68D74086A5AD16E3,
+                73F2B586BEE64D1BBC72CD40,
 				535870602669D21600D05A09 /* WatermelonFin tvOS.app */,
 				C0DE10082F00000000000008 /* WatermelonFinTopShelf.appex */,
 				796E798440A8807BC2883549 /* WatermelonFin tvOS Tests.xctest */,
@@ -408,6 +417,7 @@
 					E7A76CCB37BC4FF39B1EB2B2 /* MediaPlayerItemAudioSelectionTests.swift */,
 					F0C050012F50000000F0C001 /* HomeViewModelStateTests.swift */,
 					F0C050032F50000000F0C003 /* MediaProgressObserverTests.swift */,
+                    C011EC710026100000000001 /* CollectionPagingTests.swift */,
 					C0D3A2FF2E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift */,
 					C0D3A3012E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift */,
 					C1B4A0012F20000000BEEF01 /* CinematicBackgroundImageSizingTests.swift */,
@@ -445,6 +455,7 @@
 			);
 			name = "WatermelonFin tvOS";
 			packageProductDependencies = (
+                286E1AF58EBD4742A6582D93,
 				E13DD3CC27164CA7009D4DAF /* CoreStore */,
 				E12186DD2718F1C50010884C /* Defaults */,
 				E1002B6A2793E36600E47059 /* Algorithms */,
@@ -512,6 +523,73 @@
 			productReference = 796E798440A8807BC2883549 /* WatermelonFin tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		73F2B586BEE64D1BBC72CD40 = { "isa" = "PBXFileReference"; "explicitFileType" = "wrapper.application"; "path" = "WatermelonFin iOS.app"; "sourceTree" = "BUILT_PRODUCTS_DIR"; };
+		FBB5CA8E7500457DAE566B8E = { "isa" = "PBXFileSystemSynchronizedRootGroup"; "path" = "WatermelonFin iOS"; "sourceTree" = "<group>"; "exceptions" = ("2F2738DDEB344A53AF160476"); "explicitFileTypes" = {  }; "explicitFolders" = (); };
+        2F2738DDEB344A53AF160476 = { "isa" = "PBXFileSystemSynchronizedBuildFileExceptionSet"; "membershipExceptions" = ("Resources/Info.plist"); "target" = "B0CE6520BBB54C35B4AAD04F"; };
+        802DE4E55C7848478B1921FD = { "isa" = "PBXFileSystemSynchronizedBuildFileExceptionSet"; "membershipExceptions" = ("Extensions/JellyfinAPI/TaskTriggerInfoType.swift", "Objects/ItemArrayElements.swift", "ViewModels/AdminDashboard/ActiveSessionsViewModel.swift", "ViewModels/AdminDashboard/AddServerUserViewModel.swift", "ViewModels/AdminDashboard/APIKeysViewModel.swift", "ViewModels/AdminDashboard/DevicesViewModel.swift", "ViewModels/AdminDashboard/ServerActivityDetailViewModel.swift", "ViewModels/AdminDashboard/ServerActivityViewModel.swift", "ViewModels/AdminDashboard/ServerTaskObserver.swift", "ViewModels/AdminDashboard/ServerTasksViewModel.swift", "ViewModels/AdminDashboard/ServerUserAdminViewModel.swift", "ViewModels/AdminDashboard/ServerUsersViewModel.swift", "ViewModels/DownloadListViewModel.swift", "ViewModels/ItemAdministration/IdentifyItemViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/GenreEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/ItemEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/PeopleEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/StudioEditorViewModel.swift", "ViewModels/ItemAdministration/ItemEditorViewModel/TagEditorViewModel.swift", "ViewModels/ItemAdministration/ItemImagesViewModel.swift", "ViewModels/ItemAdministration/RemoteImageInfoViewModel.swift", "ViewModels/QuickConnectAuthorizeViewModel.swift", "ViewModels/ServerCheckViewModel.swift", "Views/SettingsView/SettingsView.swift"); "target" = "B0CE6520BBB54C35B4AAD04F"; };
+        EF44A96020C14CA6920A1B53 = { "isa" = "PBXFileSystemSynchronizedBuildFileExceptionSet"; "membershipExceptions" = ("App/WatermelonFinApp.swift", "Components/PosterButton.swift", "Components/PosterHStack.swift", "Views/SearchView.swift", "Views/VideoPlayerContainerState/Components/LoadingView.swift", "Views/VideoPlayerContainerState/PlaybackControls/SupplementContainerView.swift", "Views/VideoPlayerContainerState/PlaybackControls/ConfirmCloseOverlay.swift", "Views/VideoPlayerContainerState/PlaybackControls/VideoPlayerContainerView.swift", "Views/VideoPlayerContainerState/PlaybackControls/PlaybackControls.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/SideActionButtons.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/NavigationBar.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/SplitTimestamp.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/PlaybackProgress.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ChapterTrackMask.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/TransportBarButtonStyle.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/PlaybackButtons.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/InfoActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AspectFillActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AutoPlayActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlaybackSpeedActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlayPreviousItemActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/SubtitleActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/SkipIntroActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/AudioActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlaybackQualityActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/EpisodesActionButton.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/ActionButtons.swift", "Views/VideoPlayerContainerState/PlaybackControls/Components/ActionButtons/PlayNextItemActionButton.swift", "Views/SelectUserView/SelectUserView.swift", "Views/SelectUserView/Components/ServerSelectionMenu.swift", "Views/SelectUserView/Components/UserGridButton.swift", "Views/SelectUserView/Components/AddUserGridButton.swift", "Views/SelectUserView/Components/SelectUserBottomBar.swift", "Views/SelectUserView/Components/AddUserBottomButton.swift", "Views/ItemView/ItemView.swift", "Views/ItemView/ScrollViews/CinematicScrollView.swift", "Views/HomeView/HomeView.swift", "Views/HomeView/Components/NextUpView.swift", "Views/HomeView/Components/LatestInLibraryView.swift", "Views/HomeView/Components/RecentlyAddedView.swift", "Views/HomeView/Components/CinematicResumeItemView.swift", "Views/HomeView/Components/CinematicRecentlyAddedView.swift", "Views/ProgramsView/PagingLibraryView/PagingLibraryView.swift", "Views/ProgramsView/PagingLibraryView/Components/LibraryRow.swift", "Resources/Info.plist", "Resources/WatermelonFin tvOS.entitlements", "Resources/Assets.xcassets", "Views/AppSettingsView/Components/HourMinutePicker.swift"); "target" = "B0CE6520BBB54C35B4AAD04F"; };
+		69295ABCE90642759DEEBF73 = { "isa" = "PBXBuildFile"; "productRef" = "7BF2735257A24BF8B7B9A5E3"; };
+		0E6C6ABACF224A17B33E872B = { "isa" = "PBXBuildFile"; "productRef" = "E1002B6A2793E36600E47059"; };
+		EC71D4B177394CA8A2335C68 = { "isa" = "PBXBuildFile"; "productRef" = "E1392FEC2BA218A80034110D"; };
+		49AAF6FD176B44CD821BA2FE = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3B728A0C598009093AB"; };
+		7934B13BB9CF44D2B29AD0BF = { "isa" = "PBXBuildFile"; "productRef" = "E1575E57293E7685001665B1"; };
+		A99C8133FCA944EE9744A592 = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7A629577BCE004B26CF"; };
+		5253EF85560645EB8FC1EA73 = { "isa" = "PBXBuildFile"; "productRef" = "E1A09F782D05935A00835265"; };
+		C9A8683A4D824B61A2015566 = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3B928A0C598009093AB"; };
+		88327374822B4E93ADD75C72 = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7AA29577BCE004B26CF"; };
+		8796B615DF7246C99241DDA0 = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7A829577BCE004B26CF"; };
+		41CEA51EFBEB4CB5B07F4E95 = { "isa" = "PBXBuildFile"; "productRef" = "E1388A45293F0ABA009721B1"; };
+		4CF00E71C5284DF79D17DF11 = { "isa" = "PBXBuildFile"; "productRef" = "E14000BC2EF622AC00354A3C"; };
+		9F874270583643C2ADB8F9CC = { "isa" = "PBXBuildFile"; "productRef" = "E19D41B12BF2BFA50082B8B2"; };
+		AD8BD71659EE4088B8C30920 = { "isa" = "PBXBuildFile"; "productRef" = "E18443CA2A037773002DDDC8"; };
+		D1409A0961A947A9A17F1A3A = { "isa" = "PBXBuildFile"; "productRef" = "E1155ACA2D0584A90021557A"; };
+		5848B42D104840DB9B92B1DD = { "isa" = "PBXBuildFile"; "productRef" = "E1B5F7AC29577BDD004B26CF"; };
+		D807217BD53B43EEB3E07FE1 = { "isa" = "PBXBuildFile"; "productRef" = "E13DD3CC27164CA7009D4DAF"; };
+		DC1A23CDC85F4C1CB36C584D = { "isa" = "PBXBuildFile"; "productRef" = "E1A7B1642B9A9F7800152546"; };
+		A83D19D42E1746C180449F9F = { "isa" = "PBXBuildFile"; "productRef" = "E1A09F762D05935A00835265"; };
+		E21825439C704DC39959A197 = { "isa" = "PBXBuildFile"; "productRef" = "E1153DD12BBB649C00424D36"; };
+		D425C528CC4D4F1693DA7CC8 = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3BB28A0C59E009093AB"; };
+		51052C7FE6B44D9AA274180D = { "isa" = "PBXBuildFile"; "productRef" = "E150C0C22BFD6DA200944FFA"; };
+		70ECE45EE751433DBDA67C2E = { "isa" = "PBXBuildFile"; "productRef" = "E1E2D7BE2E3FD936004E2E5F"; };
+		30C5A83FA8B34A579E3A840D = { "isa" = "PBXBuildFile"; "productRef" = "E13AF3B528A0C598009093AB"; };
+		7036A4689376473DBE4EDCF3 = { "isa" = "PBXBuildFile"; "productRef" = "E12186DD2718F1C50010884C"; };
+		24B45F6D6C074E1A829DFB4A = { "isa" = "PBXBuildFile"; "productRef" = "E192608728D2E5F0002314B4"; };
+		F7D2A87DBE1E470497602EA1 = { "isa" = "PBXSourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		792E314A8734495292E8C666 = { "isa" = "PBXFrameworksBuildPhase"; "buildActionMask" = "2147483647"; "files" = (
+                0B211A77F4CE444D8A28A137,"69295ABCE90642759DEEBF73", "0E6C6ABACF224A17B33E872B", "EC71D4B177394CA8A2335C68", "49AAF6FD176B44CD821BA2FE", "7934B13BB9CF44D2B29AD0BF", "A99C8133FCA944EE9744A592", "5253EF85560645EB8FC1EA73", "C9A8683A4D824B61A2015566", "88327374822B4E93ADD75C72", "8796B615DF7246C99241DDA0", "41CEA51EFBEB4CB5B07F4E95", "4CF00E71C5284DF79D17DF11", "9F874270583643C2ADB8F9CC", "AD8BD71659EE4088B8C30920", "D1409A0961A947A9A17F1A3A", "5848B42D104840DB9B92B1DD", "D807217BD53B43EEB3E07FE1", "DC1A23CDC85F4C1CB36C584D", "A83D19D42E1746C180449F9F", "E21825439C704DC39959A197", "D425C528CC4D4F1693DA7CC8", "51052C7FE6B44D9AA274180D", "70ECE45EE751433DBDA67C2E", "30C5A83FA8B34A579E3A840D", "7036A4689376473DBE4EDCF3", "24B45F6D6C074E1A829DFB4A"); "runOnlyForDeploymentPostprocessing" = "0"; };
+		53127D841E5F4162867FD2B5 = { "isa" = "PBXResourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		FD860C9E80F44F919258DF4E = { "isa" = "XCBuildConfiguration"; "buildSettings" = { "ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon"; "CODE_SIGN_STYLE" = "Automatic"; "CURRENT_PROJECT_VERSION" = "2"; "MARKETING_VERSION" = "1.0.0"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "INFOPLIST_FILE" = "WatermelonFin iOS/Resources/Info.plist"; "SWIFT_VERSION" = "5.0"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG WATERMELONFIN_PHONE"; "LD_RUNPATH_SEARCH_PATHS" = ("$(inherited)", "@executable_path/Frameworks"); "ENABLE_USER_SCRIPT_SANDBOXING" = "NO"; "SUPPORTS_MACCATALYST" = "NO"; "GENERATE_INFOPLIST_FILE" = "NO"; }; "name" = "Debug"; };
+		67842B1DE1704C47B64D4B10 = { "isa" = "XCBuildConfiguration"; "buildSettings" = { "ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon"; "CODE_SIGN_STYLE" = "Automatic"; "CURRENT_PROJECT_VERSION" = "2"; "MARKETING_VERSION" = "1.0.0"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "INFOPLIST_FILE" = "WatermelonFin iOS/Resources/Info.plist"; "SWIFT_VERSION" = "5.0"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "WATERMELONFIN_PHONE"; "LD_RUNPATH_SEARCH_PATHS" = ("$(inherited)", "@executable_path/Frameworks"); "ENABLE_USER_SCRIPT_SANDBOXING" = "NO"; "SUPPORTS_MACCATALYST" = "NO"; "GENERATE_INFOPLIST_FILE" = "NO"; }; "name" = "Release"; };
+		865AFC9CD9574D4DAC26DEF9 = { "isa" = "XCConfigurationList"; "buildConfigurations" = ("FD860C9E80F44F919258DF4E", "67842B1DE1704C47B64D4B10"); "defaultConfigurationIsVisible" = "0"; "defaultConfigurationName" = "Release"; };
+		B0CE6520BBB54C35B4AAD04F = { "isa" = "PBXNativeTarget"; "name" = "WatermelonFin iOS"; "productName" = "WatermelonFin iOS"; "productReference" = "73F2B586BEE64D1BBC72CD40"; "productType" = "com.apple.product-type.application"; "buildConfigurationList" = "865AFC9CD9574D4DAC26DEF9"; "buildPhases" = ("F7D2A87DBE1E470497602EA1", "792E314A8734495292E8C666", "53127D841E5F4162867FD2B5"); "buildRules" = (); "dependencies" = (); "fileSystemSynchronizedGroups" = ("E14563272DFCAE6E008FF700", "E145669F2DFCAEFD008FF700", "E1456FC82DFCB323008FF700", "FBB5CA8E7500457DAE566B8E"); "packageProductDependencies" = (
+                286E1AF58EBD4742A6582D93,"E13DD3CC27164CA7009D4DAF", "E12186DD2718F1C50010884C", "E1002B6A2793E36600E47059", "E13AF3B528A0C598009093AB", "E13AF3B728A0C598009093AB", "E13AF3B928A0C598009093AB", "E13AF3BB28A0C59E009093AB", "E192608728D2E5F0002314B4", "E1575E57293E7685001665B1", "E1388A45293F0ABA009721B1", "E1B5F7A629577BCE004B26CF", "E1B5F7A829577BCE004B26CF", "E1B5F7AA29577BCE004B26CF", "E1B5F7AC29577BDD004B26CF", "E18443CA2A037773002DDDC8", "E1A7B1642B9A9F7800152546", "E1392FEC2BA218A80034110D", "E1153DD12BBB649C00424D36", "E19D41B12BF2BFA50082B8B2", "E150C0C22BFD6DA200944FFA", "E1155ACA2D0584A90021557A", "E1A09F762D05935A00835265", "E1A09F782D05935A00835265", "7BF2735257A24BF8B7B9A5E3", "E1E2D7BE2E3FD936004E2E5F", "E14000BC2EF622AC00354A3C"); };
+		08C2A57D68D74086A5AD16E3 = { "isa" = "PBXFileReference"; "explicitFileType" = "wrapper.cfbundle"; "path" = "WatermelonFin iOS Tests.xctest"; "sourceTree" = "BUILT_PRODUCTS_DIR"; };
+		1BEE133050454636B53F5957 = { "isa" = "PBXFileSystemSynchronizedRootGroup"; "path" = "WatermelonFin iOS Tests"; "sourceTree" = "<group>"; "explicitFileTypes" = {  }; "explicitFolders" = (); };
+		629006D301174384A585848A = { "isa" = "PBXSourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		5E6EC9EBA72946F88887A7B8 = { "isa" = "PBXFrameworksBuildPhase"; "buildActionMask" = "2147483647"; "files" = ("EE1149E31B2348D38B93B4FF"); "runOnlyForDeploymentPostprocessing" = "0"; };
+		3E9DD81502834D64A67C1B3F = { "isa" = "PBXResourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		956D1E7963BA43799252E620 = { "isa" = "XCBuildConfiguration"; "name" = "Debug"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.tests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG"; "TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/WatermelonFin iOS.app/WatermelonFin iOS"; "BUNDLE_LOADER" = "$(TEST_HOST)"; }; };
+		DCE6F99F3D0746C4B0B9AE84 = { "isa" = "XCBuildConfiguration"; "name" = "Release"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.tests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = ""; "TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/WatermelonFin iOS.app/WatermelonFin iOS"; "BUNDLE_LOADER" = "$(TEST_HOST)"; }; };
+		0A5A3530DF0B4EFCB85E029C = { "isa" = "XCConfigurationList"; "buildConfigurations" = ("956D1E7963BA43799252E620", "DCE6F99F3D0746C4B0B9AE84"); "defaultConfigurationIsVisible" = "0"; "defaultConfigurationName" = "Release"; };
+		F1C25C366CAF4D0EA867586F = { "isa" = "PBXContainerItemProxy"; "containerPortal" = "5377CBE9263B596A003A4E83"; "proxyType" = "1"; "remoteGlobalIDString" = "B0CE6520BBB54C35B4AAD04F"; "remoteInfo" = "WatermelonFin iOS"; };
+		A2BD710FC6C9456480F37F13 = { "isa" = "PBXTargetDependency"; "target" = "B0CE6520BBB54C35B4AAD04F"; "targetProxy" = "F1C25C366CAF4D0EA867586F"; };
+		88CC21CF9E20403E8CFACE73 = { "isa" = "PBXNativeTarget"; "name" = "WatermelonFin iOS Tests"; "productName" = "WatermelonFin iOS Tests"; "productReference" = "08C2A57D68D74086A5AD16E3"; "productType" = "com.apple.product-type.bundle.unit-test"; "buildConfigurationList" = "0A5A3530DF0B4EFCB85E029C"; "buildPhases" = ("629006D301174384A585848A", "5E6EC9EBA72946F88887A7B8", "3E9DD81502834D64A67C1B3F"); "buildRules" = (); "dependencies" = ("A2BD710FC6C9456480F37F13"); "fileSystemSynchronizedGroups" = ("1BEE133050454636B53F5957"); "packageProductDependencies" = ("E150C0C22BFD6DA200944FFA"); };
+		EE1149E31B2348D38B93B4FF = { "isa" = "PBXBuildFile"; "productRef" = "E150C0C22BFD6DA200944FFA"; };
+		5E1D35E1F8924E03B385C619 = { "isa" = "PBXFileReference"; "explicitFileType" = "wrapper.cfbundle"; "path" = "WatermelonFin iOS UI Tests.xctest"; "sourceTree" = "BUILT_PRODUCTS_DIR"; };
+		E583E45451A9464CB438D2EA = { "isa" = "PBXFileSystemSynchronizedRootGroup"; "path" = "WatermelonFin iOS UI Tests"; "sourceTree" = "<group>"; "explicitFileTypes" = {  }; "explicitFolders" = (); };
+		AC64CE05FA3845B89C73E91F = { "isa" = "PBXSourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		8D3BA6D4B56F48D78DE6235D = { "isa" = "PBXFrameworksBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		721C0A8165ED4CFAB4FE071B = { "isa" = "PBXResourcesBuildPhase"; "buildActionMask" = "2147483647"; "files" = (); "runOnlyForDeploymentPostprocessing" = "0"; };
+		27D912081971402FB5F21B5F = { "isa" = "XCBuildConfiguration"; "name" = "Debug"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.uitests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG"; "TEST_TARGET_NAME" = "WatermelonFin iOS"; }; };
+		9AC64F9AEC2F4D93BD382E44 = { "isa" = "XCBuildConfiguration"; "name" = "Release"; "buildSettings" = { "GENERATE_INFOPLIST_FILE" = "YES"; "PRODUCT_NAME" = "$(TARGET_NAME)"; "PRODUCT_BUNDLE_IDENTIFIER" = "org.chenacademy.watermelonfin.ios.uitests"; "SDKROOT" = "iphoneos"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "TARGETED_DEVICE_FAMILY" = "1,2"; "IPHONEOS_DEPLOYMENT_TARGET" = "17.5"; "SWIFT_VERSION" = "5.0"; "CODE_SIGN_STYLE" = "Automatic"; "SWIFT_ACTIVE_COMPILATION_CONDITIONS" = ""; "TEST_TARGET_NAME" = "WatermelonFin iOS"; }; };
+		671D5979FFE64F949E1ED9BE = { "isa" = "XCConfigurationList"; "buildConfigurations" = ("27D912081971402FB5F21B5F", "9AC64F9AEC2F4D93BD382E44"); "defaultConfigurationIsVisible" = "0"; "defaultConfigurationName" = "Release"; };
+		AE74210E57EA48BD8348261B = { "isa" = "PBXContainerItemProxy"; "containerPortal" = "5377CBE9263B596A003A4E83"; "proxyType" = "1"; "remoteGlobalIDString" = "B0CE6520BBB54C35B4AAD04F"; "remoteInfo" = "WatermelonFin iOS"; };
+		1D379AF708B74B91B8D81A9E = { "isa" = "PBXTargetDependency"; "target" = "B0CE6520BBB54C35B4AAD04F"; "targetProxy" = "AE74210E57EA48BD8348261B"; };
+		082BA00F2A764D53BB4297BE = { "isa" = "PBXNativeTarget"; "name" = "WatermelonFin iOS UI Tests"; "productName" = "WatermelonFin iOS UI Tests"; "productReference" = "5E1D35E1F8924E03B385C619"; "productType" = "com.apple.product-type.bundle.ui-testing"; "buildConfigurationList" = "671D5979FFE64F949E1ED9BE"; "buildPhases" = ("AC64CE05FA3845B89C73E91F", "8D3BA6D4B56F48D78DE6235D", "721C0A8165ED4CFAB4FE071B"); "buildRules" = (); "dependencies" = ("1D379AF708B74B91B8D81A9E"); "fileSystemSynchronizedGroups" = ("E583E45451A9464CB438D2EA"); };
+		04BBBB1C373F4A7BA3E57C73 = { "isa" = "XCRemoteSwiftPackageReference"; "repositoryURL" = "https://github.com/kean/Get"; "requirement" = { "kind" = "upToNextMajorVersion"; "minimumVersion" = "2.2.1"; }; };
+		286E1AF58EBD4742A6582D93 = { "isa" = "XCSwiftPackageProductDependency"; "package" = "04BBBB1C373F4A7BA3E57C73"; "productName" = "Get"; };
+		C90C584B5D6B4FB3978AC463 = { "isa" = "PBXBuildFile"; "productRef" = "286E1AF58EBD4742A6582D93"; };
+		0B211A77F4CE444D8A28A137 = { "isa" = "PBXBuildFile"; "productRef" = "286E1AF58EBD4742A6582D93"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -590,6 +668,7 @@
 			);
 			mainGroup = 5377CBE8263B596A003A4E83;
 			packageReferences = (
+                04BBBB1C373F4A7BA3E57C73,
 				5335256F265EA0A0006CCA86 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				E13DD3C42716499E009D4DAF /* XCRemoteSwiftPackageReference "CoreStore" */,
 				E13DD3D127168E65009D4DAF /* XCRemoteSwiftPackageReference "Defaults" */,
@@ -621,6 +700,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+                082BA00F2A764D53BB4297BE,
+                88CC21CF9E20403E8CFACE73,
+                B0CE6520BBB54C35B4AAD04F,
 				5358705F2669D21600D05A09 /* WatermelonFin tvOS */,
 				C0DE10012F00000000000001 /* WatermelonFinTopShelf */,
 				D69A236F08D624F2AAB685F5 /* WatermelonFin tvOS Tests */,
@@ -762,6 +844,7 @@
 					EE9A94A7172E4DA099EED926 /* MediaPlayerItemAudioSelectionTests.swift in Sources */,
 					F0C050022F50000000F0C002 /* HomeViewModelStateTests.swift in Sources */,
 					F0C050042F50000000F0C004 /* MediaProgressObserverTests.swift in Sources */,
+                    C011EC710026100000000002 /* CollectionPagingTests.swift in Sources */,
 					C0D3A3002E18500000F1A001 /* WatermelonFinAPIClientDelegateTests.swift in Sources */,
 					C0D3A3022E19000000F1A001 /* FirstTimeAccountFlowAutomationTests.swift in Sources */,
 					C1B4A0022F20000000BEEF02 /* CinematicBackgroundImageSizingTests.swift in Sources */,
@@ -1194,8 +1277,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JohnEstropia/CoreStore.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				kind = exactVersion;
+				version = 9.2.0;
 			};
 		};
 		E13DD3D127168E65009D4DAF /* XCRemoteSwiftPackageReference "Defaults" */ = {
@@ -1251,7 +1334,7 @@
 			repositoryURL = "https://github.com/nathantannar4/Transmission";
 			requirement = {
 				kind = exactVersion;
-				version = 2.4.5;
+				version = 2.12.3;
 			};
 		};
 		E176EBDC2D050067009F4CF1 /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {

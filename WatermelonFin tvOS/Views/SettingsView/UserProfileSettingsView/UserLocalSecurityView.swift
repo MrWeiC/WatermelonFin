@@ -8,6 +8,9 @@
 
 import Combine
 import Defaults
+#if canImport(LocalAuthentication)
+import LocalAuthentication
+#endif
 import KeychainSwift
 import SwiftUI
 
@@ -122,9 +125,30 @@ struct UserLocalSecurityView: View {
 
             pin = ""
             isPresentingNewPinPrompt = true
-        case .promptForOldDeviceAuth, .promptForNewDeviceAuth:
-            break
+        case .promptForOldDeviceAuth:
+            authenticateDevice { checkNewPolicy() }
+        case .promptForNewDeviceAuth:
+            authenticateDevice {
+                do {
+                    try viewModel.set(newPolicy: signInPolicy, newPin: pin, newPinHint: pinHint)
+                    router.dismiss()
+                } catch { self.error = error }
+            }
         }
+    }
+
+    private func authenticateDevice(completion: @escaping () -> Void) {
+        #if os(iOS)
+        let originalSession = viewModel.userSession
+        Task {
+            do {
+                let context = LAContext()
+                try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: L10n.security)
+                guard originalSession === viewModel.userSession else { return }
+                completion()
+            } catch { self.error = error }
+        }
+        #endif
     }
 
     // MARK: - Body
@@ -132,6 +156,11 @@ struct UserLocalSecurityView: View {
     var body: some View {
         Form(content: {
             Section {
+                #if os(iOS)
+                Picker(L10n.security, selection: $signInPolicy) {
+                    ForEach(UserAccessPolicy.allCases, id: \.self) { Text($0.displayTitle).tag($0) }
+                }
+                #else
                 Toggle(
                     L10n.pin,
                     isOn: Binding<Bool>(
@@ -140,6 +169,7 @@ struct UserLocalSecurityView: View {
                     )
                 )
                 .focused($focusedItem, equals: .security)
+                #endif
                 /* Picker(L10n.security, selection: $signInPolicy) {
                      ForEach(UserAccessPolicy.allCases.filter { $0 != .requireDeviceAuthentication }, id: \.self) { policy in
                          Text(policy.displayTitle)
@@ -168,8 +198,8 @@ struct UserLocalSecurityView: View {
         .animation(.linear, value: signInPolicy)
         .navigationTitle(L10n.security)
         .onFirstAppear {
-            pinHint = viewModel.userSession!.user.pinHint
-            signInPolicy = viewModel.userSession!.user.accessPolicy
+            pinHint = viewModel.userSession?.user.pinHint ?? ""
+            signInPolicy = viewModel.userSession?.user.accessPolicy ?? .none
         }
         .onReceive(viewModel.events) { event in
             onReceive(event)
@@ -179,7 +209,7 @@ struct UserLocalSecurityView: View {
                 checkOldPolicy()
             } label: {
                 Group {
-                    if signInPolicy == .requirePin, signInPolicy == viewModel.userSession!.user.accessPolicy {
+                    if signInPolicy == .requirePin, signInPolicy == viewModel.userSession?.user.accessPolicy {
                         Text(L10n.changePin)
                     } else {
                         Text(L10n.save)
@@ -211,7 +241,7 @@ struct UserLocalSecurityView: View {
 
             Button(L10n.cancel, role: .cancel) {}
         } message: { _ in
-            Text(L10n.enterPinForUser(viewModel.userSession!.user.username))
+            Text(L10n.enterPinForUser(viewModel.userSession?.user.username ?? ""))
         }
         .alert(
             L10n.setPin,
@@ -228,7 +258,7 @@ struct UserLocalSecurityView: View {
 
             Button(L10n.cancel, role: .cancel) {}
         } message: { _ in
-            Text(L10n.createPinForUser(viewModel.userSession!.user.username))
+            Text(L10n.createPinForUser(viewModel.userSession?.user.username ?? ""))
         }
         .errorMessage($error)
     }

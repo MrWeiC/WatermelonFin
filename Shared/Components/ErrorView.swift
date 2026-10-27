@@ -75,7 +75,7 @@ struct ErrorView<ErrorType: Error>: View {
         }
         .frame(maxWidth: 600, maxHeight: .infinity)
         .frame(maxWidth: .infinity)
-        .focusSection()
+        .platformFocusSection()
         .edgePadding()
     }
 }

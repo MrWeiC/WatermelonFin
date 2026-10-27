@@ -1,0 +1,127 @@
+diff --git a/sites/software/src/components/WatermelonFinPage.astro b/sites/software/src/components/WatermelonFinPage.astro
+new file mode 100644
+index 0000000..4d9ef67
+--- /dev/null
++++ b/sites/software/src/components/WatermelonFinPage.astro
+@@ -0,0 +1,61 @@
++---
++import InkLayout from "@chenacademy/shared/components/InkLayout.astro";
++import Seal from "@chenacademy/shared/components/Seal.astro";
++interface Props { lang: "zh" | "en" }
++const {lang} = Astro.props;
++const zh = lang === "zh";
++const github = "https://github.com/MrWeiC/WatermelonFin";
++const title = zh ? "WatermelonFin · 自家片库，随身与客厅" : "WatermelonFin · Your library, at home and on the go";
++const features = zh ? [
++  ["你的服务器，你的片库", "连接自己的 Jellyfin 服务器，浏览影片、剧集、收藏和直播频道。"],
++  ["为两种屏幕设计", "Apple TV 使用遥控器导航；iPhone 版本正在开发原生触控界面。"],
++  ["播放随你选择", "MPV 播放内核，字幕、音轨、倍速和播放质量选项，以及服务端观看进度。"],
++  ["播放列表就在服务器", "创建列表、加入影片、按条目移除；观看状态跟随同一个媒体项目。"],
++] : [
++  ["Your server. Your library.", "Connect to your Jellyfin server and browse movies, series, favorites, and live channels."],
++  ["Made for two screens", "Remote navigation on Apple TV, with a native touch interface in development for iPhone."],
++  ["Playback your way", "MPV playback with subtitle, audio, speed, and quality controls, plus server-side viewing progress."],
++  ["Playlists live on your server", "Create lists, add videos, and remove individual entries while keeping watched status consistent."],
++];
++---
++<InkLayout lang={lang} title={title} description={title} siteKey="software" siteName={zh ? "软件工坊" : "Software Workshop"} sealChar="工" altHref={zh ? "/en/watermelonfin/" : "/watermelonfin/"}>
++  <section class="section container product-hero">
++    <Seal char="瓜" size="5rem" />
++    <p class="eyebrow">JELLYFIN · iPHONE · APPLE TV</p>
++    <h1>WatermelonFin</h1>
++    <p class="lead">{zh ? "自家片库，随身小屏，客厅大屏。" : "Your own library. In your hand. On the big screen."}</p>
++    <p>{zh ? "为一家人观看自家媒体而做的开源原生客户端。" : "An open-source native client for watching your family's own media."}</p>
++    <p class="status">{zh ? "iPhone 版开发中，目前通过源码构建。本站未提供 App Store 或 TestFlight 下载。" : "iPhone development is underway. Build from source; no App Store or TestFlight download is currently offered here."}</p>
++    <div class="actions"><a class="seal-button" href={github}>{zh ? "查看源码" : "View source"}</a><a class="ink-button" href="#install">{zh ? "安装与支持" : "Install & support"}</a></div>
++  </section>
++  <section class="section container">
++    <div class="features">{features.map(([heading, body]) => <article class="paper-card"><h2>{heading}</h2><p>{body}</p></article>)}</div>
++  </section>
++  <section id="install" class="section container install">
++    <h2>{zh ? "从源码运行" : "Run from source"}</h2>
++    <ol>
++      <li>{zh ? "准备一台 Mac、兼容版本的 Xcode，以及自己的 Jellyfin 服务器。" : "Use a Mac, a compatible Xcode installation, and your own Jellyfin server."}</li>
++      <li>{zh ? "克隆仓库，打开 WatermelonFin.xcodeproj，等待 Swift 包解析完成。" : "Clone the repository, open WatermelonFin.xcodeproj, and let Swift packages resolve."}</li>
++      <li>{zh ? "选择 WatermelonFin iOS 或 WatermelonFin tvOS scheme，再选择对应的模拟器或设备。真机需要配置自己的签名。" : "Select the WatermelonFin iOS or WatermelonFin tvOS scheme, then a matching simulator or device. Physical devices require your own signing configuration."}</li>
++      <li>{zh ? "运行后填写服务器地址，使用自己服务器上的账号登录。" : "Run the app, enter your server address, and sign in with your server account."}</li>
++    </ol>
++    <p>{zh ? "兼容性、构建要求与已知限制以仓库文档为准。" : "See the repository documentation for compatibility, build requirements, and known limitations."}</p>
++    <a href={`${github}/issues`}>{zh ? "报告问题或提出建议 →" : "Report an issue or request a feature →"}</a>
++    <p class="fine">{zh ? "WatermelonFin 是独立项目，与 Jellyfin、Swiftfin 或 Reefy 无隶属关系，也未获得其官方背书。不提供媒体内容。" : "WatermelonFin is independent and is not affiliated with or endorsed by Jellyfin, Swiftfin, or Reefy. It does not provide media content."}</p>
++  </section>
++</InkLayout>
++<style>
++.product-hero { padding-top: 5rem; max-width: 54rem; }
++h1 { font-size: clamp(2.8rem, 7vw, 5rem); margin: 1rem 0; letter-spacing: -.04em; }
++.eyebrow { margin-top: 2rem; font-size: .75rem; letter-spacing: .18em; }
++.lead { font-size: clamp(1.4rem, 3vw, 2rem); }
++.status { max-width: 44rem; opacity: .75; }
++.actions { display:flex; gap:1rem; flex-wrap:wrap; margin-top:2rem; }
++.features { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
++.paper-card { padding:2rem; }
++h2 { font-size:1.35rem; margin-bottom:1rem; }
++.install { max-width:54rem; }
++li { margin-bottom:1rem; padding-left:.5rem; }
++.fine { margin-top:2rem; font-size:.85rem; opacity:.7; }
++@media(max-width:640px){.features{grid-template-columns:1fr}.product-hero{padding-top:3rem}}
++</style>
+diff --git a/sites/software/src/content.ts b/sites/software/src/content.ts
+index 8a72422..63e828b 100644
+--- a/sites/software/src/content.ts
++++ b/sites/software/src/content.ts
+@@ -92,13 +92,13 @@ export const content: Record<Lang, SoftwareContent> = {
+       {
+         sealChar: "瓜",
+         name: "WatermelonFin",
+-        platform: "Apple TV",
++        platform: "iPhone · Apple TV",
+         status: "开源",
+-        tagline: "自家片库，客厅大屏，一颗西瓜。",
++        tagline: "自家片库，随身小屏，客厅大屏，一颗西瓜。",
+         description:
+-          "专为 Apple TV 打造的原生 Jellyfin 客户端：MPV 播放内核、宽字幕与编解码支持、tvOS 18 液态玻璃质感的播放界面。",
++          "原生 Jellyfin 客户端，现正加入 iPhone 支持：MPV 播放内核、字幕与音轨选择、片库和播放列表，让自家媒体在手机与 Apple TV 上接续观看。",
+         github: "https://github.com/MrWeiC/WatermelonFin",
+-        website: null,
++        website: "/watermelonfin/",
+       },
+       {
+         sealChar: "帖",
+@@ -167,13 +167,13 @@ export const content: Record<Lang, SoftwareContent> = {
+       {
+         sealChar: "瓜",
+         name: "WatermelonFin",
+-        platform: "Apple TV",
++        platform: "iPhone · Apple TV",
+         status: "Open source",
+-        tagline: "Your own library, on the big screen, with a watermelon.",
++        tagline: "Your own library, in your hand and on the big screen.",
+         description:
+-          "A native Jellyfin client built exclusively for Apple TV: MPV playback engine, wide codec and subtitle support, and a tvOS 18 liquid-glass transport bar.",
++          "A native Jellyfin client with iPhone support in development: MPV playback, subtitle and audio selection, libraries, and playlists for your phone and Apple TV.",
+         github: "https://github.com/MrWeiC/WatermelonFin",
+-        website: null,
++        website: "/en/watermelonfin/",
+       },
+       {
+         sealChar: "帖",
+diff --git a/sites/software/src/pages/en/watermelonfin.astro b/sites/software/src/pages/en/watermelonfin.astro
+new file mode 100644
+index 0000000..81e2546
+--- /dev/null
++++ b/sites/software/src/pages/en/watermelonfin.astro
+@@ -0,0 +1,4 @@
++---
++import WatermelonFinPage from "../../components/WatermelonFinPage.astro";
++---
++<WatermelonFinPage lang="en" />
+diff --git a/sites/software/src/pages/watermelonfin.astro b/sites/software/src/pages/watermelonfin.astro
+new file mode 100644
+index 0000000..1302001
+--- /dev/null
++++ b/sites/software/src/pages/watermelonfin.astro
+@@ -0,0 +1,4 @@
++---
++import WatermelonFinPage from "../components/WatermelonFinPage.astro";
++---
++<WatermelonFinPage lang="zh" />

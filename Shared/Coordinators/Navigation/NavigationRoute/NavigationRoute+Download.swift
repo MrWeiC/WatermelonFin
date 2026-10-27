@@ -14,14 +14,14 @@ extension NavigationRoute {
     static let downloadList = NavigationRoute(
         id: "downloadList"
     ) {
-        #if os(iOS)
+        #if os(iOS) && !WATERMELONFIN_PHONE
         DownloadListView(viewModel: .init())
         #else
         EmptyView()
         #endif
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static func downloadTask(downloadTask: DownloadTask) -> NavigationRoute {
         NavigationRoute(
             id: "downloadTask",

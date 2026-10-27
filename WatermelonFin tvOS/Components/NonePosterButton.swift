@@ -32,6 +32,6 @@ struct NonePosterButton: View {
                 .posterStyle(type)
             }
         }
-        .buttonStyle(.card)
+        .buttonStyle(.platformCard)
     }
 }

@@ -113,7 +113,7 @@ extension SeriesEpisodeSelector {
                 }.transition(.opacity.animation(.linear(duration: 0.1)))
             }
             .padding(.bottom, 45)
-            .focusSection()
+            .platformFocusSection()
             .focusGuide(
                 focusGuide,
                 tag: "episodes",

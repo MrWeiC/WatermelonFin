@@ -13,7 +13,7 @@ extension NavigationRoute {
 
     // MARK: - Item Editing
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static func addGenre(viewModel: GenreEditorViewModel) -> NavigationRoute {
         NavigationRoute(
             id: "addGenre",
@@ -76,7 +76,7 @@ extension NavigationRoute {
         }
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static func cropItemImage(viewModel: ItemImagesViewModel, image: UIImage, type: ImageType) -> NavigationRoute {
         NavigationRoute(
             id: "crop-Image"
@@ -201,7 +201,7 @@ extension NavigationRoute {
         }
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static func itemEditor(viewModel: ItemViewModel) -> NavigationRoute {
         NavigationRoute(
             id: "itemEditor",
@@ -264,7 +264,7 @@ extension NavigationRoute {
         }
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
 
     static func itemSearchImageDetails(viewModel: ItemImagesViewModel, remoteImageInfo: RemoteImageInfo) -> NavigationRoute {
         NavigationRoute(

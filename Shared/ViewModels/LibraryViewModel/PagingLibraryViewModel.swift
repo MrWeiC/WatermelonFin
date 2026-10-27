@@ -252,6 +252,7 @@ class PagingLibraryViewModel<Element: Poster>: ViewModel, Eventful, Stateful {
 
             pagingTask?.cancel()
             randomItemTask?.cancel()
+            backgroundStates.remove(.gettingNextPage)
 
             filterViewModel?.send(.getQueryFilters)
 
@@ -288,7 +289,7 @@ class PagingLibraryViewModel<Element: Poster>: ViewModel, Eventful, Stateful {
             return .refreshing
         case .getNextPage:
 
-            guard hasNextPage else { return state }
+            guard hasNextPage, !backgroundStates.contains(.gettingNextPage) else { return state }
 
             backgroundStates.insert(.gettingNextPage)
 
@@ -365,11 +366,12 @@ class PagingLibraryViewModel<Element: Poster>: ViewModel, Eventful, Stateful {
     final func getNextPage() async throws {
         guard hasNextPage else { return }
 
-        currentPage += 1
+        let nextPage = currentPage + 1
+        let pageItems = try await get(page: nextPage)
+        try Task.checkCancellation()
+        currentPage = nextPage
 
-        let pageItems = try await get(page: currentPage)
-
-        hasNextPage = !(pageItems.count < DefaultPageSize)
+        hasNextPage = PagingPagePolicy.hasNextPage(receivedCount: pageItems.count, pageSize: pageSize)
 
         await MainActor.run {
             elements.append(contentsOf: pageItems)
@@ -377,7 +379,7 @@ class PagingLibraryViewModel<Element: Poster>: ViewModel, Eventful, Stateful {
     }
 
     /// Gets the items at the given page. If the number of items
-    /// is less than `DefaultPageSize`, then it is inferred that
+    /// is less than `pageSize`, then it is inferred that
     /// there is not a next page and subsequent calls to `getNextPage`
     /// will immediately return.
     func get(page: Int) async throws -> [Element] {

@@ -75,7 +75,7 @@ struct CinematicItemSelector<Item: Poster>: View {
             guard let focusedPoster, isSectionFocused else { return }
             viewModel.select(item: focusedPoster)
         }
-        .focusSection()
+        .platformFocusSection()
         .focused($isSectionFocused)
     }
 }

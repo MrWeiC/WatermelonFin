@@ -91,12 +91,8 @@ struct NavigationInjectionView: View {
         .presentation(
                 $coordinator.presentedFullScreen,
                 transition: .zoomIfAvailable(
-                    options: .init(
-                        dimmingVisualEffect: .systemThickMaterialDark,
-                        options: .init(
-                            isInteractive: isPresentationInteractive
-                        )
-                    ),
+                    .init(dimmingVisualEffect: .systemThickMaterialDark),
+                    options: .init(isInteractive: isPresentationInteractive),
                     otherwise: .slide(.init(edge: .bottom), options: .init(isInteractive: isPresentationInteractive))
                 )
             ) { routeBinding, _ in
@@ -105,6 +101,8 @@ struct NavigationInjectionView: View {
                         routeBinding.wrappedValue.destination
                             .environment(\.presentationControllerShouldDismiss, $isPresentationInteractive)
                     }
+                    // UIKit-created hosting roots do not inherit SwiftUI environment objects.
+                    .environmentObject(rootCoordinator)
                 }
 
                 // TODO: presentation options for customizing background color, dimming effect, etc.

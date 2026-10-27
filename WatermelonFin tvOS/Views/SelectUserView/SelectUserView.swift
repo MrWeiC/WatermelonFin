@@ -266,7 +266,7 @@ struct SelectUserView: View {
                             userGrid
                         }
                     }
-                    .focusSection()
+                    .platformFocusSection()
                 }
                 .scrollIfLargerThanContainer(padding: 100)
                 .scrollViewOffset($scrollViewOffset)
@@ -294,7 +294,7 @@ struct SelectUserView: View {
             } onMoveUp: {
                 focusFirstUserIfNeeded(force: true)
             }
-            .focusSection()
+            .platformFocusSection()
         }
         .animation(.linear(duration: 0.1), value: scrollViewOffset)
         .environment(\.isOverComplexContent, true)
@@ -334,7 +334,7 @@ struct SelectUserView: View {
                     .frame(width: 400, height: 75)
                     .background(Color.watermelonRed)
             }
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
         }
     }
 

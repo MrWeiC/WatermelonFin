@@ -51,7 +51,7 @@ extension VideoPlayer.PlaybackControls {
                         }
                     }
                 }
-                .focusSection()
+                .platformFocusSection()
                 .padding(.vertical, 20)
                 .padding(.horizontal, 24)
                 .background { TransportBarBackground() }

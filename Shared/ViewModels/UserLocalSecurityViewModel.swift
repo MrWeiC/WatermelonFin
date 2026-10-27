@@ -31,7 +31,7 @@ final class UserLocalSecurityViewModel: ViewModel, Eventful {
     /// Will throw and send event if needing to prompt for old auth.
     func checkForOldPolicy() throws {
 
-        let oldPolicy = userSession!.user.accessPolicy
+        let oldPolicy = try requireSession().user.accessPolicy
 
         switch oldPolicy {
         case .requireDeviceAuthentication:
@@ -51,31 +51,39 @@ final class UserLocalSecurityViewModel: ViewModel, Eventful {
         switch newPolicy {
         case .requireDeviceAuthentication:
             eventSubject.send(.promptForNewDeviceAuth)
+            throw ErrorMessage("Prompt for new device auth")
         case .requirePin:
             eventSubject.send(.promptForNewPin)
+            throw ErrorMessage("Prompt for new pin")
         case .none: ()
         }
     }
 
     func check(oldPin: String) throws {
 
-        if let storedPin = keychain.get("\(userSession!.user.id)-pin") {
-            if oldPin != storedPin {
-                eventSubject.send(.error(.init(L10n.incorrectPinForUser(userSession!.user.username))))
-                throw ErrorMessage("invalid pin")
-            }
+        let session = try requireSession()
+        guard let storedPin = keychain.get("\(session.user.id)-pin"),
+              LocalPINPolicy.isValid(oldPin), oldPin == storedPin
+        else {
+            let error = ErrorMessage(L10n.incorrectPinForUser(session.user.username))
+            eventSubject.send(.error(error))
+            throw error
         }
     }
 
     func set(newPolicy: UserAccessPolicy, newPin: String, newPinHint: String) throws {
-
-        if newPolicy == .requirePin {
-            try userSession!.user.storePin(newPin)
-        } else {
-            keychain.delete("\(userSession!.user.id)-pin")
+        let session = try requireSession()
+        if newPolicy == .requirePin, !LocalPINPolicy.isValid(newPin) {
+            throw ErrorMessage(L10n.requirePinDescription)
         }
 
-        userSession!.user.accessPolicy = newPolicy
-        userSession!.user.pinHint = newPinHint
+        if newPolicy == .requirePin {
+            try session.user.storePin(newPin)
+        } else {
+            keychain.delete("\(session.user.id)-pin")
+        }
+
+        session.user.accessPolicy = newPolicy
+        session.user.pinHint = newPinHint
     }
 }

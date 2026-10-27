@@ -192,7 +192,7 @@ extension MediaChaptersSupplement {
                     }
                     .padding(.horizontal, EdgeInsets.edgePadding * 2)
                 }
-                .focusSection()
+                .platformFocusSection()
                 .assign(manager.secondsBox.$value, to: $activeSeconds)
                 .onAppear {
                     if let currentChapter {
@@ -266,7 +266,7 @@ extension MediaChaptersSupplement {
                     .frame(width: 320, alignment: .leading)
                 }
             }
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
             .focused($isFocused)
             .scaleEffect(isFocused ? 1.05 : 1.0)
             .animation(.easeInOut(duration: 0.15), value: isFocused)

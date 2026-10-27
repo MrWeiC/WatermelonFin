@@ -1,5 +1,5 @@
 {
-  "originHash" : "449f7b1893a636167df9fb30f845d1cd8696445dee1d976bc6af81c223624363",
+  "originHash" : "4f1670f59d617d17139c449355a52c992b0bcad027ceec03606ffe67486be4b1",
   "pins" : [
     {
       "identity" : "blurhashkit",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/JohnEstropia/CoreStore.git",
       "state" : {
-        "revision" : "5a0d27cf343c6e341b0ef3c8d36104770b27a839",
-        "version" : "9.3.0"
+        "revision" : "4b6d9a54e75d2c9fd2c3c768f7d4aa3175c09133",
+        "version" : "9.2.0"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nathantannar4/Engine",
       "state" : {
-        "revision" : "8062b68c43373af4abf1695bb8aba86cc013ec9d",
-        "version" : "2.3.2"
+        "revision" : "0a97b1e8ebb37146479bf18dd33e17edff9a65b7",
+        "version" : "2.12.2"
       }
     },
     {
@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nathantannar4/Transmission",
       "state" : {
-        "revision" : "2da5049d33111238ad4cb979ebce783af9586cef",
-        "version" : "2.4.5"
+        "revision" : "7059ceebf79ba91e982cbcf75eebeb7f1c5345d4",
+        "version" : "2.12.3"
       }
     },
     {

@@ -20,8 +20,8 @@ struct NavigationBarBrandingModifier: ViewModifier {
                     Image(.watermelonfinLogo)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 100)
-                        .padding(.bottom, 25)
+                        .frame(height: UIDevice.isTV ? 100 : 28)
+                        .padding(.bottom, UIDevice.isTV ? 25 : 0)
                 }
 
                 if isLoading {

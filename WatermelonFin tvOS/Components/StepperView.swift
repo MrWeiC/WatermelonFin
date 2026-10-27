@@ -58,7 +58,7 @@ struct StepperView<Value: CustomStringConvertible & Strideable>: View {
                             .font(.title2.weight(.bold))
                             .frame(width: 200, height: 75)
                     }
-                    .buttonStyle(.card)
+                    .buttonStyle(.platformCard)
 
                     Button {
                         if updatedValue < range.upperBound {
@@ -70,7 +70,7 @@ struct StepperView<Value: CustomStringConvertible & Strideable>: View {
                             .font(.title2.weight(.bold))
                             .frame(width: 200, height: 75)
                     }
-                    .buttonStyle(.card)
+                    .buttonStyle(.platformCard)
                 }
 
                 Button(L10n.close) {

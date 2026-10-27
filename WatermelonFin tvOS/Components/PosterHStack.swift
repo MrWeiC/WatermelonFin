@@ -9,8 +9,6 @@
 import CollectionHStack
 import SwiftUI
 
-// TODO: trailing content refactor?
-
 struct PosterHStack<Element: Poster, Data: Collection>: View where Data.Element == Element, Data.Index == Int {
 
     private var data: Data
@@ -32,6 +30,8 @@ struct PosterHStack<Element: Poster, Data: Collection>: View where Data.Element 
                         .padding(.leading, 50)
 
                     Spacer()
+                    trailingContent().eraseToAnyView()
+                        .padding(.trailing, 50)
                 }
             }
 
@@ -56,7 +56,7 @@ struct PosterHStack<Element: Poster, Data: Collection>: View where Data.Element 
             .itemSpacing(EdgeInsets.edgePadding - 20)
             .scrollBehavior(.continuousLeadingEdge)
         }
-        .focusSection()
+        .platformFocusSection()
     }
 }
 

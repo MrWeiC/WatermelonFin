@@ -158,7 +158,7 @@ extension MediaView {
             .onChange(of: viewModel.cardDataRevision) { _, _ in
                 setCardData()
             }
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
         }
     }
 }

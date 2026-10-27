@@ -71,7 +71,7 @@ struct RefreshMetadataView: View {
             }
             .topBarTrailing {
                 Button(L10n.run, action: onRun)
-                    .buttonStyle(.toolbarPill)
+                    .buttonStyle(.bordered)
             }
         #endif
     }

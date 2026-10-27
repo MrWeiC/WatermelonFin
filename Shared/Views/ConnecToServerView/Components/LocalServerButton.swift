@@ -67,7 +67,7 @@ extension ConnectToServerView {
                 #endif
             }
             .foregroundStyle(.primary, .secondary)
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
         }
     }
 }

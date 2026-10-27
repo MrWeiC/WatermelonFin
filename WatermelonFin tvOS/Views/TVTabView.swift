@@ -72,7 +72,7 @@ struct TVTabView: View {
                 sectionButton(for: section)
             }
         }
-        .focusSection()
+        .platformFocusSection()
     }
 
     private func sectionButton(for section: Section) -> some View {
@@ -93,7 +93,7 @@ struct TVTabView: View {
                     .foregroundColor(.black)
             }
         }
-        .buttonStyle(.card)
+        .buttonStyle(.platformCard)
         .focused($focusedSection, equals: section)
     }
 

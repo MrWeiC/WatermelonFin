@@ -66,7 +66,7 @@ extension SeriesEpisodeSelector {
                 }
                 .padding()
             }
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
         }
     }
 }
