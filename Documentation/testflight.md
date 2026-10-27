@@ -7,17 +7,17 @@ Prepare a TestFlight beta first. The intended US App Store launch price is **US$
 ## Current build
 
 - Scheme: `WatermelonFin iOS`
-- Bundle identifier: `org.chenacademy.watermelonfin.ios`
-- Version/build: `1.0.0 (2)`; verify the next unused build number in App Store Connect before uploading.
+- Bundle identifier: `org.chenacademy.watermelonfin`
+- Version/build: `1.0.0 (7)`; verify the next unused build number in App Store Connect before uploading.
 - Minimum iOS/iPadOS: 17.5; supports both iPhone and iPad
 - Automated simulator validation: seven tests passed on each of CS iPhone Duo and iPad Pro 13-inch (M5). See `iphone-verification.md` for actual runtime coverage and remaining tests.
-- Developer team: not assigned in the checked-in phone target. Select the correct enrolled Apple Developer team before creating a distribution archive.
+- Developer team: Wei Chen (`GP22YF7BL7`), using automatic signing for iOS, tvOS, and Top Shelf.
 - Release archive check: optimized unsigned archive succeeded on Xcode 27.1 after updating Transmission to 2.12.3 and Engine to 2.12.2. Distribution signing and TestFlight upload remain outstanding.
-- App Store Connect is not authenticated in the current browser session. The app record, signing team, upload history, and tester availability have not been verified.
+- Existing App Store Connect app: WatermelonFin, Apple ID `6789271807`, bundle ID `org.chenacademy.watermelonfin`. iOS was added alongside tvOS for one app record. The previous tvOS build is 1.0.0 (6); new uploads use build 7.
 
 ## Upload prerequisites
 
-1. Sign in to App Store Connect and confirm the correct team, existing app records, and registered bundle identifier. Decide whether iPhone and Apple TV should share an App Store purchase before registering a separate phone app record. The local targets currently use separate identifiers; do not assume universal purchase is configured.
+1. Use the existing WatermelonFin app record for both iOS and tvOS. The app targets now share its bundle identifier; iPhone and iPad are supported by the same iOS build. Confirm the next unused build number before any subsequent upload.
 2. Resolve the linked player library's distribution requirements. The lockfile pins `streamyfin/MPVKit` at `0.40.0-av`, revision `d3d341129f77a5eb5251bd8c68fd1243a0ca1c73`; both app targets link the `MPVKit-GPL` product. Its README explicitly describes GPL v3 components, while its LICENSE file contains LGPL text. A root MPL notice alone is not a complete dependency review. Confirm applicable source, notice, and distribution requirements for the actual binary before TestFlight delivery; do not silently replace or remove playback features.
 3. Confirm privacy disclosures, privacy manifests for the actual build, encryption/export answers, support contact, and beta feedback email. The current encryption plist answer is inherited configuration, not a newly completed export assessment.
 4. In Xcode, select the correct development team and a generic iOS device, then Product → Archive. Validate the signed archive in Organizer. An unsigned local archive is a build check, not an uploadable TestFlight build.
