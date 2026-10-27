@@ -6,6 +6,7 @@ from collections import deque
 import io
 import math
 import re
+import shutil
 
 try:
     from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -18,6 +19,7 @@ except ModuleNotFoundError as error:
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "WatermelonFin tvOS/Resources/Assets.xcassets"
+IOS_ASSETS = ROOT / "WatermelonFin iOS/Resources/Assets.xcassets"
 BRAND = ASSETS / "App Icon & Top Shelf Image.brandassets"
 PREVIEW = ROOT / "docs/watermelonfin-logo-assets-preview.png"
 DEFAULT_SOURCE = ROOT / "Scripts/Branding/Sources/watermelonfin-original.png"
@@ -571,6 +573,19 @@ def save_logo_assets(mark, wordmark):
         image.save(logo_dir / filename)
 
 
+def save_ios_assets(mark):
+    # Use the same approved source mark as tvOS, with an opaque square icon.
+    icon = brand_background((1024, 1024))
+    paste_fitted(icon, mark, (104, 104, 816, 816), shadow=True)
+    icon_dir = IOS_ASSETS / "AppIcon.appiconset"
+    icon_dir.mkdir(parents=True, exist_ok=True)
+    icon.convert("RGB").save(icon_dir / "AppIcon.png")
+    logo_dir = IOS_ASSETS / "watermelonfin-logo.imageset"
+    logo_dir.mkdir(parents=True, exist_ok=True)
+    for filename, _ in LOGO_TARGETS:
+        shutil.copy2(ASSETS / "watermelonfin-logo.imageset" / filename, logo_dir / filename)
+
+
 def save_icon_assets(mark):
     for relative, size, mode in ICON_TARGETS:
         target = BRAND / relative
@@ -649,20 +664,26 @@ def save_preview(source):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Generate WatermelonFin tvOS logo, app icon, and Top Shelf assets.")
+    parser = argparse.ArgumentParser(description="Generate WatermelonFin iOS/tvOS logos, app icons, and Top Shelf assets.")
     parser.add_argument(
         "--source",
         type=Path,
         default=DEFAULT_SOURCE,
         help="Path to the source PNG/JPG/SVG artwork. SVG input must contain an embedded raster image.",
     )
+    parser.add_argument("--ios-only", action="store_true", help="Regenerate only the iPhone/iPad icon and copy the current tvOS wordmark assets.")
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
     mark, wordmark = source_pieces(args.source)
+    if args.ios_only:
+        save_ios_assets(mark)
+        print("Generated WatermelonFin iPhone/iPad assets.")
+        return
     save_logo_assets(mark, wordmark)
+    save_ios_assets(mark)
     save_icon_assets(mark)
     save_top_shelf_assets(mark, wordmark)
     save_preview(args.source)
