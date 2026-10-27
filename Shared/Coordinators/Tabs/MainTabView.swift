@@ -6,6 +6,7 @@
 // Copyright (c) 2026 Jellyfin & Jellyfin Contributors
 //
 
+import Defaults
 import Factory
 import Logging
 import SwiftUI
@@ -17,11 +18,17 @@ import SwiftUI
 struct MainTabView: View {
 
     #if os(iOS)
+    @Default(.appearance)
+    private var userAppearance
+    @Default(.accentColor)
+    private var userAccentColor
     @StateObject
     private var tabCoordinator = TabCoordinator {
         TabItem.home
         TabItem.search
         TabItem.media
+        TabItem.live
+        TabItem.settings
     }
     #else
     @StateObject
@@ -55,6 +62,15 @@ struct MainTabView: View {
                 .tag(tab.item.id)
             }
         }
+        #if os(iOS)
+        .modifier(MobileTabPresentation())
+        .onAppear {
+            Defaults[.appearance] = Defaults[.userAppearance]
+            Defaults[.accentColor] = Defaults[.userAccentColor]
+        }
+        .tint(userAccentColor)
+        .preferredColorScheme(userAppearance == .system ? nil : (userAppearance == .dark ? .dark : .light))
+        #endif
         #if os(tvOS)
         .onAppear {
             if let pendingURL = TopShelfDeepLinkStore.consumePendingURL() {
@@ -109,3 +125,15 @@ struct MainTabView: View {
     }
     #endif
 }
+
+#if os(iOS)
+private struct MobileTabPresentation: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.tabViewStyle(.sidebarAdaptable)
+        } else {
+            content
+        }
+    }
+}
+#endif

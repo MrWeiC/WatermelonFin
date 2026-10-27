@@ -38,7 +38,7 @@ struct RootItem: Identifiable {
         }
     }
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     static let serverCheck = RootItem(id: "serverCheck") {
         NavigationInjectionView(coordinator: .init()) {
             ServerCheckView()

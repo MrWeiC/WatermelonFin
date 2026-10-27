@@ -28,6 +28,7 @@ extension NavigationRoute {
     }
 
     #if os(iOS)
+    #if !WATERMELONFIN_PHONE
     static func userProfileImage(viewModel: UserProfileImageViewModel) -> NavigationRoute {
         NavigationRoute(
             id: "userProfileImage",
@@ -48,6 +49,8 @@ extension NavigationRoute {
             )
         }
     }
+
+    #endif
 
     // TODO: rename to `localUserAccessPolicy`
     static func userSecurity(pinHint: Binding<String>, accessPolicy: Binding<UserAccessPolicy>) -> NavigationRoute {

@@ -47,7 +47,7 @@ extension SeriesEpisodeSelector {
                     .padding(.horizontal, EdgeInsets.edgePadding)
                 }
                 .padding(.bottom, 45)
-                .focusSection()
+                .platformFocusSection()
                 .focusGuide(
                     focusGuide,
                     tag: "belowHeader",
@@ -108,7 +108,7 @@ extension SeriesEpisodeSelector {
                     }
             }
             .focused($focusedSeason, equals: season.id)
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
             .padding(.horizontal, 4)
             .padding(.vertical)
         }

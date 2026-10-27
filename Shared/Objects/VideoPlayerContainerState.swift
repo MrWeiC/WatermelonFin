@@ -227,7 +227,7 @@ class VideoPlayerContainerState: ObservableObject {
     weak var containerView: VideoPlayer.UIVideoPlayerContainerViewController?
     weak var manager: MediaPlayerManager?
 
-    #if os(iOS)
+    #if os(iOS) && !WATERMELONFIN_PHONE
     var panHandlingAction: (any _PanHandlingAction)?
     var didSwipe: Bool = false
     var lastTapLocation: CGPoint?
@@ -255,7 +255,7 @@ class VideoPlayerContainerState: ObservableObject {
             }
         }
 
-        #if os(iOS)
+        #if os(iOS) && !WATERMELONFIN_PHONE
         jumpProgressCancellable = jumpProgressObserver
             .timer
             .sink { [weak self] in

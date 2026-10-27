@@ -138,7 +138,7 @@ struct LocalizedLogView: View {
                         Button {} label: {
                             LocalizedLogEntryRow(entry: entry)
                         }
-                        .buttonStyle(.card)
+                        .buttonStyle(.platformCard)
                     }
                 }
             }

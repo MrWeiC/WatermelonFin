@@ -272,7 +272,7 @@ extension MediaInfoSupplement {
                 }
                 .padding(.horizontal, EdgeInsets.edgePadding * 2)
             }
-            .focusSection()
+            .platformFocusSection()
         }
     }
 }

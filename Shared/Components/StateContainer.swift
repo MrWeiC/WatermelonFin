@@ -124,7 +124,7 @@ struct EmptyStateView: View {
         }
         .frame(maxWidth: 600)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .focusSection()
+        .platformFocusSection()
         .edgePadding()
     }
 }

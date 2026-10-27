@@ -81,7 +81,7 @@ struct MediaView: View {
                         }
                     }
                 }
-                .focusSection()
+                .platformFocusSection()
             }
         }
     }

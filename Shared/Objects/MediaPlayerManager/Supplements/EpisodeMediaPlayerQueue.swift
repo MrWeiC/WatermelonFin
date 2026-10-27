@@ -266,7 +266,7 @@ extension EpisodeMediaPlayerQueue {
                 }
             }
             .padding(.horizontal, EdgeInsets.edgePadding * 2)
-            .focusSection()
+            .platformFocusSection()
         }
 
         private var seasonSelector: some View {

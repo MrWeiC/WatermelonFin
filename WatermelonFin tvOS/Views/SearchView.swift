@@ -59,7 +59,7 @@ struct SearchView: View {
                                     .lineLimit(1)
                                     .frame(maxWidth: .infinity, minHeight: 64)
                             }
-                            .buttonStyle(.card)
+                            .buttonStyle(.platformCard)
                         }
                     }
                 }

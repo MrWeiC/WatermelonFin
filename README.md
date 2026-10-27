@@ -2,7 +2,7 @@
 
 # WatermelonFin
 
-**A tvOS-focused Jellyfin client**
+**A native Jellyfin client for Apple TV and iPhone**
 
 <img src="https://img.shields.io/badge/tvOS-17+-blue"/>
 <img src="https://img.shields.io/badge/Jellyfin-10.11-9962be"/>
@@ -16,9 +16,9 @@
 
 ## About
 
-**WatermelonFin** is a native Jellyfin media client built exclusively for Apple TV. It uses MPV for direct playback and is designed to feel native on tvOS.
+**WatermelonFin** is a native Jellyfin media client for Apple TV and iPhone. It uses MPV for direct playback and is designed to feel native on tvOS.
 
-This project focuses purely on the tvOS experience — no iOS, just Apple TV.
+Apple TV uses remote-focused browsing; iPhone has a native touch interface. Both platforms share the same Jellyfin session, library, playlist, and playback models. See [iPhone setup and validation](Documentation/iphone.md).
 
 ---
 
@@ -38,11 +38,11 @@ Playlist membership is stored by Jellyfin. Watched status remains the signed-in 
 
 ## Build from Source
 
-WatermelonFin is free and open source under the MPL 2.0 license. You can build it yourself:
+WatermelonFin source is available under the MPL 2.0 license. The planned US App Store price is $0.99 as a one-time purchase; no paid iPhone release is available yet. TestFlight validation comes before the store launch. You can also build from source:
 
 **Requirements:**
 - Xcode (latest)
-- Apple TV (tvOS 17+ recommended, tvOS 18+ for Liquid Glass effects)
+- Apple TV (tvOS 17.5+) or iPhone (iOS 17.5+)
 - A Jellyfin media server (10.11+ recommended)
 
 See the [Documentation](Documentation/) directory for build details.

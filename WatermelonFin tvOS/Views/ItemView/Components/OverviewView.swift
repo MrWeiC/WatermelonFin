@@ -20,6 +20,12 @@ extension ItemView {
         private var overviewLineLimit: Int?
         private var taglineLineLimit: Int?
 
+        init(item: BaseItemDto) {
+            self.item = item
+            self.overviewLineLimit = nil
+            self.taglineLineLimit = nil
+        }
+
         var body: some View {
             VStack(alignment: .leading, spacing: 10) {
 
@@ -65,14 +71,6 @@ extension ItemView {
 }
 
 extension ItemView.OverviewView {
-
-    init(item: BaseItemDto) {
-        self.init(
-            item: item,
-            overviewLineLimit: nil,
-            taglineLineLimit: nil
-        )
-    }
 
     func overviewLineLimit(_ limit: Int) -> Self {
         copy(modifying: \.overviewLineLimit, with: limit)

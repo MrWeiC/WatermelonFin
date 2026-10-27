@@ -159,7 +159,7 @@ struct EditServerView: View {
                 .frame(height: 68)
                 .background(Color.red.opacity(0.18), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
-        .buttonStyle(.card)
+        .buttonStyle(.platformCard)
         .buttonBorderShape(.roundedRectangle(radius: 14))
     }
 

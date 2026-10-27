@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "addToPlaylist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -24,6 +25,7 @@
       }
     },
     "createPlaylist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -46,6 +48,7 @@
       }
     },
     "noVideoPlaylists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -68,6 +71,7 @@
       }
     },
     "playlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -90,6 +94,7 @@
       }
     },
     "playlists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -112,6 +117,7 @@
       }
     },
     "removeFromPlaylist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

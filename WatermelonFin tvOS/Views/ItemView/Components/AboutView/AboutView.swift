@@ -43,7 +43,7 @@ extension ItemView {
                     .padding(50)
                 }
             }
-            .focusSection()
+            .platformFocusSection()
         }
     }
 }

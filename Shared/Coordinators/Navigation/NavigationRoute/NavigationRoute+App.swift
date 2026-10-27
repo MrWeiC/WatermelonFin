@@ -18,6 +18,7 @@ extension NavigationRoute {
         AboutAppView()
     }
 
+    #if !WATERMELONFIN_PHONE
     static func appIconSelector(viewModel: SettingsViewModel) -> NavigationRoute {
         NavigationRoute(
             id: "app-icon-selector"
@@ -25,6 +26,7 @@ extension NavigationRoute {
             AppIconSelectorView(viewModel: viewModel)
         }
     }
+    #endif
     #endif
 
     #if os(tvOS)
@@ -40,7 +42,7 @@ extension NavigationRoute {
     }
     #endif
 
-    #if os(tvOS)
+    #if os(tvOS) || WATERMELONFIN_PHONE
     static let hourPicker = NavigationRoute(
         id: "hour-picker",
         style: .fullscreen

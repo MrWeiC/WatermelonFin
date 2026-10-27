@@ -16,9 +16,12 @@ final class CollectionItemViewModel: ItemViewModel {
     @ObservedPublisher
     var sections: OrderedDictionary<BaseItemKind, ItemLibraryViewModel>
 
+    let playlistEntries: PlaylistEntriesViewModel?
+
     private let itemCollection: ItemTypeCollection
 
     override init(item: BaseItemDto) {
+        self.playlistEntries = item.type == .playlist ? PlaylistEntriesViewModel(playlist: item) : nil
         self.itemCollection = ItemTypeCollection(
             parent: item,
             itemTypes: BaseItemKind.supportedCases
@@ -40,7 +43,11 @@ final class CollectionItemViewModel: ItemViewModel {
 
         switch action {
         case .refresh, .backgroundRefresh:
-            itemCollection.send(.refresh)
+            if let playlistEntries {
+                playlistEntries.refresh()
+            } else {
+                itemCollection.send(.refresh)
+            }
         default: ()
         }
 
@@ -49,6 +56,8 @@ final class CollectionItemViewModel: ItemViewModel {
 
     // TODO: possibly multiple items, for image source fallbacks
     func randomItem() -> BaseItemDto? {
+        if let playlistEntries { return playlistEntries.entries.randomElement()?.item }
+
         // Try to exclude episodes if possible
 
         if itemCollection.elements.elements.count == 1 {
@@ -81,7 +90,11 @@ final class CollectionItemViewModel: ItemViewModel {
         _ = try await session.client.send(request)
 
         await MainActor.run {
-            itemCollection.send(.refresh)
+            if let playlistEntries {
+                playlistEntries.refresh()
+            } else {
+                itemCollection.send(.refresh)
+            }
         }
     }
 }

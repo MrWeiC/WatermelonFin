@@ -34,7 +34,7 @@ extension SeriesEpisodeSelector {
                             ProgressView()
                         }
                 }
-                .buttonStyle(.card)
+                .buttonStyle(.platformCard)
                 .posterShadow()
 
                 SeriesEpisodeSelector.EpisodeContent(

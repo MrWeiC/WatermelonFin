@@ -41,11 +41,22 @@ struct ConnectToServerView: View {
 
     private func continueToSignIn(server: ServerState) {
         UIDevice.feedback(.success)
+        #if WATERMELONFIN_PHONE
+        Notifications[.didConnectToServer].post(server)
+        if server.userIDs.isEmpty {
+            // Keep the current presentation alive while pushing sign-in. Replacing
+            // a fullscreen route during its dismissal can discard the new route.
+            router.route(to: .userSignIn(server: server), style: .push(.automatic))
+        } else {
+            router.dismiss()
+        }
+        #else
         router.dismiss()
 
         DispatchQueue.main.async {
             Notifications[.didConnectToServer].post(server)
         }
+        #endif
     }
 
     private func onEvent(_ event: ConnectToServerViewModel._Event) {
@@ -62,6 +73,7 @@ struct ConnectToServerView: View {
     @ViewBuilder
     private var manualAddressFields: some View {
         TextField(L10n.serverURL, text: $url)
+            .accessibilityIdentifier("mobile.server.address")
             .disableAutocorrection(true)
             .textInputAutocapitalization(.never)
             .keyboardType(.URL)
@@ -110,7 +122,7 @@ struct ConnectToServerView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, minHeight: 64)
                 }
-                .buttonStyle(.card)
+                .buttonStyle(.platformCard)
             }
         } header: {
             Text(L10n.manualServerAddress)

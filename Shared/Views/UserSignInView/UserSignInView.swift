@@ -249,12 +249,12 @@ struct UserSignInView: View {
             }
             .buttonStyle(.primary)
             .frame(height: 64)
-            .disabled(username.isEmpty || password.isEmpty)
+            .disabled(username.isEmpty)
             .foregroundStyle(
                 accentColor.overlayColor,
                 accentColor
             )
-            .opacity(username.isEmpty || password.isEmpty ? 0.5 : 1)
+            .opacity(username.isEmpty ? 0.5 : 1)
         }
 
         if viewModel.isQuickConnectEnabled {

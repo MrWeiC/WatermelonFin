@@ -119,7 +119,7 @@ extension ItemView {
                     }
                     .buttonStyle(.tintedMaterial(tint: Color.watermelonGreen, foregroundColor: .primary))
                     .isSelected(isPlayed)
-                    .frame(width: 100, height: 100)
+                    .frame(width: UIDevice.isTV ? 100 : 48, height: UIDevice.isTV ? 100 : 48)
                 }
 
                 // MARK: Toggle Favorite
@@ -134,7 +134,7 @@ extension ItemView {
                 }
                 .buttonStyle(.tintedMaterial(tint: .pink, foregroundColor: .primary))
                 .isSelected(isHeartSelected)
-                .frame(width: 100, height: 100)
+                .frame(width: UIDevice.isTV ? 100 : 48, height: UIDevice.isTV ? 100 : 48)
 
                 // MARK: Add to Playlist
 
@@ -143,7 +143,7 @@ extension ItemView {
                         isPresentingPlaylistPicker = true
                     }
                     .buttonStyle(.tintedMaterial(tint: Color.watermelonRed, foregroundColor: .primary))
-                    .frame(width: 100, height: 100)
+                    .frame(width: UIDevice.isTV ? 100 : 48, height: UIDevice.isTV ? 100 : 48)
                 }
 
                 // MARK: Watch a Trailer
@@ -154,7 +154,7 @@ extension ItemView {
                         externalTrailers: viewModel.item.remoteTrailers ?? []
                     )
                     .buttonStyle(.tintedMaterial(tint: .pink, foregroundColor: .primary))
-                    .frame(width: 100, height: 100)
+                    .frame(width: UIDevice.isTV ? 100 : 48, height: UIDevice.isTV ? 100 : 48)
                 }
 
                 // MARK: Advanced Options

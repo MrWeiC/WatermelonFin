@@ -74,7 +74,7 @@ struct SupplementContainerView: View {
         }
         .isVisible(containerState.isPresentingOverlay)
         .animation(.linear(duration: 0.2), value: containerState.isPresentingOverlay)
-        .focusSection()
+        .platformFocusSection()
         .focused($isFocused)
         .onReceive(manager.$supplements) { newValue in
             let newSupplements = IdentifiedArray(

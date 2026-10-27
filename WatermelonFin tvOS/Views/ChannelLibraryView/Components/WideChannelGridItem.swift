@@ -125,7 +125,7 @@ extension ChannelLibraryView {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.horizontal, EdgeInsets.edgePadding / 2)
             }
-            .buttonStyle(.card)
+            .buttonStyle(.platformCard)
             .frame(height: 200)
             .onReceive(timer) { newValue in
                 now = newValue

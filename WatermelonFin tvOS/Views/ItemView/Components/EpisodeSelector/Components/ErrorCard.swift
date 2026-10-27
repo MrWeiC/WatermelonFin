@@ -37,7 +37,7 @@ extension SeriesEpisodeSelector {
                                 .font(.system(size: 40))
                         }
                 }
-                .buttonStyle(.card)
+                .buttonStyle(.platformCard)
                 .posterShadow()
 
                 SeriesEpisodeSelector.EpisodeContent(

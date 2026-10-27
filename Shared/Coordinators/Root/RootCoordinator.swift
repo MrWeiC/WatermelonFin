@@ -48,7 +48,7 @@ final class RootCoordinator: ObservableObject {
                         return
                     }
 
-                    #if os(tvOS)
+                    #if os(tvOS) || WATERMELONFIN_PHONE
                     await MainActor.run {
                         root(.mainTab)
                     }
@@ -94,7 +94,7 @@ final class RootCoordinator: ObservableObject {
             return
         }
 
-        #if os(tvOS)
+        #if os(tvOS) || WATERMELONFIN_PHONE
         root(.mainTab)
         #else
         root(.serverCheck)

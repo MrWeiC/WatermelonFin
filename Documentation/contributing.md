@@ -6,7 +6,7 @@
 
 ## Setup
 
-Fork the WatermelonFin repo and install the necessary dependencies with Xcode 15:
+Fork the WatermelonFin repo and install the necessary dependencies with a current Xcode release supporting the project’s SDK requirements:
 
 ```bash
 # install Carthage, SwiftFormat, and SwiftGen with homebrew
@@ -60,7 +60,8 @@ Run the pre-PR checks from the repository root:
 
 ```bash
 swift Scripts/Checks/ValidateATSConfiguration.swift
-swiftlint lint
+bash Scripts/Checks/run-reliability-checks.sh
+python3 Scripts/Checks/check-swiftlint-regressions.py origin/main
 swiftformat . --lint --config ".swiftformat"
 xcodebuild build \
   -project WatermelonFin.xcodeproj \
@@ -73,7 +74,7 @@ xcodebuild build \
 If a local SDK or dependency issue prevents the build from running, note that in the PR description and include the checks that did run.
 
 The following must pass in order for a PR to be merged:
-- automated `iOS` and `tvOS` builds must succeed
+- automated builds and tests for every supported platform must succeed
 - developer account cannot be attached
 - SwiftFormat linting check must pass. If this does not pass, you may need to update your version of `swiftformat`
 - new strings that are not part of an experimental feature must be localized
@@ -119,3 +120,5 @@ If you notice undesirable behavior, would like to make a UI/UX tweak, or have a 
 The following behaviors are intended due to current technical limitations with the active player backend:
 
 - Audio delay may occur when starting playback and un-pausing on some media or output configurations
+
+The SwiftLint gate rejects newly introduced errors against the base revision. Existing violations remain visible as a backlog; SwiftFormat checks all source files.

@@ -1,10 +1,12 @@
-# Testing Guide for atvfin
+# Testing Guide for WatermelonFin
 
-This document provides guidance on writing and running tests for the atvfin project.
+This document provides guidance on writing and running tests for the WatermelonFin project.
 
 ## Test Structure
 
-Tests are organized in the `Tests/` directory with the following structure:
+The active XCTest target is `WatermelonFin tvOS Tests/`; `Tests/SharedTests/` contains legacy tests not currently included in that target. Platform-independent regression checks run with `bash Scripts/Checks/run-reliability-checks.sh`.
+
+Legacy directory structure:
 
 ```
 Tests/
@@ -18,21 +20,21 @@ Tests/
 ## Running Tests
 
 ### Via Xcode
-1. Open `WatermelonFin.xcodeproj` (Note: Update to actual project file name)
+1. Open `WatermelonFin.xcodeproj`
 2. Select the test scheme
 3. Press `Cmd+U` to run all tests
 4. Press `Cmd+Control+Option+U` to run tests with code coverage
 
 ### Via Command Line
 ```bash
-# Run all tests (update scheme name to match your project)
-xcodebuild test -scheme "WatermelonFin tvOS" -destination "platform=tvOS Simulator,name=Apple TV 4K"
+# Run all active tvOS tests
+xcodebuild test -scheme "WatermelonFin tvOS Tests" -destination "platform=tvOS Simulator,name=Apple TV 4K"
 
 # Run specific test class
-xcodebuild test -scheme "WatermelonFin tvOS" -only-testing:SharedTests/DownloadTaskTests
+xcodebuild test -scheme "WatermelonFin tvOS Tests" -only-testing:"WatermelonFin tvOS Tests/MediaProgressObserverTests"
 
 # Run with code coverage
-xcodebuild test -scheme "WatermelonFin tvOS" -enableCodeCoverage YES
+xcodebuild test -scheme "WatermelonFin tvOS Tests" -enableCodeCoverage YES
 ```
 
 ## Writing Tests

@@ -37,7 +37,7 @@ struct ServerButton: View {
             }
             .padding(10)
         }
-        .buttonStyle(.card)
+        .buttonStyle(.platformCard)
     }
 }
 

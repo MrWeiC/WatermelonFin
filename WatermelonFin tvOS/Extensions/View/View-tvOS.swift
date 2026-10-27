@@ -22,6 +22,7 @@ extension View {
         )
     }
 
+    #if os(tvOS)
     /// - Important: This does nothing on tvOS.
     func navigationBarTitleDisplayMode(_ mode: NavigationBarItem.TitleDisplayMode) -> some View {
         self
@@ -36,8 +37,10 @@ extension View {
     func prefersStatusBarHidden(_ hidden: Bool) -> some View {
         self
     }
+    #endif
 }
 
+#if os(tvOS)
 extension EnvironmentValues {
 
     @Entry
@@ -47,3 +50,5 @@ extension EnvironmentValues {
 struct PresentationCoordinator {
     var isPresented: Bool = false
 }
+
+#endif
