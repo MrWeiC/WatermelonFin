@@ -109,6 +109,7 @@ final class HomeViewModel: ViewModel, Stateful {
                     recentlyAddedViewModel.send(.refresh)
 
                     #if os(tvOS)
+                    let topShelfSession = currentSession
                     let topShelfOptions = topShelfNextUpOptions()
                     #endif
 
@@ -125,8 +126,8 @@ final class HomeViewModel: ViewModel, Stateful {
                     guard !Task.isCancelled else { return }
 
                     #if os(tvOS)
-                    if let session = currentSession {
-                        TopShelfCache.update(
+                    if let session = topShelfSession {
+                        await TopShelfCache.update(
                             resumeItems: refreshedResumeItems,
                             nextUpItems: refreshedTopShelfNextUpItems,
                             session: session
@@ -196,6 +197,9 @@ final class HomeViewModel: ViewModel, Stateful {
     }
 
     private func refresh() async throws {
+        #if os(tvOS)
+        let topShelfSession = currentSession
+        #endif
 
         await nextUpViewModel.send(.refresh)
         await recentlyAddedViewModel.send(.refresh)
@@ -221,8 +225,8 @@ final class HomeViewModel: ViewModel, Stateful {
         }
 
         #if os(tvOS)
-        if let session = currentSession {
-            TopShelfCache.update(
+        if let session = topShelfSession {
+            await TopShelfCache.update(
                 resumeItems: resumeItems,
                 nextUpItems: topShelfNextUpItems,
                 session: session

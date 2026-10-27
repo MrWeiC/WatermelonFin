@@ -13,6 +13,7 @@ private let appGroupInfoPlistKey = "WatermelonFinAppGroupIdentifier"
 private let cacheKey = "WatermelonFinTopShelfPayload"
 
 private struct TopShelfPayload: Decodable {
+    let version: Int
     let sections: [TopShelfSection]
 }
 
@@ -37,7 +38,8 @@ final class TopShelfProvider: TVTopShelfContentProvider {
         guard let appGroupIdentifier = Bundle.main.object(forInfoDictionaryKey: appGroupInfoPlistKey) as? String,
               let defaults = UserDefaults(suiteName: appGroupIdentifier),
               let data = defaults.data(forKey: cacheKey),
-              let payload = try? JSONDecoder().decode(TopShelfPayload.self, from: data)
+              let payload = try? JSONDecoder().decode(TopShelfPayload.self, from: data),
+              payload.version == 2
         else {
             completionHandler(nil)
             return
@@ -70,7 +72,8 @@ final class TopShelfProvider: TVTopShelfContentProvider {
         }
 
         if let imageURLString = cacheItem.imageURL,
-           let imageURL = URL(string: imageURLString)
+           let imageURL = URL(string: imageURLString),
+           imageURL.isFileURL
         {
             item.setImageURL(imageURL, for: .screenScale1x)
             item.setImageURL(imageURL, for: .screenScale2x)
