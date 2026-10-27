@@ -8,12 +8,12 @@ Prepare a TestFlight beta first. The intended US App Store launch price is **US$
 
 - Scheme: `WatermelonFin iOS`
 - Bundle identifier: `org.chenacademy.watermelonfin`
-- Version/build: `1.0.0 (9)`; verify the next unused build number in App Store Connect before uploading.
+- Version/build: `1.0.0 (10)` for iPhone/iPad; tvOS is `1.0.0 (9)`. Verify the next unused build number in App Store Connect before uploading.
 - Minimum iOS/iPadOS: 17.5; supports both iPhone and iPad
 - Automated simulator validation: seven tests passed on each of CS iPhone Duo and iPad Pro 13-inch (M5). See `iphone-verification.md` for actual runtime coverage and remaining tests.
-- Developer team: Wei Chen (`GP22YF7BL7`), using automatic signing for iOS, tvOS, and Top Shelf.
-- Release archive check: optimized unsigned archive succeeded on Xcode 27.1 after updating Transmission to 2.12.3 and Engine to 2.12.2. Distribution signing and TestFlight upload remain outstanding.
-- Existing App Store Connect app: WatermelonFin, Apple ID `6789271807`, bundle ID `org.chenacademy.watermelonfin`. iOS was added alongside tvOS for one app record. The previous tvOS build is 1.0.0 (6); new uploads use build 9.
+- Developer team: Wei Chen (`GP22YF7BL7`), using automatic signing for iOS and Debug builds; tvOS/Top Shelf Release use the manual distribution profiles listed below.
+- Release archive check: optimized unsigned archive succeeded on Xcode 27.1 after updating Transmission to 2.12.3 and Engine to 2.12.2. Signed iOS build 10 and tvOS build 9 archives were uploaded through Xcode and completed Apple processing on October 27, 2026. Both are assigned to the existing Internal Tester group (one tester).
+- Existing App Store Connect app: WatermelonFin, Apple ID `6789271807`, bundle ID `org.chenacademy.watermelonfin`. iOS was added alongside tvOS for one app record. The previous tvOS build was 1.0.0 (6); current internal builds are iOS 10 and tvOS 9.
 
 ## Upload prerequisites
 
@@ -54,8 +54,14 @@ In App Store Connect, select the United States base storefront and the available
 
 iOS build 7 uploaded successfully from Xcode but Apple processing rejected it with 90208: the generated MPVKit framework plist advertised iOS 12.0 while its linked binary required 17.5. Both app targets now run `Scripts/Distribution/NormalizeMPVKitMinimumOS.sh`, which derives MinimumOSVersion from the embedded Mach-O binary and re-signs the framework when signing is enabled. Build 8 archives for iOS and tvOS were verified to declare and require 17.5.
 
-The iOS build 8 signed archive succeeded. The tvOS build 8 unsigned archive succeeded; distribution signing happens during export because the team has no registered Apple TV development device. Xcode may warn that MPVKit has no matching dSYM; this affects symbolication of that framework and is separate from Apple processing acceptance. New TestFlight availability must be checked after processing.
+The iOS build 8 signed archive succeeded. The tvOS build 8 unsigned archive succeeded; the later tvOS build 9 signed archive used the approved local distribution certificate and manual App Store profiles. Xcode may warn that MPVKit has no matching dSYM; this affects symbolication of that framework and is separate from Apple processing acceptance. Apple processing completed for iOS 9, iOS 10, and tvOS 9; the current builds are assigned to Internal Tester. External testing and public release have not been started.
 
 iOS build 8 passed the framework minimum-OS check but Apple processing returned 90683 for a missing camera purpose string referenced by the player dependency. Build 9 includes camera and microphone purpose strings that accurately state the app does not capture photos/video or record audio. The app does not request those permissions in its playback flows.
 
 The owner authorized creation of a local Apple Distribution certificate and two tvOS App Store profiles. TV Release builds use manual signing with `WatermelonFin tvOS App Store Local 2026` and `WatermelonFin TopShelf App Store Local 2026`; Debug remains automatic. Install the corresponding profiles and certificate before a signed TV archive. No private key or provisioning profile is committed.
+
+## Branding verification — build 10
+
+iOS build 9 accidentally retained the legacy blue app icon. Build 10 uses the approved red watermelon artwork from `Scripts/Branding/Sources/watermelonfin-original.png`. The branding generator now emits an opaque 1024-pixel iOS icon and synchronizes the existing red wordmark assets; `--ios-only` regenerates just those iOS assets.
+
+Verified the actual build 10 archive: its iPhone and iPad app-icon PNGs contain the red watermelon, and `Assets.car` contains `watermelonfin-logo` at 1x, 2x, and 3x. The logo is compiled into the asset catalog rather than shipped as a loose PNG. The running CS iPhone Duo simulator also displays the red watermelon wordmark on the login screen. Apple processing shows Complete and the existing internal group has build 10.
