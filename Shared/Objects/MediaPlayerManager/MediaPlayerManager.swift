@@ -67,6 +67,8 @@ final class MediaPlayerManager: ViewModel {
         }
     }
 
+    let reportQueue = PlaybackReportQueue()
+
     enum State {
         case error
         case initial
@@ -99,7 +101,6 @@ final class MediaPlayerManager: ViewModel {
                     metadata: [
                         "itemID": .stringConvertible(playbackItem.baseItem.id ?? "Unknown"),
                         "itemTitle": .stringConvertible(playbackItem.baseItem.displayTitle),
-                        "url": .stringConvertible(playbackItem.url.absoluteString),
                         "defaultAudioStreamIndex": .stringConvertible(playbackItem.mediaSource.defaultAudioStreamIndex ?? -1),
                         "selectedAudioStreamIndex": .stringConvertible(playbackItem.selectedAudioStreamIndex ?? -1),
                         "audioStreamsCount": .stringConvertible(playbackItem.audioStreams.count),
@@ -269,7 +270,6 @@ final class MediaPlayerManager: ViewModel {
                     "error": .stringConvertible(error.localizedDescription),
                     "itemID": .stringConvertible(playbackItem.baseItem.id ?? "Unknown"),
                     "itemTitle": .stringConvertible(playbackItem.baseItem.displayTitle),
-                    "url": .stringConvertible(playbackItem.url.absoluteString),
                 ]
             )
         } else {

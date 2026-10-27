@@ -12,10 +12,6 @@ import Foundation
 import JellyfinAPI
 import UIKit
 
-// TODO: respond properly to end of playback
-//       - when item changes
-// TODO: only send stop on manager stop, not per-item
-
 class MediaProgressObserver: ViewModel, MediaPlayerObserver {
 
     weak var manager: MediaPlayerManager? {
@@ -28,6 +24,9 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
 
     private let timer = PokeIntervalTimer()
     private var hasSentStart = false
+    private var hasStopped = false
+    private var reportQueue: PlaybackReportQueue?
+    private var reportingClient: JellyfinClient?
     private weak var item: MediaPlayerItem?
     private var lastPlaybackRequestStatus: MediaPlayerManager.PlaybackRequestStatus = .playing
 
@@ -37,7 +36,12 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
     }
 
     private func sendReport() {
-        guard let item else { return }
+        guard !hasStopped, let item else { return }
+
+        if !hasSentStart {
+            sendStartReport(for: item, seconds: manager?.seconds)
+            return
+        }
 
         switch lastPlaybackRequestStatus {
         case .playing:
@@ -53,6 +57,8 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
 
     private func setup(with manager: MediaPlayerManager) {
         cancellables = []
+        reportingClient = userSession?.client
+        reportQueue = manager.reportQueue
 
         timer.sink { [weak self] in
             self?.sendReport()
@@ -78,40 +84,43 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
         NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
             .sink { [weak self] _ in
                 guard let self, let item = self.item else { return }
-                self.sendProgressReport(for: item, seconds: self.manager?.seconds)
+                self.sendProgressReport(
+                    for: item,
+                    seconds: self.manager?.seconds,
+                    isPaused: self.lastPlaybackRequestStatus == .paused
+                )
             }
             .store(in: &cancellables)
     }
 
     private func playbackItemDidChange(_ newItem: MediaPlayerItem?) {
-        timer.poke()
+        guard !hasStopped, let item, newItem !== item else { return }
+        // Each item owns its own observer. Retiring this one prevents it from
+        // following the next item and duplicating that item's reports.
+        finishReporting(for: item)
+    }
 
-        if let item, newItem !== item {
-            sendStopReport(for: item, seconds: manager?.seconds)
-
-            self.item = newItem
-            self.hasSentStart = false
-            sendReport()
-        }
+    private func finishReporting(for item: MediaPlayerItem) {
+        guard !hasStopped else { return }
+        hasStopped = true
+        cancellables = []
+        timer.stop()
+        sendStopReport(for: item, seconds: manager?.seconds)
+        self.item = nil
     }
 
     private func playbackRequestStatusDidChange(_ newStatus: MediaPlayerManager.PlaybackRequestStatus) {
         timer.poke()
         lastPlaybackRequestStatus = newStatus
+        sendReport()
     }
 
-    // TODO: respond to error
-    // TODO: respond properly to ended
     private func didReceive(action: MediaPlayerManager._Action) {
         switch action {
-        case .stop:
-            cancellables = []
-            timer.stop()
-            if let item {
-                sendStopReport(for: item, seconds: manager?.seconds)
-            }
-            item = nil
-        default: ()
+        case .stop, .error:
+            if let item { finishReporting(for: item) }
+        default:
+            break
         }
     }
 
@@ -121,7 +130,9 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
         guard Defaults[.sendProgressReports] else { return }
         #endif
 
-        Task {
+        guard !hasSentStart, let client = reportingClient, let reportQueue else { return }
+        hasSentStart = true
+        reportQueue.enqueue {
             do {
                 var info = PlaybackStartInfo()
                 info.audioStreamIndex = item.selectedAudioStreamIndex
@@ -132,11 +143,11 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
                 info.subtitleStreamIndex = item.selectedSubtitleStreamIndex
 
                 let request = Paths.reportPlaybackStart(info)
-                _ = try await userSession!.client.send(request)
+                _ = try await client.send(request)
 
-                self.hasSentStart = true
             } catch {
-                logger.error("Failed to send playback start report: \(error.localizedDescription)")
+                if !self.hasStopped { self.hasSentStart = false }
+                self.logger.error("Failed to send playback start report: \(error.localizedDescription)")
             }
         }
     }
@@ -159,14 +170,15 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
         guard Defaults[.sendProgressReports] else { return }
         #endif
 
-        Task {
+        guard let client = reportingClient, let reportQueue else { return }
+        reportQueue.enqueue {
             do {
                 let info = Self.playbackStopInfo(for: item, seconds: seconds)
 
                 let request = Paths.reportPlaybackStopped(info)
-                _ = try await userSession!.client.send(request)
+                _ = try await client.send(request)
             } catch {
-                logger.error("Failed to send playback stop report: \(error.localizedDescription)")
+                self.logger.error("Failed to send playback stop report: \(error.localizedDescription)")
             }
         }
     }
@@ -186,7 +198,8 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
         guard Defaults[.sendProgressReports] else { return }
         #endif
 
-        Task {
+        guard let client = reportingClient, let reportQueue else { return }
+        reportQueue.enqueue {
             do {
                 var info = PlaybackProgressInfo()
                 info.audioStreamIndex = item.selectedAudioStreamIndex
@@ -198,10 +211,10 @@ class MediaProgressObserver: ViewModel, MediaPlayerObserver {
                 info.subtitleStreamIndex = item.selectedSubtitleStreamIndex
 
                 let request = Paths.reportPlaybackProgress(info)
-                _ = try await userSession!.client.send(request)
+                _ = try await client.send(request)
             } catch {
                 // Don't log progress errors at error level - they're frequent and expected during network issues
-                logger.warning("Failed to send playback progress report: \(error.localizedDescription)")
+                self.logger.warning("Failed to send playback progress report: \(error.localizedDescription)")
             }
         }
     }
