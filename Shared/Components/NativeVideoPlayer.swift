@@ -41,7 +41,11 @@ struct NativeVideoPlayer: View {
             case .playback:
                 NativeVideoPlayerView(proxy: proxy)
             default:
+                #if WATERMELONFIN_PHONE
+                WatermelonPlaybackLoadingView()
+                #else
                 ProgressView()
+                #endif
             }
         }
         .onAppear {

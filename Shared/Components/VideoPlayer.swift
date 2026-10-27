@@ -68,6 +68,17 @@ struct VideoPlayer: View {
 
     var body: some View {
         containerView
+            #if WATERMELONFIN_PHONE
+            .accessibilityHidden(manager.state == .loadingItem)
+            #endif
+            .overlay {
+                #if WATERMELONFIN_PHONE
+                if manager.state == .loadingItem {
+                    WatermelonPlaybackLoadingView()
+                        .ignoresSafeArea()
+                }
+                #endif
+            }
             .preference(key: IsStatusBarHiddenKey.self, value: !containerState.isPresentingOverlay)
             .backport
             .onChange(of: audioOffset) { _, newValue in
