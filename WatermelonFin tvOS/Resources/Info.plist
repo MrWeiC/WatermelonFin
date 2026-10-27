@@ -41,6 +41,10 @@
 		<string>vimeo</string>
 		<string>com.apple.tv</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>WatermelonFin plays media from your Jellyfin server and does not capture photos or video.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>WatermelonFin plays media from your Jellyfin server and does not record audio.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
