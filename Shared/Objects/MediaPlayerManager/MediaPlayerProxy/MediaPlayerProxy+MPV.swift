@@ -917,22 +917,24 @@ private final class MPVLayerRenderer {
                 ]
             )
 
-            // Replacing/stopping a file also emits END_FILE. Only EOF means the
-            // viewer naturally reached the end and autoplay may advance.
-            guard endFile.reason == MPV_END_FILE_REASON_EOF else {
-                logger.info(
-                    "Ignoring non-EOF MPV end event",
-                    metadata: [
-                        "reason": "\(endFile.reason.rawValue)",
-                    ]
-                )
+            switch PlaybackEndAction.resolve(
+                isError: endFile.reason == MPV_END_FILE_REASON_ERROR,
+                isEOF: endFile.reason == MPV_END_FILE_REASON_EOF,
+                isStopping: isStopping,
+                isReady: isReadyToSeek
+            ) {
+            case .ignore:
                 return
-            }
-
-            guard !isStopping, isReadyToSeek else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                self.delegate?.rendererDidEndPlayback(self)
+            case .fail:
+                isLoading = false
+                isReadyToSeek = false
+                notifyLoading(false)
+                notifyFailure(String(cString: mpv_error_string(Int32(endFile.error))))
+            case .finish:
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    self.delegate?.rendererDidEndPlayback(self)
+                }
             }
 
         case MPV_EVENT_LOG_MESSAGE:
