@@ -8,10 +8,9 @@
 
 import SwiftUI
 
-/// A procedural watermelon-to-play mark. The caller owns the launch background
-/// and its dismissal, and can remove the playback mark as soon as media is ready.
+/// The caller owns the background and dismissal. Playback never waits for this
+/// animation: removing the loading view removes its timeline immediately.
 struct WatermelonLoadingAnimation: View {
-
     enum Style {
         case launch
         case playback
@@ -24,50 +23,37 @@ struct WatermelonLoadingAnimation: View {
     private var reduceMotion
     @Environment(\.scenePhase)
     private var scenePhase
-
     @State
     private var startedAt = Date()
     @State
     private var didFinish = false
 
-    private static let launchDuration = 1.6
+    static let launchDuration = 3.8
+    private static let playbackDuration = 2.4
 
     var body: some View {
         TimelineView(.animation(minimumInterval: 1.0 / 30, paused: reduceMotion || scenePhase != .active || didFinish)) { timeline in
-            Canvas { context, size in
-                let elapsed = max(0, timeline.date.timeIntervalSince(startedAt))
-                let dimension = min(size.width, size.height, style == .launch ? 224 : 100)
-                context.translateBy(x: size.width / 2, y: size.height / 2)
-                context.scaleBy(x: dimension / 2, y: dimension / 2)
-
-                if reduceMotion {
-                    WatermelonMark.drawSlice(in: context, morph: 0, white: 0)
-                } else if style == .launch {
-                    WatermelonMark.drawLaunch(in: context, progress: min(1, elapsed / Self.launchDuration))
-                } else {
-                    WatermelonMark.drawPlayback(in: context, elapsed: elapsed)
-                }
-            }
+            let elapsed = max(0, timeline.date.timeIntervalSince(startedAt))
+            let progress = style == .launch
+                ? min(1, elapsed / Self.launchDuration)
+                : elapsed.truncatingRemainder(dividingBy: Self.playbackDuration) / Self.playbackDuration
+            WatermelonBrandFrame(progress: progress, style: style, reduceMotion: reduceMotion)
         }
         .allowsHitTesting(false)
         .accessibilityHidden(true)
         .task {
             startedAt = Date()
             guard style == .launch, !didFinish else { return }
-            // This task is cancelled automatically when the view disappears.
-            // Finishing never depends on an animation frame or a repeating timer.
             do {
                 try await Task.sleep(for: .seconds(reduceMotion ? 0.3 : Self.launchDuration))
                 try Task.checkCancellation()
                 finishLaunch()
             } catch {
-                // A removed launch overlay must not call back into its owner.
+                // SwiftUI cancels this task when its owner removes the overlay.
             }
         }
         .onChange(of: scenePhase) { _, phase in
-            if phase == .background {
-                finishLaunch()
-            }
+            if phase == .background { finishLaunch() }
         }
     }
 
@@ -78,192 +64,353 @@ struct WatermelonLoadingAnimation: View {
     }
 }
 
-/// All paths use a two-unit coordinate space, so rotation and resizing preserve
-/// the same silhouette on a phone, tablet, or a changing multitasking window.
-private enum WatermelonMark {
+/// The exact, deterministic frame used by the live timeline and image previews.
+/// Asset injection also lets previews render the original artwork outside an app bundle.
+struct WatermelonBrandFrame: View {
+    let progress: Double
+    let style: WatermelonLoadingAnimation.Style
+    var reduceMotion = false
+    var mark: Image = .init("watermelonfin-mark")
+    var wordmark: Image = .init("watermelonfin-wordmark")
 
-    private static let rind = Color(red: 0.13, green: 0.54, blue: 0.28)
-    private static let rindLight = Color(red: 0.39, green: 0.76, blue: 0.37)
-    private static let pith = Color(red: 0.87, green: 0.96, blue: 0.66)
-    private static let flesh = Color.watermelonRed
-    private static let seed = Color(red: 0.16, green: 0.06, blue: 0.10)
+    private var phase: Double {
+        min(1, max(0, progress))
+    }
 
-    static func drawLaunch(in context: GraphicsContext, progress t: Double) {
-        let entrance = smooth(t, from: 0, to: 0.12)
-        let split = smooth(t, from: 0.36, to: 0.61)
-        let melonOpacity = 1 - smooth(t, from: 0.43, to: 0.65)
+    var body: some View {
+        GeometryReader { geometry in
+            if style == .launch {
+                launchFrame(size: geometry.size)
+            } else {
+                playbackFrame(size: geometry.size)
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
 
-        var glow = context
-        glow.opacity = 0.15 * entrance * (1 - smooth(t, from: 0.7, to: 0.98))
-        glow.addFilter(.blur(radius: 0.22))
-        glow.fill(Path(ellipseIn: CGRect(x: -0.55, y: -0.42, width: 1.1, height: 1.1)), with: .color(flesh))
+    private func launchFrame(size: CGSize) -> some View {
+        let markSide = min(326, size.height * 0.77, size.width * 0.96)
+        let wordWidth = min(320, size.width * 0.96)
+        let lettering = reduceMotion ? 1 : ease(phase, from: 0.86, to: 0.94)
 
-        if melonOpacity > 0 {
-            let scale = 0.87 + 0.13 * entrance
-            // Two clipped copies separate along the normal of the diagonal cut.
-            for side in [-1.0, 1.0] {
-                var half = context
-                half.opacity = entrance * melonOpacity
-                half.translateBy(x: -side * 0.14 * split, y: side * 0.21 * split)
-                half.rotate(by: .degrees(side * 13 * split))
-                half.scaleBy(x: scale, y: scale)
-                var clip = Path()
-                clip.move(to: CGPoint(x: -2, y: -1.3))
-                clip.addLine(to: CGPoint(x: 2, y: 1.3))
-                clip.addLine(to: CGPoint(x: 2, y: side * 3))
-                clip.addLine(to: CGPoint(x: -2, y: side * 3))
-                clip.closeSubpath()
-                half.clip(to: clip)
-                drawMelon(in: half)
+        return VStack(spacing: 18) {
+            Group {
+                if reduceMotion {
+                    mark.resizable().interpolation(.high).scaledToFit()
+                } else {
+                    WatermelonSliceSequence(progress: phase, mark: mark)
+                }
+            }
+            .frame(width: markSide, height: markSide)
+
+            wordmark
+                .resizable()
+                .interpolation(.high)
+                .scaledToFit()
+                .frame(width: wordWidth, height: wordWidth * 41 / 304)
+                .opacity(lettering)
+                .offset(y: 8 * (1 - lettering))
+        }
+        .frame(width: size.width, height: size.height)
+    }
+
+    private func playbackFrame(size: CGSize) -> some View {
+        let side = min(size.width, size.height, 112)
+        let wave = reduceMotion ? 0 : sin(phase * .pi * 2)
+        // The reflection clears completely before wrapping, so there is no flash
+        // or visual reset at the loop boundary. The inset play stays red.
+        let reflection = reduceMotion ? 0 : pow(sin(phase * .pi), 2) * 0.16
+        return reflectedMark(side: side, position: phase, intensity: reflection)
+            .scaleEffect(1 + 0.012 * wave)
+            .rotation3DEffect(.degrees(2.2 * wave), axis: (x: 0, y: 1, z: 0), perspective: 0.2)
+            .frame(width: size.width, height: size.height)
+    }
+
+    private func reflectedMark(side: CGFloat, position: Double, intensity: Double) -> some View {
+        mark
+            .resizable()
+            .interpolation(.high)
+            .scaledToFit()
+            .frame(width: side, height: side)
+            .overlay {
+                LinearGradient(
+                    stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .white.opacity(0.18), location: 0.34),
+                        .init(color: .white, location: 0.50),
+                        .init(color: .white.opacity(0.16), location: 0.60),
+                        .init(color: .clear, location: 1),
+                    ],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: side * 0.24, height: side * 1.8)
+                .rotationEffect(.degrees(24))
+                .offset(x: side * (position * 2 - 1))
+                .frame(width: side, height: side)
+                .mask {
+                    mark.resizable().scaledToFit().frame(width: side, height: side)
+                }
+                .opacity(intensity)
+                .blendMode(.screen)
+            }
+    }
+
+    private func ease(_ value: Double, from start: Double, to end: Double) -> Double {
+        let t = min(1, max(0, (value - start) / (end - start)))
+        return t * t * (3 - 2 * t)
+    }
+}
+
+/// Six persistent pieces, first joined as two shell halves. Faces change only
+/// at an edge-on rotation; no opacity dissolve or travelling reveal mask is used.
+private struct WatermelonSliceSequence: View {
+    let progress: Double
+    let mark: Image
+
+    private var heroTurn: Double { ease(progress, from: 0.67, to: 0.84) }
+
+    var body: some View {
+        GeometryReader { geometry in
+            let side = min(geometry.size.width, geometry.size.height)
+            ZStack {
+                Canvas { context, size in
+                    context.translateBy(x: size.width / 2, y: size.height / 2)
+                    context.scaleBy(x: side * 0.39, y: side * 0.39)
+                    drawSequence(in: context)
+                }
+                // The artwork is the reverse face of the selected wedge. At
+                // 90 degrees both faces have zero width, hiding the face change.
+                if heroTurn >= 0.5 {
+                    mark.resizable().interpolation(.high).scaledToFit()
+                        .frame(width: side, height: side)
+                        .scaleEffect(x: -cos(heroTurn * .pi), y: 0.78 + 0.22 * heroTurn)
+                        .rotationEffect(.degrees(-7 * (1 - heroTurn)))
+                }
+            }
+        }
+    }
+
+    private func drawSequence(in context: GraphicsContext) {
+        let split = ease(progress, from: 0.13, to: 0.23)
+        let turn = ease(progress, from: 0.26, to: 0.43)
+        let cut = ease(progress, from: 0.50, to: 0.555)
+        let depart = ease(progress, from: 0.62, to: 0.80)
+        let collect = ease(progress, from: 0.60, to: 0.69)
+
+        if split == 0 {
+            drawShell(in: context)
+        } else if progress < 0.50 {
+            for half in 0..<2 {
+                let direction = half == 0 ? 1.0 : -1.0
+                var face = context
+                face.translateBy(x: 0, y: direction * 0.26 * split)
+                // Rotate around the centre of each physical half, not the fruit.
+                let pivot = direction * 0.43
+                face.translateBy(x: 0, y: pivot)
+                face.scaleBy(x: 1, y: max(0.002, abs(cos(.pi * turn))))
+                face.translateBy(x: 0, y: -pivot)
+                let shape = sector(start: Double(half) * .pi, sweep: .pi, radius: 1)
+                if turn < 0.5 {
+                    face.clip(to: shape)
+                    drawShell(in: face)
+                } else {
+                    drawFlesh(in: face, start: Double(half) * .pi, sweep: .pi, seams: false)
+                }
+            }
+        } else {
+            // Three wedges in each half. They retain their positions and faces
+            // through the cut; the five companions physically leave the canvas.
+            for index in [0, 1, 2, 4, 5, 3] {
+                let start = Double(index) * .pi / 3
+                let angle = start + .pi / 6
+                let direction = index < 3 ? 1.0 : -1.0
+                let centre = CGPoint(x: cos(angle) * 0.62, y: sin(angle) * 0.62)
+                var wedge = context
+                let spread = 0.19 * cut
+                let originX = cos(angle) * spread
+                let originY = direction * 0.26 + sin(angle) * spread
+                if index == 3 {
+                    guard heroTurn < 0.5 else { continue }
+                    wedge.translateBy(
+                        x: (originX + centre.x) * (1 - collect),
+                        y: (originY + centre.y) * (1 - collect)
+                    )
+                    wedge.scaleBy(x: cos(heroTurn * .pi) * (1 + 1.15 * collect), y: 1 + 1.15 * collect)
+                    wedge.rotate(by: .degrees(-30 * collect))
+                    wedge.translateBy(x: -centre.x, y: -centre.y)
+                } else {
+                    wedge.translateBy(
+                        x: originX + cos(angle) * 5 * depart,
+                        y: originY + sin(angle) * 5 * depart
+                    )
+                    wedge.translateBy(x: centre.x, y: centre.y)
+                    wedge.rotate(by: .degrees((index.isMultiple(of: 2) ? 1 : -1) * 68 * depart))
+                    wedge.translateBy(x: -centre.x, y: -centre.y)
+                }
+                drawFlesh(in: wedge, start: start, sweep: .pi / 3, seams: true)
             }
         }
 
-        let slashIn = smooth(t, from: 0.29, to: 0.43)
-        let slashOut = smooth(t, from: 0.44, to: 0.56)
-        if slashIn > 0, slashOut < 1 {
-            var slash = context
-            slash.opacity = (1 - slashOut) * 0.95
-            let start = CGPoint(x: -1.05 + 2.1 * slashOut, y: -0.69 + 1.38 * slashOut)
-            let end = CGPoint(x: -1.05 + 2.1 * slashIn, y: -0.69 + 1.38 * slashIn)
+        // The knife actions are brief hard-edged strokes followed immediately
+        // by separation. These are accents, never masks that reveal new artwork.
+        if progress >= 0.115, progress < 0.17 {
+            let travel = ease(progress, from: 0.115, to: 0.145)
             var line = Path()
-            line.move(to: start)
-            line.addLine(to: end)
-            var bloom = slash
-            bloom.addFilter(.blur(radius: 0.05))
-            bloom.stroke(line, with: .color(pith), style: StrokeStyle(lineWidth: 0.065, lineCap: .round))
-            slash.stroke(line, with: .color(.white), style: StrokeStyle(lineWidth: 0.018, lineCap: .round))
+            line.move(to: CGPoint(x: -1.12, y: 0))
+            line.addLine(to: CGPoint(x: -1.12 + 2.24 * travel, y: 0))
+            context.stroke(line, with: .color(.white), style: StrokeStyle(lineWidth: 0.015, lineCap: .round))
         }
-
-        let reveal = smooth(t, from: 0.46, to: 0.63)
-        if reveal > 0 {
-            var slice = context
-            slice.opacity = reveal
-            let turn = smooth(t, from: 0.48, to: 0.84)
-            let scale = 0.65 + 0.35 * reveal
-            slice.scaleBy(x: scale, y: scale)
-            slice.rotate(by: .degrees(-100 * (1 - turn)))
-            drawSlice(
-                in: slice,
-                morph: smooth(t, from: 0.63, to: 0.88),
-                white: smooth(t, from: 0.81, to: 0.96)
-            )
+        if progress >= 0.49, progress < 0.525 {
+            for angle in [Double.pi / 3, Double.pi * 2 / 3] {
+                var line = Path()
+                line.move(to: CGPoint(x: -cos(angle), y: -sin(angle) - 0.26))
+                line.addLine(to: CGPoint(x: cos(angle), y: sin(angle) + 0.26))
+                context.stroke(line, with: .color(.white.opacity(0.9)), lineWidth: 0.012)
+            }
         }
     }
 
-    static func drawPlayback(in context: GraphicsContext, elapsed: Double) {
-        // A quiet, continuous slice/play loop without a discontinuous reset.
-        let wave = (1 - cos(elapsed * .pi * 2 / 1.7)) / 2
-        let morph = smooth(wave, from: 0.12, to: 0.88)
-        var mark = context
-        let scale = 0.90 + 0.045 * sin(elapsed * .pi * 2 / 1.7)
-        mark.scaleBy(x: scale, y: scale)
-        mark.rotate(by: .degrees(-8 * (1 - morph)))
-        drawSlice(in: mark, morph: morph, white: morph * 0.92)
-    }
-
-    private static func drawMelon(in context: GraphicsContext) {
-        let bounds = CGRect(x: -0.73, y: -0.78, width: 1.46, height: 1.56)
-        let body = Path(ellipseIn: bounds)
-        var melon = context
-        melon.clip(to: body)
-        melon.fill(body, with: .linearGradient(
-            Gradient(colors: [rindLight, rind, Color(red: 0.025, green: 0.22, blue: 0.13)]),
-            startPoint: CGPoint(x: -0.5, y: -0.65), endPoint: CGPoint(x: 0.65, y: 0.7)
-        ))
-
-        // Longitudinal, tapered stripes describe a round fruit without an icon asset.
-        for offset in [-0.58, -0.28, 0.08, 0.42] {
-            var stripe = Path()
-            stripe.move(to: CGPoint(x: offset * 0.32, y: -0.84))
-            stripe.addCurve(
-                to: CGPoint(x: offset * 0.30, y: 0.86),
-                control1: CGPoint(x: offset - 0.22, y: -0.35),
-                control2: CGPoint(x: offset - 0.16, y: 0.38)
-            )
-            stripe.addCurve(
-                to: CGPoint(x: offset * 0.32 + 0.055, y: -0.84),
-                control1: CGPoint(x: offset + 0.09, y: 0.33),
-                control2: CGPoint(x: offset + 0.07, y: -0.37)
-            )
-            stripe.closeSubpath()
-            melon.fill(stripe, with: .color(Color(red: 0.03, green: 0.27, blue: 0.12).opacity(0.66)))
-        }
-
-        var highlight = melon
-        highlight.addFilter(.blur(radius: 0.08))
-        highlight.fill(
-            Path(ellipseIn: CGRect(x: -0.43, y: -0.61, width: 0.27, height: 0.50)),
-            with: .color(Color.white.opacity(0.17))
-        )
-        context.stroke(body, with: .color(rindLight.opacity(0.35)), lineWidth: 0.012)
-    }
-
-    static func drawSlice(in context: GraphicsContext, morph: Double, white: Double) {
-        let outer = slicePath(morph: morph, inset: 0)
-        let innerRind = slicePath(morph: morph, inset: 0.047 * (1 - morph))
-        let interior = slicePath(morph: morph, inset: 0.105 * (1 - morph))
-
-        context.fill(outer, with: .linearGradient(
-            Gradient(colors: [rindLight, rind]),
-            startPoint: CGPoint(x: -0.8, y: -0.6), endPoint: CGPoint(x: -0.4, y: 0.7)
-        ))
-        context.fill(innerRind, with: .color(pith))
-        context.fill(interior, with: .linearGradient(
-            Gradient(colors: [Color(red: 1, green: 0.38, blue: 0.40), flesh, Color(red: 0.84, green: 0.10, blue: 0.26)]),
-            startPoint: CGPoint(x: 0.4, y: -0.45), endPoint: CGPoint(x: -0.5, y: 0.5)
-        ))
-
-        var seeds = context
-        seeds.opacity = 1 - smooth(morph, from: 0.15, to: 0.85)
-        let positions: [(Double, Double, Double)] = [
-            (-0.40, -0.34, -36), (-0.50, -0.06, -4),
-            (-0.39, 0.27, 33), (-0.12, -0.18, -28),
-            (-0.10, 0.16, 27), (0.20, 0.00, 90),
-        ]
-        for (x, y, angle) in positions {
-            var dot = seeds
-            dot.translateBy(x: x, y: y)
-            dot.rotate(by: .degrees(angle))
-            var seedPath = Path()
-            seedPath.move(to: CGPoint(x: 0, y: -0.055))
-            seedPath.addCurve(
-                to: CGPoint(x: 0, y: 0.045),
-                control1: CGPoint(x: -0.060, y: 0.005), control2: CGPoint(x: -0.030, y: 0.046)
-            )
-            seedPath.addCurve(
-                to: CGPoint(x: 0, y: -0.055),
-                control1: CGPoint(x: 0.030, y: 0.046), control2: CGPoint(x: 0.060, y: 0.005)
-            )
-            dot.fill(seedPath, with: .color(seed))
-        }
-
-        var play = context
-        play.opacity = white
-        play.fill(outer, with: .color(.white))
-    }
-
-    private static func slicePath(morph: Double, inset: Double) -> Path {
-        // The curved rind straightens into the back edge of the same play triangle.
-        let back = -0.48 + inset
-        let height = 0.66 - inset * 0.42
-        let curve = -1.0 + 0.52 * morph + inset
+    private func sector(start: Double, sweep: Double, radius: Double) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: 0.76, y: 0))
-        path.addLine(to: CGPoint(x: back, y: height))
-        path.addQuadCurve(to: CGPoint(x: back, y: -height), control: CGPoint(x: curve, y: 0))
+        path.move(to: .zero)
+        path.addArc(center: .zero, radius: radius, startAngle: .radians(start), endAngle: .radians(start + sweep), clockwise: false)
         path.closeSubpath()
         return path
     }
 
-    private static func smooth(_ value: Double, from start: Double, to end: Double) -> Double {
-        let progress = min(1, max(0, (value - start) / (end - start)))
-        return progress * progress * (3 - 2 * progress)
+    private func drawFlesh(in context: GraphicsContext, start: Double, sweep: Double, seams: Bool) {
+        let rind = sector(start: start, sweep: sweep, radius: 1)
+        let pith = sector(start: start, sweep: sweep, radius: 0.92)
+        let flesh = sector(start: start, sweep: sweep, radius: 0.85)
+        // A small extruded green edge keeps the slices solid during rotation.
+        var edge = context
+        edge.translateBy(x: 0.015, y: 0.045)
+        edge.fill(rind, with: .color(Color(red: 0.09, green: 0.28, blue: 0.04)))
+        context.fill(rind, with: .linearGradient(
+            Gradient(colors: [Color(red: 0.48, green: 0.73, blue: 0.12), Color(red: 0.12, green: 0.39, blue: 0.04)]),
+            startPoint: .init(x: -1, y: -1), endPoint: .init(x: 1, y: 1)
+        ))
+        context.fill(pith, with: .color(Color(red: 0.96, green: 0.95, blue: 0.70)))
+        context.fill(flesh, with: .linearGradient(
+            Gradient(colors: [Color(red: 1, green: 0.32, blue: 0.39), Color(red: 0.87, green: 0.035, blue: 0.17)]),
+            startPoint: .init(x: -0.7, y: -0.8), endPoint: .init(x: 0.8, y: 1)
+        ))
+        // A polished outer bevel catches light in the same pink as the logo.
+        var polished = context
+        polished.clip(to: flesh)
+        polished.stroke(flesh, with: .color(Color(red: 1, green: 0.55, blue: 0.60).opacity(0.65)), lineWidth: 0.10)
+        for facet in 0..<6 {
+            let angle = Double(facet) * .pi / 3
+            var plane = Path()
+            plane.move(to: .init(x: -0.12, y: -0.18))
+            plane.addLine(to: .init(x: cos(angle) * 0.85, y: sin(angle) * 0.85))
+            plane.addLine(to: .init(x: cos(angle + 0.5) * 0.85, y: sin(angle + 0.5) * 0.85))
+            plane.closeSubpath()
+            polished.fill(plane, with: .color(.white.opacity(facet.isMultiple(of: 2) ? 0.055 : 0.018)))
+        }
+        context.stroke(flesh, with: .color(Color(red: 1, green: 0.56, blue: 0.60)), lineWidth: 0.022)
+        if seams {
+            context.stroke(rind, with: .color(Color(red: 1, green: 0.92, blue: 0.71).opacity(0.75)), lineWidth: 0.009)
+        }
+        // Seed positions are shared by the halves and the six sectors, so the
+        // cut never changes their arrangement or makes the fruit jump.
+        for index in 0..<12 {
+            let angle = (Double(index) + 0.5) * .pi / 6
+            guard angle >= start, angle < start + sweep else { continue }
+            var seed = context
+            seed.translateBy(x: cos(angle) * 0.66, y: sin(angle) * 0.66)
+            seed.rotate(by: .radians(angle - .pi / 2))
+            let oval = Path(ellipseIn: CGRect(x: -0.027, y: -0.052, width: 0.054, height: 0.104))
+            seed.fill(oval, with: .color(Color(red: 0.14, green: 0.095, blue: 0.065)))
+            seed.stroke(oval, with: .color(Color(red: 1, green: 0.55, blue: 0.53).opacity(0.7)), lineWidth: 0.008)
+            seed.fill(Path(ellipseIn: CGRect(x: -0.014, y: -0.038, width: 0.012, height: 0.035)), with: .color(.white.opacity(0.25)))
+        }
+    }
+
+    private func drawShell(in context: GraphicsContext) {
+        let outline = Path(ellipseIn: CGRect(x: -1, y: -1, width: 2, height: 2))
+        var fruit = context
+        fruit.clip(to: outline)
+        fruit.fill(outline, with: .radialGradient(
+            Gradient(stops: [
+                .init(color: Color(red: 0.47, green: 0.74, blue: 0.29), location: 0),
+                .init(color: Color(red: 0.19, green: 0.47, blue: 0.10), location: 0.43),
+                .init(color: Color(red: 0.035, green: 0.19, blue: 0.08), location: 0.80),
+                .init(color: Color(red: 0.012, green: 0.07, blue: 0.04), location: 1),
+            ]),
+            center: CGPoint(x: -0.32, y: -0.43), startRadius: 0, endRadius: 1.65
+        ))
+
+        for offset in [-0.58, -0.30, 0.05, 0.39, 0.65] {
+            var stripe = Path()
+            stripe.move(to: CGPoint(x: offset * 0.27, y: -0.95))
+            stripe.addCurve(
+                to: CGPoint(x: offset * 0.32, y: 0.95),
+                control1: CGPoint(x: offset - 0.24, y: -0.40),
+                control2: CGPoint(x: offset - 0.18, y: 0.40)
+            )
+            stripe.addCurve(
+                to: CGPoint(x: offset * 0.27 + 0.045, y: -0.95),
+                control1: CGPoint(x: offset + 0.07, y: 0.38),
+                control2: CGPoint(x: offset + 0.08, y: -0.40)
+            )
+            stripe.closeSubpath()
+            fruit.fill(stripe, with: .linearGradient(
+                Gradient(colors: [Color(red: 0.07, green: 0.27, blue: 0.08).opacity(0.75), .black.opacity(0.20)]),
+                startPoint: CGPoint(x: -0.6, y: -0.7), endPoint: CGPoint(x: 0.5, y: 0.7)
+            ))
+        }
+
+        // Broad translucent planes give the glossy rind a cut-glass depth.
+        let facets: [[CGPoint]] = [
+            [.init(x: -0.8, y: -0.45), .init(x: -0.22, y: -0.86), .init(x: -0.38, y: 0.12)],
+            [.init(x: -0.22, y: -0.86), .init(x: 0.46, y: -0.66), .init(x: 0.13, y: -0.12)],
+            [.init(x: 0.13, y: -0.12), .init(x: 0.73, y: -0.32), .init(x: 0.54, y: 0.58)],
+            [.init(x: -0.62, y: 0.42), .init(x: 0.13, y: -0.12), .init(x: -0.06, y: 0.87)],
+        ]
+        for (index, vertices) in facets.enumerated() {
+            var plane = Path()
+            plane.addLines(vertices)
+            plane.closeSubpath()
+            fruit.fill(plane, with: .color(.white.opacity(index == 0 ? 0.09 : 0.035)))
+        }
+
+        var specular = Path()
+        specular.move(to: CGPoint(x: -0.63, y: 0.05))
+        specular.addCurve(
+            to: CGPoint(x: 0.16, y: -0.78),
+            control1: CGPoint(x: -0.73, y: -0.60), control2: CGPoint(x: -0.22, y: -0.91)
+        )
+        var bloom = fruit
+        bloom.addFilter(.blur(radius: 0.025))
+        bloom.stroke(specular, with: .color(.white.opacity(0.18)), style: StrokeStyle(lineWidth: 0.075, lineCap: .round))
+        fruit.stroke(specular, with: .linearGradient(
+            Gradient(colors: [.white.opacity(0.05), .white.opacity(0.6), .white.opacity(0.08)]),
+            startPoint: CGPoint(x: -0.65, y: -0.2), endPoint: CGPoint(x: 0.2, y: -0.8)
+        ), style: StrokeStyle(lineWidth: 0.014, lineCap: .round))
+        fruit.stroke(outline, with: .linearGradient(
+            Gradient(colors: [.white.opacity(0.45), Color.green.opacity(0.08), Color(red: 0.42, green: 0.68, blue: 0.23).opacity(0.35)]),
+            startPoint: CGPoint(x: -0.65, y: -0.8), endPoint: CGPoint(x: 0.65, y: 0.8)
+        ), lineWidth: 0.014)
+    }
+
+    private func ease(_ value: Double, from start: Double, to end: Double) -> Double {
+        let t = min(1, max(0, (value - start) / (end - start)))
+        return t * t * (3 - 2 * t)
     }
 }
 
 #Preview("Launch") {
     WatermelonLoadingAnimation(style: .launch)
-        .frame(width: 300, height: 300)
+        .frame(width: 360, height: 420)
+        .background(Color(red: 0.015, green: 0.045, blue: 0.028))
+}
+
+#Preview("Brand hold") {
+    WatermelonBrandFrame(progress: 1, style: .launch)
+        .frame(width: 360, height: 420)
         .background(Color(red: 0.015, green: 0.045, blue: 0.028))
 }
 
