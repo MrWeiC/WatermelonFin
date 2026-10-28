@@ -2302,14 +2302,71 @@
 /// Server %s is already added. Use this URL as the current address?
 "serverAlreadyExistsPrompt" = "Server %s is already added. Use this URL as the current address?";
 
+/// Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.
+"serverAlternateHelp" = "Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.";
+
+/// Add alternate address (optional)
+"serverAlternateOptional" = "Add alternate address (optional)";
+
+/// IP address or MagicDNS name
+"serverAlternatePlaceholder" = "IP address or MagicDNS name";
+
+/// Save alternate address
+"serverAlternateSave" = "Save alternate address";
+
+/// This address belongs to a different Jellyfin server. The saved server was not changed.
+"serverIdentityMismatch" = "This address belongs to a different Jellyfin server. The saved server was not changed.";
+
+/// Enter a valid IP address or server URL. Use brackets around IPv6 addresses.
+"serverInvalidAddress" = "Enter a valid IP address or server URL. Use brackets around IPv6 addresses.";
+
 /// Server logs
 "serverLogs" = "Server logs";
+
+/// Looking for your server…
+"serverLookingForSaved" = "Looking for your server…";
+
+/// Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.
+"serverManualHelp" = "Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.";
+
+/// Enter address manually
+"serverManualOptional" = "Enter address manually";
 
 /// Detected a new address for %@: %@. Use this as the current address?
 "serverNewAddressPrompt" = "Detected a new address for %@: %@. Use this as the current address?";
 
+/// Open Settings
+"serverOpenSettings" = "Open Settings";
+
+/// Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.
+"serverPermissionHelp" = "Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.";
+
 /// Servers
 "servers" = "Servers";
+
+/// Your accounts and settings are saved. Select a server to retry its saved addresses, including a Tailscale address if you added one.
+"serverSavedHelp" = "Your accounts and settings are saved. Select a server to retry its saved addresses, including a Tailscale address if you added one.";
+
+/// Saved servers
+"serverSavedList" = "Saved servers";
+
+/// Unable to find the saved server.
+"serverSavedMissing" = "Unable to find the saved server.";
+
+/// Search again
+"serverSearchAgain" = "Search again";
+
+/// No servers replied. Check that your server is running and connected to the same network, or enter its address manually.
+"serverSearchEmpty" = "No servers replied. Check that your server is running and connected to the same network, or enter its address manually.";
+
+/// Looking for Jellyfin servers…
+"serverSearching" = "Looking for Jellyfin servers…";
+
+/// Search local network
+"serverSearchStart" = "Search local network";
+
+/// Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.
+"serverSearchUnavailable" = "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.";
 
 /// Server URL
 "serverURL" = "Server URL";
@@ -2877,23 +2934,3 @@
 
 /// Yes
 "yes" = "Yes";
-// Server discovery and alternate addresses
-"serverLookingForSaved" = "Looking for your server…";
-"serverSavedList" = "Saved servers";
-"serverSavedHelp" = "Your accounts and settings are saved. Select a server to retry its saved addresses, including a Tailscale address if you added one.";
-"serverManualOptional" = "Enter address manually";
-"serverManualHelp" = "Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.";
-"serverSearching" = "Looking for Jellyfin servers…";
-"serverSearchUnavailable" = "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.";
-"serverSearchEmpty" = "No servers replied. Check that your server is running and connected to the same network, or enter its address manually.";
-"serverSearchAgain" = "Search again";
-"serverSearchStart" = "Search local network";
-"serverPermissionHelp" = "Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.";
-"serverOpenSettings" = "Open Settings";
-"serverAlternateOptional" = "Add alternate address (optional)";
-"serverAlternatePlaceholder" = "IP address or MagicDNS name";
-"serverAlternateHelp" = "Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.";
-"serverAlternateSave" = "Save alternate address";
-"serverInvalidAddress" = "Enter a valid IP address or server URL. Use brackets around IPv6 addresses.";
-"serverIdentityMismatch" = "This address belongs to a different Jellyfin server. The saved server was not changed.";
-"serverSavedMissing" = "Unable to find the saved server.";
