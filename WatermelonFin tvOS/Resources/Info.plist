@@ -51,7 +51,7 @@
 		<true/>
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>WatermelonFin 需要本地网络权限来发现并连接你的 Jellyfin 媒体服务器。</string>
+	<string>Connect to your Jellyfin server on your local network.</string>
 	<key>UIDesignRequiresCompatibility</key>
 	<true/>
 	<key>UILaunchScreen</key>

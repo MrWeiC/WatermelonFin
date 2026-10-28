@@ -944,8 +944,8 @@ internal enum L10n {
   internal static let local = L10n.tr("Localizable", "local", fallback: "Local")
   /// Local servers
   internal static let localServers = L10n.tr("Localizable", "localServers", fallback: "Local servers")
-  /// Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.
-  internal static let localServersDescription = L10n.tr("Localizable", "localServersDescription", fallback: "Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.")
+  /// Automatic discovery is unavailable in this version. Enter your server address to connect.
+  internal static let localServersDescription = L10n.tr("Localizable", "localServersDescription", fallback: "Automatic discovery is unavailable in this version. Enter your server address to connect.")
   /// Lock all fields
   internal static let lockAllFields = L10n.tr("Localizable", "lockAllFields", fallback: "Lock all fields")
   /// Locked fields
@@ -978,8 +978,8 @@ internal enum L10n {
   internal static let manualPlaylistsFolders = L10n.tr("Localizable", "manualPlaylistsFolders", fallback: "Manual playlists folders")
   /// Manual address
   internal static let manualServerAddress = L10n.tr("Localizable", "manualServerAddress", fallback: "Manual address")
-  /// Use this only when local discovery cannot find your server. WatermelonFin remembers the server ID and can update future address changes automatically.
-  internal static let manualServerAddressDescription = L10n.tr("Localizable", "manualServerAddressDescription", fallback: "Use this only when local discovery cannot find your server. WatermelonFin remembers the server ID and can update future address changes automatically.")
+  /// Enter your Jellyfin server address. If the address changes, add the new address to the saved server.
+  internal static let manualServerAddressDescription = L10n.tr("Localizable", "manualServerAddressDescription", fallback: "Enter your Jellyfin server address. If the address changes, add the new address to the saved server.")
   /// Mark unwatched
   internal static let markUnwatched = L10n.tr("Localizable", "markUnwatched", fallback: "Mark unwatched")
   /// Mark watched
@@ -1538,8 +1538,8 @@ internal enum L10n {
   internal static let save = L10n.tr("Localizable", "save", fallback: "Save")
   /// Saved addresses
   internal static let savedServerAddresses = L10n.tr("Localizable", "savedServerAddresses", fallback: "Saved addresses")
-  /// Saved addresses include every URL WatermelonFin has used for this server. If local discovery finds this server at a new IP, WatermelonFin saves it and switches automatically.
-  internal static let savedServerAddressesDescription = L10n.tr("Localizable", "savedServerAddressesDescription", fallback: "Saved addresses include every URL WatermelonFin has used for this server. If local discovery finds this server at a new IP, WatermelonFin saves it and switches automatically.")
+  /// WatermelonFin tries your saved addresses when a connection fails. If your server moves to an unknown address, add the new address here.
+  internal static let savedServerAddressesDescription = L10n.tr("Localizable", "savedServerAddressesDescription", fallback: "WatermelonFin tries your saved addresses when a connection fails. If your server moves to an unknown address, add the new address here.")
   /// Save the user to this device without any local authentication.
   internal static let saveUserWithoutAuthDescription = L10n.tr("Localizable", "saveUserWithoutAuthDescription", fallback: "Save the user to this device without any local authentication.")
   /// Scan for new and update files
@@ -1638,8 +1638,8 @@ internal enum L10n {
   internal static let serverInvalidAddress = L10n.tr("Localizable", "serverInvalidAddress", fallback: "Enter a valid IP address or server URL. Use brackets around IPv6 addresses.")
   /// Server logs
   internal static let serverLogs = L10n.tr("Localizable", "serverLogs", fallback: "Server logs")
-  /// Looking for your server…
-  internal static let serverLookingForSaved = L10n.tr("Localizable", "serverLookingForSaved", fallback: "Looking for your server…")
+  /// Trying saved addresses…
+  internal static let serverLookingForSaved = L10n.tr("Localizable", "serverLookingForSaved", fallback: "Trying saved addresses…")
   /// Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.
   internal static let serverManualHelp = L10n.tr("Localizable", "serverManualHelp", fallback: "Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.")
   /// Enter address manually
@@ -1650,8 +1650,8 @@ internal enum L10n {
   }
   /// Open Settings
   internal static let serverOpenSettings = L10n.tr("Localizable", "serverOpenSettings", fallback: "Open Settings")
-  /// Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.
-  internal static let serverPermissionHelp = L10n.tr("Localizable", "serverPermissionHelp", fallback: "Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.")
+  /// Connecting to a server on your local network requires Local Network access. Allow access when prompted.
+  internal static let serverPermissionHelp = L10n.tr("Localizable", "serverPermissionHelp", fallback: "Connecting to a server on your local network requires Local Network access. Allow access when prompted.")
   /// Servers
   internal static let servers = L10n.tr("Localizable", "servers", fallback: "Servers")
   /// Your accounts and settings are saved. Select a server to retry its saved addresses, including a Tailscale address if you added one.
@@ -1660,6 +1660,8 @@ internal enum L10n {
   internal static let serverSavedList = L10n.tr("Localizable", "serverSavedList", fallback: "Saved servers")
   /// Unable to find the saved server.
   internal static let serverSavedMissing = L10n.tr("Localizable", "serverSavedMissing", fallback: "Unable to find the saved server.")
+  /// Unable to connect using your saved addresses. Check that your server is running, or enter its new address. Your accounts and settings are saved. Tailscale is optional.
+  internal static let serverSavedUnavailable = L10n.tr("Localizable", "serverSavedUnavailable", fallback: "Unable to connect using your saved addresses. Check that your server is running, or enter its new address. Your accounts and settings are saved. Tailscale is optional.")
   /// Search again
   internal static let serverSearchAgain = L10n.tr("Localizable", "serverSearchAgain", fallback: "Search again")
   /// No servers replied. Check that your server is running and connected to the same network, or enter its address manually.
@@ -1668,8 +1670,8 @@ internal enum L10n {
   internal static let serverSearching = L10n.tr("Localizable", "serverSearching", fallback: "Looking for Jellyfin servers…")
   /// Search local network
   internal static let serverSearchStart = L10n.tr("Localizable", "serverSearchStart", fallback: "Search local network")
-  /// Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.
-  internal static let serverSearchUnavailable = L10n.tr("Localizable", "serverSearchUnavailable", fallback: "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.")
+  /// Automatic discovery is unavailable in this version. Enter your server address to connect.
+  internal static let serverSearchUnavailable = L10n.tr("Localizable", "serverSearchUnavailable", fallback: "Automatic discovery is unavailable in this version. Enter your server address to connect.")
   /// Server URL
   internal static let serverURL = L10n.tr("Localizable", "serverURL", fallback: "Server URL")
   /// WatermelonFin requires Jellyfin version %@ or higher.

@@ -406,17 +406,20 @@
 "deselectAll" = "取消全選";
 
 // Server discovery and alternate addresses
-"serverLookingForSaved" = "正在尋找你的伺服器…";
+/// 正在嘗試已儲存的位址…
+"serverLookingForSaved" = "正在嘗試已儲存的位址…";
 "serverSavedList" = "已儲存的伺服器";
 "serverSavedHelp" = "帳號和設定已保留。選擇伺服器可重試已儲存的位址；只有你新增過 Tailscale 位址時才會嘗試該位址。";
 "serverManualOptional" = "手動輸入位址";
 "serverManualHelp" = "輸入 IP 位址或主機名稱即可，預設使用 8096 連接埠。如使用其他連接埠或 HTTPS，請填寫完整位址。Tailscale 為選填項目，可稍後在伺服器設定中新增。";
 "serverSearching" = "正在搜尋 Jellyfin 伺服器…";
-"serverSearchUnavailable" = "暫時無法搜尋區域網路。請檢查系統設定中的本機網路存取權限，也可以手動輸入位址。";
+/// 此版本暫不支援自動探索。請輸入伺服器位址進行連線。
+"serverSearchUnavailable" = "此版本暫不支援自動探索。請輸入伺服器位址進行連線。";
 "serverSearchEmpty" = "未收到伺服器回應。請確認伺服器正在執行且連接同一網路，也可以手動輸入位址。";
 "serverSearchAgain" = "重新搜尋";
 "serverSearchStart" = "搜尋區域網路伺服器";
-"serverPermissionHelp" = "搜尋需要存取本機網路以尋找 Jellyfin 伺服器。系統詢問時，請允許「本機網路」存取。你也可以直接手動輸入位址。";
+/// 連線至本機網路中的伺服器需要本機網路存取權限。出現提示時，請允許存取。
+"serverPermissionHelp" = "連線至本機網路中的伺服器需要本機網路存取權限。出現提示時，請允許存取。";
 "serverOpenSettings" = "開啟系統設定";
 "serverAlternateOptional" = "新增備用位址（選填）";
 "serverAlternatePlaceholder" = "IP 位址或 MagicDNS 名稱";
@@ -425,3 +428,13 @@
 "serverInvalidAddress" = "請輸入有效的 IP 位址或伺服器 URL。IPv6 位址請使用方括號。";
 "serverIdentityMismatch" = "此位址屬於另一台 Jellyfin 伺服器，已儲存的伺服器未更改。";
 "serverSavedMissing" = "找不到已儲存的伺服器。";
+
+"localServersDescription" = "此版本暫不支援自動探索。請輸入伺服器位址進行連線。";
+
+"manualServerAddressDescription" = "輸入 Jellyfin 伺服器位址。如果位址變更，請為已儲存的伺服器新增位址。";
+
+"savedServerAddressesDescription" = "連線失敗時，WatermelonFin 會嘗試已儲存的位址。如果伺服器改用尚未儲存的位址，請在這裡新增位址。";
+
+"serverSavedUnavailable" = "無法透過已儲存的位址連線。請確認伺服器正在執行，或輸入它的新位址。你的帳號和設定已保留。Tailscale 為選填項目。";
+
+"manualServerAddress" = "伺服器位址";

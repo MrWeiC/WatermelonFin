@@ -14,6 +14,10 @@ import UDPBroadcast
 
 class ServerDiscovery {
 
+    /// Enable only in a future release after Apple's multicast approval,
+    /// provisioning updates, and physical-device discovery validation.
+    static let isEnabled = false
+
     private let logger = Logger.watermelonfin()
 
     private var connection: UDPBroadcastConnection?
@@ -43,6 +47,7 @@ class ServerDiscovery {
     private var discoveredServersPublisher = PassthroughSubject<ServerResponse, Never>()
 
     func broadcast() {
+        guard Self.isEnabled else { return }
         do {
             if connection == nil { try open() }
             try connection?.sendBroadcast("Who is JellyfinServer?")
