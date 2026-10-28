@@ -38,6 +38,13 @@ final class RootCoordinator: ObservableObject {
                         )
                     }
 
+                    guard isServerReachable else {
+                        // Keep credentials and all saved addresses. Present discovery
+                        // instead of starting authenticated requests at an unverified IP.
+                        root(.selectUser)
+                        return
+                    }
+
                     // Recovery may have replaced the cached session with one
                     // targeting the new address. Validate the saved token on
                     // that refreshed session before showing authenticated UI.
@@ -114,16 +121,37 @@ final class RootCoordinator: ObservableObject {
 
     @objc
     func didChangeCurrentServerURL(_ notification: Notification) {
+        guard let changedServer = notification.userInfo?["payload"] as? ServerState,
+              let currentSession = Container.shared.currentUserSession(),
+              ServerIdentityPolicy.matches(expected: currentSession.server.id, reported: changedServer.id)
+        else { return }
 
-        guard Container.shared.currentUserSession() != nil else { return }
+        // Startup owns token validation and the final root transition.
+        if root.id == RootItem.appLoading.id {
+            Container.shared.currentUserSession.reset()
+            return
+        }
 
-        Container.shared.currentUserSession.reset()
+        let userID = currentSession.user.id
+        Task { @MainActor [weak self] in
+            guard let self,
+                  await ServerAddressRecoveryService.shared.refreshAddressIfNeeded(
+                      serverID: changedServer.id, currentURL: changedServer.currentURL
+                  ),
+                  let activeSession = Container.shared.currentUserSession(),
+                  activeSession.user.id == userID,
+                  activeSession.server.id == changedServer.id
+            else { return }
 
-        // Startup owns the transition out of appLoading so it can validate
-        // the saved token before authenticated views are constructed.
-        guard root.id != RootItem.appLoading.id else { return }
-
-        Notifications[.didSignIn].post()
+            Container.shared.currentUserSession.reset()
+            guard let refreshedSession = Container.shared.currentUserSession(),
+                  await self.validateSavedSession(refreshedSession),
+                  let stillActiveSession = Container.shared.currentUserSession(),
+                  stillActiveSession.user.id == userID,
+                  stillActiveSession.server.id == changedServer.id
+            else { return }
+            Notifications[.didSignIn].post()
+        }
     }
 
     @objc
@@ -146,6 +174,12 @@ final class RootCoordinator: ObservableObject {
         } catch APIError.unacceptableStatusCode(401) {
             logger.warning("Saved Jellyfin access token is no longer valid")
             session.user.removeAccessToken()
+            // A delayed rejection for a previous user/server must not sign out
+            // the session selected while this request was in flight.
+            guard let activeSession = Container.shared.currentUserSession(),
+                  activeSession.user.id == session.user.id,
+                  activeSession.server.id == session.server.id
+            else { return false }
             Defaults[.lastSignedInUserID] = .signedOut
             Container.shared.currentUserSession.reset()
             Notifications[.didSignOut].post()

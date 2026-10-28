@@ -46,51 +46,68 @@ final class ConnectToServerViewModel: ViewModel {
         case initial
     }
 
-    /// no longer-found servers are not cleared, but not an issue
     @Published
     var localServers: OrderedSet<ServerState> = []
-
+    @Published
+    private(set) var isSearching = false
     @Published
     private(set) var storedServersByID: [String: ServerState] = [:]
 
-    private let discovery = ServerDiscovery()
-    private var discoveryTask: Task<Void, Never>?
+    @Published
+    private(set) var discoveryFailed = false
+    @Published
+    private(set) var isRecovering = false
+    private var recoveryTask: Task<Void, Never>?
+    private var failureSubscription: AnyCancellable?
+    private let connectionSessionConfiguration: URLSessionConfiguration
+    private var discovery: ServerDiscovery?
+    private var discoverySubscription: AnyCancellable?
+    private var searchTask: Task<Void, Never>?
 
     deinit {
-        discoveryTask?.cancel()
-        discovery.close()
+        searchTask?.cancel()
+        recoveryTask?.cancel()
+        discovery?.close()
     }
 
     override init() {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = 3
+        configuration.timeoutIntervalForResource = 4
+        connectionSessionConfiguration = configuration
         super.init()
-
         Task { @MainActor [weak self] in
             self?.refreshStoredServers()
         }
+    }
 
-        discoveryTask = Task { @MainActor [weak self] in
-            guard let self else { return }
+    init(sessionConfiguration: URLSessionConfiguration) {
+        connectionSessionConfiguration = sessionConfiguration
+        super.init()
+        Task { @MainActor [weak self] in self?.refreshStoredServers() }
+    }
 
-            for await response in self.discovery.discoveredServers.values {
-                if let serverState = response.asServerState {
-                    if let previousAddress = self.localServers.first(where: { $0.id == serverState.id }) {
-                        self.localServers.remove(previousAddress)
-                    }
-                    self.localServers.append(serverState)
-                }
-            }
-        }
+    func stopSearching() {
+        searchTask?.cancel()
+        searchTask = nil
+        discoverySubscription?.cancel()
+        discoverySubscription = nil
+        failureSubscription?.cancel()
+        failureSubscription = nil
+        discovery?.close()
+        discovery = nil
+        isSearching = false
     }
 
     @Function(\Action.Cases.connect)
-    private func connectToServer(_ url: String) async throws {
+    private func connectToServer(_ input: String) async throws {
+        try await performConnection(input, expectedServerID: nil)
+    }
 
-        let formattedURL = url.trimmingCharacters(in: .whitespacesAndNewlines)
-            .trimmingCharacters(in: .objectReplacement)
-            .trimmingCharacters(in: ["/"])
-            .prepending("http://", if: !url.contains("://"))
-
-        guard let url = URL(string: formattedURL) else { throw ErrorMessage("Invalid URL") }
+    private func performConnection(_ input: String, expectedServerID: String?) async throws {
+        let url: URL
+        do { url = try ServerAddressInput.url(from: input) }
+        catch { throw ErrorMessage("Enter a valid IP address or server URL. Use brackets around IPv6 addresses.") }
 
         // Validate IP address format if host looks like an IP
         if let host = url.host, host.looksLikeIPv4Address, !host.isValidIPv4Address {
@@ -104,6 +121,7 @@ final class ConnectToServerViewModel: ViewModel {
 
         let client = JellyfinClient.watermelonfinClient(
             configuration: .watermelonfinConfiguration(url: url),
+            sessionConfiguration: connectionSessionConfiguration,
             sessionDelegate: URLSessionProxyDelegate(logger: NetworkLogger.watermelonfin())
         )
 
@@ -114,6 +132,12 @@ final class ConnectToServerViewModel: ViewModel {
         else {
             logger.critical("Missing server data from network call")
             throw ErrorMessage(L10n.unknownError)
+        }
+
+        if let expectedServerID,
+           !ServerIdentityPolicy.matches(expected: expectedServerID, reported: id)
+        {
+            throw ErrorMessage("This address belongs to a different Jellyfin server. The saved server was not changed.")
         }
 
         let connectionURL = processConnectionURL(
@@ -236,14 +260,65 @@ final class ConnectToServerViewModel: ViewModel {
 
     /// server has same id, but (possible) new URL
     @Function(\Action.Cases.addNewURL)
-    private func _addNewURL(_ server: ServerState) throws {
-        let existingServer = existingServer(for: server) ?? server
-        let newState = try updateStoredAddress(for: existingServer, discoveredServer: server)
-        events.send(.connected(newState))
+    private func _addNewURL(_ server: ServerState) async throws {
+        // Re-query the endpoint instead of trusting discovery-provided identity.
+        try await performConnection(server.currentURL.absoluteString, expectedServerID: server.id)
+    }
+
+    func retrySavedServer(_ server: ServerState) {
+        guard !isRecovering else { return }
+        isRecovering = true
+        recoveryTask = Task { @MainActor [weak self] in
+            let reachable = await ServerAddressRecoveryService.shared.refreshAddressIfNeeded(
+                serverID: server.id, currentURL: server.currentURL
+            )
+            guard !Task.isCancelled, let self else { return }
+            self.isRecovering = false
+            self.refreshStoredServers()
+            if reachable, let updated = self.storedServersByID[server.id] {
+                self.events.send(.connected(updated))
+            } else {
+                self
+                    .error =
+                    ErrorMessage(
+                        "Your server is unavailable. Check its connection or add its Tailscale address. Your saved accounts have been kept."
+                    )
+            }
+        }
     }
 
     @Function(\Action.Cases.searchForServers)
     private func _searchForServers() {
+        stopSearching()
+        localServers.removeAll()
+        refreshStoredServers()
+        isSearching = true
+        discoveryFailed = false
+        let discovery = ServerDiscovery()
+        self.discovery = discovery
+        // Subscribe synchronously before the first broadcast; weak capture avoids
+        // the long-lived async-sequence task retaining the whole view model.
+        discoverySubscription = discovery.discoveredServers.sink { [weak self] response in
+            guard let self, let server = response.asServerState else { return }
+            if let previous = self.localServers.first(where: { $0.id == server.id }) {
+                self.localServers.remove(previous)
+            }
+            self.localServers.append(server)
+        }
+        failureSubscription = discovery.failures.sink { [weak self] in
+            self?.discoveryFailed = true
+            self?.stopSearching()
+        }
         discovery.broadcast()
+        searchTask = Task { @MainActor [weak self] in
+            do {
+                for _ in 0 ..< 3 {
+                    try await Task.sleep(for: .seconds(2))
+                    self?.discovery?.broadcast()
+                }
+                try await Task.sleep(for: .seconds(2))
+                self?.stopSearching()
+            } catch {}
+        }
     }
 }

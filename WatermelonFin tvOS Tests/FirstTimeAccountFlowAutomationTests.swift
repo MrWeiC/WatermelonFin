@@ -71,7 +71,7 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
         let server = ServerState(
             urls: [originalURL],
             currentURL: originalURL,
-            name: "HermesMediaServer",
+            name: "Test Jellyfin Server",
             id: "test-server-id",
             usersIDs: []
         )
@@ -101,6 +101,41 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
         XCTAssertTrue(updatedServer.urls.contains(rediscoveredURL))
     }
 
+    func testDiscoveredAddressWithWrongIdentityDoesNotUpdateSavedServer() async throws {
+        await prepareDataStack()
+        try await resetLocalState()
+        defer { try? deleteStoredUsersAndServers() }
+        let originalURL = try XCTUnwrap(URL(string: "http://192.0.2.20:8096"))
+        let candidateURL = try XCTUnwrap(URL(string: "http://192.0.2.21:8096"))
+        try WatermelonFinStore.dataStack.perform { transaction in
+            let stored = transaction.create(Into<ServerModel>())
+            stored.id = "expected-server"
+            stored.name = "Saved server"
+            stored.currentURL = originalURL
+            stored.urls = [originalURL]
+            stored.users = []
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [DiscoveryPublicInfoProtocol.self]
+        configuration.httpAdditionalHeaders = ["X-Test-Server-ID": "different-server"]
+        let viewModel = ConnectToServerViewModel(sessionConfiguration: configuration)
+        let rejected = expectation(description: "wrong server identity rejected")
+        viewModel.$error.compactMap { $0 }.prefix(1).sink { _ in rejected.fulfill() }.store(in: &cancellables)
+        let candidate = ServerState(
+            urls: [candidateURL],
+            currentURL: candidateURL,
+            name: "Saved server",
+            id: "expected-server",
+            usersIDs: []
+        )
+        await viewModel.addNewURL(serverState: candidate)
+        await fulfillment(of: [rejected], timeout: 5)
+        let stored = try XCTUnwrap(try WatermelonFinStore.dataStack.fetchOne(From<ServerModel>().where(\.$id == "expected-server")))
+        XCTAssertEqual(stored.currentURL, originalURL)
+        XCTAssertEqual(stored.urls, [originalURL])
+        XCTAssertEqual(try WatermelonFinStore.dataStack.fetchAll(From<ServerModel>()).count, 1)
+    }
+
     private func loadCredentials() throws -> Credentials {
         let environment = ProcessInfo.processInfo.environment
 
@@ -116,11 +151,17 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
             )
         }
 
-        let serverURLString = environment["WATERMELONFIN_AUTOMATION_SERVER_URL"] ??
-            defaults.string(forKey: "WATERMELONFIN_AUTOMATION_SERVER_URL") ??
-            "http://192.168.86.88:8096"
-        guard let serverURL = URL(string: serverURLString) else {
-            throw XCTSkip("WATERMELONFIN_AUTOMATION_SERVER_URL is not a valid URL.")
+        guard let serverURLString = environment["WATERMELONFIN_AUTOMATION_SERVER_URL"] ??
+            defaults.string(forKey: "WATERMELONFIN_AUTOMATION_SERVER_URL"),
+            !serverURLString.isEmpty
+        else {
+            throw XCTSkip("Set WATERMELONFIN_AUTOMATION_SERVER_URL to an explicitly configured test server.")
+        }
+        guard let serverURL = URL(string: serverURLString),
+              ["http", "https"].contains(serverURL.scheme?.lowercased() ?? ""),
+              serverURL.host != nil
+        else {
+            throw XCTSkip("WATERMELONFIN_AUTOMATION_SERVER_URL is not a valid HTTP(S) URL.")
         }
 
         return Credentials(
@@ -229,7 +270,11 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
     }
 
     private func applyDiscoveredAddress(_ server: ServerState) async throws -> ServerState {
-        let viewModel = ConnectToServerViewModel()
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [DiscoveryPublicInfoProtocol.self]
+        configuration.httpAdditionalHeaders = ["X-Test-Server-ID": server.id]
+        configuration.timeoutIntervalForResource = 4
+        let viewModel = ConnectToServerViewModel(sessionConfiguration: configuration)
         let connected = expectation(description: "discovered address connected")
         let notified = expectation(description: "current server URL changed")
 
@@ -375,6 +420,10 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
                 case .expiredSession:
                     unexpectedFailure = "Expected the saved Jellyfin token to remain valid."
                     signedIn.fulfill()
+                case .discoverServers:
+                    // Discovery presentation is handled by the app UI. This
+                    // helper waits only for the saved-account sign-in result.
+                    break
                 }
             }
             .store(in: &cancellables)
@@ -418,4 +467,38 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
         _ = try await session.client.send(Paths.getResumeItems(parameters: resumeParameters))
         _ = try await session.client.send(Paths.getItemsByUserID(userID: session.user.id, parameters: itemParameters))
     }
+}
+
+/// Only intercepts reserved documentation addresses; live configured endpoints
+/// keep using the actual network. Every mocked response still passes through
+/// the real HTTP decoding and Server ID verification path.
+private final class DiscoveryPublicInfoProtocol: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool {
+        request.url?.host?.hasPrefix("192.0.2.") == true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        request
+    }
+
+    override func startLoading() {
+        guard let url = request.url,
+              let response = HTTPURLResponse(
+                  url: url,
+                  statusCode: 200,
+                  httpVersion: nil,
+                  headerFields: ["Content-Type": "application/json"]
+              )
+        else { return }
+        let data = try! JSONSerialization.data(withJSONObject: [
+            "Id": request.value(forHTTPHeaderField: "X-Test-Server-ID") ?? "test-server-id",
+            "ServerName": "Test Jellyfin Server",
+            "Version": "10.10.0",
+        ])
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocol(self, didLoad: data)
+        client?.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
 }

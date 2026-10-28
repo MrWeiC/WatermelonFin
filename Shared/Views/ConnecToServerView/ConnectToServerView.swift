@@ -33,7 +33,8 @@ struct ConnectToServerView: View {
     @State
     private var url: String = ""
 
-    private let timer = Timer.publish(every: 12, on: .main, in: .common).autoconnect()
+    @Environment(\.scenePhase)
+    private var scenePhase
 
     private var canConnectManually: Bool {
         url.trimmingCharacters(in: .whitespacesAndNewlines).isNotEmpty
@@ -104,9 +105,23 @@ struct ConnectToServerView: View {
         }
     }
 
-    private var connectSection: some View {
-        Section(L10n.connectToServer) {
-            manualAddressFields
+    private var savedServersSection: some View {
+        Section {
+            ForEach(viewModel.storedServersByID.values.sorted { $0.name < $1.name }) { server in
+                Button {
+                    viewModel.retrySavedServer(server)
+                } label: {
+                    Label(server.name, systemImage: "server.rack")
+                }
+                .disabled(viewModel.state == .connecting || viewModel.isRecovering)
+            }
+            if viewModel.isRecovering { ProgressView("Looking for your server…") }
+        } header: {
+            if !viewModel.storedServersByID.isEmpty { Text("Saved servers") }
+        } footer: {
+            if !viewModel.storedServersByID.isEmpty {
+                Text("Your accounts and settings are saved. Select a server to retry its local and saved Tailscale addresses.")
+            }
         }
     }
 
@@ -118,7 +133,8 @@ struct ConnectToServerView: View {
                 Button {
                     isShowingManualAddress = true
                 } label: {
-                    Label(L10n.enterServerAddressManually, systemImage: "keyboard")
+                    Label("Enter address manually (optional)", systemImage: "keyboard")
+                        .accessibilityIdentifier("server.manualAddress")
                         .font(.headline)
                         .frame(maxWidth: .infinity, minHeight: 64)
                 }
@@ -127,7 +143,9 @@ struct ConnectToServerView: View {
         } header: {
             Text(L10n.manualServerAddress)
         } footer: {
-            Text(L10n.manualServerAddressDescription)
+            Text(
+                "Local servers are usually found automatically. Tailscale is optional. To use it, enter its IP or MagicDNS name once and connect this device to Tailscale. Port 8096 is automatic for a bare address. Include a custom port or a complete HTTPS URL when needed."
+            )
         }
     }
 
@@ -135,8 +153,14 @@ struct ConnectToServerView: View {
 
     private var localServersSection: some View {
         Section {
-            if viewModel.localServers.isEmpty {
-                Text(L10n.noLocalServersFound)
+            if viewModel.isSearching {
+                ProgressView("Looking for Jellyfin servers…")
+                    .accessibilityIdentifier("server.searching")
+            }
+            if viewModel.localServers.isEmpty && !viewModel.isSearching {
+                Text(viewModel
+                    .discoveryFailed ? "Unable to search this network. Check local network access in Settings, then try again." :
+                    "No servers replied. Check that your server is running and connected to the same network.")
                     .font(.callout)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity)
@@ -151,6 +175,11 @@ struct ConnectToServerView: View {
                     }
                 }
             }
+            Button("Search again", systemImage: "arrow.clockwise") {
+                viewModel.searchForServers()
+            }
+            .disabled(viewModel.isSearching || viewModel.state == .connecting)
+            .accessibilityIdentifier("server.searchAgain")
         } header: {
             Text(L10n.localServers)
         } footer: {
@@ -162,9 +191,11 @@ struct ConnectToServerView: View {
     private var contentView: some View {
         #if os(iOS)
         List {
-            connectSection
-
             localServersSection
+
+            savedServersSection
+
+            manualAddressSection
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarCloseButton(disabled: viewModel.state == .connecting) {
@@ -176,6 +207,7 @@ struct ConnectToServerView: View {
         ) {
             localServersSection
         } trailingContentView: {
+            savedServersSection
             manualAddressSection
         }
         #endif
@@ -188,9 +220,6 @@ struct ConnectToServerView: View {
             .navigationTitle(L10n.connect)
             .interactiveDismissDisabled(viewModel.state == .connecting)
             .onFirstAppear {
-                #if os(iOS)
-                isURLFocused = true
-                #endif
                 viewModel.searchForServers()
             }
             .onChange(of: isShowingManualAddress) { _, newValue in
@@ -199,9 +228,10 @@ struct ConnectToServerView: View {
                     isURLFocused = true
                 }
             }
-            .onReceive(timer) { _ in
-                guard viewModel.state != .connecting else { return }
-                viewModel.searchForServers()
+            .onDisappear { viewModel.stopSearching() }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active, viewModel.state != .connecting { viewModel.searchForServers() }
+                else if phase != .active { viewModel.stopSearching() }
             }
             .onReceive(viewModel.events, perform: onEvent)
             .onReceive(viewModel.$error) { error in

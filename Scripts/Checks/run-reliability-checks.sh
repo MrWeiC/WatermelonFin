@@ -20,3 +20,7 @@ swiftc -module-cache-path "$check_dir/modules" -parse-as-library \
 swiftc -module-cache-path "$check_dir/modules" -parse-as-library \
   Shared/Objects/LocalPINPolicy.swift Scripts/Checks/LocalPINPolicyTests.swift -o "$check_dir/pin"
 "$check_dir/pin"
+
+swiftc -module-cache-path "$check_dir/modules" -parse-as-library \
+  Shared/ServerDiscovery/ServerAddressInput.swift Scripts/Checks/ServerAddressPolicyTests.swift -o "$check_dir/server-address"
+"$check_dir/server-address"
