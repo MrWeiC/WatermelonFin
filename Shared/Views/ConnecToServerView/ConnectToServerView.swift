@@ -25,6 +25,12 @@ struct ConnectToServerView: View {
     private var viewModel = ConnectToServerViewModel()
 
     @State
+    private var hasRequestedSearch = false
+
+    @Environment(\.openURL)
+    private var openURL
+
+    @State
     private var duplicateServer: ServerState? = nil
     @State
     private var isShowingManualAddress: Bool = false
@@ -115,12 +121,12 @@ struct ConnectToServerView: View {
                 }
                 .disabled(viewModel.state == .connecting || viewModel.isRecovering)
             }
-            if viewModel.isRecovering { ProgressView("Looking for your server…") }
+            if viewModel.isRecovering { ProgressView(L10n.serverLookingForSaved) }
         } header: {
-            if !viewModel.storedServersByID.isEmpty { Text("Saved servers") }
+            if !viewModel.storedServersByID.isEmpty { Text(L10n.serverSavedList) }
         } footer: {
             if !viewModel.storedServersByID.isEmpty {
-                Text("Your accounts and settings are saved. Select a server to retry its local and saved Tailscale addresses.")
+                Text(L10n.serverSavedHelp)
             }
         }
     }
@@ -133,7 +139,7 @@ struct ConnectToServerView: View {
                 Button {
                     isShowingManualAddress = true
                 } label: {
-                    Label("Enter address manually (optional)", systemImage: "keyboard")
+                    Label(L10n.serverManualOptional, systemImage: "keyboard")
                         .accessibilityIdentifier("server.manualAddress")
                         .font(.headline)
                         .frame(maxWidth: .infinity, minHeight: 64)
@@ -144,7 +150,7 @@ struct ConnectToServerView: View {
             Text(L10n.manualServerAddress)
         } footer: {
             Text(
-                "Local servers are usually found automatically. Tailscale is optional. To use it, enter its IP or MagicDNS name once and connect this device to Tailscale. Port 8096 is automatic for a bare address. Include a custom port or a complete HTTPS URL when needed."
+                L10n.serverManualHelp
             )
         }
     }
@@ -154,13 +160,17 @@ struct ConnectToServerView: View {
     private var localServersSection: some View {
         Section {
             if viewModel.isSearching {
-                ProgressView("Looking for Jellyfin servers…")
+                ProgressView(L10n.serverSearching)
                     .accessibilityIdentifier("server.searching")
             }
-            if viewModel.localServers.isEmpty && !viewModel.isSearching {
+            if !hasRequestedSearch {
+                Text(L10n.serverPermissionHelp)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            } else if viewModel.localServers.isEmpty && !viewModel.isSearching {
                 Text(viewModel
-                    .discoveryFailed ? "Unable to search this network. Check local network access in Settings, then try again." :
-                    "No servers replied. Check that your server is running and connected to the same network.")
+                    .discoveryFailed ? L10n.serverSearchUnavailable :
+                    L10n.serverSearchEmpty)
                     .font(.callout)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity)
@@ -175,7 +185,15 @@ struct ConnectToServerView: View {
                     }
                 }
             }
-            Button("Search again", systemImage: "arrow.clockwise") {
+            #if os(iOS)
+            if viewModel.discoveryFailed {
+                Button(L10n.serverOpenSettings) {
+                    if let settings = URL(string: UIApplication.openSettingsURLString) { openURL(settings) }
+                }
+            }
+            #endif
+            Button(hasRequestedSearch ? L10n.serverSearchAgain : L10n.serverSearchStart, systemImage: "arrow.clockwise") {
+                hasRequestedSearch = true
                 viewModel.searchForServers()
             }
             .disabled(viewModel.isSearching || viewModel.state == .connecting)
@@ -219,9 +237,6 @@ struct ConnectToServerView: View {
         contentView
             .navigationTitle(L10n.connect)
             .interactiveDismissDisabled(viewModel.state == .connecting)
-            .onFirstAppear {
-                viewModel.searchForServers()
-            }
             .onChange(of: isShowingManualAddress) { _, newValue in
                 guard newValue else { return }
                 DispatchQueue.main.async {
@@ -230,7 +245,7 @@ struct ConnectToServerView: View {
             }
             .onDisappear { viewModel.stopSearching() }
             .onChange(of: scenePhase) { _, phase in
-                if phase == .active, viewModel.state != .connecting { viewModel.searchForServers() }
+                if phase == .active, hasRequestedSearch, viewModel.state != .connecting { viewModel.searchForServers() }
                 else if phase != .active { viewModel.stopSearching() }
             }
             .onReceive(viewModel.events, perform: onEvent)

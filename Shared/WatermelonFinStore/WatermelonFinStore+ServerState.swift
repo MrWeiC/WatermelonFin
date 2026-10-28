@@ -88,7 +88,7 @@ extension ServerState {
 
         let publicInfo = try await getPublicSystemInfo()
         guard ServerIdentityPolicy.matches(expected: id, reported: publicInfo.id) else {
-            throw ErrorMessage("The address belongs to a different Jellyfin server.")
+            throw ErrorMessage(L10n.serverIdentityMismatch)
         }
 
         try WatermelonFinStore.dataStack.perform { transaction in

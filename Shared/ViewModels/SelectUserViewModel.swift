@@ -33,9 +33,6 @@ final class SelectUserViewModel: ViewModel {
         case signedIn(UserState)
     }
 
-    private var didOfferInitialDiscovery = false
-    private var previouslyHadServers = false
-
     @Published
     private(set) var servers: OrderedDictionary<ServerState, [UserState]> = [:]
 
@@ -61,15 +58,8 @@ final class SelectUserViewModel: ViewModel {
             }
 
         servers = newServers
-        let becameEmpty = previouslyHadServers && newServers.isEmpty
-        let needsRecovery = newServers.keys.contains {
-            ServerAddressRecoveryService.shared.unavailableServerIDs.contains($0.id)
-        }
-        if (!didOfferInitialDiscovery && (newServers.isEmpty || needsRecovery)) || becameEmpty {
-            events.send(.discoverServers)
-        }
-        didOfferInitialDiscovery = true
-        previouslyHadServers = !newServers.isEmpty
+        // Loading account state must never present UI over the launch animation.
+        // Discovery is entered through Add Server or an explicit failed sign-in.
     }
 
     private func getUsers(for server: ServerState) throws -> [UserState] {
