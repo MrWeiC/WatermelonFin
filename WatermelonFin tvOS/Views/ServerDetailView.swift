@@ -170,21 +170,21 @@ struct EditServerView: View {
 
     private var alternateAddressSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Button("Add alternate address (optional)", systemImage: "plus") {
+            Button(L10n.serverAlternateOptional, systemImage: "plus") {
                 showAlternateAddress.toggle()
             }
             .accessibilityIdentifier("server.addAlternateAddress")
             if showAlternateAddress {
-                TextField("IP address or MagicDNS name", text: $alternateAddress)
+                TextField(L10n.serverAlternatePlaceholder, text: $alternateAddress)
                     .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
                     .keyboardType(.URL)
                 Text(
-                    "Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved."
+                    L10n.serverAlternateHelp
                 )
                 .font(.callout)
                 .foregroundStyle(.secondary)
-                Button("Save alternate address") {
+                Button(L10n.serverAlternateSave) {
                     Task { await viewModel.addAlternateAddress(alternateAddress) }
                 }
                 .disabled(viewModel.isCheckingAddress || alternateAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)

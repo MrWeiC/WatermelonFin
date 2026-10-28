@@ -75,7 +75,7 @@ final class ServerConnectionViewModel: ViewModel {
 
     func addAlternateAddress(_ text: String) async {
         do { try await saveAddress(ServerAddressInput.url(from: text), makeCurrent: false) }
-        catch { self.error = ErrorMessage("Enter a valid IP address or server URL.") }
+        catch { self.error = ErrorMessage(L10n.serverInvalidAddress) }
     }
 
     private func saveAddress(_ url: URL, makeCurrent: Bool) async {
@@ -92,11 +92,11 @@ final class ServerConnectionViewModel: ViewModel {
         do {
             let response = try await client.send(Paths.getPublicSystemInfo)
             guard ServerIdentityPolicy.matches(expected: server.id, reported: response.value.id) else {
-                throw ErrorMessage("This address belongs to a different Jellyfin server. It was not added.")
+                throw ErrorMessage(L10n.serverIdentityMismatch)
             }
             let newState = try dataStack.perform { transaction in
                 guard let storedServer = try transaction.fetchOne(From<ServerModel>().where(\.$id == self.server.id)) else {
-                    throw ErrorMessage("Unable to find the saved server.")
+                    throw ErrorMessage(L10n.serverSavedMissing)
                 }
                 storedServer.urls.insert(url)
                 if makeCurrent { storedServer.currentURL = url }

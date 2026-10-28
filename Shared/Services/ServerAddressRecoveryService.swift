@@ -158,7 +158,7 @@ final class ServerAddressRecoveryService {
                 guard let editServer = try transaction.fetchOne(
                     From<ServerModel>().where(\.$id == discoveredServer.id)
                 ) else {
-                    throw ErrorMessage("Unable to find the saved Jellyfin server")
+                    throw ErrorMessage(L10n.serverSavedMissing)
                 }
 
                 editServer.urls.insert(discoveredServer.currentURL)

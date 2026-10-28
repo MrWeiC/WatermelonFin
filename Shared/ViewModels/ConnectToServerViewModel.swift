@@ -107,7 +107,7 @@ final class ConnectToServerViewModel: ViewModel {
     private func performConnection(_ input: String, expectedServerID: String?) async throws {
         let url: URL
         do { url = try ServerAddressInput.url(from: input) }
-        catch { throw ErrorMessage("Enter a valid IP address or server URL. Use brackets around IPv6 addresses.") }
+        catch { throw ErrorMessage(L10n.serverInvalidAddress) }
 
         // Validate IP address format if host looks like an IP
         if let host = url.host, host.looksLikeIPv4Address, !host.isValidIPv4Address {
@@ -137,7 +137,7 @@ final class ConnectToServerViewModel: ViewModel {
         if let expectedServerID,
            !ServerIdentityPolicy.matches(expected: expectedServerID, reported: id)
         {
-            throw ErrorMessage("This address belongs to a different Jellyfin server. The saved server was not changed.")
+            throw ErrorMessage(L10n.serverIdentityMismatch)
         }
 
         let connectionURL = processConnectionURL(

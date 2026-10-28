@@ -16,8 +16,16 @@ final class FirstRunTests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments = ["-uiTestingSignedOut"]
         app.launch()
+        let addServer = app.buttons["mobile.account.addServer"]
+        XCTAssertTrue(addServer.waitForExistence(timeout: 20))
+        let animation = app.otherElements["mobile.launch.animation"]
+        XCTAssertTrue(animation.waitForNonExistence(timeout: 20))
+        XCTAssertFalse(app.buttons["server.manualAddress"].exists, "Launch must not present server discovery")
+        addServer.tap()
+        XCTAssertTrue(app.buttons["server.searchAgain"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.otherElements["server.searching"].exists, "Discovery must wait for an explicit search")
         let manual = app.buttons["server.manualAddress"]
-        XCTAssertTrue(manual.waitForExistence(timeout: 20), "An unconfigured launch should open discovery automatically")
+        XCTAssertTrue(manual.waitForExistence(timeout: 10))
         manual.tap()
         let address = app.textFields["mobile.server.address"]
         XCTAssertTrue(address.waitForExistence(timeout: 10))

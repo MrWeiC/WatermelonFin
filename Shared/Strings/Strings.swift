@@ -1624,14 +1624,52 @@ internal enum L10n {
   internal static func serverAlreadyExistsPrompt(_ p1: UnsafePointer<CChar>) -> String {
     return L10n.tr("Localizable", "serverAlreadyExistsPrompt", p1, fallback: "Server %s is already added. Use this URL as the current address?")
   }
+  /// Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.
+  internal static let serverAlternateHelp = L10n.tr("Localizable", "serverAlternateHelp", fallback: "Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.")
+  /// Add alternate address (optional)
+  internal static let serverAlternateOptional = L10n.tr("Localizable", "serverAlternateOptional", fallback: "Add alternate address (optional)")
+  /// IP address or MagicDNS name
+  internal static let serverAlternatePlaceholder = L10n.tr("Localizable", "serverAlternatePlaceholder", fallback: "IP address or MagicDNS name")
+  /// Save alternate address
+  internal static let serverAlternateSave = L10n.tr("Localizable", "serverAlternateSave", fallback: "Save alternate address")
+  /// This address belongs to a different Jellyfin server. The saved server was not changed.
+  internal static let serverIdentityMismatch = L10n.tr("Localizable", "serverIdentityMismatch", fallback: "This address belongs to a different Jellyfin server. The saved server was not changed.")
+  /// Enter a valid IP address or server URL. Use brackets around IPv6 addresses.
+  internal static let serverInvalidAddress = L10n.tr("Localizable", "serverInvalidAddress", fallback: "Enter a valid IP address or server URL. Use brackets around IPv6 addresses.")
   /// Server logs
   internal static let serverLogs = L10n.tr("Localizable", "serverLogs", fallback: "Server logs")
+  /// Looking for your server…
+  internal static let serverLookingForSaved = L10n.tr("Localizable", "serverLookingForSaved", fallback: "Looking for your server…")
+  /// Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.
+  internal static let serverManualHelp = L10n.tr("Localizable", "serverManualHelp", fallback: "Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.")
+  /// Enter address manually
+  internal static let serverManualOptional = L10n.tr("Localizable", "serverManualOptional", fallback: "Enter address manually")
   /// Detected a new address for %@: %@. Use this as the current address?
   internal static func serverNewAddressPrompt(_ p1: Any, _ p2: Any) -> String {
     return L10n.tr("Localizable", "serverNewAddressPrompt", String(describing: p1), String(describing: p2), fallback: "Detected a new address for %@: %@. Use this as the current address?")
   }
+  /// Open Settings
+  internal static let serverOpenSettings = L10n.tr("Localizable", "serverOpenSettings", fallback: "Open Settings")
+  /// Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.
+  internal static let serverPermissionHelp = L10n.tr("Localizable", "serverPermissionHelp", fallback: "Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.")
   /// Servers
   internal static let servers = L10n.tr("Localizable", "servers", fallback: "Servers")
+  /// Your accounts and settings are saved. Select a server to retry its saved addresses, including a Tailscale address if you added one.
+  internal static let serverSavedHelp = L10n.tr("Localizable", "serverSavedHelp", fallback: "Your accounts and settings are saved. Select a server to retry its saved addresses, including a Tailscale address if you added one.")
+  /// Saved servers
+  internal static let serverSavedList = L10n.tr("Localizable", "serverSavedList", fallback: "Saved servers")
+  /// Unable to find the saved server.
+  internal static let serverSavedMissing = L10n.tr("Localizable", "serverSavedMissing", fallback: "Unable to find the saved server.")
+  /// Search again
+  internal static let serverSearchAgain = L10n.tr("Localizable", "serverSearchAgain", fallback: "Search again")
+  /// No servers replied. Check that your server is running and connected to the same network, or enter its address manually.
+  internal static let serverSearchEmpty = L10n.tr("Localizable", "serverSearchEmpty", fallback: "No servers replied. Check that your server is running and connected to the same network, or enter its address manually.")
+  /// Looking for Jellyfin servers…
+  internal static let serverSearching = L10n.tr("Localizable", "serverSearching", fallback: "Looking for Jellyfin servers…")
+  /// Search local network
+  internal static let serverSearchStart = L10n.tr("Localizable", "serverSearchStart", fallback: "Search local network")
+  /// Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.
+  internal static let serverSearchUnavailable = L10n.tr("Localizable", "serverSearchUnavailable", fallback: "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.")
   /// Server URL
   internal static let serverURL = L10n.tr("Localizable", "serverURL", fallback: "Server URL")
   /// WatermelonFin requires Jellyfin version %@ or higher.
