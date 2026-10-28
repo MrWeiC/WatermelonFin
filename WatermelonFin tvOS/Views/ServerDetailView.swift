@@ -179,9 +179,11 @@ struct EditServerView: View {
                     .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
                     .keyboardType(.URL)
-                Text("Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+                Text(
+                    "Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved."
+                )
+                .font(.callout)
+                .foregroundStyle(.secondary)
                 Button("Save alternate address") {
                     Task { await viewModel.addAlternateAddress(alternateAddress) }
                 }

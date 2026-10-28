@@ -59,6 +59,7 @@ final class ConnectToServerViewModel: ViewModel {
     private(set) var isRecovering = false
     private var recoveryTask: Task<Void, Never>?
     private var failureSubscription: AnyCancellable?
+    private let connectionSessionConfiguration: URLSessionConfiguration
     private var discovery: ServerDiscovery?
     private var discoverySubscription: AnyCancellable?
     private var searchTask: Task<Void, Never>?
@@ -70,10 +71,20 @@ final class ConnectToServerViewModel: ViewModel {
     }
 
     override init() {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = 3
+        configuration.timeoutIntervalForResource = 4
+        connectionSessionConfiguration = configuration
         super.init()
         Task { @MainActor [weak self] in
             self?.refreshStoredServers()
         }
+    }
+
+    init(sessionConfiguration: URLSessionConfiguration) {
+        connectionSessionConfiguration = sessionConfiguration
+        super.init()
+        Task { @MainActor [weak self] in self?.refreshStoredServers() }
     }
 
     func stopSearching() {
@@ -90,7 +101,10 @@ final class ConnectToServerViewModel: ViewModel {
 
     @Function(\Action.Cases.connect)
     private func connectToServer(_ input: String) async throws {
+        try await performConnection(input, expectedServerID: nil)
+    }
 
+    private func performConnection(_ input: String, expectedServerID: String?) async throws {
         let url: URL
         do { url = try ServerAddressInput.url(from: input) }
         catch { throw ErrorMessage("Enter a valid IP address or server URL. Use brackets around IPv6 addresses.") }
@@ -107,6 +121,7 @@ final class ConnectToServerViewModel: ViewModel {
 
         let client = JellyfinClient.watermelonfinClient(
             configuration: .watermelonfinConfiguration(url: url),
+            sessionConfiguration: connectionSessionConfiguration,
             sessionDelegate: URLSessionProxyDelegate(logger: NetworkLogger.watermelonfin())
         )
 
@@ -117,6 +132,12 @@ final class ConnectToServerViewModel: ViewModel {
         else {
             logger.critical("Missing server data from network call")
             throw ErrorMessage(L10n.unknownError)
+        }
+
+        if let expectedServerID,
+           !ServerIdentityPolicy.matches(expected: expectedServerID, reported: id)
+        {
+            throw ErrorMessage("This address belongs to a different Jellyfin server. The saved server was not changed.")
         }
 
         let connectionURL = processConnectionURL(
@@ -241,7 +262,7 @@ final class ConnectToServerViewModel: ViewModel {
     @Function(\Action.Cases.addNewURL)
     private func _addNewURL(_ server: ServerState) async throws {
         // Re-query the endpoint instead of trusting discovery-provided identity.
-        try await connectToServer(server.currentURL.absoluteString)
+        try await performConnection(server.currentURL.absoluteString, expectedServerID: server.id)
     }
 
     func retrySavedServer(_ server: ServerState) {
@@ -257,7 +278,11 @@ final class ConnectToServerViewModel: ViewModel {
             if reachable, let updated = self.storedServersByID[server.id] {
                 self.events.send(.connected(updated))
             } else {
-                self.error = ErrorMessage("Your server is unavailable. Check its connection or add its Tailscale address. Your saved accounts have been kept.")
+                self
+                    .error =
+                    ErrorMessage(
+                        "Your server is unavailable. Check its connection or add its Tailscale address. Your saved accounts have been kept."
+                    )
             }
         }
     }
@@ -287,13 +312,13 @@ final class ConnectToServerViewModel: ViewModel {
         discovery.broadcast()
         searchTask = Task { @MainActor [weak self] in
             do {
-                for _ in 0..<3 {
+                for _ in 0 ..< 3 {
                     try await Task.sleep(for: .seconds(2))
                     self?.discovery?.broadcast()
                 }
                 try await Task.sleep(for: .seconds(2))
                 self?.stopSearching()
-            } catch { }
+            } catch {}
         }
     }
 }

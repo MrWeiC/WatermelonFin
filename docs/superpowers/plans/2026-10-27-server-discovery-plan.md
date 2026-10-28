@@ -7,3 +7,5 @@
 5. Submit PR with explicit physical-device and Apple multicast entitlement release dependencies; do not claim TestFlight release.
 
 Implementation complete locally. Checks: pure Swift policies, existing quick checks, Swift syntax parse and whitespace pass; SwiftLint has warnings only. Full application compilation, simulator interaction, physical local-network discovery and TestFlight upload remain unverified in the restricted runtime.
+
+Live account-flow tests require an explicitly configured `WATERMELONFIN_AUTOMATION_SERVER_URL` plus username/password in the local test environment (or existing local automation defaults). No private server address is built into the test; missing configuration produces XCTSkip. Never commit those values.

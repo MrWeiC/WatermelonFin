@@ -1,3 +1,11 @@
+//
+// WatermelonFin is subject to the terms of the Mozilla Public
+// License, v2.0. If a copy of the MPL was not distributed with this
+// file, you can obtain one at https://mozilla.org/MPL/2.0/.
+//
+// Copyright (c) 2026 Jellyfin & Jellyfin Contributors
+//
+
 import Foundation
 
 /// Bare hosts use Jellyfin's default port; explicit URLs retain HTTP/HTTPS defaults.
@@ -6,7 +14,7 @@ enum ServerAddressInput {
 
     static func url(from input: String) throws -> URL {
         let value = input.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !value.isEmpty, !value.contains(where: { $0.isWhitespace }) else {
+        guard !value.isEmpty, !value.contains(where: \.isWhitespace) else {
             throw InvalidAddress.invalid
         }
         let explicitScheme = value.contains("://")
@@ -21,8 +29,10 @@ enum ServerAddressInput {
               parts.user == nil, parts.password == nil, parts.query == nil, parts.fragment == nil
         else { throw InvalidAddress.invalid }
         if !explicitScheme, parts.port == nil { parts.port = 8096 }
-        if let port = parts.port, !(1...65535).contains(port) { throw InvalidAddress.invalid }
-        while parts.path.hasSuffix("/") { parts.path.removeLast() }
+        if let port = parts.port, !(1 ... 65535).contains(port) { throw InvalidAddress.invalid }
+        while parts.path.hasSuffix("/") {
+            parts.path.removeLast()
+        }
         guard let url = parts.url else { throw InvalidAddress.invalid }
         return url
     }

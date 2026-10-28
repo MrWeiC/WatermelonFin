@@ -143,7 +143,9 @@ struct ConnectToServerView: View {
         } header: {
             Text(L10n.manualServerAddress)
         } footer: {
-            Text("Local servers are usually found automatically. Tailscale is optional. To use it, enter its IP or MagicDNS name once and connect this device to Tailscale. Port 8096 is automatic for a bare address. Include a custom port or a complete HTTPS URL when needed.")
+            Text(
+                "Local servers are usually found automatically. Tailscale is optional. To use it, enter its IP or MagicDNS name once and connect this device to Tailscale. Port 8096 is automatic for a bare address. Include a custom port or a complete HTTPS URL when needed."
+            )
         }
     }
 
@@ -156,7 +158,9 @@ struct ConnectToServerView: View {
                     .accessibilityIdentifier("server.searching")
             }
             if viewModel.localServers.isEmpty && !viewModel.isSearching {
-                Text(viewModel.discoveryFailed ? "Unable to search this network. Check local network access in Settings, then try again." : "No servers replied. Check that your server is running and connected to the same network.")
+                Text(viewModel
+                    .discoveryFailed ? "Unable to search this network. Check local network access in Settings, then try again." :
+                    "No servers replied. Check that your server is running and connected to the same network.")
                     .font(.callout)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity)

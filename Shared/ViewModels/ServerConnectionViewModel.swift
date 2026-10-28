@@ -74,7 +74,7 @@ final class ServerConnectionViewModel: ViewModel {
     }
 
     func addAlternateAddress(_ text: String) async {
-        do { await saveAddress(try ServerAddressInput.url(from: text), makeCurrent: false) }
+        do { try await saveAddress(ServerAddressInput.url(from: text), makeCurrent: false) }
         catch { self.error = ErrorMessage("Enter a valid IP address or server URL.") }
     }
 

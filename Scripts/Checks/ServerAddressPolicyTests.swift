@@ -1,6 +1,15 @@
+//
+// WatermelonFin is subject to the terms of the Mozilla Public
+// License, v2.0. If a copy of the MPL was not distributed with this
+// file, you can obtain one at https://mozilla.org/MPL/2.0/.
+//
+// Copyright (c) 2026 Jellyfin & Jellyfin Contributors
+//
+
 import Foundation
 
-@main struct ServerAddressPolicyTests {
+@main
+struct ServerAddressPolicyTests {
     static func main() throws {
         let cases = [
             ("192.168.1.20", "http://192.168.1.20:8096"),
@@ -17,11 +26,21 @@ import Foundation
             let actual = try ServerAddressInput.url(from: input).absoluteString
             precondition(actual == expected, "\(input): \(actual) != \(expected)")
         }
-        for input in ["", "bad host", "ftp://server", "http://user:password@server", "fd7a:115c:a1e0::1", "host:0", "host:65536", "http://host/?token=secret", "http://host/#fragment"] {
+        for input in [
+            "",
+            "bad host",
+            "ftp://server",
+            "http://user:password@server",
+            "fd7a:115c:a1e0::1",
+            "host:0",
+            "host:65536",
+            "http://host/?token=secret",
+            "http://host/#fragment",
+        ] {
             do {
                 _ = try ServerAddressInput.url(from: input)
                 fatalError("Accepted invalid input: \(input)")
-            } catch { }
+            } catch {}
         }
         precondition(ServerIdentityPolicy.matches(expected: "server-A", reported: "server-A"))
         precondition(!ServerIdentityPolicy.matches(expected: "server-A", reported: "server-B"))
