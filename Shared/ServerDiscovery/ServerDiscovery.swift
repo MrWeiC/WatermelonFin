@@ -18,8 +18,16 @@ class ServerDiscovery {
 
     private var connection: UDPBroadcastConnection?
 
-    init() {
-        connection = try? UDPBroadcastConnection(
+    private let failurePublisher = PassthroughSubject<Void, Never>()
+
+    var failures: AnyPublisher<Void, Never> {
+        failurePublisher.receive(on: RunLoop.main).eraseToAnyPublisher()
+    }
+
+    init() {}
+
+    private func open() throws {
+        connection = try UDPBroadcastConnection(
             port: 7359,
             handler: handleServerResponse,
             errorHandler: handleError
@@ -35,11 +43,17 @@ class ServerDiscovery {
     private var discoveredServersPublisher = PassthroughSubject<ServerResponse, Never>()
 
     func broadcast() {
-        try? connection?.sendBroadcast("Who is JellyfinServer?")
+        do {
+            if connection == nil { try open() }
+            try connection?.sendBroadcast("Who is JellyfinServer?")
+        } catch {
+            failurePublisher.send(())
+        }
     }
 
     func close() {
         connection?.closeConnection()
+        connection = nil
         discoveredServersPublisher.send(completion: .finished)
     }
 
@@ -55,6 +69,7 @@ class ServerDiscovery {
     }
 
     private func handleError(_ error: UDPBroadcastConnection.ConnectionError) {
+        failurePublisher.send(())
         logger.debug("Error handling response: \(error.localizedDescription)")
     }
 }

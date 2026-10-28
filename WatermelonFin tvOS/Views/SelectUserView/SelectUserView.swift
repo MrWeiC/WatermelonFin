@@ -424,6 +424,8 @@ struct SelectUserView: View {
         }
         .onReceive(viewModel.events) { event in
             switch event {
+            case .discoverServers:
+                router.route(to: .connectToServer)
             case let .expiredSession(user, server):
                 selectedUsers.removeAll()
                 router.route(to: .userSignIn(server: server, reauthenticatingUser: user))

@@ -10,10 +10,17 @@ import CoreStore
 import Foundation
 import JellyfinAPI
 
+@MainActor
 final class ServerConnectionViewModel: ViewModel {
 
     @Published
     private(set) var server: ServerState
+
+    @Published
+    var error: Error?
+
+    @Published
+    private(set) var isCheckingAddress = false
 
     init(server: ServerState) {
         self.server = server
@@ -63,21 +70,40 @@ final class ServerConnectionViewModel: ViewModel {
     }
 
     func setCurrentURL(to url: URL) {
+        Task { await saveAddress(url, makeCurrent: true) }
+    }
+
+    func addAlternateAddress(_ text: String) async {
+        do { await saveAddress(try ServerAddressInput.url(from: text), makeCurrent: false) }
+        catch { self.error = ErrorMessage("Enter a valid IP address or server URL.") }
+    }
+
+    private func saveAddress(_ url: URL, makeCurrent: Bool) async {
+        guard !isCheckingAddress else { return }
+        isCheckingAddress = true
+        defer { isCheckingAddress = false }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = 3
+        configuration.timeoutIntervalForResource = 4
+        let client = JellyfinClient.watermelonfinClient(
+            configuration: .watermelonfinConfiguration(url: url),
+            sessionConfiguration: configuration
+        )
         do {
+            let response = try await client.send(Paths.getPublicSystemInfo)
+            guard ServerIdentityPolicy.matches(expected: server.id, reported: response.value.id) else {
+                throw ErrorMessage("This address belongs to a different Jellyfin server. It was not added.")
+            }
             let newState = try dataStack.perform { transaction in
                 guard let storedServer = try transaction.fetchOne(From<ServerModel>().where(\.$id == self.server.id)) else {
-                    throw ErrorMessage("Unable to find server for URL change: \(self.server.name)")
+                    throw ErrorMessage("Unable to find the saved server.")
                 }
-                storedServer.currentURL = url
-
+                storedServer.urls.insert(url)
+                if makeCurrent { storedServer.currentURL = url }
                 return storedServer.state
             }
-
-            Notifications[.didChangeCurrentServerURL].post(newState)
-
             self.server = newState
-        } catch {
-            logger.critical("\(error.localizedDescription)")
-        }
+            if makeCurrent { Notifications[.didChangeCurrentServerURL].post(newState) }
+        } catch { self.error = error }
     }
 }

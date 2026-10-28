@@ -24,6 +24,8 @@ final class ServerAddressRecoveryService {
     }
 
     private let logger = Logger.watermelonfin()
+    private(set) var unavailableServerIDs: Set<String> = []
+
     private var recoveryTasks: [String: Task<URL?, Never>] = [:]
 
     /// Checks the saved address. If it no longer identifies the expected
@@ -31,6 +33,7 @@ final class ServerAddressRecoveryService {
     @discardableResult
     func refreshAddressIfNeeded(serverID: String, currentURL: URL) async -> Bool {
         if await verify(url: currentURL, expectedServerID: serverID) != nil {
+            unavailableServerIDs.remove(serverID)
             return true
         }
 
@@ -52,6 +55,8 @@ final class ServerAddressRecoveryService {
 
         let recoveredURL = await recoveryTask.value
         recoveryTasks[serverID] = nil
+        if recoveredURL == nil { unavailableServerIDs.insert(serverID) }
+        else { unavailableServerIDs.remove(serverID) }
         return recoveredURL
     }
 
@@ -59,7 +64,9 @@ final class ServerAddressRecoveryService {
         guard let storedServer = storedServer(id: serverID) else { return nil }
 
         // Another request may already have recovered and persisted the server.
-        if storedServer.currentURL != failedURL {
+        if storedServer.currentURL != failedURL,
+           await verify(url: storedServer.currentURL, expectedServerID: serverID) != nil
+        {
             return storedServer.currentURL
         }
 
@@ -78,11 +85,24 @@ final class ServerAddressRecoveryService {
 
         // Discovery can be blocked by network segmentation. Previously known
         // addresses are a useful fallback if DHCP returns to an older lease.
-        for savedURL in storedServer.urls where savedURL != failedURL {
-            if let verifiedServer = await verify(url: savedURL, expectedServerID: serverID) {
-                return updateStoredAddress(with: verifiedServer)
+        let alternatives = storedServer.urls.filter { $0 != failedURL }
+        // Probe saved alternatives together: old DHCP leases must not add a
+        // separate four-second delay before a working Tailscale address.
+        let verifiedAlternative = await withTaskGroup(of: VerifiedServer?.self, returning: VerifiedServer?.self) { group in
+            for url in alternatives {
+                group.addTask { @MainActor in
+                    await self.verify(url: url, expectedServerID: serverID)
+                }
             }
+            for await result in group {
+                if let result {
+                    group.cancelAll()
+                    return result
+                }
+            }
+            return nil
         }
+        if let verifiedAlternative { return updateStoredAddress(with: verifiedAlternative) }
 
         logger.warning("Unable to recover an address for server \(serverID)")
         return nil
@@ -107,7 +127,7 @@ final class ServerAddressRecoveryService {
 
         do {
             let response = try await client.send(Paths.getPublicSystemInfo)
-            guard response.value.id == expectedServerID else {
+            guard ServerIdentityPolicy.matches(expected: expectedServerID, reported: response.value.id) else {
                 logger.warning("Ignoring address that belongs to a different Jellyfin server")
                 return nil
             }
@@ -176,9 +196,14 @@ private final class MatchingServerDiscovery {
     private var timeoutTask: Task<Void, Never>?
 
     func find(serverID: String) async -> ServerState? {
-        await withTaskCancellationHandler {
+        guard !Task.isCancelled else { return nil }
+        return await withTaskCancellationHandler {
             await withCheckedContinuation { continuation in
                 self.continuation = continuation
+                guard !Task.isCancelled else {
+                    finish(with: nil)
+                    return
+                }
                 cancellable = discovery.discoveredServers
                     .filter { $0.id == serverID }
                     .compactMap(\.asServerState)

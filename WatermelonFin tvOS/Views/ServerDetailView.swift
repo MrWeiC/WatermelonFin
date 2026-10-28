@@ -20,6 +20,11 @@ struct EditServerView: View {
     @State
     private var isPresentingConfirmDeletion: Bool = false
 
+    @State
+    private var alternateAddress = ""
+    @State
+    private var showAlternateAddress = false
+
     @FocusState
     private var isAddressFocused: Bool
 
@@ -163,8 +168,31 @@ struct EditServerView: View {
         .buttonBorderShape(.roundedRectangle(radius: 14))
     }
 
+    private var alternateAddressSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Button("Add alternate address (optional)", systemImage: "plus") {
+                showAlternateAddress.toggle()
+            }
+            .accessibilityIdentifier("server.addAlternateAddress")
+            if showAlternateAddress {
+                TextField("IP address or MagicDNS name", text: $alternateAddress)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    .keyboardType(.URL)
+                Text("Tailscale is optional. Enter its address once, with Tailscale connected on this device and your server. Port 8096 is automatic for a bare address; custom ports and complete URLs are preserved.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                Button("Save alternate address") {
+                    Task { await viewModel.addAlternateAddress(alternateAddress) }
+                }
+                .disabled(viewModel.isCheckingAddress || alternateAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                if viewModel.isCheckingAddress { ProgressView() }
+            }
+        }
+    }
+
     var body: some View {
-        VStack {
+        ScrollView {
             VStack(alignment: .leading, spacing: 28) {
                 header
 
@@ -178,20 +206,23 @@ struct EditServerView: View {
                     addressMenu
                 }
 
+                alternateAddressSection
+
                 compatibilityWarning
 
                 if isEditing {
                     deleteButton
                 }
             }
-            .frame(width: 760)
-            .padding(.top, 100)
-
-            Spacer(minLength: 0)
+            .frame(maxWidth: 760)
+            .padding(.horizontal, 24)
+            .padding(.top, 24)
+            .padding(.bottom, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.ignoresSafeArea())
         .navigationTitle(L10n.server)
+        .errorMessage($viewModel.error)
         .alert(L10n.deleteServer, isPresented: $isPresentingConfirmDeletion) {
             Button(L10n.delete, role: .destructive) {
                 if viewModel.delete() {

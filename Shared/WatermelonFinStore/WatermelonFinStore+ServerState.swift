@@ -87,12 +87,14 @@ extension ServerState {
         ) else { return }
 
         let publicInfo = try await getPublicSystemInfo()
+        guard ServerIdentityPolicy.matches(expected: id, reported: publicInfo.id) else {
+            throw ErrorMessage("The address belongs to a different Jellyfin server.")
+        }
 
         try WatermelonFinStore.dataStack.perform { transaction in
             guard let newServer = transaction.edit(server) else { return }
 
             newServer.name = publicInfo.serverName ?? newServer.name
-            newServer.id = publicInfo.id ?? newServer.id
         }
 
         StoredValues[.Server.publicInfo(id: server.id)] = publicInfo

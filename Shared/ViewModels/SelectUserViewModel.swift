@@ -27,10 +27,14 @@ final class SelectUserViewModel: ViewModel {
     }
 
     enum Event {
+        case discoverServers
         case error
         case expiredSession(UserState, ServerState)
         case signedIn(UserState)
     }
+
+    private var didOfferInitialDiscovery = false
+    private var previouslyHadServers = false
 
     @Published
     private(set) var servers: OrderedDictionary<ServerState, [UserState]> = [:]
@@ -57,6 +61,15 @@ final class SelectUserViewModel: ViewModel {
             }
 
         servers = newServers
+        let becameEmpty = previouslyHadServers && newServers.isEmpty
+        let needsRecovery = newServers.keys.contains {
+            ServerAddressRecoveryService.shared.unavailableServerIDs.contains($0.id)
+        }
+        if (!didOfferInitialDiscovery && (newServers.isEmpty || needsRecovery)) || becameEmpty {
+            events.send(.discoverServers)
+        }
+        didOfferInitialDiscovery = true
+        previouslyHadServers = !newServers.isEmpty
     }
 
     private func getUsers(for server: ServerState) throws -> [UserState] {
@@ -76,23 +89,28 @@ final class SelectUserViewModel: ViewModel {
 
     @Function(\Action.Cases.signIn)
     private func _signIn(_ user: UserState, _ server: ServerState, _ pin: String) async throws {
-        guard user.hasAccessToken else {
-            events.send(.expiredSession(user, server))
-            return
-        }
-
         if user.accessPolicy == .requirePin {
             guard LocalPINPolicy.isValid(pin), let storedPin = keychain.get("\(user.id)-pin"), pin == storedPin else {
                 throw ErrorMessage(L10n.incorrectPinForUser(user.username))
             }
         }
 
+        guard await ServerAddressRecoveryService.shared.refreshAddressIfNeeded(
+            serverID: server.id, currentURL: server.currentURL
+        ), let refreshedServer = try? dataStack.fetchOne(From<ServerModel>().where(\.$id == server.id))?.state else {
+            events.send(.discoverServers)
+            return
+        }
+        guard user.hasAccessToken else {
+            events.send(.expiredSession(user, refreshedServer))
+            return
+        }
         do {
-            _ = try await user.getUserData(server: server)
+            _ = try await user.getUserData(server: refreshedServer)
         } catch {
             if error.isUnauthorizedResponse {
                 user.removeAccessToken()
-                events.send(.expiredSession(user, server))
+                events.send(.expiredSession(user, refreshedServer))
                 return
             }
 

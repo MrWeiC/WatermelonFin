@@ -61,6 +61,8 @@ struct SelectUserView: View {
         .onNotification(.didDeleteServer) { _ in viewModel.getServers() }
         .onReceive(viewModel.events) { event in
             switch event {
+            case .discoverServers:
+                router.route(to: .connectToServer)
             case let .signedIn(user):
                 Defaults[.lastSignedInUserID] = .signedIn(userID: user.id)
                 Container.shared.currentUserSession.reset()
