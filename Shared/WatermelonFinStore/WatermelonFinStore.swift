@@ -74,7 +74,7 @@ extension WatermelonFinStore {
                     continuation.resume()
                 case let .failure(error):
                     logger.error("Failed creating datastack with: \(error.localizedDescription)")
-                    continuation.resume(throwing: ErrorMessage("Failed creating datastack with: \(error.localizedDescription)"))
+                    continuation.resume(throwing: ErrorMessage(L10n.localStoreCreationFailed(error.localizedDescription)))
                 }
             }
         }

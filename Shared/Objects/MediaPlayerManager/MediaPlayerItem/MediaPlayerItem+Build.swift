@@ -110,11 +110,11 @@ extension MediaPlayerItem {
         }()
 
         guard let mediaSource else {
-            throw ErrorMessage("Unable to find media source for item")
+            throw ErrorMessage(L10n.mediaSourceNotFound)
         }
 
         guard let playSessionID = response.value.playSessionID else {
-            throw ErrorMessage("No associated play session ID")
+            throw ErrorMessage(L10n.playSessionMissing)
         }
 
         let playbackURL = try Self.streamURL(
@@ -180,14 +180,14 @@ extension MediaPlayerItem {
     ) throws -> URL {
 
         guard let itemID = item.id else {
-            throw ErrorMessage("No item ID while building online media player item!")
+            throw ErrorMessage(L10n.mediaItemIDMissing)
         }
 
         if let transcodingURL = mediaSource.transcodingURL {
             logger.trace("Using transcoding URL for item \(itemID)")
 
             guard let fullTranscodeURL = userSession.client.fullURL(with: transcodingURL)
-            else { throw ErrorMessage("Unable to make transcode URL") }
+            else { throw ErrorMessage(L10n.cannotCreateTranscodeURL) }
             return fullTranscodeURL
         }
 
@@ -203,7 +203,7 @@ extension MediaPlayerItem {
                 playSessionID: playSessionID,
                 userSession: userSession
             )
-            else { throw ErrorMessage("Unable to make video stream URL") }
+            else { throw ErrorMessage(L10n.cannotCreateStreamURL) }
 
             return videoStreamURL
         }
@@ -212,7 +212,7 @@ extension MediaPlayerItem {
 
         guard let path = mediaSource.path, let streamURL = URL(
             string: path
-        ) else { throw ErrorMessage("Unable to make stream URL") }
+        ) else { throw ErrorMessage(L10n.cannotCreateStreamURL) }
 
         return streamURL
     }

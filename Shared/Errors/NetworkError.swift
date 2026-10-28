@@ -89,7 +89,7 @@ enum NetworkError: LocalizedError, Hashable {
         case -1200, -1201, -1202, -1203, -1204, -1205, -1206:
             return .sslError
         default:
-            return .unknown(message: "URL error with code: \(urlErrorCode)")
+            return .unknown(message: L10n.networkErrorCode(urlErrorCode))
         }
     }
 
@@ -107,7 +107,7 @@ enum NetworkError: LocalizedError, Hashable {
         case 500 ... 599:
             return .serverError(statusCode: httpStatusCode, message: message)
         default:
-            return .unknown(message: message ?? "HTTP error with status: \(httpStatusCode)")
+            return .unknown(message: message ?? L10n.httpErrorCode(httpStatusCode))
         }
     }
 

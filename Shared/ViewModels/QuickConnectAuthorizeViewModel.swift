@@ -60,7 +60,7 @@ final class QuickConnectAuthorizeViewModel: ViewModel {
         let isAuthorized = (try? decoder.decode(Bool.self, from: response.value)) ?? false
 
         guard isAuthorized else {
-            throw ErrorMessage("Authorization unsuccessful")
+            throw ErrorMessage(L10n.authorizationUnsuccessful)
         }
 
         events.send(.authorized)

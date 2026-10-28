@@ -298,7 +298,7 @@ final class ItemImagesViewModel: ViewModel, Stateful, Eventful {
             imageData = jpgData
         } else {
             logger.error("Unable to convert given profile image to png/jpg")
-            throw ErrorMessage("An internal error occurred")
+            throw ErrorMessage(L10n.internalErrorOccurred)
         }
 
         try await upload(
@@ -313,7 +313,7 @@ final class ItemImagesViewModel: ViewModel, Stateful, Eventful {
     private func uploadFile(_ url: URL, type: ImageType) async throws {
         guard url.startAccessingSecurityScopedResource() else {
             logger.error("Unable to access file at \(url)")
-            throw ErrorMessage("An internal error occurred.")
+            throw ErrorMessage(L10n.internalErrorOccurred)
         }
         defer { url.stopAccessingSecurityScopedResource() }
 
@@ -330,7 +330,7 @@ final class ItemImagesViewModel: ViewModel, Stateful, Eventful {
         default:
             guard let image = try UIImage(data: Data(contentsOf: url)) else {
                 logger.error("Unable to load image from file")
-                throw ErrorMessage("An internal error occurred.")
+                throw ErrorMessage(L10n.internalErrorOccurred)
             }
 
             if let pngData = image.pngData() {
@@ -341,7 +341,7 @@ final class ItemImagesViewModel: ViewModel, Stateful, Eventful {
                 imageData = jpgData
             } else {
                 logger.error("Failed to convert image to png/jpg")
-                throw ErrorMessage("An internal error occurred.")
+                throw ErrorMessage(L10n.internalErrorOccurred)
             }
         }
 

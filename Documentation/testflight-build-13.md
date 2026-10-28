@@ -1,6 +1,6 @@
 # Build 13: manual server setup while discovery is deferred
 
-Status on October 28, 2026: code prepared; **not uploaded to TestFlight**.
+Status on October 28, 2026: startup-animation PR #37 merged. Localization release preparation is in progress; **not uploaded to TestFlight**.
 
 ## Scope
 
@@ -9,16 +9,20 @@ Status on October 28, 2026: code prepared; **not uploaded to TestFlight**.
 - No subnet/IP scan is implemented. Recovery only tries previously saved addresses and verifies the server ID before switching.
 - Bare addresses retain the default 8096 port behavior. Tailscale remains optional and can be added later.
 - English, Simplified Chinese and Traditional Chinese copy describes current behavior; local-network permission remains necessary for direct LAN connections.
-- The existing launch animation and explicit Add Server entry remain unchanged.
+- The crystal-watermelon launch video runs locally on iPhone, iPad, and tvOS. The explicit Add Server entry remains.
+- The app follows the device language, with English as the development fallback. English, Simplified Chinese, and Traditional Chinese include all source catalog keys and permission descriptions.
+- Legacy translations with invalid format arguments or empty values fall back to English. Other languages remain partially translated.
+- Shared account, server, and playback errors now use localized strings; Jellyfin/server-provided messages and media names retain their original language.
 
-## Validation
+## Validation — October 28 release preparation
 
-- `bash Scripts/Checks/validate-local.sh --quick`: passed (playback, artwork, paging, PIN, address/identity policy, both ATS configurations and whitespace checks).
-- Swift frontend parse of modified Swift files: passed; this is not full type checking or a successful app build.
-- Independent code review: no important logic regressions; identified copy gaps were corrected.
-- Updated iPhone/iPad UI regression asserts direct entry, no search controls, and preservation after background/rotation. Added tvOS view-model regression for disabled search. These tests have **not run successfully** in this session.
-- Simulator access failed with CoreSimulatorService connection/permission errors. Signed archive attempts failed during dependency resolution because SwiftPM manifest diagnostics still target a protected user cache, even with a writable package copy and `-packageCachePath`.
-- This session has no Xcode/browser UI control available. No build-13 archive, upload, processing acceptance or tester assignment is claimed.
+- `python3 Scripts/Checks/ValidateLocalizations.py`: all 996 English source keys are present in both Chinese catalogs; permission descriptions and playlist strings are covered; printf arguments match across all 48 bundled languages.
+- `bash Scripts/Checks/validate-local.sh --quick`: passed.
+- iPhone and iPad simulator suites: eight tests passed on each, including launches in English, Simplified Chinese, Traditional Chinese, and an unsupported language that falls back to English.
+- Signed tvOS simulator suite: 145 passed, one skipped (live Jellyfin credentials not supplied), zero failures. The Chinese-copy suite now explicitly selects Chinese. Its Keychain integration test requires a signed simulator host.
+- Independent review identified default-language settings and inaccurate Chinese labels; these were corrected.
+- Translation coverage and test results do not certify every screen's layout or third-party/server-provided messages. Physical-device visual checks remain useful.
+- A pre-localization iOS build-13 archive succeeded locally but was not uploaded. Release archives must be rebuilt from the final localization commit.
 
 ## Finish release from an authorized Xcode session
 

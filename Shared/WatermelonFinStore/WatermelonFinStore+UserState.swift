@@ -135,7 +135,7 @@ extension UserState {
     func delete() throws {
         try WatermelonFinStore.dataStack.perform { transaction in
             guard let storedUser = try transaction.fetchOne(From<UserModel>().where(\.$id == id)) else {
-                throw ErrorMessage("Unable to find user to delete")
+                throw ErrorMessage(L10n.userToDeleteNotFound)
             }
 
             let storedDataClause = AnyStoredData.fetchClause(ownerID: id)

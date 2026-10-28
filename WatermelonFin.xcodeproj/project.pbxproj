@@ -832,7 +832,7 @@
 			};
 			buildConfigurationList = 5377CBEC263B596A003A4E83 /* Build configuration list for PBXProject "WatermelonFin" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = "zh-Hans";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,

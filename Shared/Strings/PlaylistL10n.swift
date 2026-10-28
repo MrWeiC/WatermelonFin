@@ -17,15 +17,7 @@ enum PlaylistL10n {
     static let playlists = L10n.playlists
     static let removeFromPlaylist = localized("removeFromPlaylist", fallback: "Remove from Playlist")
 
-    private static let bundle: Bundle = {
-        guard let path = Bundle.main.path(forResource: "zh-Hans", ofType: "lproj"),
-              let localizedBundle = Bundle(path: path)
-        else {
-            return .main
-        }
-
-        return localizedBundle
-    }()
+    private static let bundle = Bundle.main
 
     private static func localized(_ key: String, fallback: String) -> String {
         bundle.localizedString(forKey: key, value: fallback, table: "Playlist")

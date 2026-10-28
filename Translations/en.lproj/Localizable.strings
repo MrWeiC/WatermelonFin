@@ -268,6 +268,9 @@
 /// Author
 "author" = "Author";
 
+/// Authorization unsuccessful
+"authorizationUnsuccessful" = "Authorization unsuccessful";
+
 /// Authorize
 "authorize" = "Authorize";
 
@@ -423,6 +426,12 @@
 
 /// Cannot connect to host
 "cannotConnectToHost" = "Cannot connect to host";
+
+/// Unable to create the stream URL.
+"cannotCreateStreamURL" = "Unable to create the stream URL.";
+
+/// Unable to create the transcoding URL.
+"cannotCreateTranscodeURL" = "Unable to create the transcoding URL.";
 
 /// Capabilities
 "capabilities" = "Capabilities";
@@ -811,8 +820,8 @@
 /// Diagnostics
 "diagnostics" = "Diagnostics";
 
-/// Connection status and troubleshooting tools for this Apple TV.
-"diagnosticsDescription" = "Connection status and troubleshooting tools for this Apple TV.";
+/// Connection status and troubleshooting tools for this device.
+"diagnosticsDescription" = "Connection status and troubleshooting tools for this device.";
 
 /// Died
 "died" = "Died";
@@ -874,8 +883,8 @@
 /// User already added
 "duplicateUser" = "User already added";
 
-/// %@ is already added on this Apple TV. Continue with the saved login, or replace it with the credentials you just entered.
-"duplicateUserSaved" = "%@ is already added on this Apple TV. Continue with the saved login, or replace it with the credentials you just entered.";
+/// %@ is already added on this device. Continue with the saved login, or replace it with the credentials you just entered.
+"duplicateUserSaved" = "%@ is already added on this device. Continue with the saved login, or replace it with the credentials you just entered.";
 
 /// Duration
 "duration" = "Duration";
@@ -1126,6 +1135,9 @@
 /// Hours
 "hours" = "Hours";
 
+/// HTTP error (status %d)
+"httpErrorCode" = "HTTP error (status %d)";
+
 /// ID
 "id" = "ID";
 
@@ -1170,6 +1182,9 @@
 
 /// Interlaced video is not supported
 "interlacedVideoNotSupported" = "Interlaced video is not supported";
+
+/// An internal error occurred.
+"internalErrorOccurred" = "An internal error occurred.";
 
 /// Interval
 "interval" = "Interval";
@@ -1330,6 +1345,9 @@
 /// Automatic discovery is unavailable in this version. Enter your server address to connect.
 "localServersDescription" = "Automatic discovery is unavailable in this version. Enter your server address to connect.";
 
+/// Unable to open local app data: %@
+"localStoreCreationFailed" = "Unable to open local app data: %@";
+
 /// Lock all fields
 "lockAllFields" = "Lock all fields";
 
@@ -1438,6 +1456,9 @@
 /// Item Error
 "mediaItemError" = "Item Error";
 
+/// The media item identifier is missing.
+"mediaItemIDMissing" = "The media item identifier is missing.";
+
 /// The requested item was not found.
 "mediaItemNotFound" = "The requested item was not found.";
 
@@ -1530,6 +1551,9 @@
 
 /// Your playback session has expired.
 "mediaSessionExpired" = "Your playback session has expired.";
+
+/// Unable to find a media source for this item.
+"mediaSourceNotFound" = "Unable to find a media source for this item.";
 
 /// The media stream ended unexpectedly.
 "mediaStreamEnded" = "The media stream ended unexpectedly.";
@@ -1635,6 +1659,9 @@
 
 /// Native Player
 "nativePlayer" = "Native Player";
+
+/// Network error (code %d)
+"networkErrorCode" = "Network error (code %d)";
 
 /// Network only
 "networkOnly" = "Network only";
@@ -1867,6 +1894,9 @@
 /// Played
 "played" = "Played";
 
+/// Player error: %@
+"playerErrorDetails" = "Player error: %@";
+
 /// Uses Apple AVPlayer for HDR, Picture in Picture, AirPlay casting, HomePod, and AirPlay speakers. Subtitle and file-format support is more limited.
 "playerNativeDescription" = "Uses Apple AVPlayer for HDR, Picture in Picture, AirPlay casting, HomePod, and AirPlay speakers. Subtitle and file-format support is more limited.";
 
@@ -1893,6 +1923,9 @@
 
 /// Play previous item
 "playPreviousItem" = "Play previous item";
+
+/// The playback session identifier is missing.
+"playSessionMissing" = "The playback session identifier is missing.";
 
 /// Portrait
 "portrait" = "Portrait";
@@ -2002,8 +2035,8 @@
 /// Re-authenticate Jellyfin user
 "reauthenticateJellyfinUser" = "Re-authenticate Jellyfin user";
 
-/// This user is already saved on this Apple TV. Enter the Jellyfin password to refresh the saved login.
-"reauthenticateJellyfinUserDescription" = "This user is already saved on this Apple TV. Enter the Jellyfin password to refresh the saved login.";
+/// This user is already saved on this device. Enter the Jellyfin password to refresh the saved login.
+"reauthenticateJellyfinUserDescription" = "This user is already saved on this device. Enter the Jellyfin password to refresh the saved login.";
 
 /// Re-authenticate %@ on %@
 "reauthenticateJellyfinUserOnServer" = "Re-authenticate %@ on %@";
@@ -2077,8 +2110,8 @@
 /// Remove logs
 "removeLogs" = "Remove logs";
 
-/// This removes app and network logs from this Apple TV.
-"removeLogsConfirmation" = "This removes app and network logs from this Apple TV.";
+/// This removes app and network logs from this device.
+"removeLogsConfirmation" = "This removes app and network logs from this device.";
 
 /// Remux
 "remux" = "Remux";
@@ -2281,6 +2314,12 @@
 /// Series date played
 "seriesDatePlayed" = "Series date played";
 
+/// The series identifier is missing.
+"seriesIDMissing" = "The series identifier is missing.";
+
+/// Unable to find the series.
+"seriesItemMissing" = "Unable to find the series.";
+
 /// Series name
 "seriesName" = "Series name";
 
@@ -2371,6 +2410,9 @@
 /// Automatic discovery is unavailable in this version. Enter your server address to connect.
 "serverSearchUnavailable" = "Automatic discovery is unavailable in this version. Enter your server address to connect.";
 
+/// Unable to find the server to delete.
+"serverToDeleteNotFound" = "Unable to find the server to delete.";
+
 /// Server URL
 "serverURL" = "Server URL";
 
@@ -2437,8 +2479,8 @@
 /// Sign in user
 "signInExistingJellyfinUser" = "Sign in user";
 
-/// This does not create a Jellyfin user. It only signs in an existing account from this server on this Apple TV.
-"signInExistingJellyfinUserDescription" = "This does not create a Jellyfin user. It only signs in an existing account from this server on this Apple TV.";
+/// This does not create a Jellyfin user. It only signs in an existing account from this server on this device.
+"signInExistingJellyfinUserDescription" = "This does not create a Jellyfin user. It only signs in an existing account from this server on this device.";
 
 /// Sign in to %s
 "signInToServer" = "Sign in to %s";
@@ -2803,6 +2845,9 @@
 /// This user will require device authentication.
 "userDeviceAuthRequiredDescription" = "This user will require device authentication.";
 
+/// The user identifier is missing.
+"userIDMissing" = "The user identifier is missing.";
+
 /// Username
 "username" = "Username";
 
@@ -2823,6 +2868,9 @@
 
 /// Users
 "users" = "Users";
+
+/// Unable to find the user to delete.
+"userToDeleteNotFound" = "Unable to find the user to delete.";
 
 /// User view
 "userView" = "User view";
