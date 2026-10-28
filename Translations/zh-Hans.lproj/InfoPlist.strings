@@ -1,1 +1,1 @@
-"NSLocalNetworkUsageDescription" = "用于查找并连接同一本地网络中的 Jellyfin 服务器。";
+"NSLocalNetworkUsageDescription" = "用于连接本地网络中的 Jellyfin 服务器。";

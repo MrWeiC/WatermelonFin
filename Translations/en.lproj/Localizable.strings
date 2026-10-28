@@ -1327,8 +1327,8 @@
 /// Local servers
 "localServers" = "Local servers";
 
-/// Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.
-"localServersDescription" = "Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.";
+/// Automatic discovery is unavailable in this version. Enter your server address to connect.
+"localServersDescription" = "Automatic discovery is unavailable in this version. Enter your server address to connect.";
 
 /// Lock all fields
 "lockAllFields" = "Lock all fields";
@@ -1378,8 +1378,8 @@
 /// Manual address
 "manualServerAddress" = "Manual address";
 
-/// Use this only when local discovery cannot find your server. WatermelonFin remembers the server ID and can update future address changes automatically.
-"manualServerAddressDescription" = "Use this only when local discovery cannot find your server. WatermelonFin remembers the server ID and can update future address changes automatically.";
+/// Enter your Jellyfin server address. If the address changes, add the new address to the saved server.
+"manualServerAddressDescription" = "Enter your Jellyfin server address. If the address changes, add the new address to the saved server.";
 
 /// Mark unwatched
 "markUnwatched" = "Mark unwatched";
@@ -2185,8 +2185,8 @@
 /// Saved addresses
 "savedServerAddresses" = "Saved addresses";
 
-/// Saved addresses include every URL WatermelonFin has used for this server. If local discovery finds this server at a new IP, WatermelonFin saves it and switches automatically.
-"savedServerAddressesDescription" = "Saved addresses include every URL WatermelonFin has used for this server. If local discovery finds this server at a new IP, WatermelonFin saves it and switches automatically.";
+/// WatermelonFin tries your saved addresses when a connection fails. If your server moves to an unknown address, add the new address here.
+"savedServerAddressesDescription" = "WatermelonFin tries your saved addresses when a connection fails. If your server moves to an unknown address, add the new address here.";
 
 /// Save the user to this device without any local authentication.
 "saveUserWithoutAuthDescription" = "Save the user to this device without any local authentication.";
@@ -2323,8 +2323,8 @@
 /// Server logs
 "serverLogs" = "Server logs";
 
-/// Looking for your server…
-"serverLookingForSaved" = "Looking for your server…";
+/// Trying saved addresses…
+"serverLookingForSaved" = "Trying saved addresses…";
 
 /// Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.
 "serverManualHelp" = "Enter an IP address or hostname. Port 8096 is added automatically. Include a custom port or a complete HTTPS URL when needed. Tailscale is optional and can be added later in server settings.";
@@ -2338,8 +2338,8 @@
 /// Open Settings
 "serverOpenSettings" = "Open Settings";
 
-/// Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.
-"serverPermissionHelp" = "Searching uses your local network to find Jellyfin servers. If asked, allow Local Network access. You can enter an address manually instead.";
+/// Connecting to a server on your local network requires Local Network access. Allow access when prompted.
+"serverPermissionHelp" = "Connecting to a server on your local network requires Local Network access. Allow access when prompted.";
 
 /// Servers
 "servers" = "Servers";
@@ -2353,6 +2353,9 @@
 /// Unable to find the saved server.
 "serverSavedMissing" = "Unable to find the saved server.";
 
+/// Unable to connect using your saved addresses. Check that your server is running, or enter its new address. Your accounts and settings are saved. Tailscale is optional.
+"serverSavedUnavailable" = "Unable to connect using your saved addresses. Check that your server is running, or enter its new address. Your accounts and settings are saved. Tailscale is optional.";
+
 /// Search again
 "serverSearchAgain" = "Search again";
 
@@ -2365,8 +2368,8 @@
 /// Search local network
 "serverSearchStart" = "Search local network";
 
-/// Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.
-"serverSearchUnavailable" = "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.";
+/// Automatic discovery is unavailable in this version. Enter your server address to connect.
+"serverSearchUnavailable" = "Automatic discovery is unavailable in this version. Enter your server address to connect.";
 
 /// Server URL
 "serverURL" = "Server URL";

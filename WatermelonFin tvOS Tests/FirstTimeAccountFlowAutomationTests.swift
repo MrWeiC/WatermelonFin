@@ -30,6 +30,16 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
         super.tearDown()
     }
 
+    func testSearchStaysIdleWhileDiscoveryIsDisabled() async throws {
+        await prepareDataStack()
+        let viewModel = ConnectToServerViewModel()
+        viewModel.searchForServers()
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertFalse(viewModel.isSearching)
+        XCTAssertTrue(viewModel.localServers.isEmpty)
+        XCTAssertFalse(viewModel.discoveryFailed, "Disabled discovery is not a network permission failure")
+    }
+
     func testDevServerCanBeAddedFromEmptyLocalState() async throws {
         let credentials = try loadCredentials()
 

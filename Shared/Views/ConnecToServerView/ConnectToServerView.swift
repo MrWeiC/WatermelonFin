@@ -33,7 +33,7 @@ struct ConnectToServerView: View {
     @State
     private var duplicateServer: ServerState? = nil
     @State
-    private var isShowingManualAddress: Bool = false
+    private var isShowingManualAddress: Bool = !ServerDiscovery.isEnabled
     @State
     private var isPresentingDuplicateServer: Bool = false
     @State
@@ -209,11 +209,11 @@ struct ConnectToServerView: View {
     private var contentView: some View {
         #if os(iOS)
         List {
-            localServersSection
-
-            savedServersSection
+            if ServerDiscovery.isEnabled { localServersSection }
 
             manualAddressSection
+
+            savedServersSection
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarCloseButton(disabled: viewModel.state == .connecting) {
@@ -223,10 +223,17 @@ struct ConnectToServerView: View {
         SplitLoginWindowView(
             isLoading: viewModel.state == .connecting
         ) {
-            localServersSection
+            if ServerDiscovery.isEnabled {
+                localServersSection
+            } else {
+                Text(L10n.manualServerAddress)
+                    .font(.title2)
+                Text(L10n.serverPermissionHelp)
+                    .foregroundStyle(.secondary)
+            }
         } trailingContentView: {
-            savedServersSection
             manualAddressSection
+            savedServersSection
         }
         #endif
     }
@@ -245,8 +252,9 @@ struct ConnectToServerView: View {
             }
             .onDisappear { viewModel.stopSearching() }
             .onChange(of: scenePhase) { _, phase in
-                if phase == .active, hasRequestedSearch, viewModel.state != .connecting { viewModel.searchForServers() }
-                else if phase != .active { viewModel.stopSearching() }
+                if ServerDiscovery.isEnabled, phase == .active, hasRequestedSearch, viewModel.state != .connecting {
+                    viewModel.searchForServers()
+                } else if phase != .active { viewModel.stopSearching() }
             }
             .onReceive(viewModel.events, perform: onEvent)
             .onReceive(viewModel.$error) { error in

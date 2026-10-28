@@ -29,7 +29,7 @@ final class ServerAddressRecoveryService {
     private var recoveryTasks: [String: Task<URL?, Never>] = [:]
 
     /// Checks the saved address. If it no longer identifies the expected
-    /// server, local discovery is attempted.
+    /// server, other saved addresses are attempted. Discovery is release-gated.
     @discardableResult
     func refreshAddressIfNeeded(serverID: String, currentURL: URL) async -> Bool {
         if await verify(url: currentURL, expectedServerID: serverID) != nil {
@@ -70,8 +70,8 @@ final class ServerAddressRecoveryService {
             return storedServer.currentURL
         }
 
-        let attempt = MatchingServerDiscovery()
-        if let discoveredServer = await attempt.find(serverID: serverID),
+        if ServerDiscovery.isEnabled,
+           let discoveredServer = await MatchingServerDiscovery().find(serverID: serverID),
            let verifiedServer = await verify(
                url: discoveredServer.currentURL,
                expectedServerID: serverID
@@ -83,8 +83,8 @@ final class ServerAddressRecoveryService {
             return updateStoredAddress(with: verifiedServer)
         }
 
-        // Discovery can be blocked by network segmentation. Previously known
-        // addresses are a useful fallback if DHCP returns to an older lease.
+        // While broadcast discovery is disabled, only contact saved addresses.
+        // Previously known addresses can also recover an older DHCP lease.
         let alternatives = storedServer.urls.filter { $0 != failedURL }
         // Probe saved alternatives together: old DHCP leases must not add a
         // separate four-second delay before a working Tailscale address.

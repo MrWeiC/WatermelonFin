@@ -1149,7 +1149,8 @@
 "preAmpDescription" = "播放前调整 ReplayGain 音量。正数更响，负数更轻。";
 "preventClipping" = "防止削波";
 "savedServerAddresses" = "已保存地址";
-"savedServerAddressesDescription" = "这里会保留 WatermelonFin 用过的服务器地址。如果本地发现找到这台服务器的新 IP，WatermelonFin 会自动保存并切换。";
+/// 连接失败时，WatermelonFin 会尝试已保存的地址。如果服务器换成了尚未保存的地址，请在这里添加新地址。
+"savedServerAddressesDescription" = "连接失败时，WatermelonFin 会尝试已保存的地址。如果服务器换成了尚未保存的地址，请在这里添加新地址。";
 "subtitleOffsetDescription" = "以毫秒为单位调整字幕同步。";
 "sync" = "同步";
 "syncDescription" = "微调音频和字幕的时间偏移。";
@@ -1163,14 +1164,14 @@
 /// 手动输入服务器地址
 "enterServerAddressManually" = "手动输入服务器地址";
 
-/// 优先选择自动发现的服务器。只有找不到 Jellyfin 服务器时，再手动输入地址。
-"localServersDescription" = "优先选择自动发现的服务器。如果已保存的 Jellyfin 服务器出现在新的本地地址，WatermelonFin 会自动更新。";
+/// 此版本暂不支持自动发现。请输入服务器地址进行连接。
+"localServersDescription" = "此版本暂不支持自动发现。请输入服务器地址进行连接。";
 
 /// 手动地址
 "manualServerAddress" = "手动地址";
 
-/// 仅在本地发现找不到服务器时使用。WatermelonFin 会记住服务器 ID，之后服务器地址变化时可以识别出来。
-"manualServerAddressDescription" = "仅在本地发现找不到服务器时使用。WatermelonFin 会记住服务器 ID，并在之后服务器地址变化时自动更新。";
+/// 输入 Jellyfin 服务器地址。如果地址发生变化，请为已保存的服务器添加新地址。
+"manualServerAddressDescription" = "输入 Jellyfin 服务器地址。如果地址发生变化，请为已保存的服务器添加新地址。";
 
 /// 选择要登录的服务器
 "selectServerToSignIn" = "选择要添加用户的服务器";
@@ -1287,17 +1288,20 @@
 "deselectAll" = "取消全选";
 
 // Server discovery and alternate addresses
-"serverLookingForSaved" = "正在查找你的服务器…";
+/// 正在尝试已保存的地址…
+"serverLookingForSaved" = "正在尝试已保存的地址…";
 "serverSavedList" = "已保存的服务器";
 "serverSavedHelp" = "账号和设置已保留。选择服务器可重试已保存的地址；只有你添加过 Tailscale 地址时才会尝试该地址。";
 "serverManualOptional" = "手动输入地址";
 "serverManualHelp" = "输入 IP 地址或主机名即可，默认使用 8096 端口。如使用其他端口或 HTTPS，请填写完整地址。Tailscale 为可选项，可稍后在服务器设置中添加。";
 "serverSearching" = "正在搜索 Jellyfin 服务器…";
-"serverSearchUnavailable" = "暂时无法搜索局域网。请检查系统设置中的本地网络访问权限，也可以手动输入地址。";
+/// 此版本暂不支持自动发现。请输入服务器地址进行连接。
+"serverSearchUnavailable" = "此版本暂不支持自动发现。请输入服务器地址进行连接。";
 "serverSearchEmpty" = "未收到服务器响应。请确认服务器正在运行且连接同一网络，也可以手动输入地址。";
 "serverSearchAgain" = "重新搜索";
 "serverSearchStart" = "搜索局域网服务器";
-"serverPermissionHelp" = "搜索需要访问本地网络以查找 Jellyfin 服务器。系统询问时，请允许“本地网络”访问。你也可以直接手动输入地址。";
+/// 连接本地网络中的服务器需要本地网络访问权限。出现提示时，请允许访问。
+"serverPermissionHelp" = "连接本地网络中的服务器需要本地网络访问权限。出现提示时，请允许访问。";
 "serverOpenSettings" = "打开系统设置";
 "serverAlternateOptional" = "添加备用地址（可选）";
 "serverAlternatePlaceholder" = "IP 地址或 MagicDNS 名称";
@@ -1306,3 +1310,5 @@
 "serverInvalidAddress" = "请输入有效的 IP 地址或服务器 URL。IPv6 地址请使用方括号。";
 "serverIdentityMismatch" = "此地址属于另一台 Jellyfin 服务器，已保存的服务器未更改。";
 "serverSavedMissing" = "找不到已保存的服务器。";
+
+"serverSavedUnavailable" = "无法通过已保存的地址连接。请确认服务器正在运行，或输入它的新地址。你的账号和设置已保留。Tailscale 为可选项。";

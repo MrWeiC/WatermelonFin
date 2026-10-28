@@ -278,11 +278,7 @@ final class ConnectToServerViewModel: ViewModel {
             if reachable, let updated = self.storedServersByID[server.id] {
                 self.events.send(.connected(updated))
             } else {
-                self
-                    .error =
-                    ErrorMessage(
-                        "Your server is unavailable. Check its connection or add its Tailscale address. Your saved accounts have been kept."
-                    )
+                self.error = ErrorMessage(L10n.serverSavedUnavailable)
             }
         }
     }
@@ -292,8 +288,9 @@ final class ConnectToServerViewModel: ViewModel {
         stopSearching()
         localServers.removeAll()
         refreshStoredServers()
-        isSearching = true
         discoveryFailed = false
+        guard ServerDiscovery.isEnabled else { return }
+        isSearching = true
         let discovery = ServerDiscovery()
         self.discovery = discovery
         // Subscribe synchronously before the first broadcast; weak capture avoids

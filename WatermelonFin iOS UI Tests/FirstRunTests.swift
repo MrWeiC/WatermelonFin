@@ -20,20 +20,19 @@ final class FirstRunTests: XCTestCase {
         XCTAssertTrue(addServer.waitForExistence(timeout: 20))
         let animation = app.otherElements["mobile.launch.animation"]
         XCTAssertTrue(animation.waitForNonExistence(timeout: 20))
-        XCTAssertFalse(app.buttons["server.manualAddress"].exists, "Launch must not present server discovery")
+        XCTAssertFalse(app.textFields["mobile.server.address"].exists, "Launch must not present server setup")
         addServer.tap()
-        XCTAssertTrue(app.buttons["server.searchAgain"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.otherElements["server.searching"].exists, "Discovery must wait for an explicit search")
-        let manual = app.buttons["server.manualAddress"]
-        XCTAssertTrue(manual.waitForExistence(timeout: 10))
-        manual.tap()
         let address = app.textFields["mobile.server.address"]
         XCTAssertTrue(address.waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["server.searchAgain"].exists, "Discovery is unavailable in this release")
+        XCTAssertFalse(app.otherElements["server.searching"].exists)
         XCTAssertFalse(app.otherElements["mobile.launch.animation"].exists)
         XCUIDevice.shared.press(.home)
         app.activate()
         XCTAssertTrue(address.waitForExistence(timeout: 10))
-        XCTAssertTrue(address.isHittable, "Returning should preserve the server discovery screen")
+        XCTAssertTrue(address.isHittable, "Returning should preserve the manual server setup screen")
+        XCTAssertFalse(app.buttons["server.searchAgain"].exists, "Discovery is unavailable in this release")
+        XCTAssertFalse(app.otherElements["server.searching"].exists)
         XCTAssertFalse(app.otherElements["mobile.launch.animation"].exists)
         let screenshot = XCTAttachment(screenshot: app.screenshot())
         screenshot.name = "iPhone server setup"
