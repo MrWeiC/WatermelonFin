@@ -18,6 +18,15 @@ final class FirstRunTests: XCTestCase {
         app.launch()
         let addServer = app.buttons["mobile.account.addServer"]
         XCTAssertTrue(addServer.waitForExistence(timeout: 20))
+        XCTAssertFalse(
+            app.otherElements["mobile.launch.animation"].exists,
+            "The startup animation must finish before the app becomes interactive"
+        )
+        XCUIDevice.shared.press(.home)
+        app.activate()
+        XCTAssertTrue(addServer.waitForExistence(timeout: 10))
+        XCTAssertTrue(addServer.isHittable, "Returning from the background must not replay a blocking splash")
+        XCTAssertFalse(app.otherElements["mobile.launch.animation"].exists)
         addServer.tap()
         let address = app.textFields["mobile.server.address"]
         XCTAssertTrue(address.waitForExistence(timeout: 10))

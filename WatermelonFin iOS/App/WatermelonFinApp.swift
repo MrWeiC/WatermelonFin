@@ -68,7 +68,9 @@ struct WatermelonFinApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            WatermelonLaunchContainer {
+                RootView()
+            }
                 .onNotification(.applicationDidEnterBackground) {
                     Defaults[.backgroundTimeStamp] = Date.now
 
