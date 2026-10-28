@@ -223,7 +223,7 @@ final class WatermelonFinAPIClientDelegateTests: XCTestCase {
         XCTAssertFalse(user.hasAccessToken)
     }
 
-    func testDefaultLocalizationUsesSimplifiedChinese() {
+    func testSelectedSimplifiedChineseLocalization() {
         XCTAssertEqual(L10n.connect, "连接")
         XCTAssertEqual(L10n.addUser, "添加已有用户")
     }

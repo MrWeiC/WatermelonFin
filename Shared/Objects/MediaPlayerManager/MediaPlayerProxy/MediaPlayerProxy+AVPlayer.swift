@@ -298,7 +298,7 @@ extension AVMediaPlayerProxy {
             case .failed:
                 if let error = self.player.error {
                     Task { @MainActor in
-                        self.manager?.error(ErrorMessage("AVPlayer error: \(error.localizedDescription)"))
+                        self.manager?.error(ErrorMessage(L10n.playerErrorDetails(error.localizedDescription)))
                     }
                 }
             case .none, .readyToPlay, .unknown:

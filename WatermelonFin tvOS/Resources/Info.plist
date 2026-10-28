@@ -23,7 +23,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>WatermelonFin</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>zh-Hans</string>
+	<string>en</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

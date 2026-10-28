@@ -211,7 +211,7 @@ struct SettingsView: View {
             }
 
             #if DEBUG && os(iOS)
-            ChevronButton("Debug") {
+            ChevronButton(L10n.debug) {
                 router.route(to: .debugSettings)
             }
             #endif

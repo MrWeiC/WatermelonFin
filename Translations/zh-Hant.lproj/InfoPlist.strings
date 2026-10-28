@@ -1,1 +1,6 @@
 "NSLocalNetworkUsageDescription" = "用於連接本機網路中的 Jellyfin 伺服器。";
+
+// Release localization additions
+"NSCameraUsageDescription" = "WatermelonFin 用於播放 Jellyfin 伺服器中的媒體，不會拍攝照片或影片。";
+"NSFaceIDUsageDescription" = "使用 Face ID 解鎖在本機受保護的 Jellyfin 帳號。";
+"NSMicrophoneUsageDescription" = "WatermelonFin 用於播放 Jellyfin 伺服器中的媒體，不會錄製音訊。";

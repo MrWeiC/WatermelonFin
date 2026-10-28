@@ -90,23 +90,11 @@ extension {{enumName}} {
 private final class BundleToken {
   static let bundle: Bundle = {
     #if SWIFT_PACKAGE
-    return localizedBundle(in: Bundle.module)
+    return Bundle.module
     #else
-    return localizedBundle(in: Bundle(for: BundleToken.self))
+    return Bundle(for: BundleToken.self)
     #endif
   }()
-
-  private static func localizedBundle(in bundle: Bundle) -> Bundle {
-    for candidate in [bundle, Bundle.main] {
-      if let path = candidate.path(forResource: "zh-Hans", ofType: "lproj"),
-         let localizedBundle = Bundle(path: path)
-      {
-        return localizedBundle
-      }
-    }
-
-    return bundle
-  }
 }
 // swiftlint:enable convenience_type
 {% endif %}

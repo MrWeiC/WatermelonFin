@@ -390,22 +390,22 @@
 "cinematicBackground" = "影片背景图";
 
 /* Customize Server View - Show Favorites */
-"showFavorites" = "标记收藏";
+"showFavorites" = "显示收藏";
 
 /* Indicators View - Show Favorited */
 "showFavorited" = "显示收藏";
 
 /* Customize Server View - Show Recently Added */
-"showRecentlyAdded" = "标记最新添加";
+"showRecentlyAdded" = "显示最近添加";
 
 /* Indicators View - Show Progress */
 "showProgress" = "显示播放进度";
 
 /* Indicators View - Show Unwatched */
-"showUnwatched" = "标记未观看";
+"showUnwatched" = "显示未观看标记";
 
 /* Indicators View - Show Watched */
-"showWatched" = "标记已观看";
+"showWatched" = "显示已观看标记";
 
 /* General */
 "jellyfin" = "Jellyfin";
@@ -533,7 +533,7 @@
 "deleteDeviceFailed" = "删除设备失败";
 "deletedScene" = "已删除的场景";
 "deleteImage" = "已删除的图片";
-"audioChannelsNotSupported" = "不支持的音轨";
+"audioChannelsNotSupported" = "不支持此音频声道数";
 "decreasePlaybackSpeed" = "降低播放速度";
 "deviceAuthFailed" = "设备授权失败";
 "directPlay" = "直接播放";
@@ -544,7 +544,7 @@
 "edit" = "修改";
 "dashboardDescription" = "执行 Jellyfin 服务器的管理任务。";
 "deleteSelectedConfirmation" = "你确定要删除这些选定的项目吗？";
-"editor" = "修改";
+"editor" = "剪辑师";
 "editUsers" = "修改用户";
 "errorDetails" = "错误详情";
 "duplicateUser" = "用户已添加";
@@ -746,7 +746,7 @@
 "ascending" = "升序";
 "replaceAll" = "全部替换";
 "searchScore" = "搜索分数";
-"signoutBackground" = "后台自动注销登录";
+"signoutBackground" = "进入后台后自动退出登录";
 "signoutBackgroundFooter" = "当 WatermelonFin 在一段时间后处于后台且未播放媒体时，注销最后一个用户。";
 "tagline" = "标语";
 "taglines" = "标语";
@@ -763,7 +763,7 @@
 "videoFramerateNotSupported" = "不支持的视频帧率";
 "year" = "年";
 "likedItems" = "喜欢的内容";
-"session" = "任务";
+"session" = "会话";
 "sessions" = "任务";
 "set" = "设置";
 "signoutClose" = "关闭后自动注销";
@@ -833,7 +833,7 @@
 "deviceAccess" = "设备访问";
 "deviceAuth" = "设备授权";
 "done" = "完成";
-"duplicateUserSaved" = "%@ 已经添加到这台 Apple TV。你可以继续使用已保存的登录，也可以用刚输入的账号密码更新它。";
+"duplicateUserSaved" = "%@ 已经添加到此设备。你可以继续使用已保存的登录，也可以用刚输入的账号密码更新它。";
 "enableAllLibraries" = "启用所有库";
 "enterSeasonNumber" = "输入第几季的编号。";
 "failedLogins" = "登录失败";
@@ -862,7 +862,7 @@
 "findMissingDescription" = "查找缺少的元数据和图像。";
 "folder" = "文件夹";
 "joinGroups" = "加入组";
-"kilobitsPerSecond" = "kpbs";
+"kilobitsPerSecond" = "kbps";
 "lastRunTime" = "最后一次运行 %@";
 "lastRun" = "最后一次运行";
 "existsOnServer" = "此项目存在于您的 Jellyfin 服务器上。";
@@ -887,7 +887,7 @@
 "remixer" = "混音师";
 "birthplace" = "出生地";
 "musicVideos" = "音乐视频";
-"program" = "程序";
+"program" = "节目";
 "aggregateFolder" = "合集文件夹";
 "aggregateFolders" = "合集文件夹";
 "box" = "盒子";
@@ -923,7 +923,7 @@
 "type" = "类型";
 "featurette" = "花絮";
 "level" = "等级";
-"letterer" = "字母";
+"letterer" = "文字编排师";
 "likes" = "喜欢";
 "logo" = "标志";
 "lockedUsers" = "锁定用户";
@@ -948,7 +948,7 @@
 "everyday" = "每天";
 "interlacedVideoNotSupported" = "不支持隔行扫描";
 "liveTVChannels" = "电视直播频道";
-"liveTVPrograms" = "电视直播程序";
+"liveTVPrograms" = "电视直播节目";
 "identify" = "识别";
 "idle" = "闲时";
 "illustrator" = "插画师";
@@ -1001,8 +1001,8 @@
 /// 删除日志
 "removeLogs" = "删除日志";
 
-/// 这会从这台 Apple TV 删除应用和网络日志。
-"removeLogsConfirmation" = "这会从这台 Apple TV 删除应用和网络日志。";
+/// 这会从此设备 删除应用和网络日志。
+"removeLogsConfirmation" = "这会从此设备 删除应用和网络日志。";
 
 /// 存储信息
 "storeInfo" = "存储信息";
@@ -1018,17 +1018,17 @@
 "music" = "音乐";
 "method" = "方法";
 "minutes" = "分钟";
-"nextUpDays" = "重新观看限制天数";
+"nextUpDays" = "接续观看保留天数";
 "missingCodecValues" = "编解码关键值缺失";
-"nextUpRewatch" = "重新观看限制";
+"nextUpRewatch" = "接续观看包含重看内容";
 "productionYear" = "制作年份";
 "profile" = "配置";
 "recording" = "录制";
 "recordings" = "录制";
 "setPinForNewUser" = "为新用户设置密码。";
 "split" = "分割";
-"tvProgram" = "电视程序";
-"tvPrograms" = "电视程序";
+"tvProgram" = "电视节目";
+"tvPrograms" = "电视节目";
 "yearsOld" = "%@岁";
 "accessTags" = "访问标签";
 "accessTagAlreadyExists" = "访问标签已经存在";
@@ -1053,7 +1053,7 @@
 "halfTopAndBottom" = "半高上下分屏";
 "fullTopAndBottom" = "全高上下分屏";
 "gigabitsPerSecond" = "Gbps";
-"profileImage" = "设置图片";
+"profileImage" = "个人头像";
 "channelFolderItems" = "频道文件夹项";
 "capsule" = "胶囊";
 "detailed" = "详细的";
@@ -1070,7 +1070,7 @@
 "executed" = "已执行";
 "disclaimer" = "免责声明";
 "engineer" = "工程师";
-"inactive" = "无效";
+"inactive" = "未在使用";
 "similarityScore" = "相似性分数";
 "liveTVProgram" = "电视直播节目";
 "manualPlaylistsFolder" = "手动播放列表文件夹";
@@ -1191,14 +1191,14 @@
 /// 登录已有 Jellyfin 用户
 "signInExistingJellyfinUser" = "登录用户";
 
-/// 这不会创建 Jellyfin 用户，只会把这台服务器上的已有账号添加到这台 Apple TV。
-"signInExistingJellyfinUserDescription" = "这不会创建 Jellyfin 用户，只会把这台服务器上的已有账号登录到这台 Apple TV。";
+/// 这不会创建 Jellyfin 用户，只会把这台服务器上的已有账号添加到此设备。
+"signInExistingJellyfinUserDescription" = "这不会创建 Jellyfin 用户，只会把这台服务器上的已有账号登录到此设备。";
 
 /// 重新登录 Jellyfin 用户
 "reauthenticateJellyfinUser" = "重新登录 Jellyfin 用户";
 
-/// 这个用户已保存在这台 Apple TV 上。请输入 Jellyfin 密码以刷新登录状态。
-"reauthenticateJellyfinUserDescription" = "这个用户已保存在这台 Apple TV 上。请输入 Jellyfin 密码以刷新登录状态。";
+/// 这个用户已保存在此设备 上。请输入 Jellyfin 密码以刷新登录状态。
+"reauthenticateJellyfinUserDescription" = "这个用户已保存在此设备 上。请输入 Jellyfin 密码以刷新登录状态。";
 
 /// 重新登录 %@（%@）
 "reauthenticateJellyfinUserOnServer" = "重新登录 %@（%@）";
@@ -1212,7 +1212,7 @@
 "advancedLogs" = "高级日志";
 "advancedLogsDescription" = "打开面向开发者排查问题的原始应用和网络日志。";
 "diagnostics" = "诊断";
-"diagnosticsDescription" = "查看这台 Apple TV 的连接状态和故障排查工具。";
+"diagnosticsDescription" = "查看此设备 的连接状态和故障排查工具。";
 "addExistingJellyfinUserToServer" = "将已有 Jellyfin 用户添加到 %@";
 "addExistingUserStartDescription" = "使用服务器上的用户名和密码登录。";
 "selectUser" = "选择用户";
@@ -1312,3 +1312,28 @@
 "serverSavedMissing" = "找不到已保存的服务器。";
 
 "serverSavedUnavailable" = "无法通过已保存的地址连接。请确认服务器正在运行，或输入它的新地址。你的账号和设置已保留。Tailscale 为可选项。";
+
+// Release localization additions
+"invalidIPAddress" = "IP 地址无效";
+"passthrough" = "音频直通";
+"skipIntro" = "跳过片头";
+"stereo" = "立体声";
+"track" = "曲目";
+
+// User-visible error messages
+"internalErrorOccurred" = "发生内部错误。";
+"authorizationUnsuccessful" = "授权失败";
+"userToDeleteNotFound" = "找不到要删除的用户。";
+"serverToDeleteNotFound" = "找不到要删除的服务器。";
+"mediaSourceNotFound" = "找不到此项目的媒体源。";
+"playSessionMissing" = "缺少播放会话标识。";
+"mediaItemIDMissing" = "缺少媒体项目标识。";
+"cannotCreateTranscodeURL" = "无法创建转码地址。";
+"cannotCreateStreamURL" = "无法创建媒体流地址。";
+"seriesIDMissing" = "缺少剧集标识。";
+"seriesItemMissing" = "找不到该剧集。";
+"userIDMissing" = "缺少用户标识。";
+"localStoreCreationFailed" = "无法打开本机应用数据：%@";
+"playerErrorDetails" = "播放器错误：%@";
+"networkErrorCode" = "网络错误（代码 %d）";
+"httpErrorCode" = "HTTP 错误（状态码 %d）";

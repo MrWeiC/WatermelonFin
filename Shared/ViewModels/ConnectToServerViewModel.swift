@@ -242,7 +242,7 @@ final class ConnectToServerViewModel: ViewModel {
         let newState = try dataStack.perform { transaction in
             guard let editServer = try transaction.fetchOne(From<ServerModel>().where(\.$id == existingServer.id)) else {
                 logger.critical("Could not find server to update current url")
-                throw ErrorMessage("An internal error has occurred")
+                throw ErrorMessage(L10n.internalErrorOccurred)
             }
 
             editServer.urls.insert(discoveredServer.currentURL)

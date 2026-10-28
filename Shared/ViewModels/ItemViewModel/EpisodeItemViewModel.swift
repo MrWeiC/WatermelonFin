@@ -47,7 +47,7 @@ final class EpisodeItemViewModel: ItemViewModel {
 
     private func getSeriesItem() async throws -> BaseItemDto {
 
-        guard let seriesID = item.seriesID else { throw ErrorMessage("Expected series ID missing") }
+        guard let seriesID = item.seriesID else { throw ErrorMessage(L10n.seriesIDMissing) }
 
         var parameters = Paths.GetItemsByUserIDParameters()
         parameters.enableUserData = true
@@ -62,7 +62,7 @@ final class EpisodeItemViewModel: ItemViewModel {
         )
         let response = try await session.client.send(request)
 
-        guard let seriesItem = response.value.items?.first else { throw ErrorMessage("Expected series item missing") }
+        guard let seriesItem = response.value.items?.first else { throw ErrorMessage(L10n.seriesItemMissing) }
 
         return seriesItem
     }

@@ -10,6 +10,29 @@ import XCTest
 
 final class FirstRunTests: XCTestCase {
     @MainActor
+    func testDeviceLanguageSelectsEnglishAndChinese() {
+        let app = XCUIApplication()
+        for (language, expectedTitle) in [
+            ("en", "Add server"),
+            ("zh-Hans", "添加服务器"),
+            ("zh-Hant", "添加伺服器"),
+            ("is", "Add server"),
+        ] {
+            app.launchArguments = ["-uiTestingSignedOut", "-AppleLanguages", "(\(language))"]
+            app.launch()
+            let addServer = app.buttons["mobile.account.addServer"]
+            XCTAssertTrue(addServer.waitForExistence(timeout: 20))
+            XCTAssertTrue(app.otherElements["mobile.launch.animation"].waitForNonExistence(timeout: 20))
+            XCTAssertEqual(addServer.label, expectedTitle, "Incorrect UI language for \(language)")
+            let screenshot = XCTAttachment(screenshot: app.screenshot())
+            screenshot.name = "First run — \(language)"
+            screenshot.lifetime = .keepAlways
+            add(screenshot)
+            app.terminate()
+        }
+    }
+
+    @MainActor
     func testFirstRunCanOpenServerSetup() {
         XCUIDevice.shared.orientation = .portrait
         defer { XCUIDevice.shared.orientation = .portrait }

@@ -1,1 +1,6 @@
 "NSLocalNetworkUsageDescription" = "Connect to your Jellyfin server on your local network.";
+
+// Release localization additions
+"NSCameraUsageDescription" = "WatermelonFin plays media from your Jellyfin server and does not capture photos or video.";
+"NSFaceIDUsageDescription" = "Use Face ID to unlock locally protected Jellyfin accounts.";
+"NSMicrophoneUsageDescription" = "WatermelonFin plays media from your Jellyfin server and does not record audio.";

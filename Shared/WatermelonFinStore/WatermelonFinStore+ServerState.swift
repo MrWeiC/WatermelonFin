@@ -56,7 +56,7 @@ extension ServerState {
     func delete() throws {
         try WatermelonFinStore.dataStack.perform { transaction in
             guard let storedServer = try transaction.fetchOne(From<ServerModel>().where(\.$id == id)) else {
-                throw ErrorMessage("Unable to find server to delete")
+                throw ErrorMessage(L10n.serverToDeleteNotFound)
             }
 
             let storedDataClause = AnyStoredData.fetchClause(ownerID: id)

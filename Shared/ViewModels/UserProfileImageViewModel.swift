@@ -141,7 +141,7 @@ final class UserProfileImageViewModel: ViewModel, Eventful, Stateful {
             imageData = jpgData
         } else {
             logger.error("Unable to convert given profile image to png/jpg")
-            throw ErrorMessage("An internal error occurred")
+            throw ErrorMessage(L10n.internalErrorOccurred)
         }
 
         var request = Paths.postUserImage(

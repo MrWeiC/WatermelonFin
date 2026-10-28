@@ -198,6 +198,8 @@ internal enum L10n {
   }
   /// Author
   internal static let author = L10n.tr("Localizable", "author", fallback: "Author")
+  /// Authorization unsuccessful
+  internal static let authorizationUnsuccessful = L10n.tr("Localizable", "authorizationUnsuccessful", fallback: "Authorization unsuccessful")
   /// Authorize
   internal static let authorize = L10n.tr("Localizable", "authorize", fallback: "Authorize")
   /// Auto
@@ -304,6 +306,10 @@ internal enum L10n {
   internal static let cancelling = L10n.tr("Localizable", "cancelling", fallback: "Cancelling...")
   /// Cannot connect to host
   internal static let cannotConnectToHost = L10n.tr("Localizable", "cannotConnectToHost", fallback: "Cannot connect to host")
+  /// Unable to create the stream URL.
+  internal static let cannotCreateStreamURL = L10n.tr("Localizable", "cannotCreateStreamURL", fallback: "Unable to create the stream URL.")
+  /// Unable to create the transcoding URL.
+  internal static let cannotCreateTranscodeURL = L10n.tr("Localizable", "cannotCreateTranscodeURL", fallback: "Unable to create the transcoding URL.")
   /// Capabilities
   internal static let capabilities = L10n.tr("Localizable", "capabilities", fallback: "Capabilities")
   /// Cast & crew
@@ -578,8 +584,8 @@ internal enum L10n {
   internal static let devices = L10n.tr("Localizable", "devices", fallback: "Devices")
   /// Diagnostics
   internal static let diagnostics = L10n.tr("Localizable", "diagnostics", fallback: "Diagnostics")
-  /// Connection status and troubleshooting tools for this Apple TV.
-  internal static let diagnosticsDescription = L10n.tr("Localizable", "diagnosticsDescription", fallback: "Connection status and troubleshooting tools for this Apple TV.")
+  /// Connection status and troubleshooting tools for this device.
+  internal static let diagnosticsDescription = L10n.tr("Localizable", "diagnosticsDescription", fallback: "Connection status and troubleshooting tools for this device.")
   /// Died
   internal static let died = L10n.tr("Localizable", "died", fallback: "Died")
   /// Digital
@@ -620,9 +626,9 @@ internal enum L10n {
   internal static let downloads = L10n.tr("Localizable", "downloads", fallback: "Downloads")
   /// User already added
   internal static let duplicateUser = L10n.tr("Localizable", "duplicateUser", fallback: "User already added")
-  /// %@ is already added on this Apple TV. Continue with the saved login, or replace it with the credentials you just entered.
+  /// %@ is already added on this device. Continue with the saved login, or replace it with the credentials you just entered.
   internal static func duplicateUserSaved(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "duplicateUserSaved", String(describing: p1), fallback: "%@ is already added on this Apple TV. Continue with the saved login, or replace it with the credentials you just entered.")
+    return L10n.tr("Localizable", "duplicateUserSaved", String(describing: p1), fallback: "%@ is already added on this device. Continue with the saved login, or replace it with the credentials you just entered.")
   }
   /// Duration
   internal static let duration = L10n.tr("Localizable", "duration", fallback: "Duration")
@@ -800,6 +806,10 @@ internal enum L10n {
   internal static let horizontalSwipe = L10n.tr("Localizable", "horizontalSwipe", fallback: "Horizontal swipe")
   /// Hours
   internal static let hours = L10n.tr("Localizable", "hours", fallback: "Hours")
+  /// HTTP error (status %d)
+  internal static func httpErrorCode(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "httpErrorCode", p1, fallback: "HTTP error (status %d)")
+  }
   /// ID
   internal static let id = L10n.tr("Localizable", "id", fallback: "ID")
   /// Identify
@@ -832,6 +842,8 @@ internal enum L10n {
   internal static let inker = L10n.tr("Localizable", "inker", fallback: "Inker")
   /// Interlaced video is not supported
   internal static let interlacedVideoNotSupported = L10n.tr("Localizable", "interlacedVideoNotSupported", fallback: "Interlaced video is not supported")
+  /// An internal error occurred.
+  internal static let internalErrorOccurred = L10n.tr("Localizable", "internalErrorOccurred", fallback: "An internal error occurred.")
   /// Interval
   internal static let interval = L10n.tr("Localizable", "interval", fallback: "Interval")
   /// Interview
@@ -946,6 +958,10 @@ internal enum L10n {
   internal static let localServers = L10n.tr("Localizable", "localServers", fallback: "Local servers")
   /// Automatic discovery is unavailable in this version. Enter your server address to connect.
   internal static let localServersDescription = L10n.tr("Localizable", "localServersDescription", fallback: "Automatic discovery is unavailable in this version. Enter your server address to connect.")
+  /// Unable to open local app data: %@
+  internal static func localStoreCreationFailed(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "localStoreCreationFailed", String(describing: p1), fallback: "Unable to open local app data: %@")
+  }
   /// Lock all fields
   internal static let lockAllFields = L10n.tr("Localizable", "lockAllFields", fallback: "Lock all fields")
   /// Locked fields
@@ -1018,6 +1034,8 @@ internal enum L10n {
   internal static let mediaDownloads = L10n.tr("Localizable", "mediaDownloads", fallback: "Media downloads")
   /// Item Error
   internal static let mediaItemError = L10n.tr("Localizable", "mediaItemError", fallback: "Item Error")
+  /// The media item identifier is missing.
+  internal static let mediaItemIDMissing = L10n.tr("Localizable", "mediaItemIDMissing", fallback: "The media item identifier is missing.")
   /// The requested item was not found.
   internal static let mediaItemNotFound = L10n.tr("Localizable", "mediaItemNotFound", fallback: "The requested item was not found.")
   /// Item “%@” was not found.
@@ -1090,6 +1108,8 @@ internal enum L10n {
   internal static let mediaSessionError = L10n.tr("Localizable", "mediaSessionError", fallback: "Session Error")
   /// Your playback session has expired.
   internal static let mediaSessionExpired = L10n.tr("Localizable", "mediaSessionExpired", fallback: "Your playback session has expired.")
+  /// Unable to find a media source for this item.
+  internal static let mediaSourceNotFound = L10n.tr("Localizable", "mediaSourceNotFound", fallback: "Unable to find a media source for this item.")
   /// The media stream ended unexpectedly.
   internal static let mediaStreamEnded = L10n.tr("Localizable", "mediaStreamEnded", fallback: "The media stream ended unexpectedly.")
   /// Transcoding Error
@@ -1166,6 +1186,10 @@ internal enum L10n {
   internal static let native = L10n.tr("Localizable", "native", fallback: "Native (AVKit)")
   /// Native Player
   internal static let nativePlayer = L10n.tr("Localizable", "nativePlayer", fallback: "Native Player")
+  /// Network error (code %d)
+  internal static func networkErrorCode(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "networkErrorCode", p1, fallback: "Network error (code %d)")
+  }
   /// Network only
   internal static let networkOnly = L10n.tr("Localizable", "networkOnly", fallback: "Network only")
   /// Network requests
@@ -1322,6 +1346,10 @@ internal enum L10n {
   internal static let playCount = L10n.tr("Localizable", "playCount", fallback: "Play count")
   /// Played
   internal static let played = L10n.tr("Localizable", "played", fallback: "Played")
+  /// Player error: %@
+  internal static func playerErrorDetails(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "playerErrorDetails", String(describing: p1), fallback: "Player error: %@")
+  }
   /// Uses Apple AVPlayer for HDR, Picture in Picture, AirPlay casting, HomePod, and AirPlay speakers. Subtitle and file-format support is more limited.
   internal static let playerNativeDescription = L10n.tr("Localizable", "playerNativeDescription", fallback: "Uses Apple AVPlayer for HDR, Picture in Picture, AirPlay casting, HomePod, and AirPlay speakers. Subtitle and file-format support is more limited.")
   /// Uses MPV/libmpv for broad format compatibility and stronger subtitle rendering. It does not support HomePod, AirPlay speakers, Picture in Picture, or AirPlay casting.
@@ -1340,6 +1368,8 @@ internal enum L10n {
   internal static let playNextItem = L10n.tr("Localizable", "playNextItem", fallback: "Play next item")
   /// Play previous item
   internal static let playPreviousItem = L10n.tr("Localizable", "playPreviousItem", fallback: "Play previous item")
+  /// The playback session identifier is missing.
+  internal static let playSessionMissing = L10n.tr("Localizable", "playSessionMissing", fallback: "The playback session identifier is missing.")
   /// Portrait
   internal static let portrait = L10n.tr("Localizable", "portrait", fallback: "Portrait")
   /// Posters
@@ -1412,8 +1442,8 @@ internal enum L10n {
   internal static let ratings = L10n.tr("Localizable", "ratings", fallback: "Ratings")
   /// Re-authenticate Jellyfin user
   internal static let reauthenticateJellyfinUser = L10n.tr("Localizable", "reauthenticateJellyfinUser", fallback: "Re-authenticate Jellyfin user")
-  /// This user is already saved on this Apple TV. Enter the Jellyfin password to refresh the saved login.
-  internal static let reauthenticateJellyfinUserDescription = L10n.tr("Localizable", "reauthenticateJellyfinUserDescription", fallback: "This user is already saved on this Apple TV. Enter the Jellyfin password to refresh the saved login.")
+  /// This user is already saved on this device. Enter the Jellyfin password to refresh the saved login.
+  internal static let reauthenticateJellyfinUserDescription = L10n.tr("Localizable", "reauthenticateJellyfinUserDescription", fallback: "This user is already saved on this device. Enter the Jellyfin password to refresh the saved login.")
   /// Re-authenticate %@ on %@
   internal static func reauthenticateJellyfinUserOnServer(_ p1: Any, _ p2: Any) -> String {
     return L10n.tr("Localizable", "reauthenticateJellyfinUserOnServer", String(describing: p1), String(describing: p2), fallback: "Re-authenticate %@ on %@")
@@ -1464,8 +1494,8 @@ internal enum L10n {
   internal static let removeAll = L10n.tr("Localizable", "removeAll", fallback: "Remove all")
   /// Remove logs
   internal static let removeLogs = L10n.tr("Localizable", "removeLogs", fallback: "Remove logs")
-  /// This removes app and network logs from this Apple TV.
-  internal static let removeLogsConfirmation = L10n.tr("Localizable", "removeLogsConfirmation", fallback: "This removes app and network logs from this Apple TV.")
+  /// This removes app and network logs from this device.
+  internal static let removeLogsConfirmation = L10n.tr("Localizable", "removeLogsConfirmation", fallback: "This removes app and network logs from this device.")
   /// Remux
   internal static let remux = L10n.tr("Localizable", "remux", fallback: "Remux")
   /// Reorder
@@ -1608,6 +1638,10 @@ internal enum L10n {
   }
   /// Series date played
   internal static let seriesDatePlayed = L10n.tr("Localizable", "seriesDatePlayed", fallback: "Series date played")
+  /// The series identifier is missing.
+  internal static let seriesIDMissing = L10n.tr("Localizable", "seriesIDMissing", fallback: "The series identifier is missing.")
+  /// Unable to find the series.
+  internal static let seriesItemMissing = L10n.tr("Localizable", "seriesItemMissing", fallback: "Unable to find the series.")
   /// Series name
   internal static let seriesName = L10n.tr("Localizable", "seriesName", fallback: "Series name")
   /// Server
@@ -1672,6 +1706,8 @@ internal enum L10n {
   internal static let serverSearchStart = L10n.tr("Localizable", "serverSearchStart", fallback: "Search local network")
   /// Automatic discovery is unavailable in this version. Enter your server address to connect.
   internal static let serverSearchUnavailable = L10n.tr("Localizable", "serverSearchUnavailable", fallback: "Automatic discovery is unavailable in this version. Enter your server address to connect.")
+  /// Unable to find the server to delete.
+  internal static let serverToDeleteNotFound = L10n.tr("Localizable", "serverToDeleteNotFound", fallback: "Unable to find the server to delete.")
   /// Server URL
   internal static let serverURL = L10n.tr("Localizable", "serverURL", fallback: "Server URL")
   /// WatermelonFin requires Jellyfin version %@ or higher.
@@ -1718,8 +1754,8 @@ internal enum L10n {
   internal static let signIn = L10n.tr("Localizable", "signIn", fallback: "Sign in")
   /// Sign in user
   internal static let signInExistingJellyfinUser = L10n.tr("Localizable", "signInExistingJellyfinUser", fallback: "Sign in user")
-  /// This does not create a Jellyfin user. It only signs in an existing account from this server on this Apple TV.
-  internal static let signInExistingJellyfinUserDescription = L10n.tr("Localizable", "signInExistingJellyfinUserDescription", fallback: "This does not create a Jellyfin user. It only signs in an existing account from this server on this Apple TV.")
+  /// This does not create a Jellyfin user. It only signs in an existing account from this server on this device.
+  internal static let signInExistingJellyfinUserDescription = L10n.tr("Localizable", "signInExistingJellyfinUserDescription", fallback: "This does not create a Jellyfin user. It only signs in an existing account from this server on this device.")
   /// Sign in to %s
   internal static func signInToServer(_ p1: UnsafePointer<CChar>) -> String {
     return L10n.tr("Localizable", "signInToServer", p1, fallback: "Sign in to %s")
@@ -1968,6 +2004,8 @@ internal enum L10n {
   internal static let user = L10n.tr("Localizable", "user", fallback: "User")
   /// This user will require device authentication.
   internal static let userDeviceAuthRequiredDescription = L10n.tr("Localizable", "userDeviceAuthRequiredDescription", fallback: "This user will require device authentication.")
+  /// The user identifier is missing.
+  internal static let userIDMissing = L10n.tr("Localizable", "userIDMissing", fallback: "The user identifier is missing.")
   /// Username
   internal static let username = L10n.tr("Localizable", "username", fallback: "Username")
   /// A username is required
@@ -1984,6 +2022,8 @@ internal enum L10n {
   internal static let userRootFolders = L10n.tr("Localizable", "userRootFolders", fallback: "User root folders")
   /// Users
   internal static let users = L10n.tr("Localizable", "users", fallback: "Users")
+  /// Unable to find the user to delete.
+  internal static let userToDeleteNotFound = L10n.tr("Localizable", "userToDeleteNotFound", fallback: "Unable to find the user to delete.")
   /// User view
   internal static let userView = L10n.tr("Localizable", "userView", fallback: "User view")
   /// User views
@@ -2079,22 +2119,10 @@ extension L10n {
 private final class BundleToken {
   static let bundle: Bundle = {
     #if SWIFT_PACKAGE
-    return localizedBundle(in: Bundle.module)
+    return Bundle.module
     #else
-    return localizedBundle(in: Bundle(for: BundleToken.self))
+    return Bundle(for: BundleToken.self)
     #endif
   }()
-
-  private static func localizedBundle(in bundle: Bundle) -> Bundle {
-    for candidate in [bundle, Bundle.main] {
-      if let path = candidate.path(forResource: "zh-Hans", ofType: "lproj"),
-         let localizedBundle = Bundle(path: path)
-      {
-        return localizedBundle
-      }
-    }
-
-    return bundle
-  }
 }
 // swiftlint:enable convenience_type
