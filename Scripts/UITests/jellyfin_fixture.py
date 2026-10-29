@@ -30,6 +30,8 @@ class Handler(BaseHTTPRequestHandler):
         parts = urlparse(self.path).path.strip('/').split('/')
         scenario, run = (parts + ['users', 'default'])[:2]
         endpoint = '/'.join(parts[2:]).lower()
+        if endpoint == 'quickconnect/initiate' and self.command != 'POST':
+            return self.respond(405, {'Message': 'Quick Connect initiation requires POST'})
         server_id = hashlib.md5(run.encode()).hexdigest()
         user = {'Id': hashlib.md5((run + 'user').encode()).hexdigest(),
                 'Name': 'Preview User', 'ServerId': server_id,

@@ -42,6 +42,13 @@ final class WatermelonFinAPIClientDelegate: APIClientDelegate {
     }
 
     func client(_ client: APIClient, willSendRequest request: inout URLRequest) async throws {
+        // The pinned SDK's QuickConnect helper still uses deprecated GET.
+        // Current Jellyfin servers require POST; preserve reverse-proxy prefixes.
+        if request.httpMethod == "GET",
+           request.url?.path.lowercased().hasSuffix("/quickconnect/initiate") == true
+        {
+            request.httpMethod = "POST"
+        }
         if let requestURL = request.url {
             let recoveryState = recoveredServerState
             if let recoveredServerURL = recoveryState.url {

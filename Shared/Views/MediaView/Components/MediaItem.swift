@@ -95,32 +95,53 @@ extension MediaView {
         private var cardOverlay: some View {
             ZStack(alignment: .bottomLeading) {
                 LinearGradient(
-                    colors: [.clear, .black.opacity(0.88)],
-                    startPoint: .center,
+                    colors: UIDevice.isTV ? [.clear, .black.opacity(0.88)] : [.black.opacity(0.25), .black.opacity(0.9)],
+                    startPoint: UIDevice.isTV ? .center : .top,
                     endPoint: .bottom
                 )
 
-                HStack(spacing: 18) {
-                    Image(systemName: mediaType.systemImage)
-                        .font(.title2)
-                        .frame(width: 54, height: 54)
-                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
-
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(mediaType.displayTitle)
+                if UIDevice.isTV {
+                    HStack(spacing: 18) {
+                        Image(systemName: mediaType.systemImage)
                             .font(.title2)
-                            .fontWeight(.semibold)
-                            .lineLimit(1)
+                            .frame(width: 54, height: 54)
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
 
-                        if let countLabel {
-                            Text(countLabel)
-                                .font(.callout)
-                                .foregroundStyle(.white.opacity(0.75))
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text(mediaType.displayTitle)
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .lineLimit(1)
+
+                            if let countLabel {
+                                Text(countLabel)
+                                    .font(.callout)
+                                    .foregroundStyle(.white.opacity(0.75))
+                            }
                         }
                     }
+                    .foregroundStyle(.white)
+                    .padding(24)
+                } else {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Image(systemName: mediaType.systemImage)
+                            .font(.body.weight(.semibold))
+                            .accessibilityHidden(true)
+                        Text(mediaType.displayTitle)
+                            .font(.headline)
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
+                        if let countLabel {
+                            Text(countLabel)
+                                .font(.caption)
+                                .foregroundStyle(.white.opacity(0.85))
+                                .lineLimit(1)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(.white)
+                    .padding(12)
                 }
-                .foregroundStyle(.white)
-                .padding(24)
             }
         }
 
@@ -158,7 +179,8 @@ extension MediaView {
             .onChange(of: viewModel.cardDataRevision) { _, _ in
                 setCardData()
             }
-            .buttonStyle(.platformCard)
+            .if(UIDevice.isTV) { $0.buttonStyle(.platformCard) }
+            .if(!UIDevice.isTV) { $0.buttonStyle(.plain) }
         }
     }
 }

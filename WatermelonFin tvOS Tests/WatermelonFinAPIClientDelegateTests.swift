@@ -17,6 +17,34 @@ import XCTest
 @MainActor
 final class WatermelonFinAPIClientDelegateTests: XCTestCase {
 
+    func testDeprecatedInitiateUsesPostIncludingReverseProxyPrefix() async throws {
+        let delegate = WatermelonFinAPIClientDelegate()
+        for path in ["/QuickConnect/Initiate", "/jellyfin/QuickConnect/Initiate"] {
+            let url = try XCTUnwrap(URL(string: "https://example.invalid" + path))
+            var request = URLRequest(url: url)
+            try await delegate.client(APIClient(baseURL: url), willSendRequest: &request)
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual(request.url, url)
+        }
+    }
+
+    func testOtherQuickConnectRequestsRemainUnchanged() async throws {
+        let delegate = WatermelonFinAPIClientDelegate()
+        for (path, method) in [
+            ("/QuickConnect/Connect?secret=test", "GET"),
+            ("/QuickConnect/Enabled", "GET"),
+            ("/QuickConnect/Authorize?code=123456", "POST"),
+            ("/QuickConnect/Initiate", "POST"),
+        ] {
+            let url = try XCTUnwrap(URL(string: "https://example.invalid" + path))
+            var request = URLRequest(url: url)
+            request.httpMethod = method
+            try await delegate.client(APIClient(baseURL: url), willSendRequest: &request)
+            XCTAssertEqual(request.httpMethod, method)
+            XCTAssertEqual(request.url, url)
+        }
+    }
+
     func testAuthorizationHeaderQuotesValuesWithSpaces() throws {
         let configuration = try JellyfinClient.Configuration(
             url: XCTUnwrap(URL(string: "http://jellyfin.local:8096")),

@@ -12,6 +12,24 @@ import XCTest
 
 @MainActor
 final class PlaybackAndPlaylistTests: XCTestCase {
+    func testMPVProfileDoesNotTranscodeAnamorphicH264() throws {
+        let profile = try XCTUnwrap(VideoPlayerType.watermelonfin.codecProfiles.first { $0.codec == "h264" })
+        XCTAssertFalse(profile.conditions?.contains { $0.property == .isAnamorphic } ?? false)
+        XCTAssertTrue(profile.conditions?.contains { $0.property == .videoRangeType } ?? false)
+    }
+
+    func testTrackSelectionPreventsOverlayTimeout() async throws {
+        let state = VideoPlayerContainerState(overlayAutoHideInterval: 0.05)
+        state.isPresentingOverlay = true
+        state.isPresentingSelection = true
+        state.timer.poke()
+        try await Task.sleep(for: .milliseconds(150))
+        XCTAssertTrue(state.isPresentingOverlay)
+        state.isPresentingSelection = false
+        try await Task.sleep(for: .milliseconds(150))
+        XCTAssertFalse(state.isPresentingOverlay)
+    }
+
     func testPlaybackFailureBeforeReadinessDoesNotAutoplay() {
         XCTAssertEqual(PlaybackEndAction.resolve(isError: true, isEOF: false, isStopping: false, isReady: false), .fail)
         XCTAssertEqual(PlaybackEndAction.resolve(isError: false, isEOF: true, isStopping: false, isReady: true), .finish)
