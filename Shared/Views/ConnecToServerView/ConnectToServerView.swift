@@ -53,7 +53,7 @@ struct ConnectToServerView: View {
         if server.userIDs.isEmpty {
             // Keep the current presentation alive while pushing sign-in. Replacing
             // a fullscreen route during its dismissal can discard the new route.
-            router.route(to: .userSignIn(server: server), style: .push(.automatic))
+            router.route(to: .userSignIn(server: server, isPushed: true), style: .push(.automatic))
         } else {
             router.dismiss()
         }
@@ -102,6 +102,7 @@ struct ConnectToServerView: View {
             }
             .buttonStyle(.primary)
             .frame(height: 64)
+            .accessibilityIdentifier("mobile.server.connect")
             .disabled(!canConnectManually)
             .foregroundStyle(
                 accentColor.overlayColor,
@@ -215,6 +216,10 @@ struct ConnectToServerView: View {
 
             savedServersSection
         }
+        .frame(maxWidth: 640)
+        .frame(maxWidth: .infinity)
+        .background(Color(uiColor: .systemGroupedBackground))
+        .scrollDismissesKeyboard(.interactively)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarCloseButton(disabled: viewModel.state == .connecting) {
             router.dismiss()
@@ -259,6 +264,7 @@ struct ConnectToServerView: View {
             .onReceive(viewModel.events, perform: onEvent)
             .onReceive(viewModel.$error) { error in
                 guard error != nil else { return }
+                viewModel.cancel()
                 UIDevice.feedback(.error)
                 #if os(tvOS)
                 isShowingManualAddress = true

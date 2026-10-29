@@ -1117,6 +1117,9 @@
 /// Hidden libraries
 "hiddenLibraries" = "Hidden libraries";
 
+/// Hide password
+"hidePassword" = "Hide password";
+
 /// Hide user from login screen
 "hideUserFromLoginScreen" = "Hide user from login screen";
 
@@ -2014,6 +2017,9 @@
 /// Authorizing Quick Connect successful. Please continue on your other device.
 "quickConnectSuccessMessage" = "Authorizing Quick Connect successful. Please continue on your other device.";
 
+/// Quick Connect could not connect to this server. Try again, or close this screen to sign in with your username and password.
+"quickConnectUnavailable" = "Quick Connect could not connect to this server. Try again, or close this screen to sign in with your username and password.";
+
 /// This user will be authenticated to the other device.
 "quickConnectUserDisclaimer" = "This user will be authenticated to the other device.";
 
@@ -2452,6 +2458,9 @@
 /// Show missing seasons
 "showMissingSeasons" = "Show missing seasons";
 
+/// Show password
+"showPassword" = "Show password";
+
 /// Show poster labels
 "showPosterLabels" = "Show poster labels";
 
@@ -2479,8 +2488,8 @@
 /// Sign in user
 "signInExistingJellyfinUser" = "Sign in user";
 
-/// This does not create a Jellyfin user. It only signs in an existing account from this server on this device.
-"signInExistingJellyfinUserDescription" = "This does not create a Jellyfin user. It only signs in an existing account from this server on this device.";
+/// Use your existing Jellyfin account for this server.
+"signInExistingJellyfinUserDescription" = "Use your existing Jellyfin account for this server.";
 
 /// Sign in to %s
 "signInToServer" = "Sign in to %s";

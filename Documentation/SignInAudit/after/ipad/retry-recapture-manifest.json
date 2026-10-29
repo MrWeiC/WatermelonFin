@@ -1,0 +1,26 @@
+[
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "331EEB40-7A35-4353-A42F-F4603C519C71.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "14-quick-connect-recovered_0_4880F82B-4B64-44EA-AD6E-B4C5A24917CD.png",
+        "timestamp": 1793239612.381
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "280CC73A-89FB-409A-B95E-E711727FCBA4.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "13-quick-connect-error_0_335E548B-03E8-4DAD-902C-CBB66A16BD10.png",
+        "timestamp": 1793239609.628
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testQuickConnectRecoversAfterRetry()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testQuickConnectRecoversAfterRetry"
+  }
+]

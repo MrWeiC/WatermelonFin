@@ -51,14 +51,17 @@ struct UserSignInView: View {
     private var viewModel: UserSignInViewModel
 
     private let reauthenticatingUser: UserState?
+    private let isPushed: Bool
 
     private let logger = Logger.watermelonfin()
 
     init(
         server: ServerState,
-        reauthenticatingUser: UserState? = nil
+        reauthenticatingUser: UserState? = nil,
+        isPushed: Bool = false
     ) {
         self.reauthenticatingUser = reauthenticatingUser
+        self.isPushed = isPushed
         self._viewModel = StateObject(wrappedValue: UserSignInViewModel(server: server))
     }
 
@@ -106,7 +109,7 @@ struct UserSignInView: View {
     }
 
     private var signInButtonTitle: String {
-        isReauthenticating ? L10n.signIn : L10n.addUser
+        L10n.signIn
     }
 
     private var signInDescription: String {
@@ -114,6 +117,9 @@ struct UserSignInView: View {
     }
 
     private var signInHeader: String {
+        #if os(iOS)
+        return viewModel.server.name
+        #else
         if let reauthenticatingUser {
             L10n.reauthenticateJellyfinUserOnServer(
                 reauthenticatingUser.username,
@@ -122,10 +128,11 @@ struct UserSignInView: View {
         } else {
             L10n.addExistingJellyfinUserToServer(viewModel.server.name)
         }
+        #endif
     }
 
     private var signInTitle: String {
-        isReauthenticating ? L10n.reauthenticateJellyfinUser : L10n.signInExistingJellyfinUser
+        isReauthenticating ? L10n.reauthenticateJellyfinUser : L10n.signIn
     }
 
     private func saveExistingUser(
@@ -152,6 +159,7 @@ struct UserSignInView: View {
     }
 
     private func runQuickConnect() {
+        focusedTextField = nil
         Task {
             do {
                 guard let secret = try await quickConnectAction?(client: viewModel.server.client) else {
@@ -183,42 +191,75 @@ struct UserSignInView: View {
         return evaluatedPolicy
     }
 
+    private func submitSignIn() {
+        guard username.trimmingCharacters(in: .whitespacesAndNewlines).isNotEmpty,
+              viewModel.state != .signingIn else { return }
+        focusedTextField = nil
+        viewModel.signIn(username: username, password: password)
+    }
+
+    private var usernamePrompt: Text? {
+        #if os(iOS)
+        Text("")
+        #else
+        nil
+        #endif
+    }
+
     // MARK: - Sign In Section
 
     @ViewBuilder
     private var signInSection: some View {
         Section {
-            TextField(L10n.username, text: $username)
+            VStack(alignment: .leading, spacing: 6) {
+                #if os(iOS)
+                Text(L10n.username)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                #endif
+                TextField(L10n.username, text: $username, prompt: usernamePrompt)
+                    .accessibilityLabel(L10n.username)
+                    .accessibilityIdentifier("mobile.signIn.username")
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .focused($focusedTextField, equals: .username)
+                    .disabled(isReauthenticating || viewModel.state == .signingIn)
+                    .submitLabel(.next)
+                    .onSubmit {
+                        focusedTextField = .password
+                    }
+                #if os(tvOS)
+                    .frame(minHeight: 60)
+                #endif
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                #if os(iOS)
+                Text(L10n.password)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                #endif
+                SecureField(
+                    L10n.password,
+                    text: $password,
+                    maskToggle: .enabled,
+                    showsPlaceholder: false,
+                    isFocused: Binding(
+                        get: { focusedTextField == .password },
+                        set: { if $0 { focusedTextField = .password } else if focusedTextField == .password { focusedTextField = nil } }
+                    ),
+                    onSubmit: submitSignIn
+                )
+                .onSubmit(submitSignIn)
+                .submitLabel(.go)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
-                .focused($focusedTextField, equals: .username)
-                .disabled(isReauthenticating)
-                .onSubmit {
-                    focusedTextField = .password
-                }
-            #if os(tvOS)
-                .frame(minHeight: 60)
-            #endif
-
-            SecureField(
-                L10n.password,
-                text: $password,
-                maskToggle: .enabled
-            )
-            .onSubmit {
-                focusedTextField = nil
-
-                viewModel.signIn(
-                    username: username,
-                    password: password
-                )
+                .focused($focusedTextField, equals: .password)
+                #if os(tvOS)
+                    .frame(minHeight: 60)
+                #endif
             }
-            .autocorrectionDisabled()
-            .textInputAutocapitalization(.never)
-            .focused($focusedTextField, equals: .password)
-            #if os(tvOS)
-                .frame(minHeight: 60)
-            #endif
+            .disabled(viewModel.state == .signingIn)
         } header: {
             Text(signInHeader)
         } footer: {
@@ -234,6 +275,47 @@ struct UserSignInView: View {
             }
         }
 
+        #if os(iOS)
+        Section {
+            VStack(spacing: 12) {
+                if viewModel.state == .signingIn {
+                    Button(L10n.cancel, role: .cancel) {
+                        viewModel.cancel()
+                    }
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity)
+                } else {
+                    Button {
+                        focusedTextField = nil
+                        viewModel.signIn(username: username, password: password)
+                    } label: {
+                        Text(signInButtonTitle)
+                            .frame(maxWidth: .infinity, minHeight: 28)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(accentColor)
+                    .disabled(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    .accessibilityIdentifier("mobile.signIn.submit")
+                }
+
+                if viewModel.isQuickConnectEnabled {
+                    Button(action: runQuickConnect) {
+                        Label(L10n.quickConnect, systemImage: "bolt.horizontal")
+                            .frame(maxWidth: .infinity, minHeight: 28)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.primary)
+                    .disabled(viewModel.state == .signingIn)
+                    .accessibilityIdentifier("mobile.signIn.quickConnect")
+                }
+            }
+            .controlSize(.large)
+            .font(.body.weight(.semibold))
+            .buttonBorderShape(.roundedRectangle(radius: 12))
+            .listRowInsets(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
+            .listRowBackground(Color.clear)
+        }
+        #else
         if case .signingIn = viewModel.state {
             Button(L10n.cancel, role: .cancel) {
                 viewModel.cancel()
@@ -249,7 +331,7 @@ struct UserSignInView: View {
             }
             .buttonStyle(.primary)
             .frame(height: 64)
-            .disabled(username.isEmpty)
+            .disabled(username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             .foregroundStyle(
                 accentColor.overlayColor,
                 accentColor
@@ -268,6 +350,8 @@ struct UserSignInView: View {
                 .disabled(viewModel.state == .signingIn)
             }
         }
+
+        #endif
 
         #if os(tvOS)
         if viewModel.state != .signingIn {
@@ -343,10 +427,20 @@ struct UserSignInView: View {
 
             publicUsersSection
         }
+        .scrollDismissesKeyboard(.interactively)
+        .frame(maxWidth: 640)
+        .frame(maxWidth: .infinity)
+        .background(Color(uiColor: .systemGroupedBackground))
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarCloseButton(disabled: viewModel.state == .signingIn) {
-            router.dismiss()
+        .toolbar {
+            if !isPushed {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(L10n.close) { router.dismiss() }
+                        .disabled(viewModel.state == .signingIn)
+                }
+            }
         }
+        .navigationBarBackButtonHidden(isPushed && viewModel.state == .signingIn)
         .topBarTrailing {
             if viewModel.state == .signingIn || viewModel.background.is(.gettingPublicData) {
                 ProgressView()
@@ -380,12 +474,20 @@ struct UserSignInView: View {
             .navigationTitle(signInTitle)
             .interactiveDismissDisabled(viewModel.state == .signingIn)
             .onReceive(viewModel.events, perform: handleEvent)
+            .onReceive(viewModel.$error) { error in
+                guard error != nil else { return }
+                // The state-machine dependency leaves failed actions in their
+                // loading state. Reset before presenting recovery controls.
+                viewModel.cancel()
+            }
             .onFirstAppear {
                 if let reauthenticatingUser {
                     username = reauthenticatingUser.username
                     focusedTextField = .password
                 } else {
+                    #if os(tvOS)
                     focusedTextField = .username
+                    #endif
                 }
 
                 viewModel.getPublicData()

@@ -1057,7 +1057,7 @@
 "showWatched" = "顯示已觀看標記";
 "shutdownServer" = "關閉伺服器";
 "shutdownWarning" = "你確定要關閉伺服器嗎？";
-"signInExistingJellyfinUserDescription" = "這不會創建 Jellyfin 使用者，只會把這台伺服器上的已有帳號登入到此裝置。";
+"signInExistingJellyfinUserDescription" = "使用此伺服器上既有的 Jellyfin 帳號登入。";
 "signoutBackground" = "進入背景後自動登出";
 "signoutBackgroundFooter" = "當 WatermelonFin 在一段時間後處於後台且未播放媒體時，登出最後一個使用者。";
 "signoutClose" = "關閉後自動登出";
@@ -1203,3 +1203,8 @@
 "playerErrorDetails" = "播放器錯誤：%@";
 "networkErrorCode" = "網路錯誤（代碼 %d）";
 "httpErrorCode" = "HTTP 錯誤（狀態碼 %d）";
+
+"showPassword" = "顯示密碼";
+"hidePassword" = "隱藏密碼";
+
+"quickConnectUnavailable" = "快速連線無法連線至此伺服器。請重試，或關閉此頁面並使用使用者名稱和密碼登入。";

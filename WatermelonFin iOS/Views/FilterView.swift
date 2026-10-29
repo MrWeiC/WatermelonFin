@@ -37,6 +37,8 @@ struct FilterView: View {
 }
 
 struct LocalUserAccessPolicyView: View {
+    @Environment(\.dismiss)
+    private var dismiss
     @Binding
     var pinHint: String
     @Binding
@@ -47,6 +49,9 @@ struct LocalUserAccessPolicyView: View {
                 ForEach(UserAccessPolicy.allCases, id: \.self) { Text($0.displayTitle).tag($0) }
             }
             if accessPolicy == .requirePin { TextField(L10n.hint, text: $pinHint) }
-        }.navigationTitle(L10n.security)
+        }
+        .navigationTitle(L10n.security)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarCloseButton { dismiss() }
     }
 }

@@ -794,6 +794,8 @@ internal enum L10n {
   internal static let hidden = L10n.tr("Localizable", "hidden", fallback: "Hidden")
   /// Hidden libraries
   internal static let hiddenLibraries = L10n.tr("Localizable", "hiddenLibraries", fallback: "Hidden libraries")
+  /// Hide password
+  internal static let hidePassword = L10n.tr("Localizable", "hidePassword", fallback: "Hide password")
   /// Hide user from login screen
   internal static let hideUserFromLoginScreen = L10n.tr("Localizable", "hideUserFromLoginScreen", fallback: "Hide user from login screen")
   /// Hint
@@ -1428,6 +1430,8 @@ internal enum L10n {
   internal static let quickConnectStep3 = L10n.tr("Localizable", "quickConnectStep3", fallback: "Enter the following code:")
   /// Authorizing Quick Connect successful. Please continue on your other device.
   internal static let quickConnectSuccessMessage = L10n.tr("Localizable", "quickConnectSuccessMessage", fallback: "Authorizing Quick Connect successful. Please continue on your other device.")
+  /// Quick Connect could not connect to this server. Try again, or close this screen to sign in with your username and password.
+  internal static let quickConnectUnavailable = L10n.tr("Localizable", "quickConnectUnavailable", fallback: "Quick Connect could not connect to this server. Try again, or close this screen to sign in with your username and password.")
   /// This user will be authenticated to the other device.
   internal static let quickConnectUserDisclaimer = L10n.tr("Localizable", "quickConnectUserDisclaimer", fallback: "This user will be authenticated to the other device.")
   /// Quick filters
@@ -1736,6 +1740,8 @@ internal enum L10n {
   internal static let showMissingEpisodes = L10n.tr("Localizable", "showMissingEpisodes", fallback: "Show missing episodes")
   /// Show missing seasons
   internal static let showMissingSeasons = L10n.tr("Localizable", "showMissingSeasons", fallback: "Show missing seasons")
+  /// Show password
+  internal static let showPassword = L10n.tr("Localizable", "showPassword", fallback: "Show password")
   /// Show poster labels
   internal static let showPosterLabels = L10n.tr("Localizable", "showPosterLabels", fallback: "Show poster labels")
   /// Show progress
@@ -1754,8 +1760,8 @@ internal enum L10n {
   internal static let signIn = L10n.tr("Localizable", "signIn", fallback: "Sign in")
   /// Sign in user
   internal static let signInExistingJellyfinUser = L10n.tr("Localizable", "signInExistingJellyfinUser", fallback: "Sign in user")
-  /// This does not create a Jellyfin user. It only signs in an existing account from this server on this device.
-  internal static let signInExistingJellyfinUserDescription = L10n.tr("Localizable", "signInExistingJellyfinUserDescription", fallback: "This does not create a Jellyfin user. It only signs in an existing account from this server on this device.")
+  /// Use your existing Jellyfin account for this server.
+  internal static let signInExistingJellyfinUserDescription = L10n.tr("Localizable", "signInExistingJellyfinUserDescription", fallback: "Use your existing Jellyfin account for this server.")
   /// Sign in to %s
   internal static func signInToServer(_ p1: UnsafePointer<CChar>) -> String {
     return L10n.tr("Localizable", "signInToServer", p1, fallback: "Sign in to %s")

@@ -1,0 +1,26 @@
+[
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "E704B8E7-E03B-4D81-A85C-5BB7DABDCA52.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "14-quick-connect-recovered_0_AB0DEA77-1136-4FB5-9E4A-B7225E735A78.png",
+        "timestamp": 1793239581.379
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "CAB4D676-BF46-4EF5-A7C4-59E55D277D7F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "13-quick-connect-error_0_604989D1-04CE-4FFD-9133-A60CE546A4C6.png",
+        "timestamp": 1793239578.785
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testQuickConnectRecoversAfterRetry()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testQuickConnectRecoversAfterRetry"
+  }
+]

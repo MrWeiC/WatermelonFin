@@ -1,0 +1,314 @@
+[
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "847AFAE9-097F-4EA4-B3F5-69BF21D5F669.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 is_0_0C250497-4788-4A98-A130-EE74697B7015.png",
+        "timestamp": 1793238973.905
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "CA18E1D5-D03C-4787-96D9-5B040CEA325C.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 zh-Hant_0_691F8A73-72EB-419E-9636-DBD12FB14873.png",
+        "timestamp": 1793238967.658
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "4B6E3A0B-F3D6-4C76-8DCE-1CF5F707A97A.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 zh-Hans_0_8DA2F175-F962-4ADD-B909-D07BC57B815D.png",
+        "timestamp": 1793238961.364
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "1F8A8641-CAF5-485E-98C2-0605EF69280F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 en_0_2F01D47B-A083-4F79-9CE1-5ECA6A049234.png",
+        "timestamp": 1793238955.079
+      }
+    ],
+    "testIdentifier": "FirstRunTests/testDeviceLanguageSelectsEnglishAndChinese()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/FirstRunTests/testDeviceLanguageSelectsEnglishAndChinese"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "89B6B9BE-B00C-4689-9459-EB0FAA1B7601.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "Server setup landscape_0_6D54A1A7-454E-475D-B101-3602DD2F99E6.png",
+        "timestamp": 1793238986.432
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "275CAB4B-2543-4756-B98E-EE0C39697E22.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "iPhone server setup_0_AF155F54-5F40-4E6C-9A7E-7DFFB572E4E5.png",
+        "timestamp": 1793238984.623
+      }
+    ],
+    "testIdentifier": "FirstRunTests/testFirstRunCanOpenServerSetup()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/FirstRunTests/testFirstRunCanOpenServerSetup"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "23CA75F3-95E5-4970-819D-D4661C2B7933.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "06-security_0_9C50903F-5DE5-481F-BE13-BAEC343E08F4.png",
+        "timestamp": 1793239012.869
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "AFD05332-BC6E-427A-BF56-29B556CC1BCD.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "05-quick-connect-code_0_1679CDCF-D0C9-4271-A241-5C74E4CA93AD.png",
+        "timestamp": 1793239007.281
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "FE66868B-116A-46A5-AC9A-2FB6FEB6B963.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "04-sign-in-keyboard_0_8DFE18A5-9DBE-4BA0-A58C-1949CB380984.png",
+        "timestamp": 1793239002.847
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "3C358CFE-64B4-494C-852A-DADAAF235C74.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "03-sign-in-initial_0_8AE7AF7E-3ECC-41FD-854C-7ED7EC8140FC.png",
+        "timestamp": 1793239001.702
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "AC4BC49D-A85B-47A1-ACC7-1747A04B49BE.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "02-server-entry_0_2976036F-F43B-4DFB-B0CC-94883444F6E3.png",
+        "timestamp": 1793238996.259
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "1DB6F06B-EF8F-4999-B385-3F2B7B1057B6.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "01-account-selection_0_8197B700-BC25-4068-A6CA-CCB61124F1F5.png",
+        "timestamp": 1793238994.057
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testAccountFlowScreenshots()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testAccountFlowScreenshots"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "DD9D026C-A1EB-4770-A89E-5EA6FC1953F9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "12-no-public-users_0_B2179165-C750-4DEC-B1C9-6362A6D3F296.png",
+        "timestamp": 1793239040.779
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "AAF858FB-DD1E-4CEF-B270-DFBDD1687105.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "11-quick-connect-disabled_0_2B4BDB08-9AF9-4497-B21E-7E53A4DBFA8B.png",
+        "timestamp": 1793239027.064
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testEmptyUsersAndQuickConnectUnavailable()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testEmptyUsersAndQuickConnectUnavailable"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "233AED92-39D7-473B-A31A-06590E9FBFC5.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "18-quick-connect-landscape_0_D155E2B8-4780-4400-B6EC-2992563D1A26.png",
+        "timestamp": 1793239101.861
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "03AABAA7-C537-4587-A38E-D401017D50EE.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "17-quick-connect-large-text_0_5A341A16-7754-4428-95D6-0F64988E92BD.png",
+        "timestamp": 1793239098.393
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "14F266AD-5FB1-4203-B598-DCD44799CA53.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "16-accessibility-text_0_CEB6553B-3F90-4AA8-9621-26DF63CDFA7C.png",
+        "timestamp": 1793239094.952
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "9C5F78C7-88AA-453E-BF0C-2E80E70E794D.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-zh-Hant_0_4B528B80-CB9E-4E0B-A7B0-E81AE8C9E6C9.png",
+        "timestamp": 1793239082.332
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "840A4278-1F73-4C8B-8FFF-9039CD65367D.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-zh-Hans_0_10AD1547-CF32-4102-B5D3-C1380A693579.png",
+        "timestamp": 1793239068.594
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "E56FC180-24D6-4F8A-A7A3-324DF0DE6F93.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-en_0_DD309177-6DC9-41C1-8179-AC6804973C54.png",
+        "timestamp": 1793239054.822
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLanguageAndLargeTextLayouts()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLanguageAndLargeTextLayouts"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "B48B28FD-1CBF-45E3-BA4C-8372FE60ABF3.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "09-signed-in-home_0_15DABD4D-3848-4428-88E2-FDCE990F4462.png",
+        "timestamp": 1793239124.317
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "13656C0A-1352-42C8-9069-191EE94413C2.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "08-login-error_0_26BBBAFB-A004-4FB4-A5F2-A5917B45A68B.png",
+        "timestamp": 1793239120.011
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLoginFailureThenSuccess()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLoginFailureThenSuccess"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "16425813-202C-474C-A32E-1F28FDD25E90.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "20-login-cancelled_0_81736BE8-0035-4138-B1AE-CB7502E67B08.png",
+        "timestamp": 1793239151.783
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "16DEEDD9-9A47-4E16-9068-F1F87AB2CBDB.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "19-login-loading_0_6933048F-8694-4372-8705-D6D86B0D6EB8.png",
+        "timestamp": 1793239143.227
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLoginLoadingCanCancelAndPasswordVisibility()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLoginLoadingCanCancelAndPasswordVisibility"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "C6AD85B7-F561-4F92-BEBB-AF6CBD9B643E.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "14-quick-connect-recovered_0_3E53C1F0-CC1A-4603-A9D6-D9B513BE804E.png",
+        "timestamp": 1793239186.683
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "84A0A476-F58D-48A9-838A-27B75563DE07.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "13-quick-connect-error_0_9CFE6D89-150A-4E52-A856-7C7A1BCE1DC7.png",
+        "timestamp": 1793239184.267
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testQuickConnectRecoversAfterRetry()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testQuickConnectRecoversAfterRetry"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "FAD94F89-C3EF-49B9-BB04-9E2F55F1B9A9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "07-server-error_0_ED7DB839-CEE1-43D8-A7C5-BF82234CE175.png",
+        "timestamp": 1793239199.283
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testServerErrorRecovery()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testServerErrorRecovery"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "076187E1-359A-40BC-9775-5BFEF5C28463.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "10-server-loading_0_26BCEC49-7D04-4C46-A438-9B4269313507.png",
+        "timestamp": 1793239212.15
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testServerLoadingCanCancel()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testServerLoadingCanCancel"
+  }
+]

@@ -18,7 +18,7 @@ final class FirstRunTests: XCTestCase {
             ("zh-Hant", "添加伺服器"),
             ("is", "Add server"),
         ] {
-            app.launchArguments = ["-uiTestingSignedOut", "-AppleLanguages", "(\(language))"]
+            app.launchArguments = ["-uiTestingSignedOut", "-uiTestingIsolatedStore", "-AppleLanguages", "(\(language))"]
             app.launch()
             let addServer = app.buttons["mobile.account.addServer"]
             XCTAssertTrue(addServer.waitForExistence(timeout: 20))
@@ -37,7 +37,7 @@ final class FirstRunTests: XCTestCase {
         XCUIDevice.shared.orientation = .portrait
         defer { XCUIDevice.shared.orientation = .portrait }
         let app = XCUIApplication()
-        app.launchArguments = ["-uiTestingSignedOut"]
+        app.launchArguments = ["-uiTestingSignedOut", "-uiTestingIsolatedStore"]
         app.launch()
         let addServer = app.buttons["mobile.account.addServer"]
         XCTAssertTrue(addServer.waitForExistence(timeout: 20))
