@@ -297,13 +297,10 @@ final class LiveMediaFlowTests: XCTestCase {
     func testLiveTabsSettingsAndDiagnostics() async throws {
         let app = try await signIn()
         capture("14-live-home")
-        for title in ["Search", "Live TV", "Settings"] {
+        XCTAssertFalse(app.buttons["Live TV"].exists)
+        for title in ["Search", "Settings"] {
             selectTab(title, app: app)
-            if title == "Live TV" {
-                XCTAssertTrue(app.staticTexts["Coming soon"].waitForExistence(timeout: 10), "Mobile Live TV is currently a placeholder")
-            } else {
-                XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 15))
-            }
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 15))
             capture("tab-\(title)")
         }
         let diagnostics = app.buttons["Diagnostics"]
