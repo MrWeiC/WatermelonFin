@@ -69,7 +69,11 @@ struct PrimaryButtonStyle: PrimitiveButtonStyle {
             contentView(configuration: configuration)
         }
         .listRowInsets(.zero)
-        .buttonStyle(.platformCard)
-        .focused($isFocused)
+        #if os(tvOS)
+            .buttonStyle(.platformCard)
+        #else
+            .buttonStyle(.plain)
+        #endif
+            .focused($isFocused)
     }
 }

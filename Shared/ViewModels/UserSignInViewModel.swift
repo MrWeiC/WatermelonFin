@@ -124,9 +124,7 @@ final class UserSignInViewModel: ViewModel {
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .trimmingCharacters(in: .objectReplacement)
 
-        let password = password
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .trimmingCharacters(in: .objectReplacement)
+        // Passwords are opaque credentials; leading/trailing spaces are significant.
 
         let response = try await server.client.signIn(username: username, password: password)
 

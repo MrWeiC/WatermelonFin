@@ -12,13 +12,19 @@ import SwiftUI
 func SecureField(
     _ title: String,
     text: Binding<String>,
-    maskToggle: SwiftUI.SecureField<EmptyView>.MaskToggleBehavior
+    maskToggle: SwiftUI.SecureField<EmptyView>.MaskToggleBehavior,
+    showsPlaceholder: Bool = true,
+    isFocused: Binding<Bool>? = nil,
+    onSubmit: (() -> Void)? = nil
 ) -> some View {
     #if os(iOS)
     if maskToggle == .enabled {
         _UnmaskSecureField(
             title,
-            text: text
+            text: text,
+            showsPlaceholder: showsPlaceholder,
+            isFocused: isFocused,
+            onSubmit: onSubmit
         )
     } else {
         SecureField(

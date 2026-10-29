@@ -18,12 +18,12 @@ extension NavigationRoute {
         ConnectToServerView()
     }
 
-    static func quickConnect(quickConnect: QuickConnect) -> NavigationRoute {
+    static func quickConnect(quickConnect: QuickConnect, retry: @escaping () -> Void) -> NavigationRoute {
         NavigationRoute(
             id: "quickConnectView",
             style: .sheet
         ) {
-            QuickConnectView(quickConnect: quickConnect)
+            QuickConnectView(quickConnect: quickConnect, retry: retry)
         }
     }
 
@@ -68,7 +68,8 @@ extension NavigationRoute {
 
     static func userSignIn(
         server: ServerState,
-        reauthenticatingUser: UserState? = nil
+        reauthenticatingUser: UserState? = nil,
+        isPushed: Bool = false
     ) -> NavigationRoute {
         NavigationRoute(
             id: "userSignIn",
@@ -78,7 +79,8 @@ extension NavigationRoute {
                 WithQuickConnect {
                     UserSignInView(
                         server: server,
-                        reauthenticatingUser: reauthenticatingUser
+                        reauthenticatingUser: reauthenticatingUser,
+                        isPushed: isPushed
                     )
                 }
             }

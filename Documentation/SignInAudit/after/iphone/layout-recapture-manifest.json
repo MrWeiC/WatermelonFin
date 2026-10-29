@@ -1,0 +1,62 @@
+[
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "0F7952C6-8021-4A75-BC94-AF2A3D58AEF7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "18-quick-connect-landscape_0_1DDEFE70-23FE-488F-898F-634A2B4A4EF5.png",
+        "timestamp": 1793239345.952
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "7A138585-388E-4280-8C95-4FAE5DAE298E.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "17-quick-connect-large-text_0_251549B3-3A30-4AB5-A209-83D4D673FC79.png",
+        "timestamp": 1793239342.399
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "23C2AB5C-172C-4793-87C0-59E38EF92F05.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "16-accessibility-text_0_03C0D237-0EB5-4E25-8BD4-561721089E43.png",
+        "timestamp": 1793239338.93
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "2AD48F75-5764-45D7-9997-0167281407C6.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-zh-Hant_0_9283C552-E1C1-4DF5-9D66-2EB78DA1B1EF.png",
+        "timestamp": 1793239326.16
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "8CD84D04-A4C5-4CE1-9D19-1869EB82155C.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-zh-Hans_0_6A3E891E-63A8-47B0-9935-FB5E1DBF4484.png",
+        "timestamp": 1793239312.112
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+        "deviceName": "iPhone 13 Pro Max",
+        "exportedFileName": "B665AE75-B328-4CF6-8F56-5F0021E5C516.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-en_0_A12E4379-420B-4A6F-9FD2-77CBA137D44E.png",
+        "timestamp": 1793239298.078
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLanguageAndLargeTextLayouts()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLanguageAndLargeTextLayouts"
+  }
+]

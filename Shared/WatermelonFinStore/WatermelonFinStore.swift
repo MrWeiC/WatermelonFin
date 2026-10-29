@@ -63,10 +63,19 @@ extension WatermelonFinStore {
     }()
 
     static func requiresMigration() throws -> Bool {
-        try dataStack.requiredMigrationsForStorage(storage).isNotEmpty
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-uiTestingIsolatedStore") { return false }
+        #endif
+        return try dataStack.requiredMigrationsForStorage(storage).isNotEmpty
     }
 
     static func setupDataStack() async throws {
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-uiTestingIsolatedStore") {
+            try dataStack.addStorageAndWait(InMemoryStore())
+            return
+        }
+        #endif
         try await withCheckedThrowingContinuation { continuation in
             _ = dataStack.addStorage(storage) { result in
                 switch result {

@@ -45,18 +45,18 @@ struct WithQuickConnect<Content: View>: View {
         _ state: QuickConnect.State
     ) {
         switch state {
-        case let .error(error):
-            continuation?.resume(throwing: error)
-            self.cancellable = nil
-            self.continuation = nil
-            self.quickConnect = nil
+        case .error:
+            // Keep the action pending while the sheet offers Retry or Close.
+            break
         case let .authenticated(secret: secret):
             continuation?.resume(returning: secret)
+            self.cancellable?.cancel()
             self.cancellable = nil
             self.continuation = nil
             self.quickConnect = nil
         case .idle:
             continuation?.resume(throwing: CancellationError())
+            self.cancellable?.cancel()
             self.cancellable = nil
             self.continuation = nil
             self.quickConnect = nil
@@ -73,7 +73,18 @@ struct WithQuickConnect<Content: View>: View {
         let newQuickConnect = QuickConnect(client: client)
         self.quickConnect = newQuickConnect
 
-        router.route(to: .quickConnect(quickConnect: newQuickConnect))
+        router.route(to: .quickConnect(quickConnect: newQuickConnect) {
+            guard case .error = newQuickConnect.state else { return }
+            // stop() emits idle. Detach during reset so Retry does not cancel
+            // the original sign-in continuation.
+            cancellable?.cancel()
+            cancellable = nil
+            newQuickConnect.stop()
+            cancellable = newQuickConnect.$state
+                .dropFirst()
+                .sink(receiveValue: handleQuickConnectState)
+            newQuickConnect.start()
+        })
 
         return try await withCheckedThrowingContinuation { continuation in
             self.continuation = continuation

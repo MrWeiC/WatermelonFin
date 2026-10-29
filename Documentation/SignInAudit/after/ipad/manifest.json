@@ -1,0 +1,314 @@
+[
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "401622D9-2587-452B-9728-C920D0B10EBF.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 is_0_94083A92-BC36-4B3B-B653-20E698AB4828.png",
+        "timestamp": 1793239259.889
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "A844F7F5-14DE-4A49-96C1-ABC17FEDAFFD.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 zh-Hant_0_A3B1EF75-1548-4388-A2B0-60801D92672C.png",
+        "timestamp": 1793239252.209
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "0DD0E9B3-055B-4DD1-9D21-39A196C77270.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 zh-Hans_0_5166EB94-325F-4DF1-AF68-9DC1873E7941.png",
+        "timestamp": 1793239244.516
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "CA289974-B425-489D-8213-8D08822092CB.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "First run \u2014 en_0_1B8643FD-EB58-4972-8A96-8668E74B5C40.png",
+        "timestamp": 1793239236.803
+      }
+    ],
+    "testIdentifier": "FirstRunTests/testDeviceLanguageSelectsEnglishAndChinese()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/FirstRunTests/testDeviceLanguageSelectsEnglishAndChinese"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "01AE04CC-3786-4B5C-B47F-101A9BDF2073.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "Server setup landscape_0_34808920-4093-4C81-B710-FE1B95DA8FB8.png",
+        "timestamp": 1793239273.627
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "58C80520-D113-4AE7-AD1E-3779EEA7CDA9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "iPhone server setup_0_BF28E2FF-DCE3-4B00-828D-7367C5ABAD2F.png",
+        "timestamp": 1793239272.367
+      }
+    ],
+    "testIdentifier": "FirstRunTests/testFirstRunCanOpenServerSetup()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/FirstRunTests/testFirstRunCanOpenServerSetup"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "4389EFBE-D6EA-4566-AB6F-54AC58C33653.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "06-security_0_A234D1BC-086B-4C50-A32B-F4E717541D29.png",
+        "timestamp": 1793239300.962
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "676AD30A-98C1-4E68-912C-4CE6D9A788BD.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "05-quick-connect-code_0_C565A187-6F4A-4A78-9E6A-AB6C26E94776.png",
+        "timestamp": 1793239295.852
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "C2632D4D-632C-43E6-B5CC-2C556C344840.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "04-sign-in-keyboard_0_ED62B38D-6B5F-428D-A0F5-743D6095D4F6.png",
+        "timestamp": 1793239291.743
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "DC8436DD-9D1D-4771-8F72-78CD1283815F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "03-sign-in-initial_0_C3A00163-8F26-4FB6-ACC8-CFB873C80AC3.png",
+        "timestamp": 1793239290.449
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "B25F07C8-B214-4E97-825A-FC57BDC7401F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "02-server-entry_0_29EE1763-DBE6-4740-A8CD-B6662A074CF4.png",
+        "timestamp": 1793239284.913
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "A6959457-F960-490F-B793-ECF9C9C6D863.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "01-account-selection_0_9E480658-D556-4F78-B3F0-EFCD089B3072.png",
+        "timestamp": 1793239282.628
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testAccountFlowScreenshots()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testAccountFlowScreenshots"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "D8162F60-1F1F-4FCD-8570-04E3D2D62CD9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "12-no-public-users_0_1BFBEF59-2477-47C0-ACBE-6E35FD99784B.png",
+        "timestamp": 1793239331.942
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "550681A3-F6E1-4721-98A4-279E4B04D2F6.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "11-quick-connect-disabled_0_9643769F-F18A-4E20-A41F-781DEE0C6FC0.png",
+        "timestamp": 1793239316.581
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testEmptyUsersAndQuickConnectUnavailable()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testEmptyUsersAndQuickConnectUnavailable"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "7E8E5689-3AAF-4822-98C0-B0B681391AC3.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "18-quick-connect-landscape_0_8F62EF96-982D-4508-9500-2F47ED1F58C8.png",
+        "timestamp": 1793239397.584
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "C77405DB-5A49-4F1E-A64D-0F2A073526D7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "17-quick-connect-large-text_0_869443A1-4CC1-428F-92F3-BED450C4C809.png",
+        "timestamp": 1793239395.399
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "2C8887AC-4D95-4590-989D-069E2C585DF0.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "16-accessibility-text_0_CD14E3DB-DD96-4B64-9168-74F7BE9907DC.png",
+        "timestamp": 1793239392.187
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "4465B371-D3FB-48E9-A5D4-90B0AE4B5E95.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-zh-Hant_0_C765863B-7E61-4B00-900A-C3CC1B99F137.png",
+        "timestamp": 1793239378.255
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "1751A4D3-2553-4A30-ACC4-83C862E04F36.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-zh-Hans_0_CA720012-CCEF-4FC5-8F1D-994D39A7606A.png",
+        "timestamp": 1793239362.584
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "F2089B24-0983-45F7-8D59-F112D63C1C18.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "15-sign-in-en_0_BD38E41B-C5C7-4CBA-AC9F-005BEA9DCB71.png",
+        "timestamp": 1793239347.514
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLanguageAndLargeTextLayouts()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLanguageAndLargeTextLayouts"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "BB5CBCB2-2784-431A-AF2F-8A31E3F3AD5D.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "09-signed-in-home_0_62BBF52C-8683-41E1-8C71-B3B607C2BB66.png",
+        "timestamp": 1793239422.074
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "29EE221D-7756-4DAC-ACE0-CDF8D08B2E43.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "08-login-error_0_D8B704DD-E760-4B37-9E08-06A14297E01E.png",
+        "timestamp": 1793239417.278
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLoginFailureThenSuccess()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLoginFailureThenSuccess"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "D49D8773-F6A4-41F7-AF08-799CDEC05734.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "20-login-cancelled_0_DEE9A47B-F2BF-45D3-B3B8-084ADF6C0295.png",
+        "timestamp": 1793239451.924
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "CF47026D-108D-433E-AD6D-D0918AC66425.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "19-login-loading_0_7A641164-F7EA-4DF8-BA2E-4DBCEF83D89D.png",
+        "timestamp": 1793239443.331
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testLoginLoadingCanCancelAndPasswordVisibility()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testLoginLoadingCanCancelAndPasswordVisibility"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "6CCE9036-E72A-4C1F-B954-A8CD2C5F8756.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "14-quick-connect-recovered_0_7B6E891B-B9E9-4D4C-8BC0-229F3C677328.png",
+        "timestamp": 1793239490.287
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "DC565604-E60A-48D0-ABDA-32834357F8AA.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "13-quick-connect-error_0_8AA78D0D-A692-4332-9DDC-BC2961C99B2E.png",
+        "timestamp": 1793239487.753
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testQuickConnectRecoversAfterRetry()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testQuickConnectRecoversAfterRetry"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "95EA8B30-514F-45DF-BD50-99865099AE27.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "07-server-error_0_C941DEE4-8157-4514-96AD-48139D8C70BB.png",
+        "timestamp": 1793239504.706
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testServerErrorRecovery()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testServerErrorRecovery"
+  },
+  {
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+        "deviceName": "iPad Pro 13-inch (M5)",
+        "exportedFileName": "E87E9877-CAE1-4BC6-ADD7-37D315FBA70B.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "10-server-loading_0_A61C8B73-BA0E-4524-BFBC-7DED1F86EEB5.png",
+        "timestamp": 1793239519.773
+      }
+    ],
+    "testIdentifier": "SignInFlowTests/testServerLoadingCanCancel()",
+    "testIdentifierURL": "test://com.apple.xcode/WatermelonFin/WatermelonFin%20iOS%20UI%20Tests/SignInFlowTests/testServerLoadingCanCancel"
+  }
+]
