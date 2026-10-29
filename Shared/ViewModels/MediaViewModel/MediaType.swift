@@ -68,7 +68,7 @@ extension MediaViewModel {
             case .boxsets:
                 self = .collectionLibrary(userView)
             case .livetv:
-                self = .liveTV(userView)
+                return nil
             default:
                 self = .library(userView)
             }

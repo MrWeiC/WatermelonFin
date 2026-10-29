@@ -1,0 +1,20 @@
+{
+  "before": {
+    "bundle": "/tmp/watermelon-series-before.xcresult",
+    "result": "Failed: season list absent"
+  },
+  "after": [
+    {
+      "device": "iphone",
+      "bundle": "/tmp/watermelon-series-iphone-final.xcresult",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "device": "ipad",
+      "bundle": "/tmp/watermelon-series-ipad-final.xcresult",
+      "passed": 2,
+      "failed": 0
+    }
+  ]
+}
