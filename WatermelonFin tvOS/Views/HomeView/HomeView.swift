@@ -95,7 +95,13 @@ struct HomeView: View {
             }
         }
         .onReceive(Notifications[.didRequestGlobalRefresh].publisher) { _ in
-            viewModel.send(.backgroundRefresh)
+            if case .error = viewModel.state {
+                viewModel.send(.refresh)
+            } else if viewModel.state == .initial {
+                viewModel.send(.refresh)
+            } else {
+                viewModel.send(.backgroundRefresh)
+            }
         }
     }
 }

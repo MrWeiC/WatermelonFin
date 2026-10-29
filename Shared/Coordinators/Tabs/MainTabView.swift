@@ -37,6 +37,9 @@ struct MainTabView: View {
     }
     #endif
 
+    @Environment(\.scenePhase)
+    private var scenePhase
+
     @State
     private var deepLinkTask: Task<Void, Never>?
 
@@ -48,6 +51,7 @@ struct MainTabView: View {
                 ) {
                     tab.item.content
                 }
+                .environment(\.showsServerConnectionNotice, true)
                 .environmentObject(tabCoordinator)
                 .environment(\.tabItemSelected, tab.publisher)
                 .tabItem {
@@ -60,6 +64,21 @@ struct MainTabView: View {
                     .eraseToAnyView()
                 }
                 .tag(tab.item.id)
+            }
+        }
+        .task(id: scenePhase) {
+            guard scenePhase == .active else { return }
+            while !Task.isCancelled {
+                guard let session = Container.shared.currentUserSession() else { return }
+                let service = ServerAddressRecoveryService.shared
+                let wasUnavailable = service.unavailableServerIDs.contains(session.server.id)
+                let reachable = await service.refreshAddressIfNeeded(
+                    serverID: session.server.id, currentURL: session.server.currentURL
+                )
+                guard !Task.isCancelled else { return }
+                if wasUnavailable && reachable { Notifications[.didRequestGlobalRefresh].post() }
+                do { try await Task.sleep(for: .seconds(15)) }
+                catch { return }
             }
         }
         #if os(iOS)
@@ -137,3 +156,63 @@ private struct MobileTabPresentation: ViewModifier {
     }
 }
 #endif
+
+/// Shared by saved accounts and the active app. This suggests VPN as one possible
+/// remedy; public-server reachability cannot identify whether a VPN is enabled.
+struct ServerConnectionNotice: View {
+    let server: ServerState
+    @ObservedObject
+    private var recovery = ServerAddressRecoveryService.shared
+
+    var body: some View {
+        if recovery.unavailableServerIDs.contains(server.id) {
+            VStack(alignment: .leading, spacing: 8) {
+                Label {
+                    Text(L10n.serverCannotReach(server.name))
+                        .accessibilityIdentifier("server.connection.title")
+                } icon: {
+                    Image(systemName: "wifi.exclamationmark")
+                }
+                .font(.headline)
+                Text(L10n.serverConnectionHelp)
+                    .font(.callout)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("server.connection.help")
+                Button {
+                    Task {
+                        let reachable = await recovery.refreshAddressIfNeeded(
+                            serverID: server.id, currentURL: server.currentURL
+                        )
+                        if reachable { Notifications[.didRequestGlobalRefresh].post() }
+                    }
+                } label: {
+                    HStack {
+                        if recovery.checkingServerIDs.contains(server.id) { ProgressView() }
+                        Text(recovery.checkingServerIDs.contains(server.id) ? L10n.serverConnecting : L10n.retry)
+                    }
+                    .frame(minHeight: 44)
+                }
+                .disabled(recovery.checkingServerIDs.contains(server.id))
+                .accessibilityIdentifier("server.connection.retry")
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.regularMaterial)
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("server.connection.notice")
+        }
+    }
+}
+
+struct ServerConnectionNoticeModifier: ViewModifier {
+    @Environment(\.showsServerConnectionNotice)
+    private var isEnabled
+
+    func body(content: Content) -> some View {
+        content.safeAreaInset(edge: .top) {
+            if isEnabled, let server = Container.shared.currentUserSession()?.server {
+                ServerConnectionNotice(server: server)
+            }
+        }
+    }
+}

@@ -1208,3 +1208,8 @@
 "hidePassword" = "隱藏密碼";
 
 "quickConnectUnavailable" = "快速連線無法連線至此伺服器。請重試，或關閉此頁面並使用使用者名稱和密碼登入。";
+
+// Saved-server connectivity
+"serverConnecting" = "正在連線…";
+"serverCannotReach" = "無法連線至 %@";
+"serverConnectionHelp" = "請檢查網路連線，並確認伺服器正在執行。如果你不在家，請連線至 Tailscale 或 VPN 以存取家庭網路，然後重試。";

@@ -168,7 +168,7 @@ enum NetworkError: LocalizedError, Hashable {
     /// becoming stale after a DHCP/IP address change.
     var canRecoverServerAddress: Bool {
         switch self {
-        case .timeout, .hostNotFound, .cannotConnect, .connectionLost:
+        case .timeout, .hostNotFound, .cannotConnect, .connectionLost, .noConnection:
             true
         default:
             false

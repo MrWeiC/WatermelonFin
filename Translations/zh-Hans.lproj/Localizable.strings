@@ -1342,3 +1342,8 @@
 "hidePassword" = "隐藏密码";
 
 "quickConnectUnavailable" = "快速连接无法连接到此服务器。请重试，或关闭此页面并使用用户名和密码登录。";
+
+// Saved-server connectivity
+"serverConnecting" = "正在连接…";
+"serverCannotReach" = "无法连接到 %@";
+"serverConnectionHelp" = "请检查网络连接，并确认服务器正在运行。如果你不在家，请连接 Tailscale 或 VPN 以访问家庭网络，然后重试。";

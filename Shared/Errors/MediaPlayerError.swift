@@ -50,7 +50,7 @@ enum MediaPlayerError: LocalizedError, SystemImageable {
     var recoverySuggestion: String? {
         switch self {
         case .networkError:
-            return L10n.mediaPlayerNetworkRecovery
+            return L10n.serverConnectionHelp
         case .codecNotSupported:
             return L10n.mediaPlayerCodecRecovery
         case .mediaSourceUnavailable:
@@ -60,7 +60,7 @@ enum MediaPlayerError: LocalizedError, SystemImageable {
         case .authenticationRequired:
             return L10n.mediaPlayerAuthenticationRecovery
         case .serverUnreachable:
-            return L10n.mediaPlayerServerRecovery
+            return L10n.serverConnectionHelp
         case .playerCrashed:
             return L10n.mediaPlayerCrashRecovery
         case .unknown:

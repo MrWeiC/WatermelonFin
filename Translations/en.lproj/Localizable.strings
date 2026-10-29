@@ -2359,6 +2359,15 @@
 /// Save alternate address
 "serverAlternateSave" = "Save alternate address";
 
+/// Can’t reach %@
+"serverCannotReach" = "Can’t reach %@";
+
+/// Connecting…
+"serverConnecting" = "Connecting…";
+
+/// Check your connection and that your server is running. If you’re away from home, connect to Tailscale or your VPN to reach your home network, then try again.
+"serverConnectionHelp" = "Check your connection and that your server is running. If you’re away from home, connect to Tailscale or your VPN to reach your home network, then try again.";
+
 /// This address belongs to a different Jellyfin server. The saved server was not changed.
 "serverIdentityMismatch" = "This address belongs to a different Jellyfin server. The saved server was not changed.";
 

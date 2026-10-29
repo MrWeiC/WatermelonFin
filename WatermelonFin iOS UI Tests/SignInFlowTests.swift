@@ -64,7 +64,12 @@ final class SignInFlowTests: XCTestCase {
     }
 
     @MainActor
-    private func openFixture(_ scenario: String, language: String = "en", largeText: Bool = false) -> XCUIApplication {
+    private func openFixture(
+        _ scenario: String,
+        language: String = "en",
+        largeText: Bool = false,
+        run: String = UUID().uuidString
+    ) -> XCUIApplication {
         continueAfterFailure = false
         XCUIDevice.shared.orientation = .portrait
         let app = XCUIApplication()
@@ -77,9 +82,79 @@ final class SignInFlowTests: XCTestCase {
         let address = app.textFields["mobile.server.address"]
         XCTAssertTrue(address.waitForExistence(timeout: 10))
         address.tap()
-        address.typeText("http://127.0.0.1:18096/\(scenario)/\(UUID().uuidString)")
+        address.typeText("http://127.0.0.1:18096/\(scenario)/\(run)")
         app.buttons["mobile.server.connect"].tap()
         return app
+    }
+
+    private func setOffline(_ offline: Bool, run: String) async throws {
+        var request = URLRequest(url: URL(string: "http://127.0.0.1:18096/_control/\(run)?offline=\(offline ? 1 : 0)")!)
+        request.httpMethod = "POST"
+        _ = try await URLSession.shared.data(for: request)
+    }
+
+    @MainActor
+    func testConnectionLossAndSavedAccountRetry() async throws {
+        let run = UUID().uuidString
+        let app = openFixture("users", run: run)
+        let username = app.textFields["Username"]
+        XCTAssertTrue(username.waitForExistence(timeout: 15))
+        username.tap()
+        username.typeText("Preview User")
+        let password = app.secureTextFields["Password"]
+        password.tap()
+        password.typeText("fixture-password")
+        app.buttons["mobile.signIn.submit"].tap()
+        XCTAssertTrue(app.navigationBars["Home"].waitForExistence(timeout: 20))
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        if springboard.buttons["Not Now"].waitForExistence(timeout: 3) { springboard.buttons["Not Now"].tap() }
+        else if app.buttons["Not Now"].exists { app.buttons["Not Now"].tap() }
+        try await setOffline(true, run: run)
+        let warning = app.staticTexts["server.connection.help"]
+        XCTAssertTrue(warning.waitForExistence(timeout: 40), "An in-app outage must explain home Wi-Fi/VPN and offer retry")
+        let mediaTab = app.tabBars.buttons["Media"].exists ? app.tabBars.buttons["Media"] : app.buttons["Media"].firstMatch
+        XCTAssertTrue(mediaTab.isHittable, "Connection notice must not cover navigation")
+        capture("connection-lost-in-app", app: app)
+        if !app.tabBars.buttons["Media"].exists {
+            let title = app.staticTexts["server.connection.title"]
+            XCTAssertTrue(title.exists)
+            XCTAssertGreaterThanOrEqual(
+                title.frame.minY,
+                mediaTab.frame.maxY,
+                "iPad notice must sit below the top tab bar"
+            )
+        }
+        try await setOffline(false, run: run)
+        app.buttons["server.connection.retry"].tap()
+        XCTAssertTrue(warning.waitForNonExistence(timeout: 15))
+        XCTAssertTrue(app.navigationBars["Home"].exists)
+        let settings = app.tabBars.buttons["Settings"].exists ? app.tabBars.buttons["Settings"] : app.buttons["Settings"].firstMatch
+        settings.tap()
+        app.buttons["Switch user"].tap()
+        let savedUser = app.buttons["Preview User"]
+        XCTAssertTrue(savedUser.waitForExistence(timeout: 15))
+        try await setOffline(true, run: run)
+        savedUser.tap()
+        capture("saved-account-connecting", app: app)
+        XCTAssertEqual(savedUser.value as? String, "Connecting…")
+        XCTAssertFalse(savedUser.isEnabled, "Duplicate sign-in must be disabled while connecting")
+        XCTAssertTrue(warning.waitForExistence(timeout: 15))
+        XCTAssertTrue(savedUser.exists, "Unreachable server must remain saved")
+        XCTAssertFalse(app.textFields["mobile.server.address"].exists, "Failure must not open Add Server")
+        XCTAssertTrue(savedUser.isEnabled, "Retry must become available after the bounded connection check")
+        capture("saved-account-unreachable", app: app)
+        try await setOffline(false, run: run)
+        savedUser.tap()
+        XCTAssertTrue(app.navigationBars["Home"].waitForExistence(timeout: 20), "Saved credentials must work after reconnection")
+        capture("connection-restored", app: app)
+        try await setOffline(true, run: run)
+        XCTAssertTrue(warning.waitForExistence(timeout: 40))
+        XCUIDevice.shared.press(.home)
+        try await setOffline(false, run: run)
+        app.activate()
+        XCTAssertTrue(warning.waitForNonExistence(timeout: 15), "Returning after VPN reconnection must recheck automatically")
+        XCTAssertTrue(app.navigationBars["Home"].exists)
+        capture("connection-restored-on-return", app: app)
     }
 
     @MainActor

@@ -235,6 +235,12 @@ struct SelectUserView: View {
             Text(userSelectionTitle)
                 .font(.title.weight(.semibold))
 
+            if viewModel.connectingUserID != nil {
+                ProgressView(L10n.serverConnecting)
+            }
+            ForEach(viewModel.servers.keys, id: \.id) { server in
+                ServerConnectionNotice(server: server)
+            }
             Text(userSelectionDescription)
                 .font(userItems.isEmpty ? .body : .callout)
                 .foregroundStyle(.secondary)
