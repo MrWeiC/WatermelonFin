@@ -10,11 +10,12 @@ import hashlib
 import json
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs
 
 
 class Handler(BaseHTTPRequestHandler):
     attempts = {}
+    offline_runs = set()
     def respond(self, status, value):
         body = json.dumps(value).encode()
         self.send_response(status)
@@ -30,6 +31,16 @@ class Handler(BaseHTTPRequestHandler):
         parts = urlparse(self.path).path.strip('/').split('/')
         scenario, run = (parts + ['users', 'default'])[:2]
         endpoint = '/'.join(parts[2:]).lower()
+        if scenario == '_control' and self.command == 'POST':
+            if parse_qs(urlparse(self.path).query).get('offline') == ['1']:
+                self.offline_runs.add(run)
+            else:
+                self.offline_runs.discard(run)
+            return self.respond(200, {'offline': run in self.offline_runs})
+        if run in self.offline_runs:
+            time.sleep(6)  # Exceed the bounded public-info probe timeout.
+            self.close_connection = True
+            return
         if endpoint == 'quickconnect/initiate' and self.command != 'POST':
             return self.respond(405, {'Message': 'Quick Connect initiation requires POST'})
         server_id = hashlib.md5(run.encode()).hexdigest()

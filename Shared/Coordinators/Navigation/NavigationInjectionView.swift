@@ -18,6 +18,9 @@ import Transmission
 extension EnvironmentValues {
 
     @Entry
+    var showsServerConnectionNotice = false
+
+    @Entry
     var presentationControllerShouldDismiss: Binding<Bool> = .constant(true)
 }
 
@@ -44,8 +47,10 @@ struct NavigationInjectionView: View {
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             content
+                .modifier(ServerConnectionNoticeModifier())
                 .navigationDestination(for: NavigationRoute.self) { route in
                     route.destination
+                        .modifier(ServerConnectionNoticeModifier())
                 }
         }
         .environment(

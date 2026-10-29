@@ -1670,6 +1670,14 @@ internal enum L10n {
   internal static let serverAlternatePlaceholder = L10n.tr("Localizable", "serverAlternatePlaceholder", fallback: "IP address or MagicDNS name")
   /// Save alternate address
   internal static let serverAlternateSave = L10n.tr("Localizable", "serverAlternateSave", fallback: "Save alternate address")
+  /// Can’t reach %@
+  internal static func serverCannotReach(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "serverCannotReach", String(describing: p1), fallback: "Can’t reach %@")
+  }
+  /// Connecting…
+  internal static let serverConnecting = L10n.tr("Localizable", "serverConnecting", fallback: "Connecting…")
+  /// Check your connection and that your server is running. If you’re away from home, connect to Tailscale or your VPN to reach your home network, then try again.
+  internal static let serverConnectionHelp = L10n.tr("Localizable", "serverConnectionHelp", fallback: "Check your connection and that your server is running. If you’re away from home, connect to Tailscale or your VPN to reach your home network, then try again.")
   /// This address belongs to a different Jellyfin server. The saved server was not changed.
   internal static let serverIdentityMismatch = L10n.tr("Localizable", "serverIdentityMismatch", fallback: "This address belongs to a different Jellyfin server. The saved server was not changed.")
   /// Enter a valid IP address or server URL. Use brackets around IPv6 addresses.

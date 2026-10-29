@@ -14,7 +14,7 @@ import Logging
 import Pulse
 
 @MainActor
-final class ServerAddressRecoveryService {
+final class ServerAddressRecoveryService: ObservableObject {
 
     static let shared = ServerAddressRecoveryService()
 
@@ -24,7 +24,11 @@ final class ServerAddressRecoveryService {
     }
 
     private let logger = Logger.watermelonfin()
+    @Published
     private(set) var unavailableServerIDs: Set<String> = []
+    @Published
+    private(set) var checkingServerIDs: Set<String> = []
+    private var checkTasks: [String: Task<Bool, Never>] = [:]
 
     private var recoveryTasks: [String: Task<URL?, Never>] = [:]
 
@@ -32,12 +36,20 @@ final class ServerAddressRecoveryService {
     /// server, other saved addresses are attempted. Discovery is release-gated.
     @discardableResult
     func refreshAddressIfNeeded(serverID: String, currentURL: URL) async -> Bool {
-        if await verify(url: currentURL, expectedServerID: serverID) != nil {
-            unavailableServerIDs.remove(serverID)
-            return true
+        if let task = checkTasks[serverID] { return await task.value }
+        checkingServerIDs.insert(serverID)
+        let task = Task { @MainActor in
+            if await self.verify(url: currentURL, expectedServerID: serverID) != nil {
+                self.unavailableServerIDs.remove(serverID)
+                return true
+            }
+            return await self.recover(serverID: serverID, failedURL: currentURL) != nil
         }
-
-        return await recover(serverID: serverID, failedURL: currentURL) != nil
+        checkTasks[serverID] = task
+        let reachable = await task.value
+        checkTasks[serverID] = nil
+        checkingServerIDs.remove(serverID)
+        return reachable
     }
 
     /// Finds another address for a saved server and coalesces simultaneous

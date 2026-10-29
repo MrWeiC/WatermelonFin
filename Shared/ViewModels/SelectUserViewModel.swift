@@ -36,6 +36,9 @@ final class SelectUserViewModel: ViewModel {
     @Published
     private(set) var servers: OrderedDictionary<ServerState, [UserState]> = [:]
 
+    @Published
+    private(set) var connectingUserID: String?
+
     @Function(\Action.Cases.deleteUsers)
     private func _deleteUsers(_ users: Set<UserState>) async throws {
         for user in users {
@@ -79,6 +82,10 @@ final class SelectUserViewModel: ViewModel {
 
     @Function(\Action.Cases.signIn)
     private func _signIn(_ user: UserState, _ server: ServerState, _ pin: String) async throws {
+        guard connectingUserID == nil else { return }
+        connectingUserID = user.id
+        defer { connectingUserID = nil }
+
         if user.accessPolicy == .requirePin {
             guard LocalPINPolicy.isValid(pin), let storedPin = keychain.get("\(user.id)-pin"), pin == storedPin else {
                 throw ErrorMessage(L10n.incorrectPinForUser(user.username))
@@ -88,7 +95,7 @@ final class SelectUserViewModel: ViewModel {
         guard await ServerAddressRecoveryService.shared.refreshAddressIfNeeded(
             serverID: server.id, currentURL: server.currentURL
         ), let refreshedServer = try? dataStack.fetchOne(From<ServerModel>().where(\.$id == server.id))?.state else {
-            events.send(.discoverServers)
+            // The server is still saved. Availability UI offers reconnection guidance.
             return
         }
         guard user.hasAccessToken else {
@@ -104,6 +111,9 @@ final class SelectUserViewModel: ViewModel {
                 return
             }
 
+            if ServerAddressRecoveryService.shared.unavailableServerIDs.contains(server.id) {
+                return
+            }
             throw error
         }
 

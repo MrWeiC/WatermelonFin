@@ -33,15 +33,29 @@ struct SelectUserView: View {
             }.listRowBackground(Color.clear)
             ForEach(viewModel.servers.keys, id: \.id) { server in
                 Section(server.name) {
+                    ServerConnectionNotice(server: server)
                     ForEach(viewModel.servers[server] ?? [], id: \.id) { user in
-                        Button(user.username, systemImage: "person.crop.circle") {
+                        Button {
                             if user.accessPolicy == .requirePin {
                                 pinUser = user
                                 pinServer = server
                                 pin = ""
                                 showPIN = true
                             } else { signIn(user, server: server) }
+                        } label: {
+                            HStack {
+                                Label(user.username, systemImage: "person.crop.circle")
+                                Spacer()
+                                if viewModel.connectingUserID == user.id {
+                                    ProgressView()
+                                        .accessibilityIdentifier("server.connection.signingIn")
+                                    Text(L10n.serverConnecting).font(.caption)
+                                }
+                            }
                         }
+                        .accessibilityLabel(user.username)
+                        .accessibilityValue(viewModel.connectingUserID == user.id ? L10n.serverConnecting : "")
+                        .disabled(viewModel.connectingUserID != nil)
                         .swipeActions {
                             Button(L10n.delete, role: .destructive) { viewModel.deleteUsers([user]) }
                         }

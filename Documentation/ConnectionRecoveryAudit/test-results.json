@@ -1,0 +1,76 @@
+{
+  "iphone": {
+    "devicesAndConfigurations": [
+      {
+        "device": {
+          "architecture": "arm64",
+          "deviceId": "FB1CD949-1BB8-4E68-94F5-E8D966879841",
+          "deviceName": "iPhone 17 Pro Max",
+          "modelName": "iPhone 17 Pro Max",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        },
+        "expectedFailures": 0,
+        "failedTests": 0,
+        "passedTests": 1,
+        "skippedTests": 0,
+        "testPlanConfiguration": {
+          "configurationId": "1",
+          "configurationName": "Test Scheme Action"
+        }
+      }
+    ],
+    "environmentDescription": "WatermelonFin iOS \u00b7 Built with macOS 27.0.1",
+    "expectedFailures": 0,
+    "failedTests": 0,
+    "finishTime": 1793296906.339,
+    "passedTests": 1,
+    "result": "Passed",
+    "runtimeWarnings": [],
+    "skippedTests": 0,
+    "startTime": 1793296824.438,
+    "statistics": [],
+    "testFailures": [],
+    "title": "Test - WatermelonFin iOS",
+    "topInsights": [],
+    "totalTestCount": 1
+  },
+  "ipad": {
+    "devicesAndConfigurations": [
+      {
+        "device": {
+          "architecture": "arm64",
+          "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+          "deviceName": "iPad Pro 13-inch (M5)",
+          "modelName": "iPad Pro 13-inch (M5)",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        },
+        "expectedFailures": 0,
+        "failedTests": 0,
+        "passedTests": 1,
+        "skippedTests": 0,
+        "testPlanConfiguration": {
+          "configurationId": "1",
+          "configurationName": "Test Scheme Action"
+        }
+      }
+    ],
+    "environmentDescription": "WatermelonFin iOS \u00b7 Built with macOS 27.0.1",
+    "expectedFailures": 0,
+    "failedTests": 0,
+    "finishTime": 1793296810.432,
+    "passedTests": 1,
+    "result": "Passed",
+    "runtimeWarnings": [],
+    "skippedTests": 0,
+    "startTime": 1793296726.105,
+    "statistics": [],
+    "testFailures": [],
+    "title": "Test - WatermelonFin iOS",
+    "topInsights": [],
+    "totalTestCount": 1
+  }
+}

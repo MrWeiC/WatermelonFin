@@ -37,7 +37,15 @@ struct HomeView: View {
         .navigationTitle(L10n.home)
         .refreshable { viewModel.send(.refresh) }
         .onFirstAppear { viewModel.send(.refresh) }
-        .onReceive(Notifications[.didRequestGlobalRefresh].publisher) { _ in viewModel.send(.backgroundRefresh) }
+        .onReceive(Notifications[.didRequestGlobalRefresh].publisher) { _ in
+            if case .error = viewModel.state {
+                viewModel.send(.refresh)
+            } else if viewModel.state == .initial {
+                viewModel.send(.refresh)
+            } else {
+                viewModel.send(.backgroundRefresh)
+            }
+        }
     }
 }
 
