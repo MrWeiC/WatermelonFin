@@ -120,6 +120,56 @@ final class LiveMediaFlowTests: XCTestCase {
         }
     }
 
+    @MainActor
+    func testLiveSeriesSeasonsAndEpisodeList() async throws {
+        let app = try await signIn()
+        selectTab("Media", app: app)
+        let shows = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Series")).firstMatch
+        XCTAssertTrue(shows.waitForExistence(timeout: 20))
+        shows.tap()
+        let series = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Line Rider")).firstMatch
+        XCTAssertTrue(series.waitForExistence(timeout: 20))
+        series.tap()
+        let season = app.staticTexts["第 1 季"].firstMatch
+        for _ in 0 ..< 5 where !season.isHittable { app.swipeUp() }
+        capture("series-seasons")
+        let tree = XCTAttachment(string: app.debugDescription)
+        tree.name = "series-details-tree"
+        tree.lifetime = .keepAlways
+        add(tree)
+        XCTAssertTrue(season.waitForExistence(timeout: 15), "Line Rider must show its seasons and episode list")
+        app.buttons["第 1 季"].tap()
+        XCTAssertTrue(app.navigationBars["第 1 季"].waitForExistence(timeout: 15))
+        for episode in ["S01E01", "S01E02", "S01E03"] {
+            XCTAssertTrue(app.buttons.matching(NSPredicate(format: "label CONTAINS %@", episode)).firstMatch.waitForExistence(timeout: 20))
+        }
+        capture("series-season-one-episodes")
+        app.navigationBars.buttons.firstMatch.tap()
+        let secondSeason = app.buttons["第 2 季"]
+        for _ in 0 ..< 3 where !secondSeason.isHittable { app.swipeUp() }
+        XCTAssertTrue(secondSeason.isHittable)
+        secondSeason.tap()
+        XCTAssertTrue(app.navigationBars["第 2 季"].waitForExistence(timeout: 15))
+        let secondEpisode = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "S02E02")).firstMatch
+        XCTAssertTrue(secondEpisode.waitForExistence(timeout: 20))
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "S02E01")).firstMatch.exists)
+        capture("series-season-two-episodes")
+        secondEpisode.tap()
+        let play = app.buttons["mobile.item.play"]
+        XCTAssertTrue(play.waitForExistence(timeout: 15))
+        capture("series-selected-episode")
+        play.tap()
+        _ = try await waitForPlayback(paused: false, minimumSeconds: 2, itemID: "7e56e268d68f80e2a80e64edd06810a3")
+        showControls(app)
+        capture("series-selected-episode-playing")
+        app.buttons["Close"].tap()
+        XCTAssertTrue(play.waitForExistence(timeout: 15))
+        app.navigationBars.buttons.firstMatch.tap()
+        XCTAssertTrue(app.navigationBars["第 2 季"].waitForExistence(timeout: 15))
+        XCTAssertTrue(secondEpisode.waitForExistence(timeout: 10))
+        capture("series-returned-to-episode-list")
+    }
+
     @discardableResult
     private func waitForPlayback(
         paused: Bool,
