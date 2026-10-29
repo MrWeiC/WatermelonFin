@@ -37,7 +37,7 @@ struct SearchView: View {
             }.padding(.vertical)
         }
         .navigationTitle(L10n.search)
-        .searchable(text: $query, prompt: L10n.searchMediaLibrary)
+        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.searchMediaLibrary)
         .onChange(of: query) { _, value in viewModel.search(query: value) }
         .onFirstAppear { viewModel.getSuggestions() }
     }

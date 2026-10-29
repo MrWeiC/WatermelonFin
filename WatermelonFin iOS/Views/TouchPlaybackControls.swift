@@ -21,6 +21,21 @@ extension VideoPlayer {
         private var position = 0.0
         @State
         private var editing = false
+        @State
+        private var trackMenu: TrackMenu?
+        @State
+        private var isPresentingOptions = false
+        @State
+        private var pendingSupplement: AnyMediaPlayerSupplement?
+
+        private enum TrackMenu: String, Identifiable {
+            case audio
+            case subtitles
+            var id: String {
+                rawValue
+            }
+        }
+
         @Default(.VideoPlayer.autoPlayEnabled)
         private var autoPlay
         @Default(.VideoPlayer.Playback.appMaximumBitrate)
@@ -38,24 +53,45 @@ extension VideoPlayer {
                     Spacer()
                     Text(manager.item.displayTitle).lineLimit(1).font(.headline)
                     Spacer()
-                    Menu {
-                        Toggle(L10n.autoPlay, isOn: $autoPlay)
-                        Toggle(L10n.aspectFill, isOn: $containerState.isAspectFilled)
-                        Menu(L10n.playbackQuality) {
-                            ForEach(PlaybackBitrate.allCases, id: \.self) { value in
-                                Button(value.displayTitle) { bitrate = value }
-                            }
-                        }
-                        Menu(L10n.playbackSpeed) {
-                            ForEach([Float(0.5), 0.75, 1, 1.25, 1.5, 2], id: \.self) { rate in
-                                Button("\(rate.formatted())×") { manager.setRate(rate: rate) }
-                            }
-                        }
-                        ForEach(manager.supplements.map(AnyMediaPlayerSupplement.init)) { value in
-                            Button(value.displayTitle) { containerState.select(supplement: value) }
-                        }
-                    } label: { Image(systemName: "ellipsis.circle") }
+                    Button {
+                        containerState.isPresentingSelection = true
+                        isPresentingOptions = true
+                    } label: { Image(systemName: "ellipsis.circle").frame(width: 44, height: 44) }
                         .accessibilityLabel(L10n.info)
+                        .sheet(isPresented: $isPresentingOptions, onDismiss: {
+                            containerState.isPresentingSelection = false
+                            if let supplement = pendingSupplement {
+                                pendingSupplement = nil
+                                containerState.select(supplement: supplement)
+                            }
+                        }) {
+                            NavigationStack {
+                                Form {
+                                    Toggle(L10n.autoPlay, isOn: $autoPlay)
+                                    Toggle(L10n.aspectFill, isOn: $containerState.isAspectFilled)
+                                    Menu(L10n.playbackQuality) {
+                                        ForEach(PlaybackBitrate.allCases, id: \.self) { value in
+                                            Button(value.displayTitle) { bitrate = value }
+                                        }
+                                    }
+                                    Menu(L10n.playbackSpeed) {
+                                        ForEach([Float(0.5), 0.75, 1, 1.25, 1.5, 2], id: \.self) { rate in
+                                            Button("\(rate.formatted())×") { manager.setRate(rate: rate) }
+                                        }
+                                    }
+                                    ForEach(manager.supplements.map(AnyMediaPlayerSupplement.init)) { value in
+                                        Button(value.displayTitle) {
+                                            pendingSupplement = value
+                                            isPresentingOptions = false
+                                        }
+                                    }
+                                }
+                                .navigationTitle(L10n.info)
+                                .toolbar { Button(L10n.close) { isPresentingOptions = false } }
+                            }
+                            .presentationDetents([.medium, .large])
+                            .preferredColorScheme(.dark)
+                        }
                 }
                 Spacer()
                 HStack(spacing: 36) {
@@ -97,25 +133,53 @@ extension VideoPlayer {
             .padding()
             .foregroundStyle(.white)
             .buttonStyle(.plain)
+            .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in
+                containerState.timer.poke()
+            })
             .background(Color.black.opacity(0.35))
             .onReceive(manager.secondsBox.$value) { value in
                 if !editing { position = min(duration, max(0, value.seconds)) }
             }
         }
 
-        @ViewBuilder
         private func trackMenus(_ item: MediaPlayerItem) -> some View {
-            Menu(L10n.audio, systemImage: "waveform") {
-                ForEach(item.audioStreams, id: \.index) { stream in
-                    Button(stream.displayTitle ?? stream.language ?? L10n.unknown) { item.selectedAudioStreamIndex = stream.index }
+            HStack {
+                Button { presentTrackMenu(.audio) } label: {
+                    Image(systemName: "waveform").frame(width: 44, height: 44).contentShape(Rectangle())
+                }.accessibilityLabel(L10n.audio)
+                Button { presentTrackMenu(.subtitles) } label: {
+                    Image(systemName: "captions.bubble").frame(width: 44, height: 44).contentShape(Rectangle())
+                }.accessibilityLabel(L10n.subtitles)
+            }
+            .labelStyle(.iconOnly)
+            .sheet(item: $trackMenu, onDismiss: { containerState.isPresentingSelection = false }) { menu in
+                NavigationStack {
+                    List {
+                        if menu == .subtitles {
+                            Button(L10n.none) {
+                                item.selectedSubtitleStreamIndex = -1
+                                trackMenu = nil
+                            }
+                        }
+                        ForEach(menu == .audio ? item.audioStreams : item.subtitleStreams, id: \.index) { stream in
+                            Button(stream.displayTitle ?? stream.language ?? L10n.unknown) {
+                                if menu == .audio { item.selectedAudioStreamIndex = stream.index }
+                                else { item.selectedSubtitleStreamIndex = stream.index }
+                                trackMenu = nil
+                            }
+                        }
+                    }
+                    .navigationTitle(menu == .audio ? L10n.audio : L10n.subtitles)
+                    .toolbar { Button(L10n.close) { trackMenu = nil } }
                 }
-            }.labelStyle(.iconOnly)
-            Menu(L10n.subtitles, systemImage: "captions.bubble") {
-                Button(L10n.none) { item.selectedSubtitleStreamIndex = -1 }
-                ForEach(item.subtitleStreams, id: \.index) { stream in
-                    Button(stream.displayTitle ?? stream.language ?? L10n.unknown) { item.selectedSubtitleStreamIndex = stream.index }
-                }
-            }.labelStyle(.iconOnly)
+                .presentationDetents([.medium, .large])
+                .preferredColorScheme(.dark)
+            }
+        }
+
+        private func presentTrackMenu(_ menu: TrackMenu) {
+            containerState.isPresentingSelection = true
+            trackMenu = menu
         }
     }
 

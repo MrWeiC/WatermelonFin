@@ -146,7 +146,8 @@ extension VideoPlayerType {
             codec: VideoCodec.h264.rawValue,
             type: .video,
             conditions: {
-                _h264BaseConditions
+                // MPV honors sample aspect ratios; anamorphic H.264 needs no transcode.
+                _h264BaseConditions.filter { $0.property != .isAnamorphic }
                 ProfileCondition(
                     condition: .equalsAny,
                     isRequired: true,

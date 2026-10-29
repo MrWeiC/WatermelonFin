@@ -1,0 +1,623 @@
+{
+  "latestCases": [
+    {
+      "device": "comparison",
+      "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+      "result": "Passed"
+    },
+    {
+      "device": "comparison",
+      "test": "SignInFlowTests/testQuickConnectRecoversAfterRetry()",
+      "result": "Passed"
+    },
+    {
+      "device": "ipad",
+      "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+      "result": "Passed"
+    },
+    {
+      "device": "ipad",
+      "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+      "result": "Passed"
+    },
+    {
+      "device": "ipad",
+      "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+      "result": "Passed"
+    },
+    {
+      "device": "ipad",
+      "test": "LiveMediaFlowTests/testLiveSubtitleSelection()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "LiveMediaFlowTests/testLiveChineseMediaLayouts()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "LiveMediaFlowTests/testLiveSubtitleSelection()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "LiveMediaFlowTests/testLiveTabsSettingsAndDiagnostics()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testMPVProfileDoesNotTranscodeAnamorphicH264()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testNewPINPolicyRequiresConfirmationBeforeSaving()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testPlaybackFailureBeforeReadinessDoesNotAutoplay()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testRepeatedMediaKeepsDistinctPlaylistEntryIdentity()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testReportsWaitForTheStartRequestBeforeProgressAndStop()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testTrackSelectionPreventsOverlayTimeout()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone26",
+      "test": "PlaybackAndPlaylistTests/testTwentyItemPagesRemainPageable()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone27",
+      "test": "LiveMediaFlowTests/testLiveChineseMediaLayouts()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone27",
+      "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone27",
+      "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone27",
+      "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone27",
+      "test": "LiveMediaFlowTests/testLiveSubtitleSelection()",
+      "result": "Passed"
+    },
+    {
+      "device": "iphone27",
+      "test": "LiveMediaFlowTests/testLiveTabsSettingsAndDiagnostics()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testGestureLockPreventsOverlayFromShowing()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testInitialOverlayStateIsHidden()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testInitialScrubStateIsIdle()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testInitialSupplementStateIsClosed()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testMenuPressAfterOverlayAutoDismissalIsTemporarilyBlocked()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testMenuPressAfterOverlayDismissalIsTemporarilyBlocked()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testMenuPressAfterScrubbingDismissalIsTemporarilyBlocked()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testMenuPressIsSwallowedWhileScrubbing()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testMenuPressSwallowDecisionCanBeCapturedBeforeOverlayDismissal()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testPausedOverlayAutoHidesAfterInactivity()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testPresentationControllerShouldDismissWhenSupplementClosed()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSetOverlayVisibleFalse()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSetOverlayVisibleIgnoredWhenLocked()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSetOverlayVisibleTrue()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSettingIsPresentingOverlayToFalseUpdatesOverlayState()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSettingIsPresentingOverlayUpdatesOverlayState()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSettingIsScrubbingToFalseReturnsToIdle()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testSettingIsScrubbingUpdatesScrubState()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testToggleOverlay()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "VideoPlayerContainerStateTests/testUnlockingGestureResetsToHidden()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "WatermelonFinAPIClientDelegateTests/testDeprecatedInitiateUsesPostIncludingReverseProxyPrefix()",
+      "result": "Passed"
+    },
+    {
+      "device": "tvos",
+      "test": "WatermelonFinAPIClientDelegateTests/testOtherQuickConnectRequestsRemainUnchanged()",
+      "result": "Passed"
+    }
+  ],
+  "runHistory": [
+    {
+      "group": "iphone26",
+      "bundle": "watermelon-live-iphone27-final.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "A5D3F77E-63CC-4FD6-90B0-002942AB9713",
+          "deviceName": "iPhone 17 Pro",
+          "modelName": "iPhone 17 Pro",
+          "osBuildNumber": "23F77",
+          "osVersion": "26.5",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "PlaybackAndPlaylistTests/testMPVProfileDoesNotTranscodeAnamorphicH264()",
+          "result": "Passed"
+        },
+        {
+          "test": "PlaybackAndPlaylistTests/testNewPINPolicyRequiresConfirmationBeforeSaving()",
+          "result": "Passed"
+        },
+        {
+          "test": "PlaybackAndPlaylistTests/testPlaybackFailureBeforeReadinessDoesNotAutoplay()",
+          "result": "Passed"
+        },
+        {
+          "test": "PlaybackAndPlaylistTests/testRepeatedMediaKeepsDistinctPlaylistEntryIdentity()",
+          "result": "Passed"
+        },
+        {
+          "test": "PlaybackAndPlaylistTests/testReportsWaitForTheStartRequestBeforeProgressAndStop()",
+          "result": "Passed"
+        },
+        {
+          "test": "PlaybackAndPlaylistTests/testTrackSelectionPreventsOverlayTimeout()",
+          "result": "Passed"
+        },
+        {
+          "test": "PlaybackAndPlaylistTests/testTwentyItemPagesRemainPageable()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveChineseMediaLayouts()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Failed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveSubtitleSelection()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveTabsSettingsAndDiagnostics()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "iphone26",
+      "bundle": "watermelon-live-movie27-verify.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "A5D3F77E-63CC-4FD6-90B0-002942AB9713",
+          "deviceName": "iPhone 17 Pro",
+          "modelName": "iPhone 17 Pro",
+          "osBuildNumber": "23F77",
+          "osVersion": "26.5",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "iphone27",
+      "bundle": "watermelon-ios27-search-fix.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "FB1CD949-1BB8-4E68-94F5-E8D966879841",
+          "deviceName": "iPhone 17 Pro Max",
+          "modelName": "iPhone 17 Pro Max",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveChineseMediaLayouts()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveSubtitleSelection()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveTabsSettingsAndDiagnostics()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "ipad",
+      "bundle": "watermelon-live-ipad27-tabs.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+          "deviceName": "iPad Pro 13-inch (M5)",
+          "modelName": "iPad Pro 13-inch (M5)",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+          "result": "Failed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Failed"
+        }
+      ]
+    },
+    {
+      "group": "ipad",
+      "bundle": "watermelon-live-ipad-playback.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+          "deviceName": "iPad Pro 13-inch (M5)",
+          "modelName": "iPad Pro 13-inch (M5)",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveEpisodeAudioSwitch()",
+          "result": "Passed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Failed"
+        },
+        {
+          "test": "LiveMediaFlowTests/testLiveSubtitleSelection()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "ipad",
+      "bundle": "watermelon-ipad-header-fix.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+          "deviceName": "iPad Pro 13-inch (M5)",
+          "modelName": "iPad Pro 13-inch (M5)",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "ipad",
+      "bundle": "watermelon-ipad-detail-final.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "0921A7BA-670F-4EC6-80BC-804C47942D06",
+          "deviceName": "iPad Pro 13-inch (M5)",
+          "modelName": "iPad Pro 13-inch (M5)",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "iphone27",
+      "bundle": "watermelon-iphone-detail-final.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "FB1CD949-1BB8-4E68-94F5-E8D966879841",
+          "deviceName": "iPhone 17 Pro Max",
+          "modelName": "iPhone 17 Pro Max",
+          "osBuildNumber": "24A434",
+          "osVersion": "27.0",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveMoviePlaybackControls()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "comparison",
+      "bundle": "watermelon-media-comparison-final.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "F6FE2516-3A70-49B4-903C-415F4B7B3D0F",
+          "deviceName": "iPhone 13 Pro Max",
+          "modelName": "iPhone 13 Pro Max",
+          "osBuildNumber": "23F77",
+          "osVersion": "26.5",
+          "platform": "iOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "LiveMediaFlowTests/testLiveMediaCardsNavigate()",
+          "result": "Passed"
+        },
+        {
+          "test": "SignInFlowTests/testQuickConnectRecoversAfterRetry()",
+          "result": "Passed"
+        }
+      ]
+    },
+    {
+      "group": "tvos",
+      "bundle": "watermelon-media-tvos-regression.xcresult",
+      "devices": [
+        {
+          "architecture": "arm64",
+          "deviceId": "5BE8069E-2EC6-4C7A-B08C-8A19EB0AC3B5",
+          "deviceName": "Apple TV 4K (3rd generation)",
+          "modelName": "Apple TV 4K (3rd generation)",
+          "osBuildNumber": "23L470",
+          "osVersion": "26.5",
+          "platform": "tvOS Simulator"
+        }
+      ],
+      "cases": [
+        {
+          "test": "VideoPlayerContainerStateTests/testGestureLockPreventsOverlayFromShowing()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testInitialOverlayStateIsHidden()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testInitialScrubStateIsIdle()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testInitialSupplementStateIsClosed()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testMenuPressAfterOverlayAutoDismissalIsTemporarilyBlocked()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testMenuPressAfterOverlayDismissalIsTemporarilyBlocked()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testMenuPressAfterScrubbingDismissalIsTemporarilyBlocked()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testMenuPressIsSwallowedWhileScrubbing()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testMenuPressSwallowDecisionCanBeCapturedBeforeOverlayDismissal()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testPausedOverlayAutoHidesAfterInactivity()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testPresentationControllerShouldDismissWhenSupplementClosed()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSetOverlayVisibleFalse()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSetOverlayVisibleIgnoredWhenLocked()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSetOverlayVisibleTrue()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSettingIsPresentingOverlayToFalseUpdatesOverlayState()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSettingIsPresentingOverlayUpdatesOverlayState()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSettingIsScrubbingToFalseReturnsToIdle()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testSettingIsScrubbingUpdatesScrubState()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testToggleOverlay()",
+          "result": "Passed"
+        },
+        {
+          "test": "VideoPlayerContainerStateTests/testUnlockingGestureResetsToHidden()",
+          "result": "Passed"
+        },
+        {
+          "test": "WatermelonFinAPIClientDelegateTests/testDeprecatedInitiateUsesPostIncludingReverseProxyPrefix()",
+          "result": "Passed"
+        },
+        {
+          "test": "WatermelonFinAPIClientDelegateTests/testOtherQuickConnectRequestsRemainUnchanged()",
+          "result": "Passed"
+        }
+      ]
+    }
+  ]
+}

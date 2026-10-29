@@ -92,6 +92,13 @@ class VideoPlayerContainerState: ObservableObject {
         }
     }
 
+    /// A touch selection sheet must outlive the playback overlay's auto-hide timer.
+    var isPresentingSelection = false {
+        didSet {
+            if isPresentingSelection { timer.stop() } else { timer.poke() }
+        }
+    }
+
     // MARK: - Computed Properties (backward compatibility)
 
     /// Whether the overlay is currently visible (not hidden or locked)
@@ -247,6 +254,7 @@ class VideoPlayerContainerState: ObservableObject {
         timerCancellable = timer.sink { [weak self] in
             guard let self else { return }
             guard scrubState == .idle,
+                  !isPresentingSelection,
                   supplementState == .closed
             else { return }
 

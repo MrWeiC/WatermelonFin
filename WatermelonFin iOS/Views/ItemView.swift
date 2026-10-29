@@ -37,7 +37,8 @@ struct ItemView: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 20) {
+                // Keep the summary mounted when a full-screen player rotates and dismisses.
+                VStack(alignment: .leading, spacing: 20) {
                     if geometry.size.width >= 760 && !dynamicTypeSize.isAccessibilitySize {
                         HStack(alignment: .top, spacing: 32) {
                             artwork.frame(maxWidth: 420)
@@ -47,22 +48,24 @@ struct ItemView: View {
                         artwork
                         itemSummary
                     }
-                    if let people = viewModel.item.people, !people.isEmpty {
-                        CastAndCrewHStack(people: people)
-                    }
-                    if let overview = viewModel.item.overview { Text(overview).textSelection(.enabled) }
-                    if let collection = viewModel as? CollectionItemViewModel {
-                        MobileCollectionRows(viewModel: collection)
-                    }
-                    if let series = viewModel as? SeriesItemViewModel { MobileSeasonRows(viewModel: series) }
-                    if !viewModel.specialFeatures.isEmpty {
-                        PosterHStack(title: L10n.specialFeatures, type: .landscape, items: viewModel.specialFeatures) {
-                            router.route(to: .item(item: $0))
+                    LazyVStack(alignment: .leading, spacing: 20) {
+                        if let people = viewModel.item.people, !people.isEmpty {
+                            CastAndCrewHStack(people: people)
                         }
-                    }
-                    if !viewModel.similarItems.isEmpty {
-                        PosterHStack(title: L10n.recommended, type: .portrait, items: viewModel.similarItems) {
-                            router.route(to: .item(item: $0))
+                        if let overview = viewModel.item.overview { Text(overview).textSelection(.enabled) }
+                        if let collection = viewModel as? CollectionItemViewModel {
+                            MobileCollectionRows(viewModel: collection)
+                        }
+                        if let series = viewModel as? SeriesItemViewModel { MobileSeasonRows(viewModel: series) }
+                        if !viewModel.specialFeatures.isEmpty {
+                            PosterHStack(title: L10n.specialFeatures, type: .landscape, items: viewModel.specialFeatures) {
+                                router.route(to: .item(item: $0))
+                            }
+                        }
+                        if !viewModel.similarItems.isEmpty {
+                            PosterHStack(title: L10n.recommended, type: .portrait, items: viewModel.similarItems) {
+                                router.route(to: .item(item: $0))
+                            }
                         }
                     }
                 }
@@ -101,6 +104,9 @@ struct ItemView: View {
                 } label: {
                     Label(item.playButtonLabel, systemImage: "play.fill").frame(maxWidth: .infinity)
                 }
+                .accessibilityIdentifier("mobile.item.play")
+                .accessibilityLabel((item.userData?.playbackPositionTicks ?? 0) > 0 ? L10n.resume : L10n.play)
+                .accessibilityValue(item.playButtonLabel)
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
                 if let sources = item.mediaSources, sources.count > 1 {

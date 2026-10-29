@@ -13,6 +13,9 @@ import SwiftUI
 
 struct MediaView: View {
 
+    @Environment(\.dynamicTypeSize)
+    private var dynamicTypeSize
+
     @Router
     private var router
 
@@ -35,7 +38,9 @@ struct MediaView: View {
     }
 
     private var columns: [GridItem] {
-        if UIDevice.isTV {
+        if dynamicTypeSize.isAccessibilitySize, !UIDevice.isTV {
+            [GridItem(.flexible())]
+        } else if UIDevice.isTV {
             Array(
                 repeating: GridItem(.flexible(), spacing: 50),
                 count: 4
@@ -144,7 +149,7 @@ struct MediaView: View {
                 .eraseToAnyView()
         }
         .animation(.linear(duration: 0.1), value: viewModel.state)
-        .ignoresSafeArea()
+        .if(UIDevice.isTV) { $0.ignoresSafeArea() }
         .navigationTitle(L10n.allMedia.localizedCapitalized)
         .refreshable {
             viewModel.invalidateCardDataCache()
