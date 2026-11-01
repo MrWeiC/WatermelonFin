@@ -56,7 +56,7 @@ struct ItemView: View {
                         if let collection = viewModel as? CollectionItemViewModel {
                             MobileCollectionRows(viewModel: collection)
                         }
-                        if let series = viewModel as? SeriesItemViewModel { MobileSeasonRows(viewModel: series) }
+                        if let series = viewModel as? SeriesItemViewModel { MobileEpisodeSelector(viewModel: series) }
                         if !viewModel.specialFeatures.isEmpty {
                             PosterHStack(title: L10n.specialFeatures, type: .landscape, items: viewModel.specialFeatures) {
                                 router.route(to: .item(item: $0))
@@ -152,13 +152,87 @@ private struct MobileCollectionRows: View {
     }
 }
 
-private struct MobileSeasonRows: View {
+private struct MobileEpisodeSelector: View {
     @ObservedObject
     var viewModel: SeriesItemViewModel
+    @State
+    private var selection: SeasonItemViewModel.ID?
+
+    private var selectedSeason: SeasonItemViewModel? {
+        viewModel.seasons.first { $0.id == selection } ?? viewModel.seasons.first
+    }
+
     var body: some View {
-        ForEach(viewModel.seasons) { season in
-            MobileLibraryRow(title: season.season.displayTitle, viewModel: season)
-                .onAppear { if season.state == .initial { season.send(.refresh) } }
+        if let selectedSeason {
+            // Season rows render nothing until loaded, so load from a view that is always on screen.
+            MobileSeasonEpisodes(viewModel: selectedSeason) { seasonPicker(selected: selectedSeason) }
+                .id(selectedSeason.id)
+                .task(id: selectedSeason.id) {
+                    if selectedSeason.state == .initial { selectedSeason.send(.refresh) }
+                }
+                .onChange(of: viewModel.playButtonItem?.seasonID, initial: true) { _, seasonID in
+                    // Open on the next-up season until the viewer picks one.
+                    if selection == nil, let seasonID, viewModel.seasons.contains(where: { $0.id == seasonID }) { selection = seasonID }
+                }
+        }
+    }
+
+    @ViewBuilder
+    private func seasonPicker(selected: SeasonItemViewModel) -> some View {
+        if viewModel.seasons.count > 1 {
+            Menu {
+                Picker(L10n.season, selection: Binding { selected.id } set: { selection = $0 }) {
+                    ForEach(viewModel.seasons) { season in
+                        Text(season.season.displayTitle).tag(season.id)
+                    }
+                }
+            } label: {
+                Label(selected.season.displayTitle, systemImage: "chevron.up.chevron.down")
+                    .labelStyle(.titleAndIcon)
+            }
+            .accessibilityIdentifier("mobile.item.seasonPicker")
+        } else {
+            Text(selected.season.displayTitle).foregroundStyle(.secondary)
+        }
+    }
+}
+
+private struct MobileSeasonEpisodes<Trailing: View>: View {
+    @ObservedObject
+    var viewModel: SeasonItemViewModel
+    @ViewBuilder
+    let picker: () -> Trailing
+    @Router
+    private var router
+
+    var body: some View {
+        if viewModel.elements.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text(L10n.episodes).font(.title3.bold())
+                    Spacer()
+                    picker()
+                }
+                switch viewModel.state {
+                case .initial, .refreshing:
+                    ProgressView()
+                case let .error(error):
+                    Text(error.localizedDescription).foregroundStyle(.secondary)
+                    Button(L10n.retry) { viewModel.send(.refresh) }
+                case .content:
+                    Text(L10n.noEpisodesAvailable).foregroundStyle(.secondary)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+        } else {
+            PosterHStack(title: L10n.episodes, type: .landscape, items: viewModel.elements) {
+                router.route(to: .item(item: $0))
+            }.trailing {
+                picker()
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("mobile.item.episodes")
         }
     }
 }

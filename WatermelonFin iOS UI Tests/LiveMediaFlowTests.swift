@@ -333,4 +333,24 @@ final class LiveMediaFlowTests: XCTestCase {
             XCTAssertTrue(app.navigationBars["Home School"].waitForExistence(timeout: 15))
         }
     }
+
+    @MainActor
+    func testLiveSeriesShowsSeasonEpisodes() async throws {
+        let app = try await signIn()
+        selectTab("Search", app: app)
+        let search = app.searchFields.firstMatch
+        XCTAssertTrue(search.waitForExistence(timeout: 10))
+        search.tap()
+        search.typeText("哆啦A梦")
+        let series = app.buttons["哆啦A梦"].firstMatch
+        XCTAssertTrue(series.waitForExistence(timeout: 30))
+        series.tap()
+        let episodes = app.otherElements["mobile.item.episodes"]
+        for _ in 0 ..< 4 where !episodes.exists {
+            app.swipeUp()
+        }
+        XCTAssertTrue(episodes.waitForExistence(timeout: 30), "Series detail must list the selected season's episodes")
+        XCTAssertGreaterThan(episodes.buttons.count, 0)
+        capture("12-live-series-episodes")
+    }
 }
