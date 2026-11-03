@@ -49,6 +49,7 @@ struct ItemView: View {
                         itemSummary
                     }
                     LazyVStack(alignment: .leading, spacing: 20) {
+                        if let series = viewModel as? SeriesItemViewModel { MobileSeasonRows(viewModel: series) }
                         if let people = viewModel.item.people, !people.isEmpty {
                             CastAndCrewHStack(people: people)
                         }
@@ -56,7 +57,6 @@ struct ItemView: View {
                         if let collection = viewModel as? CollectionItemViewModel {
                             MobileCollectionRows(viewModel: collection)
                         }
-                        if let series = viewModel as? SeriesItemViewModel { MobileSeasonRows(viewModel: series) }
                         if !viewModel.specialFeatures.isEmpty {
                             PosterHStack(title: L10n.specialFeatures, type: .landscape, items: viewModel.specialFeatures) {
                                 router.route(to: .item(item: $0))
@@ -155,10 +155,38 @@ private struct MobileCollectionRows: View {
 private struct MobileSeasonRows: View {
     @ObservedObject
     var viewModel: SeriesItemViewModel
+    @Router
+    private var router
+
     var body: some View {
-        ForEach(viewModel.seasons) { season in
-            MobileLibraryRow(title: season.season.displayTitle, viewModel: season)
-                .onAppear { if season.state == .initial { season.send(.refresh) } }
+        if !viewModel.seasons.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(L10n.seasons)
+                    .font(.title2.bold())
+                    .accessibilityAddTraits(.isHeader)
+                ForEach(viewModel.seasons) { season in
+                    // Render the season before fetching episodes. An empty preview row
+                    // cannot reliably trigger onAppear inside a lazy stack.
+                    Button {
+                        router.route(to: .library(viewModel: season))
+                    } label: {
+                        HStack(spacing: 12) {
+                            Text(season.season.displayTitle)
+                                .font(.headline)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .accessibilityHidden(true)
+                        }
+                        .padding(16)
+                        .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+                        .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("mobile.series.season.\(season.id ?? "")")
+                }
+            }
         }
     }
 }
