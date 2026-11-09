@@ -30,13 +30,13 @@ final class FirstTimeAccountFlowAutomationTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSearchStaysIdleWhileDiscoveryIsDisabled() async {
+    func testLocalDiscoveryCanStartAndStop() async {
         await prepareDataStack()
         let viewModel = ConnectToServerViewModel()
         await viewModel.searchForServers()
-        XCTAssertFalse(viewModel.isSearching)
-        XCTAssertTrue(viewModel.localServers.isEmpty)
-        XCTAssertFalse(viewModel.discoveryFailed, "Disabled discovery is not a network permission failure")
+        XCTAssertTrue(viewModel.isSearching, "Enabled discovery should start a bounded search")
+        viewModel.stopSearching()
+        XCTAssertFalse(viewModel.isSearching, "Leaving setup must stop discovery")
     }
 
     func testDevServerCanBeAddedFromEmptyLocalState() async throws {

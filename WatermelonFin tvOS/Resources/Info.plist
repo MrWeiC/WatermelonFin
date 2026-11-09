@@ -51,7 +51,7 @@
 		<true/>
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Connect to your Jellyfin server on your local network.</string>
+	<string>Discover and connect to Jellyfin servers on your local network.</string>
 	<key>UIDesignRequiresCompatibility</key>
 	<true/>
 	<key>UILaunchScreen</key>
