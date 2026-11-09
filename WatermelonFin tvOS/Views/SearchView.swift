@@ -127,24 +127,6 @@ struct SearchView: View {
                     )
                 }
 
-                if let programs = viewModel.items[.program], programs.isNotEmpty {
-                    itemsSection(
-                        title: L10n.programs,
-                        type: .program,
-                        items: programs,
-                        posterType: .landscape
-                    )
-                }
-
-                if let channels = viewModel.items[.tvChannel], channels.isNotEmpty {
-                    itemsSection(
-                        title: L10n.channels,
-                        type: .tvChannel,
-                        items: channels,
-                        posterType: .square
-                    )
-                }
-
                 if let musicArtists = viewModel.items[.musicArtist], musicArtists.isNotEmpty {
                     itemsSection(
                         title: L10n.artists,
@@ -177,13 +159,7 @@ struct SearchView: View {
     }
 
     private func select(_ item: BaseItemDto) {
-        switch item.type {
-        case .program, .tvChannel:
-            let provider = item.getPlaybackItemProvider(userSession: viewModel.userSession!)
-            router.route(to: .videoPlayer(provider: provider))
-        default:
-            router.route(to: .item(item: item))
-        }
+        router.route(to: .item(item: item))
     }
 
     private func itemsSection(

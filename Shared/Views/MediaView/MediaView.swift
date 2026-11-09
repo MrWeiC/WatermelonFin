@@ -120,8 +120,6 @@ struct MediaView: View {
                 filters: .favorites
             )
             router.route(to: .library(viewModel: viewModel), in: namespace)
-        case .liveTV:
-            router.route(to: .liveTV)
         }
     }
 

@@ -256,7 +256,6 @@
 "sort" = "排序方式";
 "order" = "排序顺序";
 "delivery" = "送达";
-"liveTV" = "直播";
 "downloads" = "下载";
 "resetAllSettings" = "重置到默认设置。";
 "removeAllServers" = "删除所有服务器";
@@ -265,7 +264,6 @@
 "nativePlayer" = "原生播放器";
 "jump" = "跳转";
 "slider" = "滑块";
-"comingSoon" = "即将推出";
 "aspectFill" = "保持纵横比填充";
 "enabled" = "启用";
 "disabled" = "禁用";
@@ -281,10 +279,6 @@
 "grid" = "网格";
 "list" = "列表";
 "logs" = "日志";
-"onNow" = "正在播放";
-"sports" = "体育";
-"kids" = "儿童";
-"news" = "新闻";
 "buttons" = "按钮";
 "playbackButtons" = "播放按钮";
 "menuButtons" = "更多菜单按钮";
@@ -883,7 +877,6 @@
 "clip" = "片段";
 "dayOfWeek" = "一周中的某天";
 "died" = "死亡";
-"liveTVRecordingManagement" = "电视直播录制管理";
 "remixer" = "混音师";
 "birthplace" = "出生地";
 "musicVideos" = "音乐视频";
@@ -1076,7 +1069,6 @@
 "manualPlaylistsFolder" = "手动播放列表文件夹";
 "manualPlaylistsFolders" = "手动播放列表文件夹";
 "interview" = "采访";
-"liveTVAccess" = "电视直播访问";
 "itemAtItem" = "%2$@ 中的 %1$@";
 "lockAllFields" = "锁定所有栏";
 "lockedFields" = "锁定的栏";
@@ -1116,7 +1108,6 @@
 "streamCountExceedsLimit" = "播放流数量超过允许的限制";
 "apiKeysCapitalized" = "API 密钥";
 "createAPIKeyCapitalized" = "创建API 密钥";
-"liveTVAccessCapitalized" = "直播电视访问";
 "parentalRatings" = "家长分级";
 "previewImage" = "进度预览图";
 "tvShowsCapitalized" = "剧集";

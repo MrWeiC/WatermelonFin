@@ -343,12 +343,10 @@
 "aspectFill" = "等比例填充";
 "enabled" = "啟用";
 "removeAllServers" = "移除所有伺服器";
-"comingSoon" = "即將到來";
 "reload" = "重新加載";
 "advanced" = "進階";
 "disabled" = "禁用";
 "resetAllSettings" = "將所有設定重置為預設值。";
-"liveTV" = "電視直播";
 "downloads" = "下載內容";
 "indicators" = "指標";
 "nativePlayer" = "原生播放器";
@@ -375,10 +373,6 @@
 "grid" = "網格";
 "list" = "清單";
 "logs" = "日誌";
-"onNow" = "熱播中";
-"sports" = "運動";
-"kids" = "兒童";
-"news" = "新聞";
 "buttons" = "按鍵";
 "jump" = "跳轉";
 "slider" = "滑桿";
@@ -789,13 +783,10 @@
 "level" = "等級";
 "likedItems" = "喜歡的內容";
 "likes" = "喜歡";
-"liveTVAccess" = "電視直播訪問";
-"liveTVAccessCapitalized" = "直播電視訪問";
 "liveTVChannel" = "電視直播頻道";
 "liveTVChannels" = "電視直播頻道";
 "liveTVProgram" = "電視直播節目";
 "liveTVPrograms" = "電視直播節目";
-"liveTVRecordingManagement" = "電視直播錄制管理";
 "loadingUserFailed" = "加載使用者失敗";
 "local" = "本地";
 "lockAllFields" = "鎖定所有欄";

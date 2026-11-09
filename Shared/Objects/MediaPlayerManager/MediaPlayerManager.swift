@@ -240,12 +240,6 @@ final class MediaPlayerManager: ViewModel {
         // position updates can lag the EOF event and container duration can differ
         // slightly from metadata, causing the one EOF event to be discarded.
 
-        // Live streams should not naturally end (defensive check).
-        if item.isLiveStream {
-            logger.trace("Ignoring ended event for live stream")
-            return
-        }
-
         // Attempt to play next item in queue if autoplay is enabled
         // Use captured nextItemProvider instead of queue?.nextItem because
         // the queue will clear nextItem when playbackItem changes.

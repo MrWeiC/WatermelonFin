@@ -514,9 +514,6 @@
 /// Columns: %@
 "columnsWithCount" = "Columns: %@";
 
-/// Coming soon
-"comingSoon" = "Coming soon";
-
 /// Community
 "community" = "Community";
 
@@ -1234,9 +1231,6 @@
 /// Jump forward length
 "jumpForwardLength" = "Jump forward length";
 
-/// Kids
-"kids" = "Kids";
-
 /// kbps
 "kilobitsPerSecond" = "kbps";
 
@@ -1312,15 +1306,6 @@
 /// List
 "list" = "List";
 
-/// Live TV
-"liveTV" = "Live TV";
-
-/// Live TV access
-"liveTVAccess" = "Live TV access";
-
-/// Live TV Access
-"liveTVAccessCapitalized" = "Live TV Access";
-
 /// Live TV channel
 "liveTVChannel" = "Live TV channel";
 
@@ -1332,9 +1317,6 @@
 
 /// Live TV programs
 "liveTVPrograms" = "Live TV programs";
-
-/// Live TV recording management
-"liveTVRecordingManagement" = "Live TV recording management";
 
 /// Loading user failed
 "loadingUserFailed" = "Loading user failed";
@@ -1684,9 +1666,6 @@
 /// New password
 "newPassword" = "New password";
 
-/// News
-"news" = "News";
-
 /// New user
 "newUser" = "New user";
 
@@ -1773,9 +1752,6 @@
 
 /// On application startup
 "onApplicationStartup" = "On application startup";
-
-/// On Now
-"onNow" = "On Now";
 
 /// Options
 "options" = "Options";
@@ -2553,9 +2529,6 @@
 
 /// Split
 "split" = "Split";
-
-/// Sports
-"sports" = "Sports";
 
 /// Start date
 "startDate" = "Start date";

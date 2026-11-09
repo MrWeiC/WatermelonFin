@@ -64,14 +64,27 @@ final class MainTabViewTabsTests: XCTestCase {
                 library(id: "movies", name: "Movies", collectionType: .movies),
                 library(id: "shows", name: "Shows", collectionType: .tvshows),
                 library(id: "music", name: "Music", collectionType: .music),
+            ],
+            hiddenLibraryIDs: [],
+            showFavorites: false
+        )
+
+        XCTAssertEqual(mediaItems.map(\.id), ["movies", "shows", "music"])
+        XCTAssertTrue(mediaItems.allSatisfy { $0.section == .libraries })
+    }
+
+    func testLiveTVLibrariesAreNotShown() {
+        let mediaItems = MediaViewModel.MediaType.makeMediaItems(
+            from: [
+                library(id: "movies", name: "Movies", collectionType: .movies),
                 library(id: "live-tv", name: "Live TV", collectionType: .livetv),
             ],
             hiddenLibraryIDs: [],
             showFavorites: false
         )
 
-        XCTAssertEqual(mediaItems.map(\.id), ["movies", "shows", "music", "live-tv"])
-        XCTAssertTrue(mediaItems.allSatisfy { $0.section == .libraries })
+        XCTAssertEqual(mediaItems.map(\.id), ["movies"])
+        XCTAssertFalse(CollectionType.supportedCases.contains(.livetv))
     }
 
     func testHiddenLibrariesAreRemovedWithoutHidingOtherLibraries() {

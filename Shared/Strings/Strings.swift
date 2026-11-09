@@ -368,8 +368,6 @@ internal enum L10n {
   internal static func columnsWithCount(_ p1: Any) -> String {
     return L10n.tr("Localizable", "columnsWithCount", String(describing: p1), fallback: "Columns: %@")
   }
-  /// Coming soon
-  internal static let comingSoon = L10n.tr("Localizable", "comingSoon", fallback: "Coming soon")
   /// Community
   internal static let community = L10n.tr("Localizable", "community", fallback: "Community")
   /// Community rating
@@ -880,8 +878,6 @@ internal enum L10n {
   internal static let jumpForward = L10n.tr("Localizable", "jumpForward", fallback: "Jump forward")
   /// Jump forward length
   internal static let jumpForwardLength = L10n.tr("Localizable", "jumpForwardLength", fallback: "Jump forward length")
-  /// Kids
-  internal static let kids = L10n.tr("Localizable", "kids", fallback: "Kids")
   /// kbps
   internal static let kilobitsPerSecond = L10n.tr("Localizable", "kilobitsPerSecond", fallback: "kbps")
   /// Landscape
@@ -936,12 +932,6 @@ internal enum L10n {
   internal static let likes = L10n.tr("Localizable", "likes", fallback: "Likes")
   /// List
   internal static let list = L10n.tr("Localizable", "list", fallback: "List")
-  /// Live TV
-  internal static let liveTV = L10n.tr("Localizable", "liveTV", fallback: "Live TV")
-  /// Live TV access
-  internal static let liveTVAccess = L10n.tr("Localizable", "liveTVAccess", fallback: "Live TV access")
-  /// Live TV Access
-  internal static let liveTVAccessCapitalized = L10n.tr("Localizable", "liveTVAccessCapitalized", fallback: "Live TV Access")
   /// Live TV channel
   internal static let liveTVChannel = L10n.tr("Localizable", "liveTVChannel", fallback: "Live TV channel")
   /// Live TV channels
@@ -950,8 +940,6 @@ internal enum L10n {
   internal static let liveTVProgram = L10n.tr("Localizable", "liveTVProgram", fallback: "Live TV program")
   /// Live TV programs
   internal static let liveTVPrograms = L10n.tr("Localizable", "liveTVPrograms", fallback: "Live TV programs")
-  /// Live TV recording management
-  internal static let liveTVRecordingManagement = L10n.tr("Localizable", "liveTVRecordingManagement", fallback: "Live TV recording management")
   /// Loading user failed
   internal static let loadingUserFailed = L10n.tr("Localizable", "loadingUserFailed", fallback: "Loading user failed")
   /// Local
@@ -1204,8 +1192,6 @@ internal enum L10n {
   internal static let neverRun = L10n.tr("Localizable", "neverRun", fallback: "Never run")
   /// New password
   internal static let newPassword = L10n.tr("Localizable", "newPassword", fallback: "New password")
-  /// News
-  internal static let news = L10n.tr("Localizable", "news", fallback: "News")
   /// New user
   internal static let newUser = L10n.tr("Localizable", "newUser", fallback: "New user")
   /// Next
@@ -1266,8 +1252,6 @@ internal enum L10n {
   internal static let ok = L10n.tr("Localizable", "ok", fallback: "OK")
   /// On application startup
   internal static let onApplicationStartup = L10n.tr("Localizable", "onApplicationStartup", fallback: "On application startup")
-  /// On Now
-  internal static let onNow = L10n.tr("Localizable", "onNow", fallback: "On Now")
   /// Options
   internal static let options = L10n.tr("Localizable", "options", fallback: "Options")
   /// Orange
@@ -1808,8 +1792,6 @@ internal enum L10n {
   internal static let splashscreenFooter = L10n.tr("Localizable", "splashscreenFooter", fallback: "When all servers are selected, use the splashscreen from a single server or a random server.")
   /// Split
   internal static let split = L10n.tr("Localizable", "split", fallback: "Split")
-  /// Sports
-  internal static let sports = L10n.tr("Localizable", "sports", fallback: "Sports")
   /// Start date
   internal static let startDate = L10n.tr("Localizable", "startDate", fallback: "Start date")
   /// Start time

@@ -53,10 +53,6 @@ extension VideoPlayer.PlaybackControls.NavigationBar {
                 excluded.formUnion([.autoPlay, .playNextItem, .playPreviousItem])
             }
 
-            if manager.item.isLiveStream {
-                excluded.formUnion([.audio, .autoPlay, .playbackSpeed, .playbackQuality, .subtitles])
-            }
-
             if manager.item.type != .episode {
                 excluded.insert(.episodes)
             }

@@ -152,13 +152,114 @@ private struct MobileCollectionRows: View {
     }
 }
 
+/// Season picker plus the selected season's episodes.
+///
+/// Episodes are loaded per season on demand. The loading trigger lives on a view that is always
+/// rendered (even while the season has no episodes yet), so the first load can't be skipped.
 private struct MobileSeasonRows: View {
     @ObservedObject
     var viewModel: SeriesItemViewModel
+    @State
+    private var selection: SeasonItemViewModel.ID?
+
+    private var selectedSeason: SeasonItemViewModel? {
+        viewModel.seasons.first(where: { $0.id == selection }) ?? viewModel.seasons.first
+    }
+
     var body: some View {
-        ForEach(viewModel.seasons) { season in
-            MobileLibraryRow(title: season.season.displayTitle, viewModel: season)
-                .onAppear { if season.state == .initial { season.send(.refresh) } }
+        if !viewModel.seasons.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(L10n.seasons).font(.title3.bold()).padding(.horizontal)
+                seasonPicker
+                // Seasons are rebuilt on every series refresh; start fresh for each new model.
+                if let selectedSeason {
+                    MobileSeasonEpisodes(viewModel: selectedSeason).id(ObjectIdentifier(selectedSeason))
+                }
+            }
+            .padding(.vertical, 8)
+            .onChange(of: viewModel.playButtonItem?.seasonID) { _, seasonID in selectPlayButtonSeason(seasonID) }
+            .onAppear { selectPlayButtonSeason(viewModel.playButtonItem?.seasonID) }
         }
+    }
+
+    private var seasonPicker: some View {
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal) {
+                HStack(spacing: 8) {
+                    ForEach(viewModel.seasons) { season in
+                        let isSelected = season.id == selectedSeason?.id
+                        Button {
+                            selection = season.id
+                        } label: {
+                            Text(season.season.displayTitle).lineLimit(1)
+                        }
+                        .buttonStyle(SeasonChipStyle(isSelected: isSelected))
+                        .accessibilityIdentifier("mobile.series.season")
+                        .accessibilityAddTraits(isSelected ? .isSelected : [])
+                        .id(season.id)
+                    }
+                }.padding(.horizontal)
+            }
+            .scrollIndicators(.hidden)
+            .onChange(of: selection) { _, newValue in
+                guard let newValue else { return }
+                withAnimation { proxy.scrollTo(newValue, anchor: .center) }
+            }
+        }
+    }
+
+    /// Start on the season holding the next-up/resume episode, until the user picks one.
+    private func selectPlayButtonSeason(_ seasonID: String?) {
+        guard selection == nil, let seasonID, viewModel.seasons.contains(where: { $0.id == seasonID }) else { return }
+        selection = seasonID
+    }
+}
+
+private struct SeasonChipStyle: ButtonStyle {
+    let isSelected: Bool
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.semibold))
+            .padding(.vertical, 8)
+            .padding(.horizontal, 14)
+            .foregroundStyle(isSelected ? AnyShapeStyle(.white) : AnyShapeStyle(.primary))
+            .background(
+                isSelected ? AnyShapeStyle(.tint) : AnyShapeStyle(.fill.tertiary),
+                in: Capsule()
+            )
+            .opacity(configuration.isPressed ? 0.7 : 1)
+            .contentShape(Capsule())
+    }
+}
+
+private struct MobileSeasonEpisodes: View {
+    @ObservedObject
+    var viewModel: SeasonItemViewModel
+    @Router
+    private var router
+
+    var body: some View {
+        Group {
+            if !viewModel.elements.isEmpty {
+                PosterHStack(type: .landscape, items: viewModel.elements) {
+                    router.route(to: .item(item: $0))
+                } label: { episode in
+                    VStack(alignment: .leading) {
+                        if let locator = episode.episodeLocator { Text(locator).foregroundStyle(.secondary) }
+                        Text(episode.displayTitle)
+                    }
+                }
+            } else if case let .error(error) = viewModel.state {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(error.localizedDescription).foregroundStyle(.secondary)
+                    Button(L10n.retry) { viewModel.send(.refresh) }
+                }.padding(.horizontal)
+            } else if viewModel.state == .content {
+                Text(L10n.noEpisodesAvailable).foregroundStyle(.secondary).padding(.horizontal)
+            } else {
+                ProgressView().frame(maxWidth: .infinity, minHeight: 120)
+            }
+        }
+        .onAppear { if viewModel.state == .initial { viewModel.send(.refresh) } }
     }
 }

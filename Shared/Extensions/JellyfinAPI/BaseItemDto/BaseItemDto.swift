@@ -55,8 +55,6 @@ extension BaseItemDto {
             L10n.musicVideos
         case .tvshows:
             L10n.series
-        case .livetv:
-            L10n.liveTV
         default:
             displayTitle.localizedDefaultLibraryDisplayTitle
         }
@@ -149,7 +147,6 @@ extension BaseItemDto {
         // TODO: only fill artist, albumArtist, and albumTitle if audio type
         return .init(
             mediaType: mediaType,
-            isLiveStream: isLiveStream,
             title: title,
             artist: subtitle,
             artwork: image.map { image in MPMediaItemArtwork(boundsSize: image.size) { _ in image }},
@@ -181,12 +178,6 @@ extension BaseItemDto {
     var itemGenres: [ItemGenre]? {
         guard let genres else { return nil }
         return genres.map(ItemGenre.init)
-    }
-
-    /// Differs from `isLive` to indicate an item
-    /// would be streaming from a live source.
-    var isLiveStream: Bool {
-        channelType == .tv
     }
 
     /// Whether the item has independent playable content, similar
@@ -233,51 +224,6 @@ extension BaseItemDto {
         .frame(width: 400)
 
         return ImageRenderer(content: transformedImage).uiImage
-    }
-
-    func getPlaybackItemProvider(
-        userSession: UserSession
-    ) -> MediaPlayerItemProvider {
-        switch type {
-        case .program:
-            MediaPlayerItemProvider(item: self) { program in
-                guard let channel = try? await self.getChannel(
-                    for: program,
-                    userSession: userSession
-                ),
-                    let mediaSource = channel.mediaSources?.first
-                else {
-                    throw ErrorMessage(L10n.unknownError)
-                }
-                return try await MediaPlayerItem.build(for: program, mediaSource: mediaSource)
-            }
-        default:
-            MediaPlayerItemProvider(item: self) { item in
-                guard let mediaSource = item.mediaSources?.first else {
-                    throw ErrorMessage(L10n.unknownError)
-                }
-                return try await MediaPlayerItem.build(for: item, mediaSource: mediaSource)
-            }
-        }
-    }
-
-    func getChannel(
-        for program: BaseItemDto,
-        userSession: UserSession
-    ) async throws -> BaseItemDto? {
-        guard type == .program else { return nil }
-
-        var parameters = Paths.GetItemsByUserIDParameters()
-        parameters.fields = .MinimumFields
-        parameters.ids = [program.channelID ?? ""]
-
-        let request = Paths.getItemsByUserID(
-            userID: userSession.user.id,
-            parameters: parameters
-        )
-        let response = try await userSession.client.send(request)
-
-        return response.value.items?.first
     }
 
     var runtime: Duration? {

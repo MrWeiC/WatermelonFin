@@ -113,24 +113,19 @@ extension TabItem {
         filters: .init(itemTypes: [.musicAlbum])
     )
 
-    static let live = TabItem(
-        id: "live",
-        title: L10n.liveTV,
-        systemImage: "tv"
-    ) {
-        LiveTabView()
-    }
+    // MARK: - TV Shows Tab (tvOS)
 
-    // MARK: - Combined TV Tab (tvOS)
-
-    /// Combined TV tab containing TV Shows and Live TV with sub-navigation.
-    /// Reduces main tab bar from 7 to 6 tabs on tvOS.
+    /// TV series library tab.
     static let tv = TabItem(
         id: "tv",
         title: L10n.tv,
         systemImage: "tv"
     ) {
-        TVTabView()
+        PagingLibraryView(
+            viewModel: ItemLibraryViewModel(
+                filters: .init(itemTypes: [.series])
+            )
+        )
     }
 
     #if os(tvOS)

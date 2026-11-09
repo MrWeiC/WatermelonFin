@@ -16,7 +16,6 @@ extension MediaViewModel {
         case collectionLibrary(BaseItemDto)
         case favorites
         case library(BaseItemDto)
-        case liveTV(BaseItemDto)
 
         enum Section: CaseIterable, Identifiable {
             case libraries
@@ -67,8 +66,6 @@ extension MediaViewModel {
             switch collectionType {
             case .boxsets:
                 self = .collectionLibrary(userView)
-            case .livetv:
-                self = .liveTV(userView)
             default:
                 self = .library(userView)
             }
@@ -80,14 +77,14 @@ extension MediaViewModel {
                 .collections
             case .favorites:
                 .favorites
-            case .library, .liveTV:
+            case .library:
                 .libraries
             }
         }
 
         var libraryItem: BaseItemDto? {
             switch self {
-            case let .collectionLibrary(item), let .library(item), let .liveTV(item):
+            case let .collectionLibrary(item), let .library(item):
                 item
             case .favorites:
                 nil
@@ -100,14 +97,12 @@ extension MediaViewModel {
                 return item.localizedCollectionDisplayTitle
             case .favorites:
                 return L10n.favorites
-            case .liveTV:
-                return L10n.liveTV
             }
         }
 
         var id: String {
             switch self {
-            case let .collectionLibrary(item), let .library(item), let .liveTV(item):
+            case let .collectionLibrary(item), let .library(item):
                 return item.id ?? "library-\(displayTitle)"
             case .favorites:
                 return "favorites"
@@ -141,8 +136,6 @@ extension MediaViewModel {
                 default:
                     "rectangle.stack.fill"
                 }
-            case .liveTV:
-                "antenna.radiowaves.left.and.right"
             }
         }
 
@@ -152,8 +145,6 @@ extension MediaViewModel {
                 item.supportedItemTypes
             case .favorites:
                 BaseItemKind.supportedCases
-            case .liveTV:
-                []
             }
         }
 
@@ -183,8 +174,6 @@ extension MediaViewModel {
                     L10n.itemCountLabel(count)
                 }
             case .favorites:
-                L10n.itemCountLabel(count)
-            case .liveTV:
                 L10n.itemCountLabel(count)
             }
         }

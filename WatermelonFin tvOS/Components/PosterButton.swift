@@ -196,14 +196,14 @@ extension PosterButton {
         var body: some View {
             ZStack {
                 if let item = item as? BaseItemDto {
-                    if item.canBePlayed, !item.isLiveStream, item.userData?.isPlayed == true {
+                    if item.canBePlayed, item.userData?.isPlayed == true {
                         WatchedIndicator(size: 45)
                             .isVisible(showPlayed)
                     } else {
                         if (item.userData?.playbackPositionTicks ?? 0) > 0 {
                             ProgressIndicator(progress: (item.userData?.playedPercentage ?? 0) / 100, height: 10)
                                 .isVisible(showProgress)
-                        } else if item.canBePlayed, !item.isLiveStream {
+                        } else if item.canBePlayed {
                             UnwatchedIndicator(size: 45)
                                 .foregroundColor(.watermelonGreen)
                                 .isVisible(showUnplayed)

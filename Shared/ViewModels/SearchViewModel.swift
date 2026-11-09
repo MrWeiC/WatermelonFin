@@ -111,9 +111,7 @@ final class SearchViewModel: ViewModel {
                 .musicAlbum,
                 .musicArtist,
                 .musicVideo,
-                .liveTvProgram,
                 .series,
-                .tvChannel,
                 .video,
             ]
 

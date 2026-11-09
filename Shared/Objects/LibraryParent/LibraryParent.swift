@@ -100,8 +100,6 @@ extension String {
             PlaylistL10n.playlists
         case "series", "show", "shows", "tv series", "tv show", "tv shows":
             L10n.series
-        case "live tv", "livetv":
-            L10n.liveTV
         default:
             self
         }
