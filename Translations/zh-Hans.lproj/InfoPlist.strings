@@ -1,4 +1,4 @@
-"NSLocalNetworkUsageDescription" = "用于连接本地网络中的 Jellyfin 服务器。";
+"NSLocalNetworkUsageDescription" = "用于发现并连接本地网络中的 Jellyfin 服务器。";
 
 // Release localization additions
 "NSCameraUsageDescription" = "WatermelonFin 用于播放 Jellyfin 服务器中的媒体，不会拍摄照片或视频。";

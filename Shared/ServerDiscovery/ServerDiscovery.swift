@@ -14,9 +14,9 @@ import UDPBroadcast
 
 class ServerDiscovery {
 
-    /// Enable only in a future release after Apple's multicast approval,
-    /// provisioning updates, and physical-device discovery validation.
-    static let isEnabled = false
+    /// Multicast request Q8PS3A4H49 is approved and enabled for this App ID.
+    /// iOS device builds must include the multicast entitlement in their signing profile.
+    static let isEnabled = true
 
     private let logger = Logger.watermelonfin()
 
