@@ -254,7 +254,6 @@ class NowPlayableObserver: ViewModel, MediaPlayerObserver {
         var nowPlayingInfo: [String: Any] = [:]
 
         nowPlayingInfo[MPNowPlayingInfoPropertyMediaType] = metadata.mediaType.rawValue
-        nowPlayingInfo[MPNowPlayingInfoPropertyIsLiveStream] = metadata.isLiveStream
         nowPlayingInfo[MPMediaItemPropertyTitle] = metadata.title
         nowPlayingInfo[MPMediaItemPropertyArtist] = metadata.artist
         nowPlayingInfo[MPMediaItemPropertyArtwork] = metadata.artwork

@@ -12,7 +12,6 @@ import MediaPlayer
 struct NowPlayableStaticMetadata {
 
     let mediaType: MPNowPlayingInfoMediaType
-    let isLiveStream: Bool
 
     let title: String
     let artist: String?
@@ -23,7 +22,6 @@ struct NowPlayableStaticMetadata {
 
     init(
         mediaType: MPNowPlayingInfoMediaType,
-        isLiveStream: Bool = false,
         title: String,
         artist: String? = nil,
         artwork: MPMediaItemArtwork? = nil,
@@ -31,7 +29,6 @@ struct NowPlayableStaticMetadata {
         albumTitle: String? = nil
     ) {
         self.mediaType = mediaType
-        self.isLiveStream = isLiveStream
         self.title = title
         self.artist = artist
         self.artwork = artwork

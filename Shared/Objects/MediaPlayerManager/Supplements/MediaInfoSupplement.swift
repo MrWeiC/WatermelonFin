@@ -109,24 +109,22 @@ extension MediaInfoSupplement {
                 }
                 .allowsHitTesting(false)
 
-                if !item.isLiveStream {
-                    Button {
-                        manager.proxy?.setSeconds(.zero)
-                        manager.setPlaybackRequestStatus(status: .playing)
-                        containerState.select(supplement: nil)
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 7)
-                                .foregroundStyle(.white)
+                Button {
+                    manager.proxy?.setSeconds(.zero)
+                    manager.setPlaybackRequestStatus(status: .playing)
+                    containerState.select(supplement: nil)
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 7)
+                            .foregroundStyle(.white)
 
-                            Label(L10n.fromBeginning, systemImage: "play.fill")
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.black)
-                        }
+                        Label(L10n.fromBeginning, systemImage: "play.fill")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.black)
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 40)
                 }
+                .frame(maxWidth: .infinity)
+                .frame(height: 40)
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)
         }
@@ -162,10 +160,8 @@ extension MediaInfoSupplement {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                if !item.isLiveStream {
-                    VStack {
-                        fromBeginningButton
-                    }
+                VStack {
+                    fromBeginningButton
                 }
             }
         }
@@ -244,29 +240,27 @@ extension MediaInfoSupplement {
                         }
 
                         // From Beginning button
-                        if !item.isLiveStream {
-                            Button {
-                                manager.proxy?.setSeconds(.zero)
-                                manager.setPlaybackRequestStatus(status: .playing)
-                                containerState.select(supplement: nil)
-                            } label: {
-                                Label(L10n.fromBeginning, systemImage: "play.fill")
-                                    .font(.headline)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(isFocused ? .black : .white)
-                                    .padding(.horizontal, 30)
-                                    .padding(.vertical, 16)
-                                    .background {
-                                        Capsule()
-                                            .fill(isFocused ? Color.white : Color.white.opacity(0.3))
-                                    }
-                            }
-                            .buttonStyle(.plain)
-                            .focused($isFocused)
-                            .scaleEffect(isFocused ? 1.05 : 1.0)
-                            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isFocused)
-                            .padding(.top, 16)
+                        Button {
+                            manager.proxy?.setSeconds(.zero)
+                            manager.setPlaybackRequestStatus(status: .playing)
+                            containerState.select(supplement: nil)
+                        } label: {
+                            Label(L10n.fromBeginning, systemImage: "play.fill")
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(isFocused ? .black : .white)
+                                .padding(.horizontal, 30)
+                                .padding(.vertical, 16)
+                                .background {
+                                    Capsule()
+                                        .fill(isFocused ? Color.white : Color.white.opacity(0.3))
+                                }
                         }
+                        .buttonStyle(.plain)
+                        .focused($isFocused)
+                        .scaleEffect(isFocused ? 1.05 : 1.0)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isFocused)
+                        .padding(.top, 16)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }

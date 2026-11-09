@@ -22,7 +22,6 @@ extension CollectionType: SupportedCaseIterable {
             .playlists,
             .trailers,
             .tvshows,
-            .livetv,
         ]
     }
 }

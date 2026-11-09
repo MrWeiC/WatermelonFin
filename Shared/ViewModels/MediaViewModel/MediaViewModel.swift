@@ -137,13 +137,6 @@ final class MediaViewModel: ViewModel {
         useRandomImage: Bool
     ) async throws -> CardData {
 
-        if case let MediaType.liveTV(item) = mediaType {
-            return CardData(
-                imageSources: [item.imageSource(.primary, maxWidth: 800)],
-                itemCount: nil
-            )
-        }
-
         let session = try requireSession()
 
         let cacheKey = CardDataCacheKey(

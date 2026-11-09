@@ -36,10 +36,6 @@ extension VideoPlayer.PlaybackControls {
             case jumpForward
         }
 
-        private var shouldShowJumpButtons: Bool {
-            !manager.item.isLiveStream
-        }
-
         // MARK: - Play/Pause Button
 
         private var playPauseButton: some View {
@@ -150,15 +146,11 @@ extension VideoPlayer.PlaybackControls {
 
         var body: some View {
             HStack(spacing: 50) {
-                if shouldShowJumpButtons {
-                    jumpBackwardButton
-                }
+                jumpBackwardButton
 
                 playPauseButton
 
-                if shouldShowJumpButtons {
-                    jumpForwardButton
-                }
+                jumpForwardButton
             }
             .foregroundStyle(.white)
         }

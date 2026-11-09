@@ -2,7 +2,8 @@
 """Loopback-only Jellyfin fixture for real-app UI automation.
 
 Use http://127.0.0.1:18096/<scenario>/<unique-run-id> as the server URL.
-Scenarios: users, empty, disabled, slow, slow-login, spaced-password, unavailable, quick-error, quick-retry.
+Scenarios: users, empty, disabled, slow, slow-login, spaced-password, unavailable, quick-error, quick-retry,
+series (one show with 12 seasons), series-single (one show with a single season).
 Never accepts or forwards real credentials. Each run ID has a distinct server ID.
 """
 import argparse
@@ -11,6 +12,57 @@ import json
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
+
+SERIES_LIBRARY_ID = 'f1c0000000000000000000000000000a'
+SERIES_ID = 'f1c0000000000000000000000000000b'
+
+
+def series_items(scenario, server_id):
+    """Static show/season/episode metadata for the series scenarios (no media is served)."""
+    library = {'Id': SERIES_LIBRARY_ID, 'Name': 'Shows', 'Type': 'CollectionFolder',
+               'CollectionType': 'tvshows', 'ServerId': server_id}
+    series = {'Id': SERIES_ID, 'Name': 'Fixture Show', 'Type': 'Series', 'ServerId': server_id,
+              'ProductionYear': 2020, 'Overview': 'A show used to check the season picker.'}
+    seasons = [{'Id': f'f1c1{number:028x}', 'Name': f'Season {number}', 'Type': 'Season',
+                'IndexNumber': number, 'SeriesId': SERIES_ID, 'SeriesName': series['Name'],
+                'ServerId': server_id}
+               for number in range(1, (2 if scenario == 'series-single' else 13))]
+    episodes = {season['Id']: [{'Id': f'f1c2{season["IndexNumber"]:014x}{episode:014x}',
+                                'Name': f'Episode {episode} of season {season["IndexNumber"]}',
+                                'Type': 'Episode', 'IndexNumber': episode,
+                                'ParentIndexNumber': season['IndexNumber'], 'SeasonId': season['Id'],
+                                'SeriesId': SERIES_ID, 'SeriesName': series['Name'],
+                                'RunTimeTicks': 12_000_000_000, 'ServerId': server_id,
+                                'UserData': {'Played': False, 'PlaybackPositionTicks': 0}}
+                               for episode in range(1, 4)]
+                for season in seasons}
+    return library, series, seasons, episodes
+
+
+def series_response(scenario, server_id, endpoint, query):
+    library, series, seasons, episodes = series_items(scenario, server_id)
+    page = lambda items: {'Items': items, 'TotalRecordCount': len(items), 'StartIndex': 0}
+    by_id = {series['Id']: series, **{s['Id']: s for s in seasons},
+             **{e['Id']: e for season in episodes.values() for e in season}}
+    parts = endpoint.split('/')
+    if endpoint.endswith('views'):
+        return page([library])
+    if endpoint.endswith('seasons'):
+        return page(seasons)
+    if endpoint.endswith('episodes'):
+        season_id = (query.get('seasonid') or [seasons[0]['Id']])[0].lower()
+        return page(episodes.get(season_id, []))
+    if endpoint.endswith('nextup') or endpoint.endswith('resume'):
+        return page([])
+    if parts[-1] in by_id:
+        return by_id[parts[-1]]
+    if endpoint.endswith('latest'):
+        return [series]
+    if endpoint.endswith('items'):
+        if 'episode' in (query.get('includeitemtypes') or [''])[0].lower():
+            return page(episodes[seasons[0]['Id']][:1])
+        return page([series])
+    return None
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -64,7 +116,8 @@ class Handler(BaseHTTPRequestHandler):
             self.attempts[key] = self.attempts.get(key, 0) + 1
             if scenario == 'quick-error' or (scenario == 'quick-retry' and endpoint == 'quickconnect/initiate' and self.attempts[key] == 1):
                 return self.respond(503, {'Message': 'Quick Connect unavailable'})
-            value = {'Code': '123456', 'Secret': 'fixture-only-secret', 'Authenticated': scenario == 'quick-retry'}
+            value = {'Code': '123456', 'Secret': 'fixture-only-secret',
+                     'Authenticated': scenario in ('quick-retry', 'series', 'series-single')}
         elif endpoint == 'users/authenticatewithquickconnect':
             value = {'User': user, 'AccessToken': 'fixture-only-token', 'ServerId': server_id}
         elif endpoint == 'users/authenticatebyname':
@@ -75,6 +128,10 @@ class Handler(BaseHTTPRequestHandler):
             if payload.get('Pw') != expected:
                 return self.respond(401, {'Message': 'Invalid username or password'})
             value = {'User': user, 'AccessToken': 'fixture-only-token', 'ServerId': server_id}
+        elif scenario.startswith('series') and (series := series_response(
+                scenario, server_id, endpoint,
+                {k.lower(): v for k, v in parse_qs(urlparse(self.path).query).items()})) is not None:
+            value = series
         elif endpoint.startswith('users/') and endpoint.count('/') == 1:
             value = user
         elif endpoint.endswith(('items', 'views', 'resume')):

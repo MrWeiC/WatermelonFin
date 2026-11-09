@@ -76,9 +76,7 @@ extension MediaPlayerItem {
         playbackInfo.maxStreamingBitrate = maxBitrate
         playbackInfo.userID = userSession.user.id
 
-        if !item.isLiveStream {
-            playbackInfo.mediaSourceID = initialMediaSource.id
-        }
+        playbackInfo.mediaSourceID = initialMediaSource.id
 
         let request = Paths.getPostedPlaybackInfo(
             itemID: itemID,
@@ -169,7 +167,6 @@ extension MediaPlayerItem {
     }
 
     // TODO: audio type stream
-    // TODO: build live tv stream from Paths.getLiveHlsStream?
     private static func streamURL(
         item: BaseItemDto,
         mediaSource: MediaSourceInfo,
@@ -191,7 +188,7 @@ extension MediaPlayerItem {
             return fullTranscodeURL
         }
 
-        if item.mediaType == .video, !item.isLiveStream {
+        if item.mediaType == .video {
 
             logger.trace("Making video stream URL for item \(itemID)")
 
