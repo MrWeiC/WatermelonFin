@@ -285,7 +285,24 @@ final class UserSignInViewModel: ViewModel {
 
         guard let disclaimer = response.value.loginDisclaimer, disclaimer.isNotEmpty else { return nil }
 
-        return disclaimer
+        let text = Self.plainText(fromDisclaimer: disclaimer)
+        return text.isEmpty ? nil : text
+    }
+
+    /// Server admins write the disclaimer for the web client, so it can contain HTML.
+    static func plainText(fromDisclaimer disclaimer: String) -> String {
+        var text = disclaimer
+            .replacingOccurrences(of: "<br\\s*/?>|</p>|</div>|</li>", with: "\n", options: [.regularExpression, .caseInsensitive])
+            .replacingOccurrences(of: "</?[a-zA-Z][^>]*>", with: "", options: .regularExpression)
+        // `&amp;` goes last so an escaped entity is decoded only once.
+        for (entity, character) in [
+            ("&nbsp;", " "), ("&lt;", "<"), ("&gt;", ">"), ("&quot;", "\""), ("&#39;", "'"), ("&apos;", "'"), ("&amp;", "&"),
+        ] {
+            text = text.replacingOccurrences(of: entity, with: character)
+        }
+        return text
+            .replacingOccurrences(of: "\n{3,}", with: "\n\n", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func retrieveIsQuickConnectEnabled() async throws -> Bool {

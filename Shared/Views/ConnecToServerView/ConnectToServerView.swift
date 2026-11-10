@@ -95,6 +95,7 @@ struct ConnectToServerView: View {
             }
             .buttonStyle(.primary)
             .frame(height: 64)
+            .manualAddressActionRow()
         } else {
             Button(L10n.connect) {
                 isURLFocused = false
@@ -109,6 +110,7 @@ struct ConnectToServerView: View {
                 accentColor
             )
             .opacity(canConnectManually ? 1 : 0.5)
+            .manualAddressActionRow()
         }
     }
 
@@ -292,5 +294,22 @@ struct ConnectToServerView: View {
                 Text(L10n.serverNewAddressPrompt(server.name, server.currentURL.absoluteString))
             }
             .errorMessage($viewModel.error)
+    }
+}
+
+private extension View {
+
+    /// Sets the action button apart from the address field instead of fusing
+    /// the two inside one grouped list card.
+    @ViewBuilder
+    func manualAddressActionRow() -> some View {
+        #if os(iOS)
+        // The primary button style pins its own row insets to zero, so the gap is padding.
+        padding(.top, 12)
+            .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
+        #else
+        self
+        #endif
     }
 }

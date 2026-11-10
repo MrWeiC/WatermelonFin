@@ -125,8 +125,8 @@ extension BaseItemDto {
         itemID: String,
         requireTag: Bool = true
     ) -> URL? {
-        let scaleWidth = maxWidth.map { UIScreen.main.scale($0) }
-        let scaleHeight = maxWidth.map { UIScreen.main.scale($0) }
+        let scaleWidth = maxWidth.map { UIScreen.current.scale($0) }
+        let scaleHeight = maxWidth.map { UIScreen.current.scale($0) }
         let validQuality = quality.map { clamp($0, min: 1, max: 100) }
 
         let tag = getImageTag(for: type)

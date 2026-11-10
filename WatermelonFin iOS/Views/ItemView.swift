@@ -34,6 +34,10 @@ struct ItemView: View {
         _viewModel = StateObject(wrappedValue: model)
     }
 
+    /// Scrolling rows carry their own leading inset so they can sit at a screen edge.
+    /// Inside this page's padding that inset is cancelled, keeping rows in line with the text.
+    fileprivate static let rowInset: CGFloat = 16
+
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -50,22 +54,24 @@ struct ItemView: View {
                     }
                     LazyVStack(alignment: .leading, spacing: 20) {
                         if let people = viewModel.item.people, !people.isEmpty {
-                            CastAndCrewHStack(people: people)
+                            CastAndCrewHStack(people: people).padding(.horizontal, -Self.rowInset)
                         }
                         if let overview = viewModel.item.overview { Text(overview).textSelection(.enabled) }
                         if let collection = viewModel as? CollectionItemViewModel {
                             MobileCollectionRows(viewModel: collection)
                         }
-                        if let series = viewModel as? SeriesItemViewModel { MobileSeasonRows(viewModel: series) }
+                        if let series = viewModel as? SeriesItemViewModel {
+                            MobileSeasonRows(viewModel: series).padding(.horizontal, -Self.rowInset)
+                        }
                         if !viewModel.specialFeatures.isEmpty {
                             PosterHStack(title: L10n.specialFeatures, type: .landscape, items: viewModel.specialFeatures) {
                                 router.route(to: .item(item: $0))
-                            }
+                            }.padding(.horizontal, -Self.rowInset)
                         }
                         if !viewModel.similarItems.isEmpty {
                             PosterHStack(title: L10n.recommended, type: .portrait, items: viewModel.similarItems) {
                                 router.route(to: .item(item: $0))
-                            }
+                            }.padding(.horizontal, -Self.rowInset)
                         }
                     }
                 }
@@ -147,6 +153,7 @@ private struct MobileCollectionRows: View {
         } else {
             ForEach(viewModel.sections.elements, id: \.key) { section in
                 MobileLibraryRow(title: section.key.pluralDisplayTitle, viewModel: section.value)
+                    .padding(.horizontal, -ItemView.rowInset)
             }
         }
     }

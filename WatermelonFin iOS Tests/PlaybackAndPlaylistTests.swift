@@ -30,6 +30,15 @@ final class PlaybackAndPlaylistTests: XCTestCase {
         XCTAssertFalse(state.isPresentingOverlay)
     }
 
+    func testServerDisclaimerHTMLBecomesPlainText() {
+        XCTAssertEqual(
+            UserSignInViewModel.plainText(fromDisclaimer: "<p>Demo server.<br/>Look <b>around</b> &amp; try it.</p>"),
+            "Demo server.\nLook around & try it."
+        )
+        XCTAssertEqual(UserSignInViewModel.plainText(fromDisclaimer: "Limit: 2 < 3 &amp;lt; 4"), "Limit: 2 < 3 &lt; 4")
+        XCTAssertEqual(UserSignInViewModel.plainText(fromDisclaimer: "<br><br>"), "")
+    }
+
     func testPlaybackFailureBeforeReadinessDoesNotAutoplay() {
         XCTAssertEqual(PlaybackEndAction.resolve(isError: true, isEOF: false, isStopping: false, isReady: false), .fail)
         XCTAssertEqual(PlaybackEndAction.resolve(isError: false, isEOF: true, isStopping: false, isReady: true), .finish)
