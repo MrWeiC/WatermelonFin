@@ -946,8 +946,8 @@ internal enum L10n {
   internal static let local = L10n.tr("Localizable", "local", fallback: "Local")
   /// Local servers
   internal static let localServers = L10n.tr("Localizable", "localServers", fallback: "Local servers")
-  /// Automatic discovery is unavailable in this version. Enter your server address to connect.
-  internal static let localServersDescription = L10n.tr("Localizable", "localServersDescription", fallback: "Automatic discovery is unavailable in this version. Enter your server address to connect.")
+  /// Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.
+  internal static let localServersDescription = L10n.tr("Localizable", "localServersDescription", fallback: "Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.")
   /// Unable to open local app data: %@
   internal static func localStoreCreationFailed(_ p1: Any) -> String {
     return L10n.tr("Localizable", "localStoreCreationFailed", String(describing: p1), fallback: "Unable to open local app data: %@")
@@ -1700,8 +1700,8 @@ internal enum L10n {
   internal static let serverSearching = L10n.tr("Localizable", "serverSearching", fallback: "Looking for Jellyfin servers…")
   /// Search local network
   internal static let serverSearchStart = L10n.tr("Localizable", "serverSearchStart", fallback: "Search local network")
-  /// Automatic discovery is unavailable in this version. Enter your server address to connect.
-  internal static let serverSearchUnavailable = L10n.tr("Localizable", "serverSearchUnavailable", fallback: "Automatic discovery is unavailable in this version. Enter your server address to connect.")
+  /// Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.
+  internal static let serverSearchUnavailable = L10n.tr("Localizable", "serverSearchUnavailable", fallback: "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.")
   /// Unable to find the server to delete.
   internal static let serverToDeleteNotFound = L10n.tr("Localizable", "serverToDeleteNotFound", fallback: "Unable to find the server to delete.")
   /// Server URL

@@ -1327,8 +1327,8 @@
 /// Local servers
 "localServers" = "Local servers";
 
-/// Automatic discovery is unavailable in this version. Enter your server address to connect.
-"localServersDescription" = "Automatic discovery is unavailable in this version. Enter your server address to connect.";
+/// Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.
+"localServersDescription" = "Choose a discovered server first. If a saved Jellyfin server appears at a new local address, WatermelonFin updates it automatically.";
 
 /// Unable to open local app data: %@
 "localStoreCreationFailed" = "Unable to open local app data: %@";
@@ -2398,8 +2398,8 @@
 /// Search local network
 "serverSearchStart" = "Search local network";
 
-/// Automatic discovery is unavailable in this version. Enter your server address to connect.
-"serverSearchUnavailable" = "Automatic discovery is unavailable in this version. Enter your server address to connect.";
+/// Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.
+"serverSearchUnavailable" = "Local discovery is unavailable. Check Local Network access in Settings. You can also enter an address manually.";
 
 /// Unable to find the server to delete.
 "serverToDeleteNotFound" = "Unable to find the server to delete.";

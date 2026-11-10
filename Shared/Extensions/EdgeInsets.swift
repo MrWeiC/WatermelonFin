@@ -12,19 +12,21 @@ extension EdgeInsets {
 
     /// The padding for Views against contextual edges,
     /// typically the edges of the View's scene
-    static let edgePadding: CGFloat = {
+    ///
+    /// The window's width class decides it rather than the device idiom: a folding
+    /// iPhone is regular width when open and compact when closed.
+    static var edgePadding: CGFloat {
         #if os(tvOS)
         60
         #else
-        if UIDevice.isPad {
-            24
-        } else {
-            16
-        }
+        let sizeClass = UIApplication.shared.keyWindow?.traitCollection.horizontalSizeClass
+        return (sizeClass.map { $0 == .regular } ?? UIDevice.isPad) ? 24 : 16
         #endif
-    }()
+    }
 
-    static let edgeInsets: EdgeInsets = .init(edgePadding)
+    static var edgeInsets: EdgeInsets {
+        .init(edgePadding)
+    }
 
     init(_ constant: CGFloat) {
         self.init(top: constant, leading: constant, bottom: constant, trailing: constant)

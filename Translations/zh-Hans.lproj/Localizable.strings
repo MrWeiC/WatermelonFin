@@ -1155,8 +1155,8 @@
 /// 手动输入服务器地址
 "enterServerAddressManually" = "手动输入服务器地址";
 
-/// 此版本暂不支持自动发现。请输入服务器地址进行连接。
-"localServersDescription" = "此版本暂不支持自动发现。请输入服务器地址进行连接。";
+/// 优先选择自动发现的服务器。如果已保存的 Jellyfin 服务器出现在新的本地地址，WatermelonFin 会自动更新。
+"localServersDescription" = "优先选择自动发现的服务器。如果已保存的 Jellyfin 服务器出现在新的本地地址，WatermelonFin 会自动更新。";
 
 /// 手动地址
 "manualServerAddress" = "手动地址";
@@ -1286,8 +1286,8 @@
 "serverManualOptional" = "手动输入地址";
 "serverManualHelp" = "输入 IP 地址或主机名即可，默认使用 8096 端口。如使用其他端口或 HTTPS，请填写完整地址。Tailscale 为可选项，可稍后在服务器设置中添加。";
 "serverSearching" = "正在搜索 Jellyfin 服务器…";
-/// 此版本暂不支持自动发现。请输入服务器地址进行连接。
-"serverSearchUnavailable" = "此版本暂不支持自动发现。请输入服务器地址进行连接。";
+/// 暂时无法搜索局域网。请检查系统设置中的本地网络访问权限，也可以手动输入地址。
+"serverSearchUnavailable" = "暂时无法搜索局域网。请检查系统设置中的本地网络访问权限，也可以手动输入地址。";
 "serverSearchEmpty" = "未收到服务器响应。请确认服务器正在运行且连接同一网络，也可以手动输入地址。";
 "serverSearchAgain" = "重新搜索";
 "serverSearchStart" = "搜索局域网服务器";

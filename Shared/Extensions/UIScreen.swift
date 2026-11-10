@@ -10,6 +10,12 @@ import UIKit
 
 extension UIScreen {
 
+    /// The screen the app is currently shown on. A folding iPhone has two, so
+    /// there is no single main screen to assume.
+    static var current: UIScreen {
+        UIApplication.shared.keyWindow?.windowScene?.screen ?? .main
+    }
+
     func scale(_ x: Int) -> Int {
         Int(nativeScale) * x
     }
