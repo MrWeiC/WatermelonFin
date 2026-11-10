@@ -15,6 +15,10 @@ struct MediaView: View {
 
     @Environment(\.dynamicTypeSize)
     private var dynamicTypeSize
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass)
+    private var horizontalSizeClass
+    #endif
 
     @Router
     private var router
@@ -37,6 +41,16 @@ struct MediaView: View {
         _viewModel = StateObject(wrappedValue: viewModel ?? MediaViewModel())
     }
 
+    /// The width class, not the idiom, decides the layout: a folding iPhone has a
+    /// regular-width inner display and a compact cover display.
+    private var hasRegularWidth: Bool {
+        #if os(iOS)
+        horizontalSizeClass == .regular
+        #else
+        false
+        #endif
+    }
+
     private var columns: [GridItem] {
         if dynamicTypeSize.isAccessibilitySize, !UIDevice.isTV {
             [GridItem(.flexible())]
@@ -45,7 +59,7 @@ struct MediaView: View {
                 repeating: GridItem(.flexible(), spacing: 50),
                 count: 4
             )
-        } else if UIDevice.isPad {
+        } else if hasRegularWidth {
             [GridItem(.adaptive(minimum: 200), spacing: 20)]
         } else {
             Array(
@@ -58,7 +72,7 @@ struct MediaView: View {
     private var contentInsets: CGFloat {
         if UIDevice.isTV {
             50
-        } else if UIDevice.isPad {
+        } else if hasRegularWidth {
             20
         } else {
             16

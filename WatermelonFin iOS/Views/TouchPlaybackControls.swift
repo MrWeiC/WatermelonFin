@@ -136,7 +136,7 @@ extension VideoPlayer {
             .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in
                 containerState.timer.poke()
             })
-            .background(Color.black.opacity(0.35))
+            .background(Color.black.opacity(0.35).ignoresSafeArea())
             .onReceive(manager.secondsBox.$value) { value in
                 if !editing { position = min(duration, max(0, value.seconds)) }
             }
@@ -223,9 +223,17 @@ extension VideoPlayer {
         weak var containerState: VideoPlayerContainerState?
         weak var manager: MediaPlayerManager?
         var host: UIHostingController<AnyView>?
+        private var isHingePartiallyOpen = false
+
         override func viewDidLoad() {
             super.viewDidLoad()
             view.backgroundColor = .black
+            if #available(iOS 27.1, *) {
+                view.addInteraction(UIHingeInteraction { [weak self] _, update in
+                    self?.isHingePartiallyOpen = update.hinge?.status == .partiallyOpen
+                    self?.updateTabletopDivision()
+                })
+            }
             guard let host else { return }
             addChild(host)
             host.view.translatesAutoresizingMaskIntoConstraints = false
@@ -237,6 +245,28 @@ extension VideoPlayer {
                 host.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
             host.didMove(toParent: self)
+        }
+
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            updateTabletopDivision()
+        }
+
+        /// Half open with the hinge horizontal, the picture belongs above the fold and the
+        /// controls below it. A vertical fold (book posture) keeps the normal layout.
+        private func updateTabletopDivision() {
+            guard let containerState else { return }
+            var division: CGRect?
+            if #available(iOS 27.1, *), isHingePartiallyOpen {
+                // The system reports where the fold crosses this view, margins included,
+                // and marks it active once content should divide around it.
+                let folds = view.reservedRegions(kind: .division, options: .includeInactive)
+                    .filter { $0.frame.width > $0.frame.height }
+                division = (folds.first(where: \.isActive) ?? folds.first)?.frame
+            }
+            if containerState.tabletopDivision != division {
+                containerState.tabletopDivision = division
+            }
         }
 
         func presentSupplementContainer(_ presented: Bool) {
@@ -281,10 +311,27 @@ private struct MobilePlayerSurface: View {
     @EnvironmentObject
     private var state: VideoPlayerContainerState
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            player.ignoresSafeArea().contentShape(Rectangle()).onTapGesture { state.toggleOverlay() }
-            if state.isPresentingOverlay { controls.transition(.opacity) }
-        }.animation(.easeInOut(duration: 0.2), value: state.isPresentingOverlay)
+        // The player and controls keep one identity across postures, so folding the
+        // phone moves them without rebuilding the video view.
+        let division = state.tabletopDivision
+        GeometryReader { proxy in
+            ZStack {
+                Color.black.ignoresSafeArea()
+                player
+                    .frame(maxHeight: division?.minY ?? .infinity)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .ignoresSafeArea()
+                    .contentShape(Rectangle())
+                    .onTapGesture { state.toggleOverlay() }
+                // Below the fold nothing is covered, so the controls stay up.
+                if state.isPresentingOverlay || division != nil {
+                    controls
+                        .padding(.top, division.map { max(0, $0.maxY - proxy.safeAreaInsets.top) } ?? 0)
+                        .transition(.opacity)
+                }
+            }
+        }
+        .animation(.easeInOut(duration: 0.2), value: state.isPresentingOverlay)
+        .animation(.easeInOut(duration: 0.3), value: division)
     }
 }

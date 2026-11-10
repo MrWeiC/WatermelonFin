@@ -169,6 +169,11 @@ class VideoPlayerContainerState: ObservableObject {
     @Published
     var isGuestSupplement: Bool = false
 
+    /// The fold line across the player while a folding iPhone sits half open with its
+    /// hinge horizontal, in the player container's coordinates. `nil` in every other posture.
+    @Published
+    var tabletopDivision: CGRect?
+
     @Published
     var presentationControllerShouldDismiss: Bool = true
 

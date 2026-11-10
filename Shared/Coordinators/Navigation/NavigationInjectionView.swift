@@ -100,20 +100,26 @@ struct NavigationInjectionView: View {
                     options: .init(isInteractive: isPresentationInteractive),
                     otherwise: .slide(.init(edge: .bottom), options: .init(isInteractive: isPresentationInteractive))
                 )
-            ) { routeBinding, _ in
-                let vc = UIPreferencesHostingController {
-                    NavigationInjectionView(coordinator: .init()) {
-                        routeBinding.wrappedValue.destination
-                            .environment(\.presentationControllerShouldDismiss, $isPresentationInteractive)
+            ) { routeBinding in
+                // Transmission lays out its destination inside the safe area. Full-screen routes
+                // own the whole display, including the status region beside a folding
+                // iPhone's inner display; each route's content still applies its own safe area.
+                ViewControllerRepresentableAdapter<UIViewController> {
+                    let vc = UIPreferencesHostingController {
+                        NavigationInjectionView(coordinator: .init()) {
+                            routeBinding.wrappedValue.destination
+                                .environment(\.presentationControllerShouldDismiss, $isPresentationInteractive)
+                        }
+                        // UIKit-created hosting roots do not inherit SwiftUI environment objects.
+                        .environmentObject(rootCoordinator)
                     }
-                    // UIKit-created hosting roots do not inherit SwiftUI environment objects.
-                    .environmentObject(rootCoordinator)
+
+                    // TODO: presentation options for customizing background color, dimming effect, etc.
+                    vc.view.backgroundColor = .black
+
+                    return vc
                 }
-
-                // TODO: presentation options for customizing background color, dimming effect, etc.
-                vc.view.backgroundColor = .black
-
-                return vc
+                .ignoresSafeArea()
             }
         #endif
     }
